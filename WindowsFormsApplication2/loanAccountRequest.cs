@@ -23,5 +23,10 @@ namespace WindowsFormsApplication2
         {
             upper.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

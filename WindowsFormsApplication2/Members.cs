@@ -14,6 +14,7 @@ namespace WindowsFormsApplication2
     public partial class Members : Form
     {
         MainMenu upper;
+        Form lower;
         public MySqlConnection conn;
         public MySqlCommand comm;
         public MySqlDataAdapter listener;
@@ -24,7 +25,7 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
             upper = x;
-            conn = new MySqlConnection("Server=10.4.42.104;Database=test_db;Uid=root;Pwd=root;");
+            conn = new MySqlConnection("Server=localhost;Database=test_db;Uid=root;Pwd=root;");
         }
 
         private void Members_FormClosing(object sender, FormClosingEventArgs e)
@@ -34,25 +35,25 @@ namespace WindowsFormsApplication2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            addMember lower = new addMember(this);
+            lower = new addMember(this,0);
             lower.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            lower = new addMember(this, 1);
+            lower.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //dataGridView1.SelectedRows
-            viewMember lower = new viewMember(this);
+            lower = new viewMember(this);
             lower.ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            loanAccountRequest lower = new loanAccountRequest(this);
+            lower = new loanAccountRequest(this);
             lower.ShowDialog();
         }
 
@@ -65,13 +66,27 @@ namespace WindowsFormsApplication2
         {
             MessageBox.Show("Report generated");
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+  
 
         private void Members_Load(object sender, EventArgs e)
+        {
+            refrehasjkda();
+            dataGridView1.ClearSelection();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                memberid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["id"].Value.ToString());
+                button1.Enabled=true;
+            }
+            catch (ArgumentOutOfRangeException ee)
+            {
+
+            }
+        }
+        public void refrehasjkda()
         {
             comm = new MySqlCommand("SELECT * FROM members", conn);
             listener = new MySqlDataAdapter(comm);
@@ -84,19 +99,6 @@ namespace WindowsFormsApplication2
             dataGridView1.Columns["middle_name"].HeaderText = "Middle Name";
             foreach (DataGridViewColumn column in dataGridView1.Columns)
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                memberid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["id"].Value.ToString());
-                MessageBox.Show(memberid.ToString());
-            }
-            catch (ArgumentOutOfRangeException ee)
-            {
-
-            }
         }
     }
 }

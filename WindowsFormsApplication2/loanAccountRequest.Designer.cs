@@ -64,6 +64,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -157,35 +159,35 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(410, 181);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Co-Maker 1 ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(81, 135);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(180, 20);
+            this.textBox4.Size = new System.Drawing.Size(306, 20);
             this.textBox4.TabIndex = 2;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(81, 96);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 20);
+            this.textBox3.Size = new System.Drawing.Size(306, 20);
             this.textBox3.TabIndex = 2;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(81, 57);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 20);
+            this.textBox2.Size = new System.Drawing.Size(306, 20);
             this.textBox2.TabIndex = 2;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(81, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
+            this.textBox1.Size = new System.Drawing.Size(306, 20);
             this.textBox1.TabIndex = 2;
             // 
             // label11
@@ -239,35 +241,35 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(410, 181);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Co-Maker 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(81, 135);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(295, 20);
+            this.textBox9.Size = new System.Drawing.Size(306, 20);
             this.textBox9.TabIndex = 7;
             // 
             // textBox10
             // 
             this.textBox10.Location = new System.Drawing.Point(81, 96);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(295, 20);
+            this.textBox10.Size = new System.Drawing.Size(306, 20);
             this.textBox10.TabIndex = 8;
             // 
             // textBox11
             // 
             this.textBox11.Location = new System.Drawing.Point(81, 57);
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(295, 20);
+            this.textBox11.Size = new System.Drawing.Size(306, 20);
             this.textBox11.TabIndex = 9;
             // 
             // textBox12
             // 
             this.textBox12.Location = new System.Drawing.Point(81, 18);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(295, 20);
+            this.textBox12.Size = new System.Drawing.Size(306, 20);
             this.textBox12.TabIndex = 10;
             // 
             // label15
@@ -386,11 +388,33 @@
             this.label14.TabIndex = 1;
             this.label14.Text = "Days";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(376, 503);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(77, 25);
+            this.button3.TabIndex = 39;
+            this.button3.Text = "Cancel";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(295, 503);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(77, 25);
+            this.button2.TabIndex = 38;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // loanAccountRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 518);
+            this.CancelButton = this.button3;
+            this.ClientSize = new System.Drawing.Size(483, 536);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
@@ -411,7 +435,7 @@
             this.Controls.Add(this.label1);
             this.Name = "loanAccountRequest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "loanAccountRequest";
+            this.Text = "Loan Account Request";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.loanAccountRequest_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -461,5 +485,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }

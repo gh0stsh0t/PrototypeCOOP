@@ -28,26 +28,31 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             lower = new loanPayment(this);
+            lower.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             lower = new loanDisbursment(this);
+            lower.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             lower = new savingsCBU(this, 0);
+            lower.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             lower = new savingsCBU(this, 1);
+            lower.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             lower = new savingsCBU(this, 2);
+            lower.Show();
         }
     }
 }

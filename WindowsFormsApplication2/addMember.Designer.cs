@@ -224,14 +224,14 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(73, 26);
+            this.textBox2.Location = new System.Drawing.Point(186, 26);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(108, 20);
             this.textBox2.TabIndex = 2;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(187, 26);
+            this.textBox1.Location = new System.Drawing.Point(73, 26);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(108, 20);
             this.textBox1.TabIndex = 2;
@@ -463,6 +463,7 @@
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button1.Location = new System.Drawing.Point(312, 412);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 27);
@@ -473,6 +474,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Location = new System.Drawing.Point(390, 412);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(72, 27);
@@ -485,6 +487,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(501, 455);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -500,6 +503,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addMember";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addMember_FormClosing);
+            this.Load += new System.EventHandler(this.addMember_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

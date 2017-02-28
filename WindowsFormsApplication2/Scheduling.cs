@@ -23,5 +23,15 @@ namespace WindowsFormsApplication2
         {
             upper.Show();
         }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

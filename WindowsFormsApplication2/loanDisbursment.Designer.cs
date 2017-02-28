@@ -65,6 +65,7 @@
             this.button3.TabIndex = 37;
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -287,6 +288,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button3;
             this.ClientSize = new System.Drawing.Size(331, 370);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.button3);

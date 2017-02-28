@@ -60,6 +60,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(18, 69);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.ShowEditingIcon = false;
@@ -67,10 +68,10 @@
             this.dataGridView1.Size = new System.Drawing.Size(221, 221);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(340, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 42);
@@ -91,6 +92,7 @@
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(263, 76);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(148, 41);
@@ -101,6 +103,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(263, 119);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(148, 41);
@@ -120,6 +123,7 @@
             // 
             // button6
             // 
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(263, 206);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(148, 41);

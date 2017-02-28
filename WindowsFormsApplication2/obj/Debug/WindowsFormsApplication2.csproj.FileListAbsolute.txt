@@ -18,3 +18,4 @@ C:\Users\rjsperias\Source\Repos\PrototypeCOOP\WindowsFormsApplication2\obj\Debug
 C:\Users\rjsperias\Source\Repos\PrototypeCOOP\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
 C:\Users\rjsperias\Source\Repos\PrototypeCOOP\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\rjsperias\Source\Repos\PrototypeCOOP\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\rjsperias\Source\Repos\PrototypeCOOP\WindowsFormsApplication2\bin\Debug\MySql.Data.dll

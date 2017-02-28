@@ -23,5 +23,10 @@ namespace WindowsFormsApplication2
             MainMenu main = new MainMenu(this);
             main.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
