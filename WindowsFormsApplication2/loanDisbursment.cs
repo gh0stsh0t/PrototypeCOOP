@@ -12,9 +12,16 @@ namespace WindowsFormsApplication2
 {
     public partial class loanDisbursment : Form
     {
-        public loanDisbursment()
+        fundsMenu upper;
+        public loanDisbursment(fundsMenu x)
         {
             InitializeComponent();
+            upper = x;
+        }
+
+        private void loanDisbursment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            upper.Show();
         }
     }
 }

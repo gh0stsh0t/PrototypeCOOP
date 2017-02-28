@@ -12,9 +12,16 @@ namespace WindowsFormsApplication2
 {
     public partial class viewMember : Form
     {
-        public viewMember()
+        Members upper;
+        public viewMember(Members x)
         {
             InitializeComponent();
+            upper = x;
+        }
+
+        private void viewMember_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            upper.Show();
         }
     }
 }

@@ -12,9 +12,16 @@ namespace WindowsFormsApplication2
 {
     public partial class loanAccountRequest : Form
     {
-        public loanAccountRequest()
+        Members upper;
+        public loanAccountRequest(Members x)
         {
             InitializeComponent();
+            upper = x;
+        }
+
+        private void loanAccountRequest_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            upper.Show();
         }
     }
 }

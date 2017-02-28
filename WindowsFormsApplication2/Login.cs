@@ -16,5 +16,12 @@ namespace WindowsFormsApplication2
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            MainMenu main = new MainMenu(this);
+            main.Show();
+        }
     }
 }

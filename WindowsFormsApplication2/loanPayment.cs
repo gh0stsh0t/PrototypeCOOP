@@ -12,9 +12,16 @@ namespace WindowsFormsApplication2
 {
     public partial class loanPayment : Form
     {
-        public loanPayment()
+        fundsMenu upper;
+        public loanPayment(fundsMenu x)
         {
             InitializeComponent();
+            upper = x;
+        }
+
+        private void loanPayment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            upper.Show();
         }
     }
 }

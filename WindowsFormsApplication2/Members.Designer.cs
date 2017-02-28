@@ -64,6 +64,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Edit";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -73,6 +74,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button4
             // 
@@ -82,6 +84,7 @@
             this.button4.TabIndex = 2;
             this.button4.Text = "View Accounts";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -91,6 +94,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "New Loan Request";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button5
             // 
@@ -109,6 +113,7 @@
             this.button6.TabIndex = 2;
             this.button6.Text = "Deactivate";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -118,6 +123,7 @@
             this.button7.TabIndex = 2;
             this.button7.Text = "Summary Report";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Members
             // 
@@ -134,7 +140,9 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
             this.Name = "Members";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Members";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Members_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
