@@ -46,7 +46,7 @@ namespace WindowsFormsApplication2
                         comm = new MySqlCommand("INSERT INTO members (family_name,first_name,middle_name) VALUES('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "')", conn);
                         break;
                     case 1:
-                        comm = new MySqlCommand("UPDATE members SET family_name='" + textBox1.Text + "',first_name='" + textBox2.Text + "',middle_name='" + textBox3.Text + "' WHERE id="upper.memberid, conn);
+                        comm = new MySqlCommand("UPDATE members SET family_name='" + textBox1.Text + "',first_name='" + textBox2.Text + "',middle_name='" + textBox3.Text + "' WHERE id="+upper.memberid, conn);
                         break;
                 }
                 comm.ExecuteNonQuery();

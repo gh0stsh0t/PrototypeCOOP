@@ -20,7 +20,7 @@ namespace WindowsFormsApplication2
         public MySqlDataAdapter listener;
         public DataTable table;
         public int memberid;
-
+        string name;
         public Members(MainMenu x)
         {
             InitializeComponent();
@@ -59,7 +59,7 @@ namespace WindowsFormsApplication2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("is Deactivated");
+            MessageBox.Show(name+" is Deactivated");
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -79,7 +79,11 @@ namespace WindowsFormsApplication2
             try
             {
                 memberid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["id"].Value.ToString());
-                button1.Enabled=true;
+                name = dataGridView1.Rows[e.RowIndex].Cells["family_name"].Value.ToString();
+                button1.Enabled = true;
+                button4.Enabled = true;
+                button3.Enabled = true;
+                button6.Enabled = true;
             }
             catch (ArgumentOutOfRangeException ee)
             {
