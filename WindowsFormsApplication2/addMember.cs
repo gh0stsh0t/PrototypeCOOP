@@ -16,7 +16,7 @@ namespace WindowsFormsApplication2
         Members upper;
         int choice;
         public MySqlConnection conn;
-        public addMember(Members x,int z)
+        public addMember(Members x, int z)
         {
             InitializeComponent();
             upper = x;
@@ -39,14 +39,14 @@ namespace WindowsFormsApplication2
             try
             {
                 conn.Open();
-                MySqlCommand comm=new MySqlCommand("");
+                MySqlCommand comm = new MySqlCommand("");
                 switch (choice)
                 {
                     case 0:
                         comm = new MySqlCommand("INSERT INTO members (family_name,first_name,middle_name) VALUES('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "')", conn);
                         break;
                     case 1:
-                        comm = new MySqlCommand("UPDATE members SET family_name='" + textBox1.Text + "',first_name='" + textBox2.Text + "',middle_name='" + textBox3.Text + "' WHERE id="+upper.memberid, conn);
+                        comm = new MySqlCommand("UPDATE members SET family_name='" + textBox1.Text + "',first_name='" + textBox2.Text + "',middle_name='" + textBox3.Text + "' WHERE id=" + upper.memberid, conn);
                         break;
                 }
                 comm.ExecuteNonQuery();
@@ -63,7 +63,7 @@ namespace WindowsFormsApplication2
 
         private void addMember_Load(object sender, EventArgs e)
         {
-            switch(choice)
+            switch (choice)
             {
                 case 0:
                     Text = "Add New Member";
@@ -71,7 +71,7 @@ namespace WindowsFormsApplication2
                 case 1:
                     try
                     {
-                        
+                            
                         conn.Open();
                         MySqlCommand comm = new MySqlCommand("SELECT * FROM members where id=" + upper.memberid, conn);
                         MySqlDataReader reader = comm.ExecuteReader();
@@ -84,7 +84,7 @@ namespace WindowsFormsApplication2
                         }
                         conn.Close();
                     }
-                    catch(Exception ee)
+                    catch (Exception ee)
                     {
                     }
                     Text = "Update Member Details";

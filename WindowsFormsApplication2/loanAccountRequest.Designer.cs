@@ -319,6 +319,10 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Regular",
+            "Emergency",
+            "Appliance"});
             this.comboBox2.Location = new System.Drawing.Point(121, 59);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(154, 21);
@@ -327,6 +331,10 @@
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "New",
+            "Renewal",
+            "Restructuring"});
             this.comboBox3.Location = new System.Drawing.Point(121, 92);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(154, 21);
@@ -390,6 +398,7 @@
             // 
             // button3
             // 
+            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button3.Location = new System.Drawing.Point(376, 503);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(77, 25);
@@ -406,6 +415,7 @@
             this.button2.TabIndex = 38;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // loanAccountRequest
             // 
@@ -437,6 +447,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loan Account Request";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.loanAccountRequest_FormClosing);
+            this.Load += new System.EventHandler(this.loanAccountRequest_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
