@@ -41,6 +41,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +55,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(-105, 0);
+            this.button1.Location = new System.Drawing.Point(-115, 14);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 90);
             this.button1.TabIndex = 0;
@@ -69,7 +71,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(-105, 94);
+            this.button2.Location = new System.Drawing.Point(-115, 108);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 90);
             this.button2.TabIndex = 0;
@@ -85,7 +87,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(-105, 190);
+            this.button3.Location = new System.Drawing.Point(-115, 204);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(114, 90);
             this.button3.TabIndex = 0;
@@ -101,7 +103,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(10, 388);
+            this.panel1.Size = new System.Drawing.Size(0, 388);
             this.panel1.TabIndex = 2;
             // 
             // panel2
@@ -195,7 +197,23 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(142)))), ((int)(((byte)(60)))));
+            this.panel3.Location = new System.Drawing.Point(0, -14);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(796, 14);
+            this.panel3.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(135, 20);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(648, 354);
+            this.panel4.TabIndex = 5;
             // 
             // MainMenu
             // 
@@ -205,6 +223,8 @@
             this.ClientSize = new System.Drawing.Size(795, 386);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -233,5 +253,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
     }
 }

@@ -13,11 +13,10 @@ namespace WindowsFormsApplication2
     public partial class MainMenu : Form
     {
         Form mem;
-        Login upper;
-        public MainMenu(Login x)
+        int incr = 0;
+        public MainMenu()
         {
             InitializeComponent();
-            upper = x;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,7 +42,6 @@ namespace WindowsFormsApplication2
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            upper.Show();
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -53,12 +51,28 @@ namespace WindowsFormsApplication2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            incr = 1;
             timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            panel1.Size = new Size(panel1.Size.Width + 7 * incr, panel1.Size.Height);
+            panel2.Size = new Size(panel2.Size.Width, panel2.Size.Height - 26 * incr);
+            if (panel2.Size.Height <= 0)
+            {
+                if (panel3.Location.Y < 0)
+                    panel3.Location = new Point(panel3.Location.X, panel3.Location.Y + 3);
+                else if (panel3.Location.Y > 0)
+                    panel3.Location = new Point(panel3.Location.X, 0);
+            }
+            BackColor = System.Drawing.Color.FromArgb(BackColor.R + 10 * incr, BackColor.G + 11 * incr, BackColor.B + 10 * incr);
 
+            if (panel1.Size.Width >= 126)
+
+                timer1.Stop();
+            else if (panel1.Size.Width == 0)
+                timer1.Stop();
         }
     }
 }
