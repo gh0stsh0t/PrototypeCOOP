@@ -95,6 +95,10 @@ namespace WindowsFormsApplication2
                 button4.Enabled = true;
                 button3.Enabled = true;
                 button6.Enabled = true;
+                button1.BackColor = button2.BackColor;
+                button4.BackColor = button2.BackColor;
+                button3.BackColor = button2.BackColor;
+                button6.BackColor = button2.BackColor;
             }
             catch (ArgumentOutOfRangeException ee)
             {

@@ -22,11 +22,13 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             breaker();
-            mem = new Members(this,BackColor);
+            mem = new Members(this, BackColor);
             mem.TopLevel = false;
-            mem.AutoScroll = true;
             panel4.Controls.Add(mem);
             mem.Show();
+            button1.BackColor = System.Drawing.Color.FromArgb(56, 142, 60);
+            button2.BackColor = System.Drawing.Color.FromArgb(0, 150, 136);
+            button3.BackColor = button2.BackColor;
         }
         private void breaker()
         {
@@ -40,11 +42,13 @@ namespace WindowsFormsApplication2
         private void button2_Click(object sender, EventArgs e)
         {
             breaker();
-            mem = new fundsMenu(this,BackColor);
+            mem = new fundsMenu(this, BackColor);
             mem.TopLevel = false;
-            mem.AutoScroll = true;
             panel4.Controls.Add(mem);
             mem.Show();
+            button2.BackColor = System.Drawing.Color.FromArgb(56, 142, 60);
+            button1.BackColor = System.Drawing.Color.FromArgb(0, 150, 136);
+            button3.BackColor = button1.BackColor;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -52,9 +56,11 @@ namespace WindowsFormsApplication2
             breaker();
             mem = new Scheduling(this);
             mem.TopLevel = false;
-            mem.AutoScroll = true;
             panel4.Controls.Add(mem);
             mem.Show();
+            button3.BackColor = System.Drawing.Color.FromArgb(56, 142, 60);
+            button1.BackColor = System.Drawing.Color.FromArgb(0, 150, 136);
+            button2.BackColor = button1.BackColor;
         }
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,13 +90,17 @@ namespace WindowsFormsApplication2
                 else if (panel3.Location.Y < -18)
                     panel3.Location = new Point(panel3.Location.X, -18);
             }
+            BackColor = System.Drawing.Color.FromArgb(BackColor.R + 10 * incr, BackColor.G + 11 * incr, BackColor.B + 10 * incr);
+
             if (panel2.Size.Height > 330)
                 panel2.Size = new Size(panel2.Size.Width, 330);
-            BackColor = System.Drawing.Color.FromArgb(BackColor.R + 10 * incr, BackColor.G + 11 * incr, BackColor.B + 10 * incr);
+            else { }
             if (panel1.Size.Width >= 126)
                 timer1.Stop();
             else if (panel1.Size.Width == 0)
+            {
                 timer1.Stop();
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)

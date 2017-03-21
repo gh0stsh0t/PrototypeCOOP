@@ -218,9 +218,10 @@
             // 
             // panel4
             // 
+            this.panel4.AutoScroll = true;
             this.panel4.Location = new System.Drawing.Point(135, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(648, 354);
+            this.panel4.Size = new System.Drawing.Size(660, 366);
             this.panel4.TabIndex = 5;
             // 
             // button6

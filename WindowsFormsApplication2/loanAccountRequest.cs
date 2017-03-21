@@ -25,7 +25,6 @@ namespace WindowsFormsApplication2
 
         private void loanAccountRequest_FormClosing(object sender, FormClosingEventArgs e)
         {
-            upper.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
