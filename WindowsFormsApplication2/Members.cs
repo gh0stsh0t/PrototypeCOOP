@@ -21,17 +21,16 @@ namespace WindowsFormsApplication2
         public DataTable table;
         public int memberid;
         string name;
-        public Members(MainMenu x)
+        public Members(MainMenu x,Color z)
         {
             InitializeComponent();
             Owner = x;
-            upper = x;
+            BackColor = z;
             conn = new MySqlConnection("Server=localhost;Database=test_db;Uid=root;Pwd=root;");
         }
 
         private void Members_FormClosing(object sender, FormClosingEventArgs e)
         {
-            upper.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -104,17 +103,22 @@ namespace WindowsFormsApplication2
         }
         public void refrehasjkda()
         {
-            comm = new MySqlCommand("SELECT * FROM members", conn);
-            listener = new MySqlDataAdapter(comm);
-            table = new DataTable();
-            listener.Fill(table);
-            dataGridView1.DataSource = table;
-            dataGridView1.Columns["id"].Visible = false;
-            dataGridView1.Columns["family_name"].HeaderText = "Family Name";
-            dataGridView1.Columns["first_name"].HeaderText = "First Name";
-            dataGridView1.Columns["middle_name"].HeaderText = "Middle Name";
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            try
+            {
+                comm = new MySqlCommand("SELECT * FROM members", conn);
+                listener = new MySqlDataAdapter(comm);
+                table = new DataTable();
+                listener.Fill(table);
+                dataGridView1.DataSource = table;
+                dataGridView1.Columns["id"].Visible = false;
+                dataGridView1.Columns["family_name"].HeaderText = "Family Name";
+                dataGridView1.Columns["first_name"].HeaderText = "First Name";
+                dataGridView1.Columns["middle_name"].HeaderText = "Middle Name";
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            catch (Exception ee)
+            { }
         }
 
         private void button5_Click(object sender, EventArgs e)

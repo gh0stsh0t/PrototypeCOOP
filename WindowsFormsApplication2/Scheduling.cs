@@ -16,12 +16,11 @@ namespace WindowsFormsApplication2
         public Scheduling(MainMenu x)
         {
             InitializeComponent();
-            upper = x;
+            Owner = x;
         }
 
         private void Scheduling_FormClosing(object sender, FormClosingEventArgs e)
         {
-            upper.Show();
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)

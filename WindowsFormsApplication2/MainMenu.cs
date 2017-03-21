@@ -21,22 +21,39 @@ namespace WindowsFormsApplication2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Hide();
-            mem = new Members(this);
+            breaker();
+            mem = new Members(this,BackColor);
+            mem.TopLevel = false;
+            mem.AutoScroll = true;
+            panel4.Controls.Add(mem);
             mem.Show();
         }
-
+        private void breaker()
+        {
+            try
+            {
+                mem.Close();
+            }
+            catch
+            { }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            //Hide();
-            mem = new fundsMenu(this);
+            breaker();
+            mem = new fundsMenu(this,BackColor);
+            mem.TopLevel = false;
+            mem.AutoScroll = true;
+            panel4.Controls.Add(mem);
             mem.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Hide();
+            breaker();
             mem = new Scheduling(this);
+            mem.TopLevel = false;
+            mem.AutoScroll = true;
+            panel4.Controls.Add(mem);
             mem.Show();
         }
 
@@ -88,6 +105,7 @@ namespace WindowsFormsApplication2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            breaker();
             incr = -1;
             timer1.Start();
         }

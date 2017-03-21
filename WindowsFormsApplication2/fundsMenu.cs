@@ -14,15 +14,15 @@ namespace WindowsFormsApplication2
     {
         MainMenu upper;
         Form lower;
-        public fundsMenu(MainMenu x)
+        public fundsMenu(MainMenu x,Color z)
         {
             InitializeComponent();
-            upper = x;
+            Owner = x;
+            BackColor = z;
         }
 
         private void fundsMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            upper.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,6 +53,11 @@ namespace WindowsFormsApplication2
         {
             lower = new savingsCBU(this, 2);
             lower.Show();
+        }
+
+        private void fundsMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

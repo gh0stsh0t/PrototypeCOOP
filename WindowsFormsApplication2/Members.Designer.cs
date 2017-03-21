@@ -148,6 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 304);
+            this.ControlBox = false;
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button6);
@@ -157,9 +158,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Members";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Members";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Members_FormClosing);
             this.Load += new System.EventHandler(this.Members_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
