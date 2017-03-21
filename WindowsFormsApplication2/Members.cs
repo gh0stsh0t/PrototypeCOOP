@@ -118,7 +118,8 @@ namespace WindowsFormsApplication2
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            lower = new pendingRequests(this);
+            lower.Show();
         }
     }
 }

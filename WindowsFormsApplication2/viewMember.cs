@@ -52,5 +52,10 @@ namespace WindowsFormsApplication2
             {
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("//here lies form that contains all data about such loan");
+        }
     }
 }

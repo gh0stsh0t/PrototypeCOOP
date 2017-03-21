@@ -52,6 +52,10 @@ namespace WindowsFormsApplication2
                 comm = new MySqlCommand("INSERT INTO CoMakers (loan_request_id,name,address,company,position) VALUES('" + loanReq + "', '" + textBox12.Text + "','" + textBox11.Text + "', '" + textBox10.Text + "','" + textBox9.Text + "')", conn);
                 comm.ExecuteNonQuery();
 
+                comm = new MySqlCommand("INSERT INTO Loans (request_id,type,term,orig_amount,interest_rate,outstanding_balance) VALUES('" + loanReq + "', '" + comboBox2.SelectedIndex+ "','" + textBox7.Text + "', '" + textBox5.Text + "','" + textBox6.Text + "','"+textBox5.Text+")", conn);
+                comm.ExecuteNonQuery();
+
+
                 conn.Close();
             }
             catch (Exception ee)

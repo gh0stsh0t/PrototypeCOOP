@@ -53,6 +53,12 @@
     <Compile Include="addMember.Designer.cs">
       <DependentUpon>addMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="pendingRequests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pendingRequests.Designer.cs">
+      <DependentUpon>pendingRequests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scheduling.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Members.resx">
       <DependentUpon>Members.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pendingRequests.resx">
+      <DependentUpon>pendingRequests.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
