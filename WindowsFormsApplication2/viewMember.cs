@@ -37,7 +37,7 @@ namespace WindowsFormsApplication2
                 MySqlDataReader reader = comm.ExecuteReader();
                 if (reader.Read())
                     label2.Text= reader.GetString(1)+", "+reader.GetString(2)+" "+ reader.GetString(3);
-                comm = new MySqlCommand("SELECT loans.loanType, loans.date_granted FROM members,loanrequest,loans ON (members.id=loans.member_id AND loanrequest.approval_no=loans.requestid) WHERE members.id=" + upper.memberid, conn);
+                comm = new MySqlCommand("SELECT loans.loanType, loans.date_granted FROM loanrequest,loans WHERE "+upper.memberid+"=loans.member_id AND loanrequest.approval_no=loans.requestid", conn);
                 MySqlDataAdapter listener = new MySqlDataAdapter(comm);
                 DataTable table = new DataTable();
                 listener.Fill(table);
