@@ -24,6 +24,7 @@ namespace WindowsFormsApplication2
         public Members(MainMenu x)
         {
             InitializeComponent();
+            Owner = x;
             upper = x;
             conn = new MySqlConnection("Server=localhost;Database=test_db;Uid=root;Pwd=root;");
         }
