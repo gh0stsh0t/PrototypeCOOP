@@ -59,7 +59,18 @@ namespace WindowsFormsApplication2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(name+" is Deactivated");
+            MessageBox.Show(name + " is Deactivated");
+            try
+            {
+                conn.Open();
+                comm = new MySqlCommand("UPDATE Members SET memberstatus=0 where id=" + memberid, conn);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+                conn.Close();
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -103,6 +114,11 @@ namespace WindowsFormsApplication2
             dataGridView1.Columns["middle_name"].HeaderText = "Middle Name";
             foreach (DataGridViewColumn column in dataGridView1.Columns)
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

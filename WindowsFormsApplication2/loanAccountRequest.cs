@@ -13,6 +13,7 @@ namespace WindowsFormsApplication2
 {
     public partial class loanAccountRequest : Form
     {
+        int[] ids;
         Members upper;
         public MySqlConnection conn;
         public loanAccountRequest(Members x)
@@ -38,30 +39,52 @@ namespace WindowsFormsApplication2
             {
                 conn.Open();
                 //Assuming approval no. is AutoIncrementing
-                MySqlCommand comm = new MySqlCommand("INSERT INTO LoanRequest (memberid,type,status,date_requested,amount,purpose) VALUES('"+ testc +"','" + comboBox3.SelectedIndex + "', 0, CURDATE(), '" + textBox5.Text + "','" + textBox8.Text + "')", conn);
+                MySqlCommand comm = new MySqlCommand("INSERT INTO LoanRequest (memberid,type,status,date_requested,amount,purpose) VALUES('"+ ids[comboBox1.SelectedIndex] +"','" + comboBox3.SelectedIndex + "', 0, CURDATE(), '" + textBox5.Text + "','" + textBox8.Text + "')", conn);
                 comm.ExecuteNonQuery();
 
-                MySqlDataReader myReader;
-                MySqlCommand myCommand = new MySqlCommand("SELECT MAX(approval_no) as loanR FROM LoanRequest", conn);
-                myReader = myCommand.ExecuteReader();
+                MySqlDataReader myReader = new MySqlCommand("SELECT MAX(approval_no) as loanR FROM LoanRequest", conn).ExecuteReader();
                 myReader.Read();
                 int loanReq = int.Parse(myReader.GetString("loanR"));
+
                 comm = new MySqlCommand("INSERT INTO CoMakers (loan_request_id,name,address,company,position) VALUES('" + loanReq + "', '" + textBox1.Text + "','" + textBox2.Text + "', '" + textBox3.Text + "','"+  textBox4.Text + "')", conn);
                 comm.ExecuteNonQuery();
+
                 comm = new MySqlCommand("INSERT INTO CoMakers (loan_request_id,name,address,company,position) VALUES('" + loanReq + "', '" + textBox12.Text + "','" + textBox11.Text + "', '" + textBox10.Text + "','" + textBox9.Text + "')", conn);
                 comm.ExecuteNonQuery();
+
                 conn.Close();
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message+" also, just let it run. data validation is TODO");
+                MessageBox.Show(ee.Message+"\n also, just let it run. data validation is TODO");
                 conn.Close();
             }
         }
 
         private void loanAccountRequest_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                int rowCount = 0;
+                MySqlDataReader myReader;
+                MySqlCommand myCommand = new MySqlCommand("SELECT * FROM Members where memberstatus=1", conn);
+                myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                    rowCount++;
+                ids = new int[rowCount];
+                rowCount = 0;
+                myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    ids[rowCount++] = int.Parse(myReader.GetString("id"));
+                    comboBox1.Items.Add(myReader.GetString("family_name") + ", " + myReader.GetString("first_name"));
+                }
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message + " also, just let it run. data validation is TODO");
+                conn.Close();
+            }
         }
     }
 }

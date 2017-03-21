@@ -35,11 +35,17 @@ namespace WindowsFormsApplication2
                 conn.Open();
                 MySqlCommand comm = new MySqlCommand("SELECT * FROM members where id=" + upper.memberid, conn);
                 MySqlDataReader reader = comm.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
+                if (reader.Read())
                     label2.Text= reader.GetString(1)+", "+reader.GetString(2)+" "+ reader.GetString(3);
-                }
+                comm = new MySqlCommand("SELECT loans.loanType, loans.date_granted FROM members,loanrequest,loans ON (members.id=loans.member_id AND loanrequest.approval_no=loans.requestid) WHERE members.id=" + upper.memberid, conn);
+                MySqlDataAdapter listener = new MySqlDataAdapter(comm);
+                DataTable table = new DataTable();
+                listener.Fill(table);
+                dataGridView1.DataSource = table;
+                dataGridView1.Columns["loanType"].HeaderText = "Loan Type";
+                dataGridView1.Columns["date_granted"].HeaderText = "Date Granted";
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 conn.Close();
             }
             catch (Exception ee)
