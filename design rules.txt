@@ -1,0 +1,56 @@
+Child
+
+bg
+236
+240
+245
+
+table
+#ffffff
+
+table header
+209
+249
+255
+
+subheader
+89
+109
+130
+
+top border
+0
+192
+239
+
+
+errorheader
+221
+75
+57
+
+successheader
+0
+166
+90
+
+categorytext
+223
+75
+57
+
+submitbutton
+0
+192
+239
+
+searchbutton
+61
+153
+112
+
+fonts
+Inside:Source Sans Pro
+
+everything els
+fontawesome
