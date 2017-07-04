@@ -16,3 +16,13 @@ C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.
 C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.MainForm.resources
 C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.Properties.Resources.resources
 C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
