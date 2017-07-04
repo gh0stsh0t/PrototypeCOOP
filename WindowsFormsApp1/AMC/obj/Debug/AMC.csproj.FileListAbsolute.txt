@@ -1,0 +1,18 @@
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\bin\Debug\AMC.exe.config
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\bin\Debug\AMC.exe
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\bin\Debug\AMC.pdb
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.MainForm.resources
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.Properties.Resources.resources
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.exe
+c:\users\farshana datukon\documents\visual studio 2015\Projects\AMC\AMC\obj\Debug\AMC.pdb
+C:\Users\fadatukon\Desktop\AMC\AMC\bin\Debug\AMC.exe.config
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.exe
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.pdb
+C:\Users\fadatukon\Desktop\AMC\AMC\bin\Debug\AMC.exe
+C:\Users\fadatukon\Desktop\AMC\AMC\bin\Debug\AMC.pdb
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.MainForm.resources
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.Properties.Resources.resources
+C:\Users\fadatukon\Desktop\AMC\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
