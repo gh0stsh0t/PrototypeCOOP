@@ -30,6 +30,7 @@
         {
             this.sidebarPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.sidebarLogoPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarBtnDashboard = new System.Windows.Forms.Button();
             this.sidebarBtnMembers = new System.Windows.Forms.Button();
             this.sidebarPanelMembers = new System.Windows.Forms.FlowLayoutPanel();
@@ -44,25 +45,22 @@
             this.sidebarBtnSavings = new System.Windows.Forms.Button();
             this.sidebarPanelSavings = new System.Windows.Forms.FlowLayoutPanel();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.sidebarBtnCBU = new System.Windows.Forms.Button();
             this.sidebarPanelCBU = new System.Windows.Forms.FlowLayoutPanel();
             this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarPanel.SuspendLayout();
             this.sidebarLogoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.sidebarPanelMembers.SuspendLayout();
             this.sidebarPanelLoans.SuspendLayout();
             this.sidebarPanelSavings.SuspendLayout();
             this.sidebarPanelCBU.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // sidebarPanel
@@ -93,6 +91,16 @@
             this.sidebarLogoPanel.Name = "sidebarLogoPanel";
             this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 76);
             this.sidebarLogoPanel.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 76);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // sidebarBtnDashboard
             // 
@@ -294,12 +302,11 @@
             // 
             this.sidebarPanelSavings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(59)))), ((int)(((byte)(65)))));
             this.sidebarPanelSavings.Controls.Add(this.button9);
-            this.sidebarPanelSavings.Controls.Add(this.button10);
             this.sidebarPanelSavings.Controls.Add(this.button11);
             this.sidebarPanelSavings.Controls.Add(this.button12);
             this.sidebarPanelSavings.Location = new System.Drawing.Point(3, 433);
             this.sidebarPanelSavings.Name = "sidebarPanelSavings";
-            this.sidebarPanelSavings.Size = new System.Drawing.Size(225, 119);
+            this.sidebarPanelSavings.Size = new System.Drawing.Size(225, 89);
             this.sidebarPanelSavings.TabIndex = 6;
             // 
             // button9
@@ -319,23 +326,6 @@
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = true;
             // 
-            // button10
-            // 
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button10.Location = new System.Drawing.Point(3, 32);
-            this.button10.Name = "button10";
-            this.button10.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
-            this.button10.Size = new System.Drawing.Size(220, 23);
-            this.button10.TabIndex = 4;
-            this.button10.Text = "Add Savings Account";
-            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.UseVisualStyleBackColor = true;
-            // 
             // button11
             // 
             this.button11.FlatAppearance.BorderSize = 0;
@@ -344,7 +334,7 @@
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button11.Location = new System.Drawing.Point(3, 61);
+            this.button11.Location = new System.Drawing.Point(3, 32);
             this.button11.Name = "button11";
             this.button11.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button11.Size = new System.Drawing.Size(220, 23);
@@ -361,7 +351,7 @@
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button12.Location = new System.Drawing.Point(3, 90);
+            this.button12.Location = new System.Drawing.Point(3, 61);
             this.button12.Name = "button12";
             this.button12.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button12.Size = new System.Drawing.Size(220, 23);
@@ -378,7 +368,7 @@
             this.sidebarBtnCBU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnCBU.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnCBU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 558);
+            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 528);
             this.sidebarBtnCBU.Name = "sidebarBtnCBU";
             this.sidebarBtnCBU.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnCBU.Size = new System.Drawing.Size(225, 29);
@@ -392,13 +382,12 @@
             // 
             this.sidebarPanelCBU.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(59)))), ((int)(((byte)(65)))));
             this.sidebarPanelCBU.Controls.Add(this.button14);
-            this.sidebarPanelCBU.Controls.Add(this.button15);
             this.sidebarPanelCBU.Controls.Add(this.button16);
             this.sidebarPanelCBU.Controls.Add(this.button17);
             this.sidebarPanelCBU.Controls.Add(this.button19);
-            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 593);
+            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 563);
             this.sidebarPanelCBU.Name = "sidebarPanelCBU";
-            this.sidebarPanelCBU.Size = new System.Drawing.Size(225, 146);
+            this.sidebarPanelCBU.Size = new System.Drawing.Size(225, 118);
             this.sidebarPanelCBU.TabIndex = 8;
             // 
             // button14
@@ -418,23 +407,6 @@
             this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button14.UseVisualStyleBackColor = true;
             // 
-            // button15
-            // 
-            this.button15.FlatAppearance.BorderSize = 0;
-            this.button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button15.Location = new System.Drawing.Point(3, 32);
-            this.button15.Name = "button15";
-            this.button15.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
-            this.button15.Size = new System.Drawing.Size(220, 23);
-            this.button15.TabIndex = 4;
-            this.button15.Text = "Add CBU Account";
-            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button15.UseVisualStyleBackColor = true;
-            // 
             // button16
             // 
             this.button16.FlatAppearance.BorderSize = 0;
@@ -443,7 +415,7 @@
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button16.Location = new System.Drawing.Point(3, 61);
+            this.button16.Location = new System.Drawing.Point(3, 32);
             this.button16.Name = "button16";
             this.button16.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button16.Size = new System.Drawing.Size(220, 23);
@@ -460,7 +432,7 @@
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button17.Location = new System.Drawing.Point(3, 90);
+            this.button17.Location = new System.Drawing.Point(3, 61);
             this.button17.Name = "button17";
             this.button17.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button17.Size = new System.Drawing.Size(220, 23);
@@ -477,7 +449,7 @@
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button19.Location = new System.Drawing.Point(3, 119);
+            this.button19.Location = new System.Drawing.Point(3, 90);
             this.button19.Name = "button19";
             this.button19.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button19.Size = new System.Drawing.Size(220, 23);
@@ -492,16 +464,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(950, 660);
             this.panel1.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 76);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -519,11 +481,11 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.sidebarLogoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.sidebarPanelMembers.ResumeLayout(false);
             this.sidebarPanelLoans.ResumeLayout(false);
             this.sidebarPanelSavings.ResumeLayout(false);
             this.sidebarPanelCBU.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -546,13 +508,11 @@
         private System.Windows.Forms.Button sidebarBtnSavings;
         private System.Windows.Forms.FlowLayoutPanel sidebarPanelSavings;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button sidebarBtnCBU;
         private System.Windows.Forms.FlowLayoutPanel sidebarPanelCBU;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button19;
