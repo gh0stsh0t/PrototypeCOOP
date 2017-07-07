@@ -190,15 +190,22 @@ namespace AMC
 
             try
             {
+                if(validation())
+                {
+                    databasecon.Open();
+                    query = new MySqlCommand("INSERT members (family_name)"
+                    + "VALUES ('" + lname.Text + "')", databasecon);
+                    ////////////////////////////
+                    query.ExecuteNonQuery();
 
-                databasecon.Open();
-                query = new MySqlCommand("INSERT members (family_name)"
-                + "VALUES ('"+ lname.Text + "')", databasecon);
-                ////////////////////////////
-                query.ExecuteNonQuery();
-
-                databasecon.Close();
-                MessageBox.Show(lname.Text + " sucesfully added!");
+                    databasecon.Close();
+                    MessageBox.Show(lname.Text + " sucesfully added!");
+                }
+                else
+                {
+                    databasecon.Close();
+                    MessageBox.Show("Please insert last name.");
+                }
 
             }
             catch (Exception ee)
@@ -307,6 +314,15 @@ namespace AMC
                 educ.Text = "";
                 educ.ForeColor = Color.FromArgb(0, 0, 0);
             }
+        }
+
+        private bool validation()
+        {
+            if (lnameFlag)
+                return false;
+            else if(lname.Text.Length > 0 && lname.Text.Trim().Length == 0)
+                return false;
+            return true;
         }
     }
 }
