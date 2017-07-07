@@ -33,7 +33,7 @@ namespace AMC
             try
             {
                 conn.Open();
-                MySqlCommand comm = new MySqlCommand("SELECT concat(family_name, ', ',first_name) as Name FROM members ", conn);
+                MySqlCommand comm = new MySqlCommand("SELECT * FROM members ", conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
@@ -74,7 +74,6 @@ namespace AMC
             }
             else
             {
-                Rifrish();
                 Rifrish();
             }
         }
