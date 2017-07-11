@@ -192,37 +192,6 @@ namespace AMC
 
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                if(validation())
-                {
-                    databasecon.Open();
-                    query = new MySqlCommand("INSERT members (family_name)"
-                    + "VALUES ('" + txtLname.Text + "')", databasecon);
-                    ////////////////////////////
-                    query.ExecuteNonQuery();
-
-                    databasecon.Close();
-                    MessageBox.Show(txtLname.Text + " sucesfully added!");
-                }
-                else
-                {
-                    databasecon.Close();
-                    MessageBox.Show("Please insert last name.");
-                }
-
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.ToString());
-                databasecon.Close();
-            }
-
-        }
-
         private void mname_Enter(object sender, EventArgs e)
         {
             if (mnameFlag)
@@ -392,6 +361,37 @@ namespace AMC
                 txtPos.AppendText("Ex. CEO");
                 txtPos.ForeColor = Color.FromArgb(219, 200, 210);
             }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (validation())
+                {
+                    databasecon.Open();
+                    query = new MySqlCommand("INSERT members (family_name)"
+                    + "VALUES ('" + txtLname.Text + "')", databasecon);
+                    ////////////////////////////
+                    query.ExecuteNonQuery();
+
+                    databasecon.Close();
+                    MessageBox.Show(txtLname.Text + " sucesfully added!");
+                }
+                else
+                {
+                    databasecon.Close();
+                    MessageBox.Show("Please insert last name.");
+                }
+
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                databasecon.Close();
+            }
+
         }
     }
 }

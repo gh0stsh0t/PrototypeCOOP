@@ -76,6 +76,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.label22 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,9 +96,9 @@
             this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(16, 70);
+            this.button1.Location = new System.Drawing.Point(16, 69);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(904, 5);
+            this.button1.Size = new System.Drawing.Size(906, 5);
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
@@ -142,7 +143,7 @@
             // txtLname
             // 
             this.txtLname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtLname.ForeColor = System.Drawing.Color.LightCoral;
             this.txtLname.Location = new System.Drawing.Point(239, 6);
             this.txtLname.Name = "txtLname";
             this.txtLname.Size = new System.Drawing.Size(173, 23);
@@ -156,7 +157,7 @@
             // txtFname
             // 
             this.txtFname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtFname.ForeColor = System.Drawing.Color.LightCoral;
             this.txtFname.Location = new System.Drawing.Point(418, 6);
             this.txtFname.Name = "txtFname";
             this.txtFname.Size = new System.Drawing.Size(253, 23);
@@ -169,7 +170,7 @@
             // txtMname
             // 
             this.txtMname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtMname.ForeColor = System.Drawing.Color.LightCoral;
             this.txtMname.Location = new System.Drawing.Point(677, 6);
             this.txtMname.Name = "txtMname";
             this.txtMname.Size = new System.Drawing.Size(189, 23);
@@ -190,7 +191,7 @@
             // 
             // txtAddr
             // 
-            this.txtAddr.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAddr.ForeColor = System.Drawing.Color.LightCoral;
             this.txtAddr.Location = new System.Drawing.Point(239, 40);
             this.txtAddr.Name = "txtAddr";
             this.txtAddr.Size = new System.Drawing.Size(627, 25);
@@ -312,7 +313,7 @@
             // 
             // txtContNo
             // 
-            this.txtContNo.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtContNo.ForeColor = System.Drawing.Color.LightCoral;
             this.txtContNo.Location = new System.Drawing.Point(239, 149);
             this.txtContNo.Name = "txtContNo";
             this.txtContNo.Size = new System.Drawing.Size(173, 25);
@@ -529,7 +530,7 @@
             // 
             // txtTIN
             // 
-            this.txtTIN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtTIN.ForeColor = System.Drawing.Color.LightCoral;
             this.txtTIN.Location = new System.Drawing.Point(646, 354);
             this.txtTIN.Name = "txtTIN";
             this.txtTIN.Size = new System.Drawing.Size(220, 25);
@@ -556,7 +557,7 @@
             // 
             // txtAnnInc
             // 
-            this.txtAnnInc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAnnInc.ForeColor = System.Drawing.Color.LightCoral;
             this.txtAnnInc.Location = new System.Drawing.Point(239, 354);
             this.txtAnnInc.Name = "txtAnnInc";
             this.txtAnnInc.Size = new System.Drawing.Size(231, 25);
@@ -565,7 +566,7 @@
             // 
             // txtOcc
             // 
-            this.txtOcc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtOcc.ForeColor = System.Drawing.Color.LightCoral;
             this.txtOcc.Location = new System.Drawing.Point(646, 314);
             this.txtOcc.Name = "txtOcc";
             this.txtOcc.Size = new System.Drawing.Size(220, 25);
@@ -583,7 +584,7 @@
             // 
             // txtPos
             // 
-            this.txtPos.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtPos.ForeColor = System.Drawing.Color.LightCoral;
             this.txtPos.Location = new System.Drawing.Point(239, 314);
             this.txtPos.Name = "txtPos";
             this.txtPos.Size = new System.Drawing.Size(231, 25);
@@ -603,7 +604,7 @@
             // 
             // txtCompany
             // 
-            this.txtCompany.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtCompany.ForeColor = System.Drawing.Color.LightCoral;
             this.txtCompany.Location = new System.Drawing.Point(239, 276);
             this.txtCompany.Name = "txtCompany";
             this.txtCompany.Size = new System.Drawing.Size(627, 25);
@@ -639,12 +640,22 @@
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(701, 47);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(219, 19);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Required fields are marked in pink.";
+            // 
             // AddMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(934, 621);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
@@ -712,5 +723,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Label label22;
     }
 }
