@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -71,6 +72,11 @@ namespace AMC
         private void lname_Leave(object sender, EventArgs e)
         {
             lnameFlag = (txtLname.Text == "");
+            if (!isAlphaNum(txtLname.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtLname.Focus();
+            }
             if (lnameFlag)
             {
                 txtLname.AppendText("Last Name");
@@ -90,6 +96,11 @@ namespace AMC
         private void textBox1_Leave(object sender, EventArgs e)
         {
             fnameFlag = (txtFname.Text == "");
+            if (!isAlphaNum(txtFname.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtFname.Focus();
+            }
             if (fnameFlag)
             {
                 txtFname.AppendText("First Name");
@@ -209,6 +220,11 @@ namespace AMC
         private void mname_Leave(object sender, EventArgs e)
         {
             mnameFlag = (txtMname.Text == "");
+            if (!isAlphaNum(txtMname.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtMname.Focus();
+            }
             if (mnameFlag)
             {
                 txtMname.AppendText("Middle Name");
@@ -228,6 +244,11 @@ namespace AMC
         private void address_Leave(object sender, EventArgs e)
         {
             addFlag = (txtAddr.Text == "");
+            if (!isAlphaNum(txtAddr.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtAddr.Focus();
+            }
             if (addFlag)
             {
                 txtAddr.AppendText("Ex. 123 Strawberry St.");
@@ -247,6 +268,11 @@ namespace AMC
         private void religion_Leave(object sender, EventArgs e)
         {
             relFlag = (txtReligion.Text == "");
+            if (!isAlphaNum(txtReligion.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtReligion.Focus();
+            }
             if (relFlag)
             {
                 txtReligion.AppendText("Ex. Roman Catholic");
@@ -257,6 +283,11 @@ namespace AMC
         private void contactno_Leave(object sender, EventArgs e)
         {
             contFlag = (txtContNo.Text == "");
+            if (!isAlphaNum(txtContNo.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtContNo.Focus();
+            }
             if (contFlag)
             {
                 txtContNo.AppendText("Ex. 09991234567");
@@ -276,6 +307,11 @@ namespace AMC
         private void educ_Leave(object sender, EventArgs e)
         {
             educFlag = (txtEduc.Text == "");
+            if (!isAlphaNum(txtEduc.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtEduc.Focus();
+            }
             if (educFlag)
             {
                 txtEduc.AppendText("Ex. College Graduate");
@@ -294,11 +330,30 @@ namespace AMC
 
         private bool validation()
         {
-            if (lnameFlag)
+            int x = 0;
+            if ((txtLname.Text.Length > 0 && txtLname.Text.Trim().Length == 0) || lnameFlag)
+                x = 1;
+            else if ((txtMname.Text.Length > 0 && txtMname.Text.Trim().Length == 0) || mnameFlag)
+                x = 2;
+            else if ((txtFname.Text.Length > 0 && txtFname.Text.Trim().Length == 0) || fnameFlag)
+                x = 3;
+            if (x == 0) return true;
+            else
+            {
+                switch(x)
+                {
+                    case 1:
+                        MessageBox.Show("Please fill up the field \"Last Name\"");
+                        break;
+                    case 2:
+                        MessageBox.Show("Please fill up the field \"First Name\"");
+                        break;
+                    case 3:
+                        MessageBox.Show("Please fill up the field \"Middle Name\"");
+                        break;
+                }
                 return false;
-            else if(txtLname.Text.Length > 0 && txtLname.Text.Trim().Length == 0)
-                return false;
-            return true;
+            }
         }
 
         private void textBox5_Enter(object sender, EventArgs e)
@@ -318,6 +373,11 @@ namespace AMC
         private void benificiary_Leave(object sender, EventArgs e)
         {
             benFlag = (txtBenificiary.Text == "");
+            if (!isAlphaNum(txtBenificiary.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtBenificiary.Focus();
+            }
             if (benFlag)
             {
                 txtBenificiary.AppendText("Ex. Bruce Wayne");
@@ -337,6 +397,11 @@ namespace AMC
         private void txtCompany_Leave(object sender, EventArgs e)
         {
             compFlag = (txtCompany.Text == "");
+            if (!isAlphaNum(txtCompany.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtCompany.Focus();
+            }
             if (compFlag)
             {
                 txtCompany.AppendText("Ex. Wayne Enterprises");
@@ -356,11 +421,21 @@ namespace AMC
         private void txtPos_Leave(object sender, EventArgs e)
         {
             posFlag = (txtPos.Text == "");
+            if (!isAlphaNum(txtPos.Text))
+            {
+                MessageBox.Show("Please make sure this field contains only letters or numbers");
+                txtPos.Focus();
+            }
             if (posFlag)
             {
                 txtPos.AppendText("Ex. CEO");
                 txtPos.ForeColor = Color.FromArgb(219, 200, 210);
             }
+        }
+        public static Boolean isAlphaNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+            return rg.IsMatch(strToCheck);
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -382,7 +457,6 @@ namespace AMC
                 else
                 {
                     databasecon.Close();
-                    MessageBox.Show("Please insert last name.");
                 }
 
             }
