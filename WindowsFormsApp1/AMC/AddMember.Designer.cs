@@ -33,26 +33,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lname = new System.Windows.Forms.TextBox();
-            this.fname = new System.Windows.Forms.TextBox();
-            this.mname = new System.Windows.Forms.TextBox();
+            this.txtLname = new System.Windows.Forms.TextBox();
+            this.txtFname = new System.Windows.Forms.TextBox();
+            this.txtMname = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.address = new System.Windows.Forms.TextBox();
+            this.txtAddr = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
-            this.religion = new System.Windows.Forms.TextBox();
+            this.txtReligion = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.civstat = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.contactno = new System.Windows.Forms.TextBox();
+            this.txtContNo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.educ = new System.Windows.Forms.TextBox();
+            this.txtEduc = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtBenificiary = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dependents = new System.Windows.Forms.ComboBox();
@@ -60,19 +60,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.txtBORAcc = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.mtype = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.txtTIN = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtAnnInc = new System.Windows.Forms.TextBox();
+            this.txtOcc = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtPos = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtCompany = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -139,45 +139,45 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Full name";
             // 
-            // lname
+            // txtLname
             // 
-            this.lname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lname.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.lname.Location = new System.Drawing.Point(239, 6);
-            this.lname.Name = "lname";
-            this.lname.Size = new System.Drawing.Size(173, 23);
-            this.lname.TabIndex = 3;
-            this.lname.Text = "Last Name";
-            this.lname.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lname_MouseClick);
-            this.lname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.lname.Enter += new System.EventHandler(this.lname_Enter);
-            this.lname.Leave += new System.EventHandler(this.lname_Leave);
+            this.txtLname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtLname.Location = new System.Drawing.Point(239, 6);
+            this.txtLname.Name = "txtLname";
+            this.txtLname.Size = new System.Drawing.Size(173, 23);
+            this.txtLname.TabIndex = 3;
+            this.txtLname.Text = "Last Name";
+            this.txtLname.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lname_MouseClick);
+            this.txtLname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtLname.Enter += new System.EventHandler(this.lname_Enter);
+            this.txtLname.Leave += new System.EventHandler(this.lname_Leave);
             // 
-            // fname
+            // txtFname
             // 
-            this.fname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fname.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.fname.Location = new System.Drawing.Point(418, 6);
-            this.fname.Name = "fname";
-            this.fname.Size = new System.Drawing.Size(253, 23);
-            this.fname.TabIndex = 4;
-            this.fname.Text = "First Name";
-            this.fname.TextChanged += new System.EventHandler(this.fname_TextChanged);
-            this.fname.Enter += new System.EventHandler(this.textBox1_Enter);
-            this.fname.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txtFname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtFname.Location = new System.Drawing.Point(418, 6);
+            this.txtFname.Name = "txtFname";
+            this.txtFname.Size = new System.Drawing.Size(253, 23);
+            this.txtFname.TabIndex = 4;
+            this.txtFname.Text = "First Name";
+            this.txtFname.TextChanged += new System.EventHandler(this.fname_TextChanged);
+            this.txtFname.Enter += new System.EventHandler(this.textBox1_Enter);
+            this.txtFname.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // mname
+            // txtMname
             // 
-            this.mname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mname.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.mname.Location = new System.Drawing.Point(677, 6);
-            this.mname.Name = "mname";
-            this.mname.Size = new System.Drawing.Size(189, 23);
-            this.mname.TabIndex = 4;
-            this.mname.Text = "Middle Name";
-            this.mname.TextChanged += new System.EventHandler(this.mname_TextChanged);
-            this.mname.Enter += new System.EventHandler(this.mname_Enter);
-            this.mname.Leave += new System.EventHandler(this.mname_Leave);
+            this.txtMname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMname.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtMname.Location = new System.Drawing.Point(677, 6);
+            this.txtMname.Name = "txtMname";
+            this.txtMname.Size = new System.Drawing.Size(189, 23);
+            this.txtMname.TabIndex = 4;
+            this.txtMname.Text = "Middle Name";
+            this.txtMname.TextChanged += new System.EventHandler(this.mname_TextChanged);
+            this.txtMname.Enter += new System.EventHandler(this.mname_Enter);
+            this.txtMname.Leave += new System.EventHandler(this.mname_Leave);
             // 
             // label4
             // 
@@ -188,16 +188,16 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Address";
             // 
-            // address
+            // txtAddr
             // 
-            this.address.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.address.Location = new System.Drawing.Point(239, 40);
-            this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(627, 25);
-            this.address.TabIndex = 6;
-            this.address.Text = "Ex. 123 Strawberry St.";
-            this.address.Enter += new System.EventHandler(this.textBox1_Enter_1);
-            this.address.Leave += new System.EventHandler(this.address_Leave);
+            this.txtAddr.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAddr.Location = new System.Drawing.Point(239, 40);
+            this.txtAddr.Name = "txtAddr";
+            this.txtAddr.Size = new System.Drawing.Size(627, 25);
+            this.txtAddr.TabIndex = 6;
+            this.txtAddr.Text = "Ex. 123 Strawberry St.";
+            this.txtAddr.Enter += new System.EventHandler(this.textBox1_Enter_1);
+            this.txtAddr.Leave += new System.EventHandler(this.address_Leave);
             // 
             // label5
             // 
@@ -262,17 +262,17 @@
             this.label7.Text = "Religion / Social Affiliation";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // religion
+            // txtReligion
             // 
-            this.religion.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.religion.Location = new System.Drawing.Point(646, 80);
-            this.religion.Name = "religion";
-            this.religion.Size = new System.Drawing.Size(220, 25);
-            this.religion.TabIndex = 14;
-            this.religion.Text = "Ex. Roman Catholic";
-            this.religion.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.religion.Enter += new System.EventHandler(this.religion_Enter);
-            this.religion.Leave += new System.EventHandler(this.religion_Leave);
+            this.txtReligion.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtReligion.Location = new System.Drawing.Point(646, 80);
+            this.txtReligion.Name = "txtReligion";
+            this.txtReligion.Size = new System.Drawing.Size(220, 25);
+            this.txtReligion.TabIndex = 14;
+            this.txtReligion.Text = "Ex. Roman Catholic";
+            this.txtReligion.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtReligion.Enter += new System.EventHandler(this.religion_Enter);
+            this.txtReligion.Leave += new System.EventHandler(this.religion_Leave);
             // 
             // label8
             // 
@@ -310,17 +310,17 @@
             this.label9.Text = "Contact Number";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // contactno
+            // txtContNo
             // 
-            this.contactno.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.contactno.Location = new System.Drawing.Point(239, 149);
-            this.contactno.Name = "contactno";
-            this.contactno.Size = new System.Drawing.Size(173, 25);
-            this.contactno.TabIndex = 18;
-            this.contactno.Text = "Ex. 09991234567";
-            this.contactno.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            this.contactno.Enter += new System.EventHandler(this.contactno_Enter);
-            this.contactno.Leave += new System.EventHandler(this.contactno_Leave);
+            this.txtContNo.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtContNo.Location = new System.Drawing.Point(239, 149);
+            this.txtContNo.Name = "txtContNo";
+            this.txtContNo.Size = new System.Drawing.Size(173, 25);
+            this.txtContNo.TabIndex = 18;
+            this.txtContNo.Text = "Ex. 09991234567";
+            this.txtContNo.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.txtContNo.Enter += new System.EventHandler(this.contactno_Enter);
+            this.txtContNo.Leave += new System.EventHandler(this.contactno_Leave);
             // 
             // label10
             // 
@@ -332,17 +332,17 @@
             this.label10.Text = "Educational Attainment";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // educ
+            // txtEduc
             // 
-            this.educ.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.educ.Location = new System.Drawing.Point(646, 149);
-            this.educ.Name = "educ";
-            this.educ.Size = new System.Drawing.Size(220, 25);
-            this.educ.TabIndex = 20;
-            this.educ.Text = "Ex. College Graduate";
-            this.educ.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            this.educ.Enter += new System.EventHandler(this.educ_Enter);
-            this.educ.Leave += new System.EventHandler(this.educ_Leave);
+            this.txtEduc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtEduc.Location = new System.Drawing.Point(646, 149);
+            this.txtEduc.Name = "txtEduc";
+            this.txtEduc.Size = new System.Drawing.Size(220, 25);
+            this.txtEduc.TabIndex = 20;
+            this.txtEduc.Text = "Ex. College Graduate";
+            this.txtEduc.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.txtEduc.Enter += new System.EventHandler(this.educ_Enter);
+            this.txtEduc.Leave += new System.EventHandler(this.educ_Leave);
             // 
             // label11
             // 
@@ -354,13 +354,17 @@
             this.label11.Text = "Beneficiary";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
-            // textBox5
+            // txtBenificiary
             // 
-            this.textBox5.Location = new System.Drawing.Point(239, 185);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(200, 25);
-            this.textBox5.TabIndex = 22;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.txtBenificiary.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtBenificiary.Location = new System.Drawing.Point(239, 185);
+            this.txtBenificiary.Name = "txtBenificiary";
+            this.txtBenificiary.Size = new System.Drawing.Size(200, 25);
+            this.txtBenificiary.TabIndex = 22;
+            this.txtBenificiary.Text = "Ex. Bruce Wayne";
+            this.txtBenificiary.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.txtBenificiary.Enter += new System.EventHandler(this.textBox5_Enter);
+            this.txtBenificiary.Leave += new System.EventHandler(this.benificiary_Leave);
             // 
             // label12
             // 
@@ -399,6 +403,7 @@
             this.dependents.Size = new System.Drawing.Size(220, 25);
             this.dependents.TabIndex = 24;
             this.dependents.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.dependents.Leave += new System.EventHandler(this.dependents_Leave);
             // 
             // button2
             // 
@@ -418,44 +423,44 @@
             // 
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.label21);
-            this.panel1.Controls.Add(this.textBox11);
+            this.panel1.Controls.Add(this.txtBORAcc);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.mtype);
             this.panel1.Controls.Add(this.label19);
-            this.panel1.Controls.Add(this.textBox10);
+            this.panel1.Controls.Add(this.txtTIN);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label17);
-            this.panel1.Controls.Add(this.textBox9);
-            this.panel1.Controls.Add(this.textBox8);
+            this.panel1.Controls.Add(this.txtAnnInc);
+            this.panel1.Controls.Add(this.txtOcc);
             this.panel1.Controls.Add(this.label16);
-            this.panel1.Controls.Add(this.textBox7);
+            this.panel1.Controls.Add(this.txtPos);
             this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.textBox6);
+            this.panel1.Controls.Add(this.txtCompany);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.dependents);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.textBox5);
+            this.panel1.Controls.Add(this.txtBenificiary);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.educ);
+            this.panel1.Controls.Add(this.txtEduc);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.contactno);
+            this.panel1.Controls.Add(this.txtContNo);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.civstat);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.religion);
+            this.panel1.Controls.Add(this.txtReligion);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.radioButton2);
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.dtpDate);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.address);
+            this.panel1.Controls.Add(this.txtAddr);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.mname);
-            this.panel1.Controls.Add(this.fname);
-            this.panel1.Controls.Add(this.lname);
+            this.panel1.Controls.Add(this.txtMname);
+            this.panel1.Controls.Add(this.txtFname);
+            this.panel1.Controls.Add(this.txtLname);
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.splitter1);
@@ -481,12 +486,14 @@
             this.label21.TabIndex = 39;
             this.label21.Text = "BOR Acceptance Date";
             // 
-            // textBox11
+            // txtBORAcc
             // 
-            this.textBox11.Location = new System.Drawing.Point(646, 390);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(220, 25);
-            this.textBox11.TabIndex = 38;
+            this.txtBORAcc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtBORAcc.Location = new System.Drawing.Point(646, 390);
+            this.txtBORAcc.Name = "txtBORAcc";
+            this.txtBORAcc.Size = new System.Drawing.Size(220, 25);
+            this.txtBORAcc.TabIndex = 38;
+            this.txtBORAcc.Text = "ex. 1a2b";
             // 
             // label20
             // 
@@ -520,12 +527,14 @@
             this.label19.TabIndex = 35;
             this.label19.Text = "Member Type";
             // 
-            // textBox10
+            // txtTIN
             // 
-            this.textBox10.Location = new System.Drawing.Point(646, 354);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(220, 25);
-            this.textBox10.TabIndex = 34;
+            this.txtTIN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtTIN.Location = new System.Drawing.Point(646, 354);
+            this.txtTIN.Name = "txtTIN";
+            this.txtTIN.Size = new System.Drawing.Size(220, 25);
+            this.txtTIN.TabIndex = 34;
+            this.txtTIN.Text = "ex. 1234";
             // 
             // label18
             // 
@@ -545,19 +554,23 @@
             this.label17.TabIndex = 32;
             this.label17.Text = "Annual Income";
             // 
-            // textBox9
+            // txtAnnInc
             // 
-            this.textBox9.Location = new System.Drawing.Point(239, 354);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(231, 25);
-            this.textBox9.TabIndex = 31;
+            this.txtAnnInc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAnnInc.Location = new System.Drawing.Point(239, 354);
+            this.txtAnnInc.Name = "txtAnnInc";
+            this.txtAnnInc.Size = new System.Drawing.Size(231, 25);
+            this.txtAnnInc.TabIndex = 31;
+            this.txtAnnInc.Text = "(in php)";
             // 
-            // textBox8
+            // txtOcc
             // 
-            this.textBox8.Location = new System.Drawing.Point(646, 314);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(220, 25);
-            this.textBox8.TabIndex = 30;
+            this.txtOcc.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtOcc.Location = new System.Drawing.Point(646, 314);
+            this.txtOcc.Name = "txtOcc";
+            this.txtOcc.Size = new System.Drawing.Size(220, 25);
+            this.txtOcc.TabIndex = 30;
+            this.txtOcc.Text = "ex. Businessman";
             // 
             // label16
             // 
@@ -568,12 +581,16 @@
             this.label16.TabIndex = 29;
             this.label16.Text = "Occupation";
             // 
-            // textBox7
+            // txtPos
             // 
-            this.textBox7.Location = new System.Drawing.Point(239, 314);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(231, 25);
-            this.textBox7.TabIndex = 28;
+            this.txtPos.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtPos.Location = new System.Drawing.Point(239, 314);
+            this.txtPos.Name = "txtPos";
+            this.txtPos.Size = new System.Drawing.Size(231, 25);
+            this.txtPos.TabIndex = 28;
+            this.txtPos.Text = "ex. CEO";
+            this.txtPos.Enter += new System.EventHandler(this.txtPos_Enter);
+            this.txtPos.Leave += new System.EventHandler(this.txtPos_Leave);
             // 
             // label15
             // 
@@ -584,12 +601,16 @@
             this.label15.TabIndex = 27;
             this.label15.Text = "Position";
             // 
-            // textBox6
+            // txtCompany
             // 
-            this.textBox6.Location = new System.Drawing.Point(239, 276);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(627, 25);
-            this.textBox6.TabIndex = 26;
+            this.txtCompany.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtCompany.Location = new System.Drawing.Point(239, 276);
+            this.txtCompany.Name = "txtCompany";
+            this.txtCompany.Size = new System.Drawing.Size(627, 25);
+            this.txtCompany.TabIndex = 26;
+            this.txtCompany.Text = "Ex. Wayne Enterprises";
+            this.txtCompany.Enter += new System.EventHandler(this.txtCompany_Enter);
+            this.txtCompany.Leave += new System.EventHandler(this.txtCompany_Leave);
             // 
             // label14
             // 
@@ -648,26 +669,26 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox lname;
-        private System.Windows.Forms.TextBox fname;
-        private System.Windows.Forms.TextBox mname;
+        private System.Windows.Forms.TextBox txtLname;
+        private System.Windows.Forms.TextBox txtFname;
+        private System.Windows.Forms.TextBox txtMname;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox address;
+        private System.Windows.Forms.TextBox txtAddr;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox religion;
+        private System.Windows.Forms.TextBox txtReligion;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox civstat;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox contactno;
+        private System.Windows.Forms.TextBox txtContNo;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox educ;
+        private System.Windows.Forms.TextBox txtEduc;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtBenificiary;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox dependents;
@@ -675,19 +696,19 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox txtBORAcc;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox mtype;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox txtTIN;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtAnnInc;
+        private System.Windows.Forms.TextBox txtOcc;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtPos;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtCompany;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter1;

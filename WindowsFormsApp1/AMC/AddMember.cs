@@ -20,6 +20,13 @@ namespace AMC
         private bool relFlag = true;
         private bool contFlag = true;
         private bool educFlag = true;
+        private bool benFlag = true;
+        private bool compFlag = true;
+        private bool posFlag = true;
+        private bool occFlag = true;
+        private bool annincFlag = true;
+        private bool tinFlag = true;
+        private bool boraccFlag = true;
         public MySqlConnection databasecon;
         public MySqlDataAdapter listener;
         public MySqlCommand query;
@@ -56,18 +63,18 @@ namespace AMC
         {
             if(lnameFlag)
             {
-                lname.Text = "";
-                lname.ForeColor = Color.FromArgb(0, 0, 0);
+                txtLname.Text = "";
+                txtLname.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
         private void lname_Leave(object sender, EventArgs e)
         {
-            lnameFlag = (lname.Text == "");
+            lnameFlag = (txtLname.Text == "");
             if (lnameFlag)
             {
-                lname.AppendText("Last Name");
-                lname.ForeColor = Color.FromArgb(219, 200, 210);
+                txtLname.AppendText("Last Name");
+                txtLname.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -75,18 +82,18 @@ namespace AMC
         {
             if (fnameFlag)
             {
-                fname.Text = "";
-                fname.ForeColor = Color.FromArgb(0, 0, 0);
+                txtFname.Text = "";
+                txtFname.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            fnameFlag = (fname.Text == "");
+            fnameFlag = (txtFname.Text == "");
             if (fnameFlag)
             {
-                fname.AppendText("First Name");
-                fname.ForeColor = Color.FromArgb(219, 200, 210);
+                txtFname.AppendText("First Name");
+                txtFname.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -194,12 +201,12 @@ namespace AMC
                 {
                     databasecon.Open();
                     query = new MySqlCommand("INSERT members (family_name)"
-                    + "VALUES ('" + lname.Text + "')", databasecon);
+                    + "VALUES ('" + txtLname.Text + "')", databasecon);
                     ////////////////////////////
                     query.ExecuteNonQuery();
 
                     databasecon.Close();
-                    MessageBox.Show(lname.Text + " sucesfully added!");
+                    MessageBox.Show(txtLname.Text + " sucesfully added!");
                 }
                 else
                 {
@@ -220,8 +227,8 @@ namespace AMC
         {
             if (mnameFlag)
             {
-                mname.Text = "";
-                mname.ForeColor = Color.FromArgb(0, 0, 0);
+                txtMname.Text = "";
+                txtMname.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
@@ -232,11 +239,11 @@ namespace AMC
 
         private void mname_Leave(object sender, EventArgs e)
         {
-            mnameFlag = (mname.Text == "");
+            mnameFlag = (txtMname.Text == "");
             if (mnameFlag)
             {
-                mname.AppendText("Middle Name");
-                mname.ForeColor = Color.FromArgb(219, 200, 210);
+                txtMname.AppendText("Middle Name");
+                txtMname.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -244,18 +251,18 @@ namespace AMC
         {
             if (addFlag)
             {
-                address.Text = "";
-                address.ForeColor = Color.FromArgb(0, 0, 0);
+                txtAddr.Text = "";
+                txtAddr.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
         private void address_Leave(object sender, EventArgs e)
         {
-            addFlag = (address.Text == "");
+            addFlag = (txtAddr.Text == "");
             if (addFlag)
             {
-                address.AppendText("Ex. 123 Strawberry St.");
-                address.ForeColor = Color.FromArgb(219, 200, 210);
+                txtAddr.AppendText("Ex. 123 Strawberry St.");
+                txtAddr.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -263,28 +270,28 @@ namespace AMC
         {
             if (relFlag)
             {
-                religion.Text = "";
-                religion.ForeColor = Color.FromArgb(0, 0, 0);
+                txtReligion.Text = "";
+                txtReligion.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
         private void religion_Leave(object sender, EventArgs e)
         {
-            relFlag = (religion.Text == "");
+            relFlag = (txtReligion.Text == "");
             if (relFlag)
             {
-                religion.AppendText("Ex. Roman Catholic");
-                religion.ForeColor = Color.FromArgb(219, 200, 210);
+                txtReligion.AppendText("Ex. Roman Catholic");
+                txtReligion.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
         private void contactno_Leave(object sender, EventArgs e)
         {
-            contFlag = (contactno.Text == "");
+            contFlag = (txtContNo.Text == "");
             if (contFlag)
             {
-                contactno.AppendText("Ex. 09991234567");
-                contactno.ForeColor = Color.FromArgb(219, 200, 210);
+                txtContNo.AppendText("Ex. 09991234567");
+                txtContNo.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -292,18 +299,18 @@ namespace AMC
         {
             if (contFlag)
             {
-                contactno.Text = "";
-                contactno.ForeColor = Color.FromArgb(0, 0, 0);
+                txtContNo.Text = "";
+                txtContNo.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
         private void educ_Leave(object sender, EventArgs e)
         {
-            educFlag = (educ.Text == "");
+            educFlag = (txtEduc.Text == "");
             if (educFlag)
             {
-                educ.AppendText("Ex. College Graduate");
-                educ.ForeColor = Color.FromArgb(219, 200, 210);
+                txtEduc.AppendText("Ex. College Graduate");
+                txtEduc.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
 
@@ -311,8 +318,8 @@ namespace AMC
         {
             if (educFlag)
             {
-                educ.Text = "";
-                educ.ForeColor = Color.FromArgb(0, 0, 0);
+                txtEduc.Text = "";
+                txtEduc.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
 
@@ -320,9 +327,71 @@ namespace AMC
         {
             if (lnameFlag)
                 return false;
-            else if(lname.Text.Length > 0 && lname.Text.Trim().Length == 0)
+            else if(txtLname.Text.Length > 0 && txtLname.Text.Trim().Length == 0)
                 return false;
             return true;
+        }
+
+        private void textBox5_Enter(object sender, EventArgs e)
+        {
+            if (benFlag)
+            {
+                txtBenificiary.Text = "";
+                txtBenificiary.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        private void dependents_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void benificiary_Leave(object sender, EventArgs e)
+        {
+            benFlag = (txtBenificiary.Text == "");
+            if (benFlag)
+            {
+                txtBenificiary.AppendText("Ex. Bruce Wayne");
+                txtBenificiary.ForeColor = Color.FromArgb(219, 200, 210);
+            }
+        }
+
+        private void txtCompany_Enter(object sender, EventArgs e)
+        {
+            if (compFlag)
+            {
+                txtCompany.Text = "";
+                txtCompany.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        private void txtCompany_Leave(object sender, EventArgs e)
+        {
+            compFlag = (txtCompany.Text == "");
+            if (compFlag)
+            {
+                txtCompany.AppendText("Ex. Wayne Enterprises");
+                txtCompany.ForeColor = Color.FromArgb(219, 200, 210);
+            }
+        }
+
+        private void txtPos_Enter(object sender, EventArgs e)
+        {
+            if (posFlag)
+            {
+                txtPos.Text = "";
+                txtPos.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        private void txtPos_Leave(object sender, EventArgs e)
+        {
+            posFlag = (txtPos.Text == "");
+            if (posFlag)
+            {
+                txtPos.AppendText("Ex. CEO");
+                txtPos.ForeColor = Color.FromArgb(219, 200, 210);
+            }
         }
     }
 }
