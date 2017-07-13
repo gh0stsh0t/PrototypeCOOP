@@ -14,20 +14,24 @@ namespace AMC
 {
     public partial class AddMember : Form
     {
-        private bool lnameFlag = true;
-        private bool fnameFlag = true;
-        private bool mnameFlag = true;
-        private bool addFlag = true;
-        private bool relFlag = true;
-        private bool contFlag = true;
-        private bool educFlag = true;
-        private bool benFlag = true;
-        private bool compFlag = true;
-        private bool posFlag = true;
-        private bool occFlag = true;
-        private bool annincFlag = true;
-        private bool tinFlag = true;
-        private bool boraccFlag = true;
+        private bool lnameFlag = true;  private string lnamepl = "Last Name";
+        private bool fnameFlag = true;  private string fnamepl = "First Name";
+        private bool mnameFlag = true;  private string mnamepl = "Middle Name";
+        private bool addFlag = true;    private string addpl = "Ex. 123 Strawberry St.";
+        private bool relFlag = true;    private string relpl = "Ex. Roman Catholic";
+        private bool contFlag = true;   private string contpl = "Ex. 09991234567";
+        private bool educFlag = true;   private string educpl = "Ex. College Graduate";
+        private bool benFlag = true;    private string benpl = "Ex. Bruce Wayne";
+        private bool compFlag = true;   private string comppl = "Ex. Wayne Enterprises";
+        private bool posFlag = true;    private string pospl = "Ex. CEO";
+        private bool occFlag = true;    private string occpl = "Ex. Batman";
+        private bool annincFlag = true; private string annincpl = "(in php)";
+        private bool tin1Flag = true; private string tin1pl = "123";
+        private bool tin2Flag = true; private string tin2pl = "456";
+        private bool tin3Flag = true; private string tin3pl = "789";
+        private bool tin4Flag = true; private string tin4pl = "000";
+        private bool boraccFlag = true; private string boraccpl = "Ex. 1a2b";
+
         public MySqlConnection databasecon;
         public MySqlDataAdapter listener;
         public MySqlCommand query;
@@ -62,50 +66,22 @@ namespace AMC
 
         private void lname_Enter(object sender, EventArgs e)
         {
-            if(lnameFlag)
-            {
-                txtLname.Text = "";
-                txtLname.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtLname, lnameFlag);
         }
 
         private void lname_Leave(object sender, EventArgs e)
         {
-            lnameFlag = (txtLname.Text == "");
-            if (!isAlphaNum(txtLname.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtLname.Focus();
-            }
-            if (lnameFlag)
-            {
-                txtLname.AppendText("Last Name");
-                txtLname.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave(txtLname, lnameFlag, lnamepl);
         }
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            if (fnameFlag)
-            {
-                txtFname.Text = "";
-                txtFname.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtFname, fnameFlag);
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            fnameFlag = (txtFname.Text == "");
-            if (!isAlphaNum(txtFname.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtFname.Focus();
-            }
-            if (fnameFlag)
-            {
-                txtFname.AppendText("First Name");
-                txtFname.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave(txtFname, fnameFlag, fnamepl);
         }
 
         private void fname_TextChanged(object sender, EventArgs e)
@@ -205,11 +181,7 @@ namespace AMC
 
         private void mname_Enter(object sender, EventArgs e)
         {
-            if (mnameFlag)
-            {
-                txtMname.Text = "";
-                txtMname.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtMname, mnameFlag);
         }
 
         private void mname_TextChanged(object sender, EventArgs e)
@@ -219,113 +191,47 @@ namespace AMC
 
         private void mname_Leave(object sender, EventArgs e)
         {
-            mnameFlag = (txtMname.Text == "");
-            if (!isAlphaNum(txtMname.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtMname.Focus();
-            }
-            if (mnameFlag)
-            {
-                txtMname.AppendText("Middle Name");
-                txtMname.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave(txtMname, mnameFlag, mnamepl);
         }
 
         private void textBox1_Enter_1(object sender, EventArgs e)
         {
-            if (addFlag)
-            {
-                txtAddr.Text = "";
-                txtAddr.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtAddr, addFlag);
         }
 
         private void address_Leave(object sender, EventArgs e)
         {
-            addFlag = (txtAddr.Text == "");
-            if (!isAlphaNum(txtAddr.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtAddr.Focus();
-            }
-            if (addFlag)
-            {
-                txtAddr.AppendText("Ex. 123 Strawberry St.");
-                txtAddr.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave(txtAddr, addFlag, addpl);
         }
 
         private void religion_Enter(object sender, EventArgs e)
         {
-            if (relFlag)
-            {
-                txtReligion.Text = "";
-                txtReligion.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtReligion, relFlag);
         }
 
         private void religion_Leave(object sender, EventArgs e)
         {
-            relFlag = (txtReligion.Text == "");
-            if (!isAlphaNum(txtReligion.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtReligion.Focus();
-            }
-            if (relFlag)
-            {
-                txtReligion.AppendText("Ex. Roman Catholic");
-                txtReligion.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeaveNR(txtReligion, relFlag, relpl);
         }
 
         private void contactno_Leave(object sender, EventArgs e)
         {
-            contFlag = (txtContNo.Text == "");
-            if (!isAlphaNum(txtContNo.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtContNo.Focus();
-            }
-            if (contFlag)
-            {
-                txtContNo.AppendText("Ex. 09991234567");
-                txtContNo.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave2(txtContNo, contFlag, contpl);
         }
 
         private void contactno_Enter(object sender, EventArgs e)
         {
-            if (contFlag)
-            {
-                txtContNo.Text = "";
-                txtContNo.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtContNo, contFlag);
         }
 
         private void educ_Leave(object sender, EventArgs e)
         {
-            educFlag = (txtEduc.Text == "");
-            if (!isAlphaNum(txtEduc.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtEduc.Focus();
-            }
-            if (educFlag)
-            {
-                txtEduc.AppendText("Ex. College Graduate");
-                txtEduc.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeaveNR(txtEduc, educFlag, educpl);
         }
 
         private void educ_Enter(object sender, EventArgs e)
         {
-            if (educFlag)
-            {
-                txtEduc.Text = "";
-                txtEduc.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtEduc, educFlag);
         }
 
         private bool validation()
@@ -358,11 +264,7 @@ namespace AMC
 
         private void textBox5_Enter(object sender, EventArgs e)
         {
-            if (benFlag)
-            {
-                txtBenificiary.Text = "";
-                txtBenificiary.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtBenificiary, benFlag);
         }
 
         private void dependents_Leave(object sender, EventArgs e)
@@ -372,41 +274,17 @@ namespace AMC
 
         private void benificiary_Leave(object sender, EventArgs e)
         {
-            benFlag = (txtBenificiary.Text == "");
-            if (!isAlphaNum(txtBenificiary.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtBenificiary.Focus();
-            }
-            if (benFlag)
-            {
-                txtBenificiary.AppendText("Ex. Bruce Wayne");
-                txtBenificiary.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeaveNR(txtBenificiary, benFlag, benpl);
         }
 
         private void txtCompany_Enter(object sender, EventArgs e)
         {
-            if (compFlag)
-            {
-                txtCompany.Text = "";
-                txtCompany.ForeColor = Color.FromArgb(0, 0, 0);
-            }
+            ctrlEnter(txtCompany, compFlag);
         }
 
         private void txtCompany_Leave(object sender, EventArgs e)
         {
-            compFlag = (txtCompany.Text == "");
-            if (!isAlphaNum(txtCompany.Text))
-            {
-                MessageBox.Show("Please make sure this field contains only letters or numbers");
-                txtCompany.Focus();
-            }
-            if (compFlag)
-            {
-                txtCompany.AppendText("Ex. Wayne Enterprises");
-                txtCompany.ForeColor = Color.FromArgb(219, 200, 210);
-            }
+            ctrlLeave(txtCompany, compFlag, comppl);
         }
 
         private void txtPos_Enter(object sender, EventArgs e)
@@ -429,12 +307,83 @@ namespace AMC
             if (posFlag)
             {
                 txtPos.AppendText("Ex. CEO");
-                txtPos.ForeColor = Color.FromArgb(219, 200, 210);
+                txtPos.ForeColor = Color.LightCoral;
             }
         }
+        
+        private void ctrlEnter(TextBox txtbox, bool flag)
+        {
+            if (flag)
+            {
+                txtbox.Text = "";
+                txtbox.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        private void ctrlLeave(TextBox txtbox, bool flag, string pl)
+        {
+            flag = (txtbox.Text == "");
+            if (!flag)
+            {
+                if (!isNum(txtbox.Text))
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtbox.Focus();
+                }
+            }
+            else
+            {
+                txtbox.AppendText(pl);
+                txtbox.ForeColor = Color.LightCoral;
+            }
+        }
+
+        private void ctrlLeaveNR(TextBox txtbox, bool flag, string pl)
+        {
+            flag = (txtbox.Text == "");
+            if (!flag)
+            {
+                if (!isNum(txtbox.Text))
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtbox.Focus();
+                }
+            }
+            else
+            {
+                txtbox.AppendText(pl);
+                txtbox.ForeColor = Color.FromArgb(219, 200, 210);
+            }
+        }
+
+
+        private void ctrlLeave2(TextBox txtbox, bool flag, string pl)
+        {
+            annincFlag = (txtAnnInc.Text == "");
+            if (!annincFlag)
+            {
+                if (!isNum(txtAnnInc.Text))
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtAnnInc.Focus();
+                }
+            }
+            else
+            {
+                txtAnnInc.AppendText("(in php)");
+                txtAnnInc.ForeColor = Color.LightCoral;
+            }
+        }
+
         public static Boolean isAlphaNum(string strToCheck)
         {
-            Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+            Regex rg = new Regex(@"^[a-zA-Z0-9]+[\s,\-]?[a-zA-Z0-9]+$");
+            return rg.IsMatch(strToCheck);
+        }
+
+        public static Boolean isNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
             return rg.IsMatch(strToCheck);
         }
 
@@ -466,6 +415,16 @@ namespace AMC
                 databasecon.Close();
             }
 
+        }
+
+        private void txtAnnInc_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtAnnInc_Enter(object sender, EventArgs e)
+        {
+            
         }
     }
 }

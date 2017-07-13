@@ -58,13 +58,20 @@
             this.dependents = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtTIN4 = new System.Windows.Forms.TextBox();
+            this.txtTIN3 = new System.Windows.Forms.TextBox();
+            this.txtTIN2 = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
             this.txtBORAcc = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.mtype = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.txtTIN = new System.Windows.Forms.TextBox();
+            this.txtTIN1 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.txtAnnInc = new System.Windows.Forms.TextBox();
@@ -422,13 +429,20 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label26);
+            this.panel1.Controls.Add(this.label25);
+            this.panel1.Controls.Add(this.label24);
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.txtTIN4);
+            this.panel1.Controls.Add(this.txtTIN3);
+            this.panel1.Controls.Add(this.txtTIN2);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.label21);
             this.panel1.Controls.Add(this.txtBORAcc);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.mtype);
             this.panel1.Controls.Add(this.label19);
-            this.panel1.Controls.Add(this.txtTIN);
+            this.panel1.Controls.Add(this.txtTIN1);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.txtAnnInc);
@@ -469,6 +483,69 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(906, 500);
             this.panel1.TabIndex = 1;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(216, 357);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(17, 19);
+            this.label26.TabIndex = 47;
+            this.label26.Text = "₱";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(809, 357);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(15, 19);
+            this.label25.TabIndex = 46;
+            this.label25.Text = "-";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(749, 357);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(15, 19);
+            this.label24.TabIndex = 45;
+            this.label24.Text = "-";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(687, 357);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(15, 19);
+            this.label23.TabIndex = 44;
+            this.label23.Text = "-";
+            // 
+            // txtTIN4
+            // 
+            this.txtTIN4.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtTIN4.Location = new System.Drawing.Point(829, 354);
+            this.txtTIN4.Name = "txtTIN4";
+            this.txtTIN4.Size = new System.Drawing.Size(36, 25);
+            this.txtTIN4.TabIndex = 43;
+            this.txtTIN4.Text = "000";
+            // 
+            // txtTIN3
+            // 
+            this.txtTIN3.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtTIN3.Location = new System.Drawing.Point(768, 354);
+            this.txtTIN3.Name = "txtTIN3";
+            this.txtTIN3.Size = new System.Drawing.Size(36, 25);
+            this.txtTIN3.TabIndex = 42;
+            this.txtTIN3.Text = "789";
+            // 
+            // txtTIN2
+            // 
+            this.txtTIN2.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtTIN2.Location = new System.Drawing.Point(707, 354);
+            this.txtTIN2.Name = "txtTIN2";
+            this.txtTIN2.Size = new System.Drawing.Size(36, 25);
+            this.txtTIN2.TabIndex = 41;
+            this.txtTIN2.Text = "456";
             // 
             // dateTimePicker1
             // 
@@ -528,14 +605,14 @@
             this.label19.TabIndex = 35;
             this.label19.Text = "Member Type";
             // 
-            // txtTIN
+            // txtTIN1
             // 
-            this.txtTIN.ForeColor = System.Drawing.Color.LightCoral;
-            this.txtTIN.Location = new System.Drawing.Point(646, 354);
-            this.txtTIN.Name = "txtTIN";
-            this.txtTIN.Size = new System.Drawing.Size(220, 25);
-            this.txtTIN.TabIndex = 34;
-            this.txtTIN.Text = "ex. 1234";
+            this.txtTIN1.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtTIN1.Location = new System.Drawing.Point(646, 354);
+            this.txtTIN1.Name = "txtTIN1";
+            this.txtTIN1.Size = new System.Drawing.Size(36, 25);
+            this.txtTIN1.TabIndex = 34;
+            this.txtTIN1.Text = "123";
             // 
             // label18
             // 
@@ -557,12 +634,14 @@
             // 
             // txtAnnInc
             // 
-            this.txtAnnInc.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtAnnInc.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtAnnInc.Location = new System.Drawing.Point(239, 354);
             this.txtAnnInc.Name = "txtAnnInc";
             this.txtAnnInc.Size = new System.Drawing.Size(231, 25);
             this.txtAnnInc.TabIndex = 31;
             this.txtAnnInc.Text = "(in php)";
+            this.txtAnnInc.Enter += new System.EventHandler(this.txtAnnInc_Enter);
+            this.txtAnnInc.Leave += new System.EventHandler(this.txtAnnInc_Leave);
             // 
             // txtOcc
             // 
@@ -571,7 +650,7 @@
             this.txtOcc.Name = "txtOcc";
             this.txtOcc.Size = new System.Drawing.Size(220, 25);
             this.txtOcc.TabIndex = 30;
-            this.txtOcc.Text = "ex. Businessman";
+            this.txtOcc.Text = "Ex. Batman";
             // 
             // label16
             // 
@@ -584,12 +663,12 @@
             // 
             // txtPos
             // 
-            this.txtPos.ForeColor = System.Drawing.Color.LightCoral;
+            this.txtPos.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtPos.Location = new System.Drawing.Point(239, 314);
             this.txtPos.Name = "txtPos";
             this.txtPos.Size = new System.Drawing.Size(231, 25);
             this.txtPos.TabIndex = 28;
-            this.txtPos.Text = "ex. CEO";
+            this.txtPos.Text = "Ex. CEO";
             this.txtPos.Enter += new System.EventHandler(this.txtPos_Enter);
             this.txtPos.Leave += new System.EventHandler(this.txtPos_Leave);
             // 
@@ -711,7 +790,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox mtype;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtTIN;
+        private System.Windows.Forms.TextBox txtTIN1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtAnnInc;
@@ -724,5 +803,12 @@
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtTIN4;
+        private System.Windows.Forms.TextBox txtTIN3;
+        private System.Windows.Forms.TextBox txtTIN2;
+        private System.Windows.Forms.Label label26;
     }
 }
