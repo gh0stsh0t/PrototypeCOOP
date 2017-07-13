@@ -38,7 +38,7 @@
                 try
                 {
                     conn.Open();
-                    var comm = new MySqlCommand("SELECT concat(family_name, ', ',first_name) as Name FROM members ", conn);
+                    var comm = new MySqlCommand("SELECT * FROM members ", conn);
                     var adp = new MySqlDataAdapter(comm);
                     var dt = new DataTable();
                     adp.Fill(dt);
@@ -120,5 +120,6 @@
         {
             //opaque.Opactiy
         }
+        
     }
 }
