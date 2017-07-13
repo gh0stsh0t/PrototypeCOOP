@@ -23,7 +23,12 @@
             {
                 panel1.Visible = !panel1.Visible;
             }
-
+            private void Animations()
+            {
+                opaque.Location = new Point(0, 0);
+                opaque.Size = this.Size;
+                popupEnabler.Start();
+            }
             private void ViewMember_Load(object sender, EventArgs e)
             {
                 Rifrish();
@@ -109,6 +114,11 @@
             {
                 MessageBox.Show("LEMFAO");
             }
+        }
+
+        private void popupEnabler_Tick(object sender, EventArgs e)
+        {
+            //opaque.Opactiy
         }
     }
 }
