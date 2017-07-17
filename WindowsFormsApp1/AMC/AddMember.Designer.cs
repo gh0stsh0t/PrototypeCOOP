@@ -528,6 +528,8 @@
             this.txtTIN4.Size = new System.Drawing.Size(36, 25);
             this.txtTIN4.TabIndex = 43;
             this.txtTIN4.Text = "000";
+            this.txtTIN4.Enter += new System.EventHandler(this.txtTIN4_Enter);
+            this.txtTIN4.Leave += new System.EventHandler(this.txtTIN4_Leave);
             // 
             // txtTIN3
             // 
@@ -537,6 +539,8 @@
             this.txtTIN3.Size = new System.Drawing.Size(36, 25);
             this.txtTIN3.TabIndex = 42;
             this.txtTIN3.Text = "789";
+            this.txtTIN3.Enter += new System.EventHandler(this.txtTIN3_Enter);
+            this.txtTIN3.Leave += new System.EventHandler(this.txtTIN3_Leave);
             // 
             // txtTIN2
             // 
@@ -546,6 +550,8 @@
             this.txtTIN2.Size = new System.Drawing.Size(36, 25);
             this.txtTIN2.TabIndex = 41;
             this.txtTIN2.Text = "456";
+            this.txtTIN2.Enter += new System.EventHandler(this.txtTIN2_Enter);
+            this.txtTIN2.Leave += new System.EventHandler(this.txtTIN2_Leave);
             // 
             // dateTimePicker1
             // 
@@ -572,6 +578,8 @@
             this.txtBORAcc.Size = new System.Drawing.Size(220, 25);
             this.txtBORAcc.TabIndex = 38;
             this.txtBORAcc.Text = "ex. 1a2b";
+            this.txtBORAcc.Enter += new System.EventHandler(this.txtBORAcc_Enter);
+            this.txtBORAcc.Leave += new System.EventHandler(this.txtBORAcc_Leave);
             // 
             // label20
             // 
@@ -613,6 +621,8 @@
             this.txtTIN1.Size = new System.Drawing.Size(36, 25);
             this.txtTIN1.TabIndex = 34;
             this.txtTIN1.Text = "123";
+            this.txtTIN1.Enter += new System.EventHandler(this.txtTIN1_Enter);
+            this.txtTIN1.Leave += new System.EventHandler(this.txtTIN1_Leave);
             // 
             // label18
             // 
@@ -651,6 +661,8 @@
             this.txtOcc.Size = new System.Drawing.Size(220, 25);
             this.txtOcc.TabIndex = 30;
             this.txtOcc.Text = "Ex. Batman";
+            this.txtOcc.Enter += new System.EventHandler(this.txtOcc_Enter);
+            this.txtOcc.Leave += new System.EventHandler(this.txtOcc_Leave);
             // 
             // label16
             // 
