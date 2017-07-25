@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +12,6 @@ namespace AMC
 {
     public partial class ViewMember : Form
     {
-        private Form childform;
-        public MainForm reftomain { get; set; }
-        private int memid;
-
         public MySqlConnection conn;
         public ViewMember(MainForm parent)
         {
@@ -33,6 +29,13 @@ namespace AMC
         private void ViewMember_Load(object sender, EventArgs e)
         {
             Rifrish();
+        }
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //breaker();
+            memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            reftomain.innerChild(new ViewProfile(memid));
+            
         }
         private void Rifrish()
         {
@@ -82,20 +85,6 @@ namespace AMC
             {
                 Rifrish();
             }
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //breaker();
-            memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            reftomain.innerChild(new ViewProfile(memid));
-            
-        }
-
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

@@ -1,3 +1,10 @@
-# PrototypeCOOP
+AMPC Microfinancing system
+==============
 
-BURN THIS
+-toDO: Profiling
+-toDO: Loans
+-toDO: Savings
+-toDO: CBU
+
+ADDU 2017-2018
+--------------

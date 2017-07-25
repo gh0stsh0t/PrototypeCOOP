@@ -33,10 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies\v4.5\MySql.Data.dll</HintPath>
-    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,12 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addLoan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="addLoan.Designer.cs">
-      <DependentUpon>addLoan.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,18 +70,9 @@
     <Compile Include="ViewMember.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewMember.designer.cs">
+    <Compile Include="ViewMember.Designer.cs">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewProfile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewProfile.Designer.cs">
-      <DependentUpon>ViewProfile.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="addLoan.resx">
-      <DependentUpon>addLoan.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,9 +94,6 @@
     </Compile>
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewProfile.resx">
-      <DependentUpon>ViewProfile.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
