@@ -707,6 +707,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 621);
+            this.ControlBox = false;
             this.Controls.Add(this.btnCBU);
             this.Controls.Add(this.btnSavings);
             this.Controls.Add(this.btnRequest);
@@ -720,7 +721,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "ViewProfile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

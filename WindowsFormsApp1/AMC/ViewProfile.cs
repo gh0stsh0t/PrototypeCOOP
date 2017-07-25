@@ -14,11 +14,13 @@ namespace AMC
     public partial class ViewProfile : Form
     {
         public MySqlConnection conn;
+        public int memid;
 
-        public ViewProfile()
+        public ViewProfile(int id)
         {
             InitializeComponent();
-            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd='';");
+            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            memid = id;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace AMC
             {
                 conn.Open();
 
-                MySqlCommand comm = new MySqlCommand("SELECT * FROM members WHERE member_id = 1", conn);
+                MySqlCommand comm = new MySqlCommand("SELECT * FROM members WHERE member_id = " + memid.ToString(), conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt);

@@ -12,7 +12,7 @@ namespace AMC
 {
     public partial class MainForm : Form
     {
-        private Form childform;
+        public Form childform;
         public ViewMember child;
 
 
@@ -86,19 +86,24 @@ namespace AMC
         {
             
             breaker();
-            child = new ViewMember();
-            child.reftomain = this;
-            child.TopLevel = false;
-            panel1.Controls.Add(child);
-            child.Show();
+            childform = new ViewMember(this);
+            panel1.Controls.Add(childform);
+            childform.Show();
+        }
+        public void innerChild(Form child)
+        {
+            breaker();
+            childform = child;
+            childform.TopLevel = false;
+            panel1.Controls.Add(childform);
+            childform.Show();
         }
         private void breaker()
         {
             try
             {
-                //childform.conn.Close();
-                child.Close();
-                child.Dispose();
+                childform.Close();
+                childform.Dispose();
             }
             catch { }
         }

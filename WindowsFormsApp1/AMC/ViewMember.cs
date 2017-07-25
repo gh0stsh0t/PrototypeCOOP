@@ -14,12 +14,15 @@ namespace AMC
     {
         private Form childform;
         public MainForm reftomain { get; set; }
+        private int memid;
 
         public MySqlConnection conn;
-        public ViewMember()
+        public ViewMember(MainForm parent)
         {
             InitializeComponent();
-            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=;");
+            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            reftomain = parent;
+            this.TopLevel = false;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -83,22 +86,16 @@ namespace AMC
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            breaker();
-            childform = new ViewProfile();
-            childform.TopLevel = false;
-            reftomain.panel1.Controls.Add(childform);
-            childform.Show();
+            //breaker();
+            memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            reftomain.innerChild(new ViewProfile(memid));
+            
         }
 
-        private void breaker()
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                //childform.conn.Close();
-                childform.Close();
-                childform.Dispose();
-            }
-            catch { }
+
         }
     }
 }
