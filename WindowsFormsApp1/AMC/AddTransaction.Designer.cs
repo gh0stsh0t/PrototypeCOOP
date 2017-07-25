@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿namespace AMC
+namespace AMC
 {
     partial class AddTransaction
     {
