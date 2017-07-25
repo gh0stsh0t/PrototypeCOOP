@@ -13,6 +13,7 @@ namespace AMC
     public partial class ViewMember : Form
     {
         public MySqlConnection conn;
+        public MainForm reftomain;
         public ViewMember(MainForm parent)
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace AMC
 		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //breaker();
-            memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
             reftomain.innerChild(new ViewProfile(memid));
             
         }
