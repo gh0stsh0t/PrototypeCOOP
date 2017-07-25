@@ -91,7 +91,6 @@ namespace AMC
         {
             try
             {
-                childform.conn.Close();
                 childform.Close();
                 childform.Dispose();
             }

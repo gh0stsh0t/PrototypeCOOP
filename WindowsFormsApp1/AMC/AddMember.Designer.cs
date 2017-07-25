@@ -154,7 +154,7 @@
             this.txtLname.Location = new System.Drawing.Point(239, 6);
             this.txtLname.Name = "txtLname";
             this.txtLname.Size = new System.Drawing.Size(173, 23);
-            this.txtLname.TabIndex = 3;
+            this.txtLname.TabIndex = 0;
             this.txtLname.Text = "Last Name";
             this.txtLname.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lname_MouseClick);
             this.txtLname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -168,7 +168,7 @@
             this.txtFname.Location = new System.Drawing.Point(418, 6);
             this.txtFname.Name = "txtFname";
             this.txtFname.Size = new System.Drawing.Size(253, 23);
-            this.txtFname.TabIndex = 4;
+            this.txtFname.TabIndex = 1;
             this.txtFname.Text = "First Name";
             this.txtFname.TextChanged += new System.EventHandler(this.fname_TextChanged);
             this.txtFname.Enter += new System.EventHandler(this.textBox1_Enter);
@@ -181,7 +181,7 @@
             this.txtMname.Location = new System.Drawing.Point(677, 6);
             this.txtMname.Name = "txtMname";
             this.txtMname.Size = new System.Drawing.Size(189, 23);
-            this.txtMname.TabIndex = 4;
+            this.txtMname.TabIndex = 2;
             this.txtMname.Text = "Middle Name";
             this.txtMname.TextChanged += new System.EventHandler(this.mname_TextChanged);
             this.txtMname.Enter += new System.EventHandler(this.mname_Enter);
@@ -202,7 +202,7 @@
             this.txtAddr.Location = new System.Drawing.Point(239, 40);
             this.txtAddr.Name = "txtAddr";
             this.txtAddr.Size = new System.Drawing.Size(627, 25);
-            this.txtAddr.TabIndex = 6;
+            this.txtAddr.TabIndex = 3;
             this.txtAddr.Text = "Ex. 123 Strawberry St.";
             this.txtAddr.Enter += new System.EventHandler(this.textBox1_Enter_1);
             this.txtAddr.Leave += new System.EventHandler(this.address_Leave);
@@ -223,7 +223,7 @@
             this.dtpDate.Location = new System.Drawing.Point(239, 80);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(133, 25);
-            this.dtpDate.TabIndex = 9;
+            this.dtpDate.TabIndex = 4;
             this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
             // label6
@@ -243,7 +243,7 @@
             this.radioButton1.Location = new System.Drawing.Point(239, 116);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(57, 23);
-            this.radioButton1.TabIndex = 11;
+            this.radioButton1.TabIndex = 6;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Male";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -255,7 +255,7 @@
             this.radioButton2.Location = new System.Drawing.Point(302, 116);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(70, 23);
-            this.radioButton2.TabIndex = 12;
+            this.radioButton2.TabIndex = 7;
             this.radioButton2.Text = "Female";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
@@ -276,7 +276,7 @@
             this.txtReligion.Location = new System.Drawing.Point(646, 80);
             this.txtReligion.Name = "txtReligion";
             this.txtReligion.Size = new System.Drawing.Size(220, 25);
-            this.txtReligion.TabIndex = 14;
+            this.txtReligion.TabIndex = 5;
             this.txtReligion.Text = "Ex. Roman Catholic";
             this.txtReligion.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.txtReligion.Enter += new System.EventHandler(this.religion_Enter);
@@ -305,7 +305,7 @@
             this.civstat.Location = new System.Drawing.Point(646, 116);
             this.civstat.Name = "civstat";
             this.civstat.Size = new System.Drawing.Size(220, 25);
-            this.civstat.TabIndex = 16;
+            this.civstat.TabIndex = 8;
             this.civstat.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label9
@@ -324,7 +324,7 @@
             this.txtContNo.Location = new System.Drawing.Point(239, 149);
             this.txtContNo.Name = "txtContNo";
             this.txtContNo.Size = new System.Drawing.Size(173, 25);
-            this.txtContNo.TabIndex = 18;
+            this.txtContNo.TabIndex = 9;
             this.txtContNo.Text = "Ex. 09991234567";
             this.txtContNo.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.txtContNo.Enter += new System.EventHandler(this.contactno_Enter);
@@ -346,7 +346,7 @@
             this.txtEduc.Location = new System.Drawing.Point(646, 149);
             this.txtEduc.Name = "txtEduc";
             this.txtEduc.Size = new System.Drawing.Size(220, 25);
-            this.txtEduc.TabIndex = 20;
+            this.txtEduc.TabIndex = 10;
             this.txtEduc.Text = "Ex. College Graduate";
             this.txtEduc.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             this.txtEduc.Enter += new System.EventHandler(this.educ_Enter);
@@ -368,7 +368,7 @@
             this.txtBenificiary.Location = new System.Drawing.Point(239, 185);
             this.txtBenificiary.Name = "txtBenificiary";
             this.txtBenificiary.Size = new System.Drawing.Size(200, 25);
-            this.txtBenificiary.TabIndex = 22;
+            this.txtBenificiary.TabIndex = 11;
             this.txtBenificiary.Text = "Ex. Bruce Wayne";
             this.txtBenificiary.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.txtBenificiary.Enter += new System.EventHandler(this.textBox5_Enter);
@@ -409,7 +409,7 @@
             this.dependents.Location = new System.Drawing.Point(646, 182);
             this.dependents.Name = "dependents";
             this.dependents.Size = new System.Drawing.Size(220, 25);
-            this.dependents.TabIndex = 24;
+            this.dependents.TabIndex = 12;
             this.dependents.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             this.dependents.Leave += new System.EventHandler(this.dependents_Leave);
             // 
@@ -526,7 +526,7 @@
             this.txtTIN4.Location = new System.Drawing.Point(829, 354);
             this.txtTIN4.Name = "txtTIN4";
             this.txtTIN4.Size = new System.Drawing.Size(36, 25);
-            this.txtTIN4.TabIndex = 43;
+            this.txtTIN4.TabIndex = 20;
             this.txtTIN4.Text = "000";
             this.txtTIN4.Enter += new System.EventHandler(this.txtTIN4_Enter);
             this.txtTIN4.Leave += new System.EventHandler(this.txtTIN4_Leave);
@@ -537,7 +537,7 @@
             this.txtTIN3.Location = new System.Drawing.Point(768, 354);
             this.txtTIN3.Name = "txtTIN3";
             this.txtTIN3.Size = new System.Drawing.Size(36, 25);
-            this.txtTIN3.TabIndex = 42;
+            this.txtTIN3.TabIndex = 19;
             this.txtTIN3.Text = "789";
             this.txtTIN3.Enter += new System.EventHandler(this.txtTIN3_Enter);
             this.txtTIN3.Leave += new System.EventHandler(this.txtTIN3_Leave);
@@ -548,7 +548,7 @@
             this.txtTIN2.Location = new System.Drawing.Point(707, 354);
             this.txtTIN2.Name = "txtTIN2";
             this.txtTIN2.Size = new System.Drawing.Size(36, 25);
-            this.txtTIN2.TabIndex = 41;
+            this.txtTIN2.TabIndex = 18;
             this.txtTIN2.Text = "456";
             this.txtTIN2.Enter += new System.EventHandler(this.txtTIN2_Enter);
             this.txtTIN2.Leave += new System.EventHandler(this.txtTIN2_Leave);
@@ -559,7 +559,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(239, 426);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(133, 25);
-            this.dateTimePicker1.TabIndex = 40;
+            this.dateTimePicker1.TabIndex = 23;
             // 
             // label21
             // 
@@ -576,7 +576,7 @@
             this.txtBORAcc.Location = new System.Drawing.Point(646, 390);
             this.txtBORAcc.Name = "txtBORAcc";
             this.txtBORAcc.Size = new System.Drawing.Size(220, 25);
-            this.txtBORAcc.TabIndex = 38;
+            this.txtBORAcc.TabIndex = 22;
             this.txtBORAcc.Text = "ex. 1a2b";
             this.txtBORAcc.Enter += new System.EventHandler(this.txtBORAcc_Enter);
             this.txtBORAcc.Leave += new System.EventHandler(this.txtBORAcc_Leave);
@@ -602,7 +602,7 @@
             this.mtype.Location = new System.Drawing.Point(239, 390);
             this.mtype.Name = "mtype";
             this.mtype.Size = new System.Drawing.Size(173, 25);
-            this.mtype.TabIndex = 36;
+            this.mtype.TabIndex = 21;
             // 
             // label19
             // 
@@ -619,7 +619,7 @@
             this.txtTIN1.Location = new System.Drawing.Point(646, 354);
             this.txtTIN1.Name = "txtTIN1";
             this.txtTIN1.Size = new System.Drawing.Size(36, 25);
-            this.txtTIN1.TabIndex = 34;
+            this.txtTIN1.TabIndex = 17;
             this.txtTIN1.Text = "123";
             this.txtTIN1.Enter += new System.EventHandler(this.txtTIN1_Enter);
             this.txtTIN1.Leave += new System.EventHandler(this.txtTIN1_Leave);
@@ -648,7 +648,7 @@
             this.txtAnnInc.Location = new System.Drawing.Point(239, 354);
             this.txtAnnInc.Name = "txtAnnInc";
             this.txtAnnInc.Size = new System.Drawing.Size(231, 25);
-            this.txtAnnInc.TabIndex = 31;
+            this.txtAnnInc.TabIndex = 16;
             this.txtAnnInc.Text = "(in php)";
             this.txtAnnInc.Enter += new System.EventHandler(this.txtAnnInc_Enter);
             this.txtAnnInc.Leave += new System.EventHandler(this.txtAnnInc_Leave);
@@ -659,7 +659,7 @@
             this.txtOcc.Location = new System.Drawing.Point(646, 314);
             this.txtOcc.Name = "txtOcc";
             this.txtOcc.Size = new System.Drawing.Size(220, 25);
-            this.txtOcc.TabIndex = 30;
+            this.txtOcc.TabIndex = 15;
             this.txtOcc.Text = "Ex. Batman";
             this.txtOcc.Enter += new System.EventHandler(this.txtOcc_Enter);
             this.txtOcc.Leave += new System.EventHandler(this.txtOcc_Leave);
@@ -679,7 +679,7 @@
             this.txtPos.Location = new System.Drawing.Point(239, 314);
             this.txtPos.Name = "txtPos";
             this.txtPos.Size = new System.Drawing.Size(231, 25);
-            this.txtPos.TabIndex = 28;
+            this.txtPos.TabIndex = 14;
             this.txtPos.Text = "Ex. CEO";
             this.txtPos.Enter += new System.EventHandler(this.txtPos_Enter);
             this.txtPos.Leave += new System.EventHandler(this.txtPos_Leave);
@@ -699,7 +699,7 @@
             this.txtCompany.Location = new System.Drawing.Point(239, 276);
             this.txtCompany.Name = "txtCompany";
             this.txtCompany.Size = new System.Drawing.Size(627, 25);
-            this.txtCompany.TabIndex = 26;
+            this.txtCompany.TabIndex = 13;
             this.txtCompany.Text = "Ex. Wayne Enterprises";
             this.txtCompany.Enter += new System.EventHandler(this.txtCompany_Enter);
             this.txtCompany.Leave += new System.EventHandler(this.txtCompany_Leave);

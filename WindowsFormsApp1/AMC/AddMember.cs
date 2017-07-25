@@ -216,7 +216,22 @@ namespace AMC
 
         private void contactno_Leave(object sender, EventArgs e)
         {
-            ctrlLeave(txtContNo, ref contFlag, contpl);
+            contFlag = (txtContNo.Text == "");
+            if (!contFlag)
+            {
+                Regex rg = new Regex(@"^(09\d{9}|\+639\d{9}|\+6382\d{7})$");
+                bool cond = rg.IsMatch(txtContNo.Text);
+                if (!cond)
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtContNo.Focus();
+                }
+            }
+            else
+            {
+                txtContNo.AppendText(contpl);
+                txtContNo.ForeColor = Color.LightCoral;
+            }
         }
 
         private void contactno_Enter(object sender, EventArgs e)
@@ -416,7 +431,7 @@ namespace AMC
 
         public static Boolean isAlphaNum(string strToCheck)
         {
-            Regex rg = new Regex(@"^[a-zA-Z0-9]+[\s,\-]?[a-zA-Z0-9]+$");
+            Regex rg = new Regex(@"^([a-zA-Z0-9]+[\s,\-]?)+");
             return rg.IsMatch(strToCheck);
         }
 
@@ -488,7 +503,22 @@ namespace AMC
 
         private void txtTIN1_Leave(object sender, EventArgs e)
         {
-            ctrlLeave(txtTIN1, ref tin1Flag, tin1pl);
+            tin1Flag = (txtTIN1.Text == "");
+            if (!tin1Flag)
+            {
+                Regex rg = new Regex(@"^\d{3}$");
+                bool cond = rg.IsMatch(txtTIN1.Text);
+                if (!cond)
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtTIN1.Focus();
+                }
+            }
+            else
+            {
+                txtTIN1.AppendText(contpl);
+                txtTIN1.ForeColor = Color.LightCoral;
+            }
         }
 
         private void txtTIN1_Enter(object sender, EventArgs e)
@@ -498,7 +528,22 @@ namespace AMC
 
         private void txtTIN2_Leave(object sender, EventArgs e)
         {
-            ctrlLeave(txtTIN2, ref tin2Flag, tin2pl);
+            tin2Flag = (txtTIN2.Text == "");
+            if (!tin2Flag)
+            {
+                Regex rg = new Regex(@"^\d{3}$");
+                bool cond = rg.IsMatch(txtTIN2.Text);
+                if (!cond)
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtTIN2.Focus();
+                }
+            }
+            else
+            {
+                txtTIN2.AppendText(contpl);
+                txtTIN2.ForeColor = Color.LightCoral;
+            }
         }
 
         private void txtTIN2_Enter(object sender, EventArgs e)
@@ -508,7 +553,22 @@ namespace AMC
 
         private void txtTIN3_Leave(object sender, EventArgs e)
         {
-            ctrlLeave(txtTIN3, ref tin3Flag, tin3pl);
+            tin3Flag = (txtTIN3.Text == "");
+            if (!tin3Flag)
+            {
+                Regex rg = new Regex(@"^\d{3}$");
+                bool cond = rg.IsMatch(txtTIN3.Text);
+                if (!cond)
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtTIN3.Focus();
+                }
+            }
+            else
+            {
+                txtTIN3.AppendText(contpl);
+                txtTIN3.ForeColor = Color.LightCoral;
+            }
         }
 
         private void txtTIN3_Enter(object sender, EventArgs e)
@@ -523,7 +583,22 @@ namespace AMC
 
         private void txtTIN4_Leave(object sender, EventArgs e)
         {
-            ctrlLeave(txtTIN4, ref tin4Flag, tin4pl);
+            tin4Flag = (txtTIN4.Text == "");
+            if (!tin4Flag)
+            {
+                Regex rg = new Regex(@"^\d{3}$");
+                bool cond = rg.IsMatch(txtTIN4.Text);
+                if (!cond)
+                {
+                    MessageBox.Show("Please make sure this field contains the valid format");
+                    txtTIN4.Focus();
+                }
+            }
+            else
+            {
+                txtTIN4.AppendText(contpl);
+                txtTIN4.ForeColor = Color.LightCoral;
+            }
         }
 
         private void txtBORAcc_Enter(object sender, EventArgs e)
