@@ -55,7 +55,6 @@
             this.txtBenificiary = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.dependents = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label26 = new System.Windows.Forms.Label();
@@ -84,7 +83,9 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.label22 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -394,25 +395,6 @@
             this.label13.TabIndex = 10;
             this.label13.Text = "Work Information";
             // 
-            // dependents
-            // 
-            this.dependents.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dependents.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dependents.FormattingEnabled = true;
-            this.dependents.Items.AddRange(new object[] {
-            "None",
-            "One",
-            "Two",
-            "Three",
-            "Four",
-            "Five or More"});
-            this.dependents.Location = new System.Drawing.Point(646, 182);
-            this.dependents.Name = "dependents";
-            this.dependents.Size = new System.Drawing.Size(220, 25);
-            this.dependents.TabIndex = 12;
-            this.dependents.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            this.dependents.Leave += new System.EventHandler(this.dependents_Leave);
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
@@ -429,6 +411,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.numericUpDown1);
             this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.label25);
             this.panel1.Controls.Add(this.label24);
@@ -453,7 +436,6 @@
             this.panel1.Controls.Add(this.txtCompany);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.dependents);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.txtBenificiary);
@@ -740,6 +722,19 @@
             this.label22.TabIndex = 9;
             this.label22.Text = "Required fields are marked in pink.";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(646, 183);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(220, 25);
+            this.numericUpDown1.TabIndex = 48;
+            // 
             // AddMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -760,6 +755,7 @@
             this.Load += new System.EventHandler(this.AddMember_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -794,7 +790,6 @@
         private System.Windows.Forms.TextBox txtBenificiary;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox dependents;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -823,5 +818,6 @@
         private System.Windows.Forms.TextBox txtTIN3;
         private System.Windows.Forms.TextBox txtTIN2;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

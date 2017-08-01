@@ -14,6 +14,8 @@ namespace AMC
 {
     public partial class AddMember : Form
     {
+        private int state = 1; //0 - add member form, 1 - edit member
+        private int mid = 3;
         private bool lnameFlag = true;  private string lnamepl = "Last Name"; 
         private bool fnameFlag = true;  private string fnamepl = "First Name"; 
         private bool mnameFlag = true;  private string mnamepl = "Middle Name"; 
@@ -32,6 +34,7 @@ namespace AMC
         private bool tin4Flag = true; private string tin4pl = "000";    
         private bool boraccFlag = true; private string boraccpl = "Ex. 1a2b";   private string boracc;
 
+        public DataTable holder;
         public MySqlConnection databasecon;
         public MySqlDataAdapter listener;
         public MySqlCommand query;
@@ -39,18 +42,111 @@ namespace AMC
         {
             InitializeComponent();
             databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            if(state == 1)
+            {
+                filldata();
+                neweditform();
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
+        
+        private void neweditform()
+        {
+            lnameFlag = false; 
+            fnameFlag = false; 
+            mnameFlag = false; 
+            addFlag = false; 
+            relFlag = false; 
+            contFlag = false; 
+            educFlag = false; 
+            benFlag = false; 
+            compFlag = false; 
+            posFlag = false; 
+            occFlag = false; 
+            annincFlag = false; 
+            tin1Flag = false; 
+            tin2Flag = false; 
+            tin3Flag = false; 
+            tin4Flag = false; 
+            boraccFlag = false; 
+            dtpDate.Enabled = false;
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
+            txtTIN1.Enabled = false;
+            txtTIN2.Enabled = false;
+            txtTIN3.Enabled = false;
+            txtTIN4.Enabled = false;
+            txtBORAcc.Enabled = false;
+            dateTimePicker1.Enabled = false;
+        }
+
+
+        private void filldata()
+        {
+            databasecon.Open();
+
+            query = new MySqlCommand("SELECT * FROM members where member_id = " + mid, databasecon);
+            listener = new MySqlDataAdapter(query);
+            holder = new DataTable();
+            listener.Fill(holder);
+
+            txtLname.Text = holder.Rows[0]["family_name"].ToString();
+            txtLname.ForeColor = Color.FromArgb(0, 0, 0);
+            txtFname.Text = holder.Rows[0]["first_name"].ToString();
+            txtFname.ForeColor = Color.FromArgb(0, 0, 0);
+            txtMname.Text = holder.Rows[0]["middle_name"].ToString();
+            txtMname.ForeColor = Color.FromArgb(0, 0, 0);
+            txtAddr.Text = holder.Rows[0]["address"].ToString();
+            txtAddr.ForeColor = Color.FromArgb(0, 0, 0);
+            DateTime dt = Convert.ToDateTime(holder.Rows[0]["birthdate"].ToString());
+            dtpDate.Value = dt;
+            txtReligion.Text = holder.Rows[0]["religion"].ToString();
+            txtReligion.ForeColor = Color.FromArgb(0, 0, 0);
+            string g = holder.Rows[0]["Gender"].ToString();
+            radioButton2.Checked = g == "Female";
+            civstat.SelectedIndex = int.Parse(holder.Rows[0]["civil_status"].ToString());
+            txtContNo.Text = holder.Rows[0]["contact_no"].ToString();
+            txtContNo.ForeColor = Color.FromArgb(0, 0, 0);
+            txtEduc.Text = holder.Rows[0]["educ_attainment"].ToString();
+            txtEduc.ForeColor = Color.FromArgb(0, 0, 0);
+            txtBenificiary.Text = holder.Rows[0]["beneficiary_name"].ToString();
+            txtBenificiary.ForeColor = Color.FromArgb(0, 0, 0);
+            numericUpDown1.Value = int.Parse(holder.Rows[0]["no_of_dependents"].ToString());
+            txtCompany.Text = holder.Rows[0]["company_name"].ToString();
+            txtCompany.ForeColor = Color.FromArgb(0, 0, 0);
+            txtPos.Text = holder.Rows[0]["position"].ToString();
+            txtPos.ForeColor = Color.FromArgb(0, 0, 0);
+            txtOcc.Text = holder.Rows[0]["occupation"].ToString();
+            txtOcc.ForeColor = Color.FromArgb(0, 0, 0);
+            txtAnnInc.Text = holder.Rows[0]["annual_income"].ToString();
+            txtAnnInc.ForeColor = Color.FromArgb(0, 0, 0);
+            string TIN = holder.Rows[0]["tin"].ToString();
+            txtTIN1.Text = TIN.Substring(0,3);
+            txtTIN1.ForeColor = Color.FromArgb(0, 0, 0);
+            txtTIN2.Text = TIN.Substring(3,3);
+            txtTIN2.ForeColor = Color.FromArgb(0, 0, 0);
+            txtTIN3.Text = TIN.Substring(6, 3);
+            txtTIN3.ForeColor = Color.FromArgb(0, 0, 0);
+            txtTIN4.Text = TIN.Substring(9, 3);
+            txtTIN4.ForeColor = Color.FromArgb(0, 0, 0);
+            mtype.SelectedIndex = int.Parse(holder.Rows[0]["type"].ToString());
+
+
+
+
+
+            databasecon.Close();
+        }
 
         private void AddMember_Load(object sender, EventArgs e)
         {
             this.ActiveControl = label3;
             civstat.SelectedIndex = 0;
-            dependents.SelectedIndex = 0;
             mtype.SelectedIndex = 0;
         }
 
@@ -455,12 +551,13 @@ namespace AMC
                     else gender = "Female";
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
                     string tin = txtTIN1.Text + txtTIN2.Text + txtTIN3.Text + txtTIN4.Text;
+                    int dependents = (int)numericUpDown1.Value;
 
                     query = new MySqlCommand("INSERT members (family_name, first_name, middle_name, birthdate, gender, address, contact_no, occupation, company_name, position, annual_income,"
                     + "tin, educ_attainment, civil_status, religion, no_of_dependents, beneficiary_name, type, status, acceptance_date)"
                     + "VALUES ('" + txtLname.Text + "', '" + txtFname.Text + "', '" + txtMname.Text + "', '" + bday + "', '" + gender + "', '" + txtAddr.Text + "', '" + txtContNo.Text + "', '" 
                     + txtOcc.Text + "', '" + txtCompany.Text + "', '" + pos + "', '" + anninc + "', '" + tin + "', '" 
-                    + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "', '1', '" + ben + "', '0', '0', '" + now + "')", databasecon);
+                    + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "'," + dependents + ", '" + ben + "', " + mtype.SelectedIndex + ", '0', '" + now + "')", databasecon);
                     ////////////////////////////
                     query.ExecuteNonQuery();
 
