@@ -181,6 +181,7 @@
             this.button2.Text = "Add Member";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // sidebarBtnLoans
             // 
@@ -518,7 +519,7 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Panel panel1;
     }
 }
 

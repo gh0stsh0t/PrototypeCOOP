@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +25,12 @@ namespace AMC
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AddTransaction_Load(object sender, EventArgs e)
+        {
+            cbxAccount.SelectedIndex = 0;
+            cbxTransaction.SelectedIndex = 0;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +14,13 @@ namespace AMC
     {
         private bool advanceSearchVisible = false;
         public MySqlConnection conn;
-        public ViewMember()
+        public MainForm reftomain;
+        public ViewMember(MainForm parent)
         {
             InitializeComponent();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            reftomain = parent;
+            this.TopLevel = false;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -34,6 +37,13 @@ namespace AMC
         private void ViewMember_Load(object sender, EventArgs e)
         {
             Rifrish();
+        }
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //breaker();
+            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            reftomain.innerChild(new ViewProfile(memid));
+            
         }
         private void Rifrish()
         {
@@ -104,7 +114,6 @@ namespace AMC
             }
             else
             {
-                Rifrish();
                 Rifrish();
             }
         }

@@ -12,7 +12,7 @@ namespace AMC
 {
     public partial class MainForm : Form
     {
-        private Form childform;
+        public Form childform;
         public MainForm()
         {
             InitializeComponent();
@@ -81,8 +81,12 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
+	    innerChild(new ViewMember(this));
+        }
+        public void innerChild(Form child)
+        {
             breaker();
-            childform = new ViewMember();
+            childform = child;
             childform.TopLevel = false;
             panel1.Controls.Add(childform);
             childform.Show();
@@ -91,7 +95,6 @@ namespace AMC
         {
             try
             {
-                //childform.conn.Close();
                 childform.Close();
                 childform.Dispose();
             }
