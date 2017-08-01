@@ -15,12 +15,14 @@ namespace AMC
     {
         public MySqlConnection conn;
         public int memid;
+        public MainForm reftomain;
 
-        public ViewProfile(int id)
+        public ViewProfile(int id, MainForm main)
         {
             InitializeComponent();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             memid = id;
+            reftomain = main;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -120,7 +122,10 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            reftomain.Enabled = false;
+            NewSavingsAccount sav = new NewSavingsAccount(memid, conn);
+            sav.reftomain = reftomain;
+            sav.Show();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace AMC
         {
             //breaker();
             int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            reftomain.innerChild(new ViewProfile(memid));
+            reftomain.innerChild(new ViewProfile(memid, reftomain));
             
         }
         private void Rifrish()

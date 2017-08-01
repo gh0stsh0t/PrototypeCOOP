@@ -41,3 +41,5 @@ C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsA
 C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
+C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
