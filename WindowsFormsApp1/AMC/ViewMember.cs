@@ -13,6 +13,7 @@ namespace AMC
     public partial class ViewMember : Form
     {
         private bool advanceSearchVisible = false;
+        private string filter = " where member.status=1";
         public MySqlConnection conn;
         public MainForm reftomain;
         public ViewMember(MainForm parent)
@@ -21,6 +22,7 @@ namespace AMC
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             reftomain = parent;
             this.TopLevel = false;
+            filterSet(7);
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -28,29 +30,22 @@ namespace AMC
             if (!advanceSearchVisible)
                 panel1.Visible = !panel1.Visible;
         }
-        private void Animations()
-        {
-            opaque.Location = new Point(0, 0);
-            opaque.Size = this.Size;
-            popupEnabler.Start();
-        }
+//        private void Animations()
+//        {
+//            opaque.Location = new Point(0, 0);
+//            opaque.Size = this.Size;
+//            popupEnabler.Start();
+//        }
         private void ViewMember_Load(object sender, EventArgs e)
         {
             Rifrish();
-        }
-		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //breaker();
-            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            reftomain.innerChild(new ViewProfile(memid));
-            
         }
         private void Rifrish()
         {
             try
             {
                 conn.Open();
-                var comm = new MySqlCommand("SELECT member_id,concat_ws(',',family_name ,first_name) as name,gender,address,contact_no,type,status FROM members ", conn);
+                var comm = new MySqlCommand("SELECT member_id,concat_ws(',',family_name ,first_name) as name,gender,address,contact_no,type,status FROM members"+filter, conn);
                 var adp = new MySqlDataAdapter(comm);
                 var dt = new DataTable();
                 adp.Fill(dt);
@@ -63,7 +58,7 @@ namespace AMC
                 var addColumn = new DataGridViewButtonColumn
                 {
                     Name = "loans",
-                    Text = "loans ",
+                    Text = "loans",
                     FlatStyle = FlatStyle.Flat,
                     DefaultCellStyle=x.DefaultCellStyle
                 };
@@ -96,7 +91,7 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    MySqlCommand comm = new MySqlCommand("SELECT concat_ws(',',family_name ,first_name) as name FROM members WHERE family_name LIKE '" + tbSearch.Text + "%'", conn);
+                    MySqlCommand comm = new MySqlCommand("SELECT concat_ws(',',family_name ,first_name) as name FROM members WHERE family_name LIKE '" + tbSearch.Text + "%' AND"+filter, conn);
                     MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                     var dt = new DataTable();
                     adp.Fill(dt);
@@ -144,6 +139,50 @@ namespace AMC
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             MessageBox.Show("edit dialog of user " + dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString());
+        }
+
+        private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            if (e.Button.Equals(MouseButtons.Left))
+            {
+                reftomain.innerChild(new ViewProfile(memid));
+            }
+            else
+            {
+                reftomain.innerChild(new AddMember(memid));
+            }
+        }
+
+        private void filterSet(int x)
+        {
+            switch (x)
+            {
+                case 0:
+                    filter = "";
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    filter = " where member.status=1";
+            }
+        }
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            //filter
+            filterSet(comboBox1.SelectedIndex);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //reset
+            filterSet(7);
         }
     }
 }
