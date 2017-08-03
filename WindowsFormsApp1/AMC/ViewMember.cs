@@ -91,7 +91,7 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    MySqlCommand comm = new MySqlCommand("SELECT concat_ws(',',family_name ,first_name) as name FROM members WHERE family_name LIKE '" + tbSearch.Text + "%' AND"+filter, conn);
+                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT concat_ws(',',family_name ,first_name) as name FROM membersloanv WHERE family_name LIKE '" + tbSearch.Text + "%' AND"+filter, conn);
                     MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                     var dt = new DataTable();
                     adp.Fill(dt);
@@ -162,15 +162,20 @@ namespace AMC
                     filter = "";
                     break;
                 case 1:
+                    filter = " WHERE date_terminated = NULL";
                     break;
                 case 2:
+                    filter = "WHERE date_terminated NOT IN(NULL)";
                     break;
                 case 3:
+                    filter = " WHERE ";
                     break;
                 case 4:
+                    filter = " WHERE status=0";
                     break;
                 default:
-                    filter = " where member.status=1";
+                    filter = " WHERE status=1";
+                    break;
             }
         }
         private void button3_Click_1(object sender, EventArgs e)
