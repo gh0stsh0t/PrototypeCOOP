@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lblName = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblAccount = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,10 +41,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtBal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,14 +57,14 @@
             this.lblName.TabIndex = 19;
             this.lblName.Text = "Member Name";
             // 
-            // label7
+            // lblAccount
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(239, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "xxxxxxx";
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Location = new System.Drawing.Point(239, 44);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(42, 13);
+            this.lblAccount.TabIndex = 13;
+            this.lblAccount.Text = "xxxxxxx";
             // 
             // label6
             // 
@@ -147,6 +147,7 @@
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Activate";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // label3
             // 
@@ -174,9 +175,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtBal);
             this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.lblAccount);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -188,6 +189,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(448, 177);
             this.panel1.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(77, 120);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 17);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Initial Balance";
+            // 
+            // txtBal
+            // 
+            this.txtBal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBal.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtBal.Location = new System.Drawing.Point(242, 122);
+            this.txtBal.Name = "txtBal";
+            this.txtBal.Size = new System.Drawing.Size(173, 23);
+            this.txtBal.TabIndex = 0;
+            this.txtBal.Text = "0.00";
             // 
             // label1
             // 
@@ -215,26 +236,6 @@
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(77, 120);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 17);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Initial Balance";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox1.Location = new System.Drawing.Point(242, 122);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(173, 23);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "0.00";
             // 
             // NewSavingsAccount
             // 
@@ -264,7 +265,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAccount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -277,7 +278,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
     }

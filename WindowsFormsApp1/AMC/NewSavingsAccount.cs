@@ -14,15 +14,17 @@ namespace AMC
 {
     public partial class NewSavingsAccount : Form
     {
-        public Form reftomain { get; set; }
+        public MainForm reftomain;
         public int memid;
         public MySqlConnection conn;
+        string accid = DateTime.Today.ToString("yyyyMM") + "001";
 
-        public NewSavingsAccount(int id, MySqlConnection c)
+        public NewSavingsAccount(int id, MySqlConnection c, MainForm main)
         {
             InitializeComponent();
             memid = id;
             conn = c;
+            reftomain = main;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -33,6 +35,7 @@ namespace AMC
 
         private void NewSavingsAccount_Load(object sender, EventArgs e)
         {
+            lblAccount.Text = accid;
             try
             {
                 conn.Open();
@@ -46,20 +49,7 @@ namespace AMC
                     lblName.Text = dt.Rows[0]["family_name"].ToString() + ", " + dt.Rows[0]["first_name"].ToString() + " " + dt.Rows[0]["middle_name"].ToString();
                     
                 }
-                /* else if (dt.Rows.Count > 1)
-                {
-                    for (int index = 0; index < dt.Rows.Count; index++)
-                    {
-                        string fn, ln;
-                        fn = dt.Rows[index]["firstname"].ToString();
-                        ln = dt.Rows[index]["lastname"].ToString();
-                        MessageBox.Show("Hello " + ln + ", " + fn);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect username and/or password.");
-                } */
+
 
                 conn.Close();
 
@@ -69,6 +59,31 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
                 conn.Close();
             }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                conn.Open();
+                string query = "INSERT INTO savings (savings_account_id, member_id, opening_date, outstanding_balance, account_status)" + 
+                                "VALUES('" + accid + "','" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "', '0')";
+                MySqlCommand ins = new MySqlCommand(query, conn);
+                ins.ExecuteNonQuery();
+                conn.Close();
+
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+
+            reftomain.Enabled = true;
+            reftomain.innerChild(new ViewProfile(memid, reftomain));
+            this.Close();
+            
         }
     }
 }
