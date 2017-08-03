@@ -14,8 +14,7 @@ namespace AMC
 {
     public partial class AddMember : Form
     {
-        private int state = 0; //0 - add member form, 1 - edit member
-        private int mid = 4; //member id
+        private int mid;
         private bool lnameFlag = true;  private string lnamepl = "Last Name"; 
         private bool fnameFlag = true;  private string fnamepl = "First Name"; 
         private bool mnameFlag = true;  private string mnamepl = "Middle Name"; 
@@ -42,13 +41,14 @@ namespace AMC
         {
             InitializeComponent();
             databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
-            if(state == 1)
-            {
-                filldata();
-                neweditform();
-                label3.Text = "Edit Member";
-            }
+        }
 
+        public AddMember(int memid) : this()
+        {
+            mid = memid;
+            filldata();
+            neweditform();
+            label3.Text = "Edit Member";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -521,7 +521,7 @@ namespace AMC
             
             try
             {
-                if(state == 0)
+                if(label3.Text.Equals("Edit Member"))
                 {
                     //validate
                     if (validation())
