@@ -14,8 +14,8 @@ namespace AMC
 {
     public partial class AddMember : Form
     {
-        private int state = 1; //0 - add member form, 1 - edit member
-        private int mid = 3;
+        private int state = 0; //0 - add member form, 1 - edit member
+        private int mid = 4; //member id
         private bool lnameFlag = true;  private string lnamepl = "Last Name"; 
         private bool fnameFlag = true;  private string fnamepl = "First Name"; 
         private bool mnameFlag = true;  private string mnamepl = "Middle Name"; 
@@ -46,6 +46,7 @@ namespace AMC
             {
                 filldata();
                 neweditform();
+                label3.Text = "Edit Member";
             }
 
         }
@@ -57,31 +58,9 @@ namespace AMC
         
         private void neweditform()
         {
-            lnameFlag = false; 
-            fnameFlag = false; 
-            mnameFlag = false; 
-            addFlag = false; 
-            relFlag = false; 
-            contFlag = false; 
-            educFlag = false; 
-            benFlag = false; 
-            compFlag = false; 
-            posFlag = false; 
-            occFlag = false; 
-            annincFlag = false; 
-            tin1Flag = false; 
-            tin2Flag = false; 
-            tin3Flag = false; 
-            tin4Flag = false; 
-            boraccFlag = false; 
-            dtpDate.Enabled = false;
-            radioButton1.Enabled = false;
-            radioButton2.Enabled = false;
-            txtTIN1.Enabled = false;
-            txtTIN2.Enabled = false;
-            txtTIN3.Enabled = false;
-            txtTIN4.Enabled = false;
-            txtBORAcc.Enabled = false;
+            lnameFlag = fnameFlag = mnameFlag = addFlag = relFlag = contFlag = educFlag = benFlag = compFlag = posFlag = 
+            occFlag = annincFlag = tin1Flag = tin2Flag = tin3Flag = tin4Flag = boraccFlag = dtpDate.Enabled = radioButton1.Enabled = 
+            radioButton2.Enabled = txtTIN1.Enabled = txtTIN2.Enabled = txtTIN3.Enabled = txtTIN4.Enabled = txtBORAcc.Enabled =
             dateTimePicker1.Enabled = false;
         }
 
@@ -95,44 +74,44 @@ namespace AMC
             holder = new DataTable();
             listener.Fill(holder);
 
-            txtLname.Text = holder.Rows[0]["family_name"].ToString();
+            lnamepl = txtLname.Text = holder.Rows[0]["family_name"].ToString();
             txtLname.ForeColor = Color.FromArgb(0, 0, 0);
-            txtFname.Text = holder.Rows[0]["first_name"].ToString();
+            fnamepl = txtFname.Text = holder.Rows[0]["first_name"].ToString();
             txtFname.ForeColor = Color.FromArgb(0, 0, 0);
-            txtMname.Text = holder.Rows[0]["middle_name"].ToString();
+            mnamepl =  txtMname.Text = holder.Rows[0]["middle_name"].ToString();
             txtMname.ForeColor = Color.FromArgb(0, 0, 0);
-            txtAddr.Text = holder.Rows[0]["address"].ToString();
+            addpl = txtAddr.Text = holder.Rows[0]["address"].ToString();
             txtAddr.ForeColor = Color.FromArgb(0, 0, 0);
             DateTime dt = Convert.ToDateTime(holder.Rows[0]["birthdate"].ToString());
             dtpDate.Value = dt;
-            txtReligion.Text = holder.Rows[0]["religion"].ToString();
+            relpl = txtReligion.Text = holder.Rows[0]["religion"].ToString();
             txtReligion.ForeColor = Color.FromArgb(0, 0, 0);
             string g = holder.Rows[0]["Gender"].ToString();
             radioButton2.Checked = g == "Female";
             civstat.SelectedIndex = int.Parse(holder.Rows[0]["civil_status"].ToString());
-            txtContNo.Text = holder.Rows[0]["contact_no"].ToString();
+            contpl = txtContNo.Text = holder.Rows[0]["contact_no"].ToString();
             txtContNo.ForeColor = Color.FromArgb(0, 0, 0);
-            txtEduc.Text = holder.Rows[0]["educ_attainment"].ToString();
+            educpl = txtEduc.Text = holder.Rows[0]["educ_attainment"].ToString();
             txtEduc.ForeColor = Color.FromArgb(0, 0, 0);
-            txtBenificiary.Text = holder.Rows[0]["beneficiary_name"].ToString();
+            benpl = txtBenificiary.Text = holder.Rows[0]["beneficiary_name"].ToString();
             txtBenificiary.ForeColor = Color.FromArgb(0, 0, 0);
             numericUpDown1.Value = int.Parse(holder.Rows[0]["no_of_dependents"].ToString());
-            txtCompany.Text = holder.Rows[0]["company_name"].ToString();
+            comppl = txtCompany.Text = holder.Rows[0]["company_name"].ToString();
             txtCompany.ForeColor = Color.FromArgb(0, 0, 0);
-            txtPos.Text = holder.Rows[0]["position"].ToString();
+            pospl = txtPos.Text = holder.Rows[0]["position"].ToString();
             txtPos.ForeColor = Color.FromArgb(0, 0, 0);
-            txtOcc.Text = holder.Rows[0]["occupation"].ToString();
+            occpl = txtOcc.Text = holder.Rows[0]["occupation"].ToString();
             txtOcc.ForeColor = Color.FromArgb(0, 0, 0);
-            txtAnnInc.Text = holder.Rows[0]["annual_income"].ToString();
+            annincpl = txtAnnInc.Text = holder.Rows[0]["annual_income"].ToString();
             txtAnnInc.ForeColor = Color.FromArgb(0, 0, 0);
             string TIN = holder.Rows[0]["tin"].ToString();
-            txtTIN1.Text = TIN.Substring(0,3);
+            tin1pl = txtTIN1.Text = TIN.Substring(0,3);
             txtTIN1.ForeColor = Color.FromArgb(0, 0, 0);
-            txtTIN2.Text = TIN.Substring(3,3);
+            tin2pl = txtTIN2.Text = TIN.Substring(3,3);
             txtTIN2.ForeColor = Color.FromArgb(0, 0, 0);
-            txtTIN3.Text = TIN.Substring(6, 3);
+            tin3pl = txtTIN3.Text = TIN.Substring(6, 3);
             txtTIN3.ForeColor = Color.FromArgb(0, 0, 0);
-            txtTIN4.Text = TIN.Substring(9, 3);
+            tin4pl = txtTIN4.Text = TIN.Substring(9, 3);
             txtTIN4.ForeColor = Color.FromArgb(0, 0, 0);
             mtype.SelectedIndex = int.Parse(holder.Rows[0]["type"].ToString());
 
@@ -520,7 +499,7 @@ namespace AMC
             }
             else
             {
-                txtbox.AppendText("(in php)");
+                txtbox.AppendText(pl);
                 txtbox.ForeColor = Color.FromArgb(219, 200, 210);
             }
         }
@@ -542,8 +521,47 @@ namespace AMC
             
             try
             {
-                if (validation())
+                if(state == 0)
                 {
+                    //validate
+                    if (validation())
+                    {
+                        //add member query
+                        databasecon.Open();
+                        string bday = dtpDate.Value.ToString("yyyy-MM-dd");
+                        string gender;
+                        if (radioButton1.Checked) gender = "Male";
+                        else gender = "Female";
+                        string now = DateTime.Now.ToString("yyyy-MM-dd");
+                        string tin = txtTIN1.Text + txtTIN2.Text + txtTIN3.Text + txtTIN4.Text;
+                        int dependents = (int)numericUpDown1.Value;
+
+                        query = new MySqlCommand("INSERT members (family_name, first_name, middle_name, birthdate, gender, address, contact_no, occupation, company_name, position, annual_income,"
+                        + "tin, educ_attainment, civil_status, religion, no_of_dependents, beneficiary_name, type, status, acceptance_date)"
+                        + "VALUES ('" + txtLname.Text + "', '" + txtFname.Text + "', '" + txtMname.Text + "', '" + bday + "', '" + gender + "', '" + txtAddr.Text + "', '" + txtContNo.Text + "', '"
+                        + txtOcc.Text + "', '" + txtCompany.Text + "', '" + pos + "', '" + anninc + "', '" + tin + "', '"
+                        + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "'," + dependents + ", '" + ben + "', " + mtype.SelectedIndex + ", '0', '" + now + "')", databasecon);
+                        query.ExecuteNonQuery();
+
+                        databasecon.Close();
+                        MessageBox.Show(txtLname.Text + " sucesfully added!");
+                    }
+                    else
+                    {
+                        databasecon.Close();
+                    }
+                }
+                else
+                {
+                    //get variables that are taken through validation method (not accessed by edit/update)
+                    rel = txtReligion.Text;
+                    educ = txtEduc.Text;
+                    pos = txtPos.Text;
+                    anninc = txtAnnInc.Text;
+                    boracc = txtBORAcc.Text;
+                    ben = txtBenificiary.Text;
+
+                    //update query
                     databasecon.Open();
                     string bday = dtpDate.Value.ToString("yyyy-MM-dd");
                     string gender;
@@ -553,20 +571,16 @@ namespace AMC
                     string tin = txtTIN1.Text + txtTIN2.Text + txtTIN3.Text + txtTIN4.Text;
                     int dependents = (int)numericUpDown1.Value;
 
-                    query = new MySqlCommand("INSERT members (family_name, first_name, middle_name, birthdate, gender, address, contact_no, occupation, company_name, position, annual_income,"
-                    + "tin, educ_attainment, civil_status, religion, no_of_dependents, beneficiary_name, type, status, acceptance_date)"
-                    + "VALUES ('" + txtLname.Text + "', '" + txtFname.Text + "', '" + txtMname.Text + "', '" + bday + "', '" + gender + "', '" + txtAddr.Text + "', '" + txtContNo.Text + "', '" 
-                    + txtOcc.Text + "', '" + txtCompany.Text + "', '" + pos + "', '" + anninc + "', '" + tin + "', '" 
-                    + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "'," + dependents + ", '" + ben + "', " + mtype.SelectedIndex + ", '0', '" + now + "')", databasecon);
-                    ////////////////////////////
+                    query = new MySqlCommand("UPDATE members SET family_name = '" + txtLname.Text + "', first_name = '" + txtFname.Text + "', middle_name = '" + txtMname.Text + "', "
+                        + "birthdate = '" + bday + "', gender = '" + gender + "', address = '" + txtAddr.Text + "', contact_no = '" + txtContNo.Text + "', occupation = '" + txtOcc.Text + "', "
+                       + "company_name = '" + txtCompany.Text + "', position = '" + txtPos.Text + "', annual_income = '" + anninc + "',"
+                    + "tin = '" + tin + "', educ_attainment = '" + educ + "', civil_status = '" + civstat.SelectedIndex + "', religion = '" + rel + "', no_of_dependents = '" + dependents + "',"
+                    + "beneficiary_name = '" + ben + "', type = '" + mtype.SelectedIndex + "', status = 0, acceptance_date = '" + now + "' where member_id = " + mid, databasecon);
                     query.ExecuteNonQuery();
 
                     databasecon.Close();
-                    MessageBox.Show(txtLname.Text + " sucesfully added!");
-                }
-                else
-                {
-                    databasecon.Close();
+                    MessageBox.Show(txtLname.Text + " sucesfully edited!");
+
                 }
 
             }
@@ -706,6 +720,11 @@ namespace AMC
         private void txtBORAcc_Leave(object sender, EventArgs e)
         {
             ctrlLeaveNR(txtBORAcc, ref boraccFlag, boraccpl);
+        }
+
+        private void AddMember_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = label3;
         }
     }
 }
