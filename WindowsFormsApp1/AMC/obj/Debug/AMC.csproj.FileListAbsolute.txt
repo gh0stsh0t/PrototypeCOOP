@@ -41,7 +41,6 @@ C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsA
 C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
@@ -51,3 +50,11 @@ C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.cs
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
+C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb

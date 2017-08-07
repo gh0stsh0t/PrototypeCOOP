@@ -153,7 +153,7 @@ namespace AMC
             int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
             if (e.Button.Equals(MouseButtons.Left))
             {
-                reftomain.innerChild(new ViewProfile(memid));
+                reftomain.innerChild(new ViewProfile(memid,reftomain));
             }
             else
             {
