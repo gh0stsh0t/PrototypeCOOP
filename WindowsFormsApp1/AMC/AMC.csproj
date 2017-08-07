@@ -68,7 +68,13 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
-	<Compile Include="ViewProfile.cs">
+    <Compile Include="NewSavingsAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewSavingsAccount.Designer.cs">
+      <DependentUpon>NewSavingsAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewProfile.Designer.cs">
@@ -91,6 +97,9 @@
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewSavingsAccount.resx">
+      <DependentUpon>NewSavingsAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -104,6 +113,9 @@
     <Fakes Include="Fakes\MySql.Data.fakes" />
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProfile.resx">
+      <DependentUpon>ViewProfile.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

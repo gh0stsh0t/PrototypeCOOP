@@ -40,6 +40,13 @@ namespace AMC
         {
             Rifrish();
         }
+	private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //breaker();
+            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+            reftomain.innerChild(new ViewProfile(memid, reftomain));
+            
+        }
         private void Rifrish()
         {
             try

@@ -15,12 +15,15 @@ namespace AMC
     {
         public MySqlConnection conn;
         public int memid;
+        public MainForm reftomain;
+        Boolean hasSavings = false, hasLoan = false, hasCapital = false;
 
-        public ViewProfile(int id)
+        public ViewProfile(int id, MainForm main)
         {
             InitializeComponent();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             memid = id;
+            reftomain = main;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -31,6 +34,8 @@ namespace AMC
         private void ViewProfile_Load(object sender, EventArgs e)
         {
             load_member();
+            load_accounts();
+            refresh_buttons();
         }
 
         private void load_member()
@@ -120,7 +125,56 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
+            reftomain.Enabled = false;
+            NewSavingsAccount sav = new NewSavingsAccount(memid, conn, reftomain);
+            sav.Show();
+        }
 
+        private void load_accounts()
+        {
+            
+            hasSavings = false;
+            hasLoan = false;
+            hasCapital = false;
+
+            try
+            {
+                conn.Open();
+                DataTable dt = new DataTable();
+                MySqlCommand savi = new MySqlCommand("SELECT savings_account_id FROM savings WHERE member_id = " + memid.ToString(), conn);
+                MySqlDataAdapter adp = new MySqlDataAdapter(savi);
+                adp.Fill(dt);
+                if (dt.Rows.Count > 0) hasSavings = true;
+                MySqlCommand cbu = new MySqlCommand("SELECT capital_account_id FROM capitals WHERE member_id = " + memid.ToString(), conn);
+                MySqlDataAdapter adp2 = new MySqlDataAdapter(cbu);
+                adp2.Fill(dt);
+                if (hasSavings & dt.Rows.Count > 1) hasCapital = true;
+                else if (!hasSavings & dt.Rows.Count > 0) hasCapital = true;
+                MySqlCommand loan = new MySqlCommand("SELECT loan_account_id FROM loans WHERE member_id = " + memid.ToString(), conn);
+                MySqlDataAdapter adp3 = new MySqlDataAdapter(loan);
+                adp3.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    dgv1.DataSource = dt;
+                }
+
+                conn.Close();
+
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+
+            
+        }
+
+        private void refresh_buttons()
+        {
+            if (hasSavings) btnSavings.Enabled = false;
+            if (hasCapital) btnCBU.Enabled = false;
+            if (hasLoan) btnCBU.Enabled = false;
         }
     }
 }

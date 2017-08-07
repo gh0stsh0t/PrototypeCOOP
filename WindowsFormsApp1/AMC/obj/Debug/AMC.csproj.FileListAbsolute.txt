@@ -49,3 +49,5 @@ C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Pr
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
+C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
+C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources

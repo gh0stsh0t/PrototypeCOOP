@@ -73,12 +73,12 @@
             this.btnDeactivate = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv1 = new System.Windows.Forms.DataGridView();
             this.btnRequest = new System.Windows.Forms.Button();
             this.btnSavings = new System.Windows.Forms.Button();
             this.btnCBU = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblName
@@ -640,15 +640,15 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // dgv1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 482);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(700, 111);
-            this.dataGridView1.TabIndex = 20;
+            this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv1.Enabled = false;
+            this.dgv1.Location = new System.Drawing.Point(19, 482);
+            this.dgv1.Name = "dgv1";
+            this.dgv1.ReadOnly = true;
+            this.dgv1.Size = new System.Drawing.Size(700, 111);
+            this.dgv1.TabIndex = 20;
             // 
             // btnRequest
             // 
@@ -711,7 +711,7 @@
             this.Controls.Add(this.btnCBU);
             this.Controls.Add(this.btnSavings);
             this.Controls.Add(this.btnRequest);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv1);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnDeactivate);
@@ -729,7 +729,7 @@
             this.Load += new System.EventHandler(this.ViewProfile_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -781,7 +781,7 @@
         private System.Windows.Forms.Button btnDeactivate;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv1;
         private System.Windows.Forms.Button btnRequest;
         private System.Windows.Forms.Button btnSavings;
         private System.Windows.Forms.Button btnCBU;
