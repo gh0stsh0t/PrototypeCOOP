@@ -205,6 +205,7 @@
             this.txtAddr.Size = new System.Drawing.Size(627, 25);
             this.txtAddr.TabIndex = 3;
             this.txtAddr.Text = "Ex. 123 Strawberry St.";
+            this.txtAddr.FontChanged += new System.EventHandler(this.txtAddr_FontChanged);
             this.txtAddr.Enter += new System.EventHandler(this.textBox1_Enter_1);
             this.txtAddr.Leave += new System.EventHandler(this.address_Leave);
             // 

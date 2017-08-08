@@ -32,6 +32,7 @@ namespace AMC
         private bool tin3Flag = true; private string tin3pl = "789";    
         private bool tin4Flag = true; private string tin4pl = "000";    
         private bool boraccFlag = true; private string boraccpl = "Ex. 1a2b";   private string boracc;
+        private string annincval;
 
         public DataTable holder;
         public MySqlConnection databasecon;
@@ -361,7 +362,7 @@ namespace AMC
                 if (annincFlag)
                     anninc = "0.00";
                 else
-                    anninc = txtAnnInc.Text;
+                    anninc = annincval;
                 if (boraccFlag)
                     boracc = "0";
                 else
@@ -485,6 +486,13 @@ namespace AMC
             }
         }
 
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+
 
         private void ctrlLeave2(TextBox txtbox, ref bool flag, string pl)
         {
@@ -496,6 +504,28 @@ namespace AMC
                     MessageBox.Show("Please make sure this field contains the valid format");
                     txtbox.Focus();
                 }
+                else
+                {
+                    annincval = txtbox.Text;
+                    string annincdec;
+                    bool state;
+                    Regex rg = new Regex(@"^[0-9]+\.[0-9]{2}$");
+                    state = rg.IsMatch(annincval);
+                    if (state)
+                        annincdec = annincval.Substring(annincval.Length -3);
+                    txtbox.Text = annincval.Substring(0, annincval.Length - 3);
+                    txtbox.Text = Reverse(txtbox.Text);
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = txtbox.Text.Length; i > 0; i--)
+                    {
+                        if (i % 3 == 0 && i!=txtbox.Text.Length)
+                            sb.Append(',');
+                        sb.Append(txtbox.Text[i-1]);
+                    }
+                    if(state)
+                        sb.Append(annincdec);
+                    string formatted = sb.ToString();
+                    txtbox.Text = formatted;
             }
             else
             {
@@ -506,13 +536,13 @@ namespace AMC
 
         public static Boolean isAlphaNum(string strToCheck)
         {
-            Regex rg = new Regex(@"^([a-zA-Z0-9]+[\s,\-]?)+");
+            Regex rg = new Regex(@"^([a-zA-Z0-9]+[\s,\-\.]?)+$");
             return rg.IsMatch(strToCheck);
         }
 
         public static Boolean isNum(string strToCheck)
         {
-            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{2}$");
             return rg.IsMatch(strToCheck);
         }
 
@@ -557,7 +587,7 @@ namespace AMC
                     rel = txtReligion.Text;
                     educ = txtEduc.Text;
                     pos = txtPos.Text;
-                    anninc = txtAnnInc.Text;
+                    anninc = annincval;
                     boracc = txtBORAcc.Text;
                     ben = txtBenificiary.Text;
 
@@ -599,7 +629,15 @@ namespace AMC
 
         private void txtAnnInc_Enter(object sender, EventArgs e)
         {
-            ctrlEnter(txtAnnInc, annincFlag);
+            if (annincFlag)
+            {
+                txtAnnInc.Text = "";
+                txtAnnInc.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+            else
+            {
+                txtAnnInc.Text = annincval;
+            }
         }
 
         private void txtOcc_Enter(object sender, EventArgs e)
@@ -627,7 +665,7 @@ namespace AMC
             }
             else
             {
-                txtTIN1.AppendText(contpl);
+                txtTIN1.AppendText(tin1pl);
                 txtTIN1.ForeColor = Color.LightCoral;
             }
         }
@@ -652,7 +690,7 @@ namespace AMC
             }
             else
             {
-                txtTIN2.AppendText(contpl);
+                txtTIN2.AppendText(tin2pl);
                 txtTIN2.ForeColor = Color.LightCoral;
             }
         }
@@ -677,7 +715,7 @@ namespace AMC
             }
             else
             {
-                txtTIN3.AppendText(contpl);
+                txtTIN3.AppendText(tin3pl);
                 txtTIN3.ForeColor = Color.LightCoral;
             }
         }
@@ -707,7 +745,7 @@ namespace AMC
             }
             else
             {
-                txtTIN4.AppendText(contpl);
+                txtTIN4.AppendText(tin4pl);
                 txtTIN4.ForeColor = Color.LightCoral;
             }
         }
@@ -725,6 +763,11 @@ namespace AMC
         private void AddMember_Click(object sender, EventArgs e)
         {
             this.ActiveControl = label3;
+        }
+
+        private void txtAddr_FontChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
