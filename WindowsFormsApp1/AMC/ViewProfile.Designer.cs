@@ -600,6 +600,7 @@
             this.btnEdit.TabIndex = 16;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDeactivate
             // 
