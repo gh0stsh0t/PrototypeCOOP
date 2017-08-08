@@ -521,7 +521,7 @@ namespace AMC
             
             try
             {
-                if(label3.Text.Equals("Edit Member"))
+                if(label3.Text.Equals("Add Member"))
                 {
                     //validate
                     if (validation())

@@ -55,6 +55,5 @@ C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Vi
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
