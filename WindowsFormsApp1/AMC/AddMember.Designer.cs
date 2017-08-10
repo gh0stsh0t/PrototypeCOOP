@@ -618,6 +618,7 @@
             this.txtTIN1.TabIndex = 17;
             this.txtTIN1.Text = "123";
             this.txtTIN1.Enter += new System.EventHandler(this.txtTIN1_Enter);
+            this.txtTIN1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTIN1_KeyPress);
             this.txtTIN1.Leave += new System.EventHandler(this.txtTIN1_Leave);
             // 
             // label18

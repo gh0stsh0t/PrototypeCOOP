@@ -507,25 +507,24 @@ namespace AMC
                 else
                 {
                     annincval = txtbox.Text;
-                    string annincdec;
                     bool state;
                     Regex rg = new Regex(@"^[0-9]+\.[0-9]{2}$");
                     state = rg.IsMatch(annincval);
                     if (state)
-                        annincdec = annincval.Substring(annincval.Length -3);
-                    txtbox.Text = annincval.Substring(0, annincval.Length - 3);
+                        txtbox.Text = annincval.Substring(0, annincval.Length - 3);
                     txtbox.Text = Reverse(txtbox.Text);
                     StringBuilder sb = new StringBuilder();
                     for (int i = txtbox.Text.Length; i > 0; i--)
                     {
-                        if (i % 3 == 0 && i!=txtbox.Text.Length)
+                        if (i % 3 == 0 && i != txtbox.Text.Length)
                             sb.Append(',');
-                        sb.Append(txtbox.Text[i-1]);
+                        sb.Append(txtbox.Text[i - 1]);
                     }
-                    if(state)
-                        sb.Append(annincdec);
+                    if (state)
+                        sb.Append(annincval.Substring(annincval.Length - 3));
                     string formatted = sb.ToString();
                     txtbox.Text = formatted;
+                }
             }
             else
             {
@@ -768,6 +767,11 @@ namespace AMC
         private void txtAddr_FontChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtTIN1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
         }
     }
 }
