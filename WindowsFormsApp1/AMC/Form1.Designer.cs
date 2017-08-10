@@ -30,7 +30,6 @@
         {
             this.sidebarPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.sidebarLogoPanel = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarBtnDashboard = new System.Windows.Forms.Button();
             this.sidebarBtnMembers = new System.Windows.Forms.Button();
             this.sidebarPanelMembers = new System.Windows.Forms.FlowLayoutPanel();
@@ -54,13 +53,14 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarPanel.SuspendLayout();
             this.sidebarLogoPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.sidebarPanelMembers.SuspendLayout();
             this.sidebarPanelLoans.SuspendLayout();
             this.sidebarPanelSavings.SuspendLayout();
             this.sidebarPanelCBU.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // sidebarPanel
@@ -91,16 +91,6 @@
             this.sidebarLogoPanel.Name = "sidebarLogoPanel";
             this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 76);
             this.sidebarLogoPanel.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 76);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // sidebarBtnDashboard
             // 
@@ -327,6 +317,7 @@
             this.button9.Text = "View Savings Accounts";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button11
             // 
@@ -467,6 +458,16 @@
             this.panel1.Size = new System.Drawing.Size(950, 660);
             this.panel1.TabIndex = 1;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 76);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -483,11 +484,11 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.sidebarLogoPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.sidebarPanelMembers.ResumeLayout(false);
             this.sidebarPanelLoans.ResumeLayout(false);
             this.sidebarPanelSavings.ResumeLayout(false);
             this.sidebarPanelCBU.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

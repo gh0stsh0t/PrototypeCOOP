@@ -94,6 +94,12 @@
     <Compile Include="ViewMember.Designer.cs">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSavings.Designer.cs">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +125,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ViewSavings.resx">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
     <Fakes Include="Fakes\MySql.Data.fakes" />
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
