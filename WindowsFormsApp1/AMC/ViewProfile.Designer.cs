@@ -702,6 +702,7 @@
             this.btnCBU.TabIndex = 23;
             this.btnCBU.Text = "Activate Capital Build-Up";
             this.btnCBU.UseVisualStyleBackColor = false;
+            this.btnCBU.Click += new System.EventHandler(this.btnCBU_Click);
             // 
             // ViewProfile
             // 

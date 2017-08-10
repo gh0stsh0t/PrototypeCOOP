@@ -78,3 +78,4 @@ C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\ms
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.dll
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.pdb
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBUAccount.resources

@@ -193,6 +193,13 @@ namespace AMC
             
         }
 
+        private void btnCBU_Click(object sender, EventArgs e)
+        {
+            reftomain.Enabled = false;
+            NewCBUAccount cbu = new NewCBUAccount(memid, conn, reftomain);
+            cbu.Show();
+        }
+
         private void load_accounts()
         {
             

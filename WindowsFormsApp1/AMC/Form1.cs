@@ -81,7 +81,7 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
-	    innerChild(new ViewMember(this));
+	        innerChild(new ViewMember(this));
         }
         public void innerChild(Form child)
         {

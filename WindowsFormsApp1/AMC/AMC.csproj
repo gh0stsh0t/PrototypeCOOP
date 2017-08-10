@@ -68,6 +68,12 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCBUAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCBUAccount.Designer.cs">
+      <DependentUpon>NewCBUAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCBUAccount.resx">
+      <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
