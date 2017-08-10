@@ -520,6 +520,7 @@
             // 
             this.txtTIN4.ForeColor = System.Drawing.Color.LightCoral;
             this.txtTIN4.Location = new System.Drawing.Point(829, 354);
+            this.txtTIN4.MaxLength = 3;
             this.txtTIN4.Name = "txtTIN4";
             this.txtTIN4.Size = new System.Drawing.Size(36, 25);
             this.txtTIN4.TabIndex = 20;
@@ -531,6 +532,7 @@
             // 
             this.txtTIN3.ForeColor = System.Drawing.Color.LightCoral;
             this.txtTIN3.Location = new System.Drawing.Point(768, 354);
+            this.txtTIN3.MaxLength = 3;
             this.txtTIN3.Name = "txtTIN3";
             this.txtTIN3.Size = new System.Drawing.Size(36, 25);
             this.txtTIN3.TabIndex = 19;
@@ -542,6 +544,7 @@
             // 
             this.txtTIN2.ForeColor = System.Drawing.Color.LightCoral;
             this.txtTIN2.Location = new System.Drawing.Point(707, 354);
+            this.txtTIN2.MaxLength = 3;
             this.txtTIN2.Name = "txtTIN2";
             this.txtTIN2.Size = new System.Drawing.Size(36, 25);
             this.txtTIN2.TabIndex = 18;
@@ -613,6 +616,7 @@
             // 
             this.txtTIN1.ForeColor = System.Drawing.Color.LightCoral;
             this.txtTIN1.Location = new System.Drawing.Point(646, 354);
+            this.txtTIN1.MaxLength = 3;
             this.txtTIN1.Name = "txtTIN1";
             this.txtTIN1.Size = new System.Drawing.Size(36, 25);
             this.txtTIN1.TabIndex = 17;

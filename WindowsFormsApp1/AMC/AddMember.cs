@@ -604,7 +604,7 @@ namespace AMC
                         + "birthdate = '" + bday + "', gender = '" + gender + "', address = '" + txtAddr.Text + "', contact_no = '" + txtContNo.Text + "', occupation = '" + txtOcc.Text + "', "
                        + "company_name = '" + txtCompany.Text + "', position = '" + txtPos.Text + "', annual_income = '" + anninc + "',"
                     + "tin = '" + tin + "', educ_attainment = '" + educ + "', civil_status = '" + civstat.SelectedIndex + "', religion = '" + rel + "', no_of_dependents = '" + dependents + "',"
-                    + "beneficiary_name = '" + ben + "', type = '" + mtype.SelectedIndex + "', status = 0, acceptance_date = '" + now + "' where member_id = " + mid, databasecon);
+                    + "beneficiary_name = '" + ben + "', type = '" + mtype.SelectedIndex + "', status = 1, acceptance_date = '" + now + "' where member_id = " + mid, databasecon);
                     query.ExecuteNonQuery();
 
                     databasecon.Close();
@@ -771,7 +771,8 @@ namespace AMC
 
         private void txtTIN1_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+            if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || e.KeyChar == 22)
+                e.Handled = true;
         }
     }
 }
