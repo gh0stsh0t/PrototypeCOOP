@@ -6,39 +6,39 @@ namespace AMC
     internal class DatabaseConn
     {
         private DataTable _holder;
-        private MySqlConnection _databasecon;
-        private MySqlDataAdapter _listener;
         private MySqlCommand _cmd;
 
         private string _sql = ""; 
         private bool _flag;   
         public DatabaseConn()
         {
-            _databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
-            _listener = new MySqlDataAdapter();
             _cmd=new MySqlCommand();
         }
 
-        public dynamic GetData()
+        public dynamic GetQueryData()
         {
-            using (_databasecon)
-            { 
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
                 _cmd.CommandText = _sql;
-                _cmd.Connection = _databasecon;
+                _cmd.Connection = databasecon;
                 if (_flag)
                 {
                     _cmd.ExecuteNonQuery();
-                    return _flag; 
+                    return _flag;
                 }
                 else
                 {
-                    _listener.SelectCommand = _cmd;
-                    _listener.Fill(_holder);
+                    _holder.Load(_cmd.ExecuteReader());
                     return _holder;
                 }
             }
         }
 
+        public DataTable GetData()
+        {
+            return _holder;
+        }
         public DatabaseConn Select(string table, params string[] fields)
         {
             _flag = false;
