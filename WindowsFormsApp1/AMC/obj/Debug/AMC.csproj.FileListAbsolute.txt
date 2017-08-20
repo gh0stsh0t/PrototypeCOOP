@@ -57,3 +57,6 @@ C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pd
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
+C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
+C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
+C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb

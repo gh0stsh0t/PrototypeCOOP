@@ -1,54 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace AMC
 {
-    class databaseConn
+    internal class DatabaseConn
     {
-        private DataTable holder;
-        private MySqlConnection databasecon;
-        private MySqlDataAdapter listener;
-        //private MySqlCommand query;
-        public databaseConn()
+        private DataTable _holder;
+        private MySqlConnection _databasecon;
+        private MySqlDataAdapter _listener;
+        private MySqlCommand _cmd;
+
+        private string _sql = ""; 
+        private bool _flag;   
+        public DatabaseConn()
         {
-            databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            _databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            _listener = new MySqlDataAdapter();
+            _cmd=new MySqlCommand();
         }
 
-        public DataTable getData()
+        public dynamic GetData()
         {
-            return holder;
-        }
-
-        public dynamic query(int type, string table, string fields, string where)
-        {
-            switch (type)
-            {
-                case 1:
-                    return query(table, fields, where);
-                case 2:
-                    query(table, fields,where);
-                    break;
-                case 3:
-                    query();
-                    break;
-                default:
-                    break;
+            using (_databasecon)
+            { 
+                _cmd.CommandText = _sql;
+                _cmd.Connection = _databasecon;
+                if (_flag)
+                {
+                    _cmd.ExecuteNonQuery();
+                    return _flag; 
+                }
+                else
+                {
+                    _listener.SelectCommand = _cmd;
+                    _listener.Fill(_holder);
+                    return _holder;
+                }
             }
         }
-        public DataTable query(string table, string fields,string where)
-        {
-            string queryHolder = "SELECT "+ string.Join(", ", fields.Split(' '))+" FROM "+table;
 
+        public DatabaseConn Select(string table, params string[] fields)
+        {
+            _flag = false;
+            _sql = "SELECT " + string.Join(", ", fields) + " FROM " + table + " ";
+            return this;
         }
 
-        public bool query(string tables, string fields,string where)
+        public DatabaseConn Update(string table, params string[] fields)
         {
-            
+            _flag = true;
+            _sql = "UPDATE " + table + " SET ";
+            for (int i = 0; i < fields.Length; i++)
+            {
+                _sql += fields[i] + " = @" + fields[i] + ((i + 2 < fields.Length) ? " ,    " : " ");
+                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
+            }
+            return this;
+        }
+
+        public DatabaseConn Insert(string table, params string[] fields )
+        {
+            _flag = true;
+            _sql = "INSERT INTO " + table + " (";
+            string values = "VALUES (";
+            for (int i = 0; i < fields.Length; i++)
+            {
+                _sql += fields[i] + ((i + 2 < fields.Length) ? " ,    " : ") ");
+                values += "@" + fields[i] + ((i + 2 < fields.Length) ? " ,    " : ") ");
+                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
+            }
+            _sql += values;
+            return this;
+        }
+
+        public DatabaseConn Where(params string[] fields)
+        {
+            _sql += "WHERE ";
+            for ( int i = 0; i < fields.Length; i++)
+            {
+                _sql += fields[i] + " = @" + fields[i]+ ((i + 2 < fields.Length) ? " AND " : "");
+                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
+            }
+            return this;
         }
     }
 }
