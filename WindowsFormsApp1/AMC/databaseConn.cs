@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -8,11 +9,17 @@ namespace AMC
         private DataTable _holder;
         private MySqlCommand _cmd;
 
-        private string _sql = ""; 
-        private bool _flag;   
+        private string _sql = "";
+        private bool _flag;
+
         public DatabaseConn()
         {
-            _cmd=new MySqlCommand();
+            RefreshCmd();
+        }
+
+        private void RefreshCmd()
+        {
+            _cmd = new MySqlCommand();
         }
 
         public dynamic GetQueryData()
@@ -27,11 +34,8 @@ namespace AMC
                     _cmd.ExecuteNonQuery();
                     return _flag;
                 }
-                else
-                {
-                    _holder.Load(_cmd.ExecuteReader());
-                    return _holder;
-                }
+                _holder.Load(_cmd.ExecuteReader());
+                return _holder;
             }
         }
 
@@ -39,49 +43,78 @@ namespace AMC
         {
             return _holder;
         }
+
         public DatabaseConn Select(string table, params string[] fields)
         {
             _flag = false;
+            RefreshCmd();
             _sql = "SELECT " + string.Join(", ", fields) + " FROM " + table + " ";
             return this;
         }
 
-        public DatabaseConn Update(string table, params string[] fields)
+        public DatabaseConn Select(string table, string[]fields, string[] wheres)
         {
-            _flag = true;
-            _sql = "UPDATE " + table + " SET ";
-            for (int i = 0; i < fields.Length; i++)
-            {
-                _sql += fields[i] + " = @" + fields[i] + ((i + 2 < fields.Length) ? " ,    " : " ");
-                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
-            }
-            return this;
+            return Select(table, fields).Where(wheres);
         }
 
-        public DatabaseConn Insert(string table, params string[] fields )
+        public DatabaseConn Update(string table, params string[] fields)
         {
-            _flag = true;
-            _sql = "INSERT INTO " + table + " (";
-            string values = "VALUES (";
-            for (int i = 0; i < fields.Length; i++)
+            if (fields.Length % 2 == 0)
             {
-                _sql += fields[i] + ((i + 2 < fields.Length) ? " ,    " : ") ");
-                values += "@" + fields[i] + ((i + 2 < fields.Length) ? " ,    " : ") ");
-                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
+                RefreshCmd();
+                _flag = true;
+                _sql = "UPDATE " + table + " SET ";
+                for (var i = 0; i < fields.Length; i++)
+                {
+                    _sql += fields[i] + " = @" + fields[i] + (i + 2 < fields.Length ? " ,    " : " ");
+                    _cmd.Parameters.AddWithValue("@" + fields[i],
+                        fields[++i]); //Every other parameter added as parameterized value
+                }
+                return this;
             }
-            _sql += values;
-            return this;
+            throw new Exception("Lack of fields/values arguements passed:" + string.Join(",", fields));
+        }
+
+        public DatabaseConn Update(string table, string[] fields, string[] wheres)
+        {
+            return Update(table, fields).Where(wheres);
+        }
+
+        public DatabaseConn Insert(string table, params string[] fields)
+        {
+            if (fields.Length % 2 == 0)
+            {
+                RefreshCmd();
+                _flag = true;
+                _sql = "INSERT INTO " + table + " (";
+                var values = "VALUES (";
+                for (var i = 0; i < fields.Length; i++)
+                {
+                    _sql += fields[i] + (i + 2 < fields.Length ? " ,    " : ") ");
+                    values += "@" + fields[i] + (i + 2 < fields.Length ? " ,    " : ") ");
+                    _cmd.Parameters.AddWithValue("@" + fields[i],
+                        fields[++i]); //Every other parameter added as parameterized value
+                }
+                _sql += values;
+                return this;
+            }
+            throw new Exception("Lack of fields/values arguements passed:" + string.Join(",", fields));
         }
 
         public DatabaseConn Where(params string[] fields)
         {
-            _sql += "WHERE ";
-            for ( int i = 0; i < fields.Length; i++)
+            if (fields.Length % 2 == 0)
             {
-                _sql += fields[i] + " = @" + fields[i]+ ((i + 2 < fields.Length) ? " AND " : "");
-                _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); //Every other parameter added as parameterized value
+                _sql += "WHERE ";
+                for (var i = 0; i < fields.Length; i++)
+                {
+                    _sql += fields[i] + " = @" + fields[i] + (i + 2 < fields.Length ? " AND " : "");
+                    _cmd.Parameters.AddWithValue("@" + fields[i],
+                        fields[++i]); //Every other parameter added as parameterized value
+                }
+                return this;
             }
-            return this;
+            throw new Exception("Lack of fields/values arguements passed:" + string.Join(",", fields));
         }
     }
 }

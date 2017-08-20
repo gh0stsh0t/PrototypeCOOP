@@ -58,5 +58,3 @@ C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Micros
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
-C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
