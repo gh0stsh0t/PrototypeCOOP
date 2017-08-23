@@ -75,6 +75,7 @@
     <Compile Include="NewSavingsAccount.Designer.cs">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Saving.cs" />
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
     </Compile>
