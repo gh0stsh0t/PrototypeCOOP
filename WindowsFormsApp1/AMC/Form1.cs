@@ -13,6 +13,7 @@ namespace AMC
     public partial class MainForm : Form
     {
         public Form childform;
+
         public MainForm()
         {
             InitializeComponent();
@@ -20,7 +21,6 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace AMC
 
         private void sidebarBtnMembers_Click(object sender, EventArgs e)
         {
-            if(sidebarPanelMembers.Visible == false)
+            if (sidebarPanelMembers.Visible == false)
                 sidebarPanelMembers.Visible = true;
             else
                 sidebarPanelMembers.Visible = false;
@@ -81,8 +81,9 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
-	    innerChild(new ViewMember(this));
+            innerChild(new ViewMember(this));
         }
+
         public void innerChild(Form child)
         {
             breaker();
@@ -91,6 +92,7 @@ namespace AMC
             panel1.Controls.Add(childform);
             childform.Show();
         }
+
         private void breaker()
         {
             try
@@ -98,8 +100,11 @@ namespace AMC
                 childform.Close();
                 childform.Dispose();
             }
-            catch { }
+            catch
+            {
+            }
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             breaker();

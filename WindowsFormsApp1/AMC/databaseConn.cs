@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -15,6 +16,7 @@ namespace AMC
         public DatabaseConn()
         {
             RefreshCmd();
+            _holder=new DataTable();
         }
 
         private void RefreshCmd()
@@ -67,8 +69,8 @@ namespace AMC
                 for (var i = 0; i < fields.Length; i++)
                 {
                     _sql += fields[i] + " = @" + fields[i] + (i + 2 < fields.Length ? " ,    " : " ");
-                    _cmd.Parameters.AddWithValue("@" + fields[i],
-                        fields[++i]); //Every other parameter added as parameterized value
+                    _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); 
+                    //Every other parameter added as parameterized value
                 }
                 return this;
             }
@@ -92,8 +94,8 @@ namespace AMC
                 {
                     _sql += fields[i] + (i + 2 < fields.Length ? " ,    " : ") ");
                     values += "@" + fields[i] + (i + 2 < fields.Length ? " ,    " : ") ");
-                    _cmd.Parameters.AddWithValue("@" + fields[i],
-                        fields[++i]); //Every other parameter added as parameterized value
+                    _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); 
+                    //Every other parameter added as parameterized value
                 }
                 _sql += values;
                 return this;
@@ -109,8 +111,8 @@ namespace AMC
                 for (var i = 0; i < fields.Length; i++)
                 {
                     _sql += fields[i] + " = @" + fields[i] + (i + 2 < fields.Length ? " AND " : "");
-                    _cmd.Parameters.AddWithValue("@" + fields[i],
-                        fields[++i]); //Every other parameter added as parameterized value
+                    _cmd.Parameters.AddWithValue("@" + fields[i], fields[++i]); 
+                    //Every other parameter added as parameterized value
                 }
                 return this;
             }
