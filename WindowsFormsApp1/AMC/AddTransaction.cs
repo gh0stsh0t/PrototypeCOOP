@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace AMC
 {
     public partial class AddTransaction : Form
     {
-        public AddTransaction()
+        public string type;
+        public AddTransaction(MainForm main, string t)
         {
             InitializeComponent();
+            type = t;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -29,8 +32,14 @@ namespace AMC
 
         private void AddTransaction_Load(object sender, EventArgs e)
         {
+            if(type=="savings")
+            {
+                lblTop.Text = "Add Savings Transaction";
+            }
             cbxAccount.SelectedIndex = 0;
             cbxTransaction.SelectedIndex = 0;
+            dtpDate.Value = DateTime.Now;
+            dtpTime.Value = DateTime.Now;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace AMC
         public int memid;
         public MySqlConnection conn;
         string accid;
+        double interest;
 
         public NewSavingsAccount(int id, MySqlConnection c, MainForm main)
         {
@@ -35,6 +36,7 @@ namespace AMC
         private void NewSavingsAccount_Load(object sender, EventArgs e)
         {
             getNewId();
+
             lblAccount.Text = accid;
             try
             {
@@ -50,6 +52,16 @@ namespace AMC
 
                 }
 
+                MySqlCommand intrate = new MySqlCommand("SELECT interest_rate FROM general WHERE id = 'control'", conn);
+                MySqlDataAdapter adp2 = new MySqlDataAdapter(intrate);
+                DataTable dt2 = new DataTable();
+                adp.Fill(dt2);
+                if (dt2.Rows.Count == 1)
+                {
+                    interest = Convert.ToDouble(dt2.Rows[0]["interest_rate"]) * 100;
+                    intRate.Text = interest.ToString();
+                }
+
 
                 conn.Close();
 
@@ -63,12 +75,11 @@ namespace AMC
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
             try
             {
                 conn.Open();
-                string query = "INSERT INTO savings (savings_account_id, member_id, opening_date, outstanding_balance, account_status)" +
-                                "VALUES('" + accid + "', '" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "', '0')";
+                string query = "INSERT INTO savings (savings_account_id, member_id, opening_date, outstanding_balance, account_status, interest_rate)" +
+                                "VALUES('" + accid + "', '" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "', '0','" + interest.ToString() + "'";
                 MySqlCommand ins = new MySqlCommand(query, conn);
                 ins.ExecuteNonQuery();
                 conn.Close();

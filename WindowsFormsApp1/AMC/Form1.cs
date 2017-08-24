@@ -113,5 +113,10 @@ namespace AMC
         {
             innerChild(new ViewSavings(this));
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddTransaction(this, "savings"));
+        }
     }
 }

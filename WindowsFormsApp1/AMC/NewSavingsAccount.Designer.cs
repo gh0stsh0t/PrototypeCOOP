@@ -33,7 +33,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lname = new System.Windows.Forms.TextBox();
+            this.intRate = new System.Windows.Forms.TextBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.label2 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -45,6 +45,7 @@
             this.txtBal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,15 +95,15 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "New Account Number";
             // 
-            // lname
+            // intRate
             // 
-            this.lname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lname.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lname.Location = new System.Drawing.Point(242, 79);
-            this.lname.Name = "lname";
-            this.lname.Size = new System.Drawing.Size(173, 23);
-            this.lname.TabIndex = 3;
-            this.lname.Text = "0.03";
+            this.intRate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intRate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.intRate.Location = new System.Drawing.Point(242, 79);
+            this.intRate.Name = "intRate";
+            this.intRate.Size = new System.Drawing.Size(39, 23);
+            this.intRate.TabIndex = 3;
+            this.intRate.Text = "3";
             // 
             // splitter2
             // 
@@ -174,6 +175,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.txtBal);
             this.panel1.Controls.Add(this.lblName);
@@ -181,7 +183,7 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lname);
+            this.panel1.Controls.Add(this.intRate);
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.splitter1);
@@ -237,6 +239,15 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(287, 83);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(16, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "%";
+            // 
             // NewSavingsAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,7 +280,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox lname;
+        private System.Windows.Forms.TextBox intRate;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Splitter splitter1;
@@ -281,5 +292,6 @@
         private System.Windows.Forms.TextBox txtBal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label7;
     }
 }

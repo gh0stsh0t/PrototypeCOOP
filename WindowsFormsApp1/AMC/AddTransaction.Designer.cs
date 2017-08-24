@@ -48,7 +48,7 @@ namespace AMC
             this.label2 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTop = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -271,16 +271,16 @@ namespace AMC
             this.label1.TabIndex = 5;
             this.label1.Text = "Transaction Details";
             // 
-            // label3
+            // lblTop
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(167, 30);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Add Transaction";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.lblTop.AutoSize = true;
+            this.lblTop.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop.Location = new System.Drawing.Point(20, 20);
+            this.lblTop.Name = "lblTop";
+            this.lblTop.Size = new System.Drawing.Size(167, 30);
+            this.lblTop.TabIndex = 3;
+            this.lblTop.Text = "Add Transaction";
+            this.lblTop.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 
@@ -320,8 +320,9 @@ namespace AMC
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblTop);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddTransaction";
             this.Text = "Add Transaction";
             this.Load += new System.EventHandler(this.AddTransaction_Load);
@@ -339,7 +340,7 @@ namespace AMC
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbxTransaction;
         private System.Windows.Forms.Label label7;
