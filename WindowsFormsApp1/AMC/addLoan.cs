@@ -17,7 +17,6 @@ namespace AMC
         {
             InitializeComponent();
             memid = x;
-            MessageBox.Show(memid.ToString());
         }
 
         private void AddLoan_Load(object sender, EventArgs e)
@@ -41,6 +40,11 @@ namespace AMC
             tbPosition2.Clear();
             tbPurpose.Clear();
             tbTerm.Clear();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -50,25 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="addLoan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="addLoan.Designer.cs">
       <DependentUpon>addLoan.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> origin/rj
     <Compile Include="AddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddTransaction.Designer.cs">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
     <Compile Include="databaseConn.cs" />
->>>>>>> origin/rj
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,10 +81,7 @@
     <Compile Include="NewSavingsAccount.Designer.cs">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
     <Compile Include="Saving.cs" />
->>>>>>> origin/rj
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,12 +96,9 @@
     <Compile Include="ViewMember.Designer.cs">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <EmbeddedResource Include="addLoan.resx">
       <DependentUpon>addLoan.cs</DependentUpon>
     </EmbeddedResource>
-=======
->>>>>>> origin/rj
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </EmbeddedResource>

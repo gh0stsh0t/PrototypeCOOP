@@ -113,5 +113,10 @@ namespace AMC
             panel1.Controls.Add(childform);
             childform.Show();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

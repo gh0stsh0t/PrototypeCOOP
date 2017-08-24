@@ -327,6 +327,7 @@
             this.button9.Text = "View Savings Accounts";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button11
             // 
