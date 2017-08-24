@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addLoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addLoan.Designer.cs">
+      <DependentUpon>addLoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="ViewMember.Designer.cs">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="addLoan.resx">
+      <DependentUpon>addLoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </EmbeddedResource>

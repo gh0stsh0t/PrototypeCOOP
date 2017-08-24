@@ -62,7 +62,6 @@ C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.Fakes.fakesconfig
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojFakesResolveAssemblyReference.cache
@@ -92,3 +91,4 @@ C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Pro
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources

@@ -10,11 +10,37 @@ using System.Windows.Forms;
 
 namespace AMC
 {
-    public partial class Form2 : Form
+    public partial class AddLoan : Form
     {
-        public Form2()
+        int memid;
+        public AddLoan(int x)
         {
             InitializeComponent();
+            memid = x;
+            MessageBox.Show(memid.ToString());
+        }
+
+        private void AddLoan_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            cbBorrower.SelectedIndex = 1;
+            cbLoan.SelectedIndex = 1;
+            cbRequest.SelectedIndex = 1;
+            tbAddress1.Clear();
+            tbAddress2.Clear();
+            tbAmount.Clear();
+            tbCompany1.Clear();
+            tbCompany2.Clear();
+            tbInterest.Clear();
+            tbName1.Clear();
+            tbName2.Clear();
+            tbPosition1.Clear();
+            tbPosition2.Clear();
+            tbPurpose.Clear();
+            tbTerm.Clear();
         }
     }
 }

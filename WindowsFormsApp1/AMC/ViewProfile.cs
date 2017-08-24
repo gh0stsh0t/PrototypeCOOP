@@ -120,7 +120,7 @@ namespace AMC
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            reftomain.innerChild(new AddLoan(memid));
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -128,6 +128,11 @@ namespace AMC
             reftomain.Enabled = false;
             NewSavingsAccount sav = new NewSavingsAccount(memid, conn, reftomain);
             sav.Show();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void load_accounts()
