@@ -1,364 +1,560 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 24, 2017 at 03:42 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema amc
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `amc` ;
-
--- -----------------------------------------------------
--- Schema amc
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `amc` ;
-USE `amc` ;
-
--- -----------------------------------------------------
--- Table `amc`.`members`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`members` (
-  `member_id` INT NOT NULL AUTO_INCREMENT,
-  `family_name` VARCHAR(45) NULL,
-  `first_name` VARCHAR(45) NULL,
-  `middle_name` VARCHAR(45) NULL,
-  `birthdate` DATETIME NULL,
-  `gender` VARCHAR(6) NULL,
-  `address` VARCHAR(75) NULL,
-  `contact_no` VARCHAR(20) NULL,
-  `occupation` VARCHAR(45) NULL,
-  `company_name` VARCHAR(65) NULL,
-  `position` VARCHAR(45) NULL,
-  `annual_income` DECIMAL(13,2) NULL,
-  `tin` INT NULL,
-  `educ_attainment` VARCHAR(45) NULL,
-  `civil_status` INT NULL,
-  `religion` VARCHAR(20) NULL,
-  `no_of_dependents` INT NULL,
-  `beneficiary_name` VARCHAR(45) NULL,
-  `type` INT NULL,
-  `status` INT NULL,
-  `acceptance_date` DATETIME NULL,
-  `acceptance_no` INT NULL,
-  `termination_date` DATETIME NULL,
-  `termination_no` INT NULL,
-  PRIMARY KEY (`member_id`))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `amc`.`loans`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`loans` (
-  `loan_account_id` INT NOT NULL AUTO_INCREMENT,
-  `member_id` INT NULL,
-  `loan_type` INT NULL,
-  `request_type` INT NULL,
-  `date_granted` DATETIME NULL,
-  `approval_no` INT NULL,
-  `term` INT NULL,
-  `orig_amount` DECIMAL(13,2) NULL,
-  `interest_rate` DOUBLE NULL,
-  `purpose` VARCHAR(65) NULL,
-  `loan_status` INT NULL,
-  `outstanding_balance` DECIMAL(13,2) NULL,
-  `date_terminated` DATETIME NULL,
-  PRIMARY KEY (`loan_account_id`),
-  INDEX `loan_member_idx` (`member_id` ASC),
-  CONSTRAINT `loan_member`
-    FOREIGN KEY (`member_id`)
-    REFERENCES `amc`.`members` (`member_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `amc`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`comakers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`comakers` (
-  `comaker_id` INT NOT NULL AUTO_INCREMENT,
-  `loan_id` INT NULL,
-  `name` VARCHAR(75) NULL,
-  `address` VARCHAR(75) NULL,
-  `company_name` VARCHAR(65) NULL,
-  `position` VARCHAR(45) NULL,
-  PRIMARY KEY (`comaker_id`),
-  INDEX `comaker_loan_idx` (`loan_id` ASC),
-  CONSTRAINT `comaker_loan`
-    FOREIGN KEY (`loan_id`)
-    REFERENCES `amc`.`loans` (`loan_account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `capitals`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`savings`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`savings` (
-  `savings_account_id` INT NOT NULL AUTO_INCREMENT,
-  `member_id` INT NULL,
-  `opening_date` DATETIME NULL,
-  `outstanding_balance` DECIMAL(13,2) NULL,
-  `account_status` INT NULL,
-  `termination_date` DATETIME NULL,
-  PRIMARY KEY (`savings_account_id`),
-  INDEX `savings_member_idx` (`member_id` ASC),
-  CONSTRAINT `savings_member`
-    FOREIGN KEY (`member_id`)
-    REFERENCES `amc`.`members` (`member_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `capitals` (
+  `capital_account_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `opening_date` datetime DEFAULT NULL,
+  `ics_no` int(11) DEFAULT NULL,
+  `ics_amount` decimal(13,2) DEFAULT NULL,
+  `ipuc_amount` decimal(13,2) DEFAULT NULL,
+  `outstanding_balance` decimal(13,2) DEFAULT NULL,
+  `account_status` int(11) DEFAULT NULL,
+  `withdrawal_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `amc`.`capitals`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`capitals` (
-  `capital_account_id` INT NOT NULL AUTO_INCREMENT,
-  `member_id` INT NULL,
-  `opening_date` DATETIME NULL,
-  `ics_no` INT NULL,
-  `ics_amount` DECIMAL(13,2) NULL,
-  `ipuc_amount` DECIMAL(13,2) NULL,
-  `outstanding_balance` DECIMAL(13,2) NULL,
-  `account_status` INT NULL,
-  `withdrawal_date` DATETIME NULL,
-  PRIMARY KEY (`capital_account_id`),
-  INDEX `capitals_members_idx` (`member_id` ASC),
-  CONSTRAINT `capitals_members`
-    FOREIGN KEY (`member_id`)
-    REFERENCES `amc`.`members` (`member_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `capitals_transaction`
+--
 
+CREATE TABLE `capitals_transaction` (
+  `capital_transaction_id` int(11) NOT NULL,
+  `capital_account_id` int(11) DEFAULT NULL,
+  `total_amount` decimal(13,2) DEFAULT NULL,
+  `encoded_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `amc`.`dividend_general`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`dividend_general` (
-  `dividend_id` INT NOT NULL AUTO_INCREMENT,
-  `year` INT NULL,
-  `total_paid_up` DECIMAL(13,2) NULL,
-  `net_surplus` DECIMAL(13,2) NULL,
-  `reserve_fund` DECIMAL(13,2) NULL,
-  `date_set` DATETIME NULL,
-  PRIMARY KEY (`dividend_id`))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `capitals_transaction_line`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`individual_dividends`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`individual_dividends` (
-  `ind_dividend_id` INT NOT NULL AUTO_INCREMENT,
-  `capital_account_id` INT NULL,
-  `dividend_id` INT NULL,
-  `current_balance` DECIMAL(13,2) NULL,
-  `dividend_amount` DECIMAL(13,2) NULL,
-  `date_computed` DATETIME NULL,
-  `date_released` DATETIME NULL,
-  PRIMARY KEY (`ind_dividend_id`),
-  INDEX `dividend_capitalaccount_idx` (`capital_account_id` ASC),
-  INDEX `dividend_general_idx` (`dividend_id` ASC),
-  CONSTRAINT `dividend_capitalaccount`
-    FOREIGN KEY (`capital_account_id`)
-    REFERENCES `amc`.`capitals` (`capital_account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `dividend_general`
-    FOREIGN KEY (`dividend_id`)
-    REFERENCES `amc`.`dividend_general` (`dividend_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `capitals_transaction_line` (
+  `cap_trans_line_id` int(11) NOT NULL,
+  `capital_transaction_id` int(11) DEFAULT NULL,
+  `particular_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `amc`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`users` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
-  `last_name` VARCHAR(45) NULL,
-  `first_name` VARCHAR(45) NULL,
-  `middle_name` VARCHAR(45) NULL,
-  `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  `user_type` INT NULL,
-  `user_status` INT NULL,
-  PRIMARY KEY (`user_id`))
-ENGINE = InnoDB;
+--
+-- Table structure for table `chart_of_accounts`
+--
 
+CREATE TABLE `chart_of_accounts` (
+  `code` int(11) NOT NULL,
+  `account_title` varchar(75) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `amc`.`loan_transaction`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`loan_transaction` (
-  `loan_transaction_id` INT NOT NULL AUTO_INCREMENT,
-  `loan_account_id` INT NULL,
-  `transaction_type` INT NULL,
-  `date` DATETIME NULL,
-  `total_amount` DECIMAL(13,2) NULL,
-  `principal` DECIMAL(13,2) NULL,
-  `interest` DECIMAL(13,2) NULL,
-  `penalty` DECIMAL(13,2) NULL,
-  `encoded_by` INT NULL,
-  PRIMARY KEY (`loan_transaction_id`),
-  INDEX `loantrans_loan_idx` (`loan_account_id` ASC),
-  INDEX `loan_encoded_by_idx` (`encoded_by` ASC),
-  CONSTRAINT `loantrans_loan`
-    FOREIGN KEY (`loan_account_id`)
-    REFERENCES `amc`.`loans` (`loan_account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `loan_encoded_by`
-    FOREIGN KEY (`encoded_by`)
-    REFERENCES `amc`.`users` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `comakers`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`savings_transaction`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`savings_transaction` (
-  `savings_transaction_id` INT NOT NULL AUTO_INCREMENT,
-  `savings_account_id` INT NULL,
-  `transaction_type` INT NULL,
-  `date` DATETIME NULL,
-  `total_amount` DECIMAL(13,2) NULL,
-  `interest_rate` DOUBLE NULL,
-  `encoded_by` INT NULL,
-  PRIMARY KEY (`savings_transaction_id`),
-  INDEX `savtrans_savings_idx` (`savings_account_id` ASC),
-  INDEX `savings_encodedby_idx` (`encoded_by` ASC),
-  CONSTRAINT `savtrans_savings`
-    FOREIGN KEY (`savings_account_id`)
-    REFERENCES `amc`.`savings` (`savings_account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `savings_encodedby`
-    FOREIGN KEY (`encoded_by`)
-    REFERENCES `amc`.`users` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `comakers` (
+  `comaker_id` int(11) NOT NULL,
+  `loan_id` int(11) DEFAULT NULL,
+  `name` varchar(75) DEFAULT NULL,
+  `address` varchar(75) DEFAULT NULL,
+  `company_name` varchar(65) DEFAULT NULL,
+  `position` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `amc`.`capitals_transaction`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`capitals_transaction` (
-  `capital_transaction_id` INT NOT NULL AUTO_INCREMENT,
-  `capital_account_id` INT NULL,
-  `total_amount` DECIMAL(13,2) NULL,
-  `encoded_by` INT NULL,
-  PRIMARY KEY (`capital_transaction_id`),
-  INDEX `captrans_capitals_idx` (`capital_account_id` ASC),
-  INDEX `capital_encodedby_idx` (`encoded_by` ASC),
-  CONSTRAINT `captrans_capitals`
-    FOREIGN KEY (`capital_account_id`)
-    REFERENCES `amc`.`capitals` (`capital_account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `capital_encodedby`
-    FOREIGN KEY (`encoded_by`)
-    REFERENCES `amc`.`users` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `dividend_general`
+--
 
+CREATE TABLE `dividend_general` (
+  `dividend_id` int(11) NOT NULL,
+  `year` int(11) DEFAULT NULL,
+  `total_paid_up` decimal(13,2) DEFAULT NULL,
+  `net_surplus` decimal(13,2) DEFAULT NULL,
+  `reserve_fund` decimal(13,2) DEFAULT NULL,
+  `date_set` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `amc`.`chart_of_accounts`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`chart_of_accounts` (
-  `code` INT NOT NULL,
-  `account_title` VARCHAR(75) NULL,
-  PRIMARY KEY (`code`))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `general`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`capitals_transaction_line`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`capitals_transaction_line` (
-  `cap_trans_line_id` INT NOT NULL AUTO_INCREMENT,
-  `capital_transaction_id` INT NULL,
-  `particular_id` INT NULL,
-  `type` INT NULL,
-  `amount` DECIMAL(13,2) NULL,
-  PRIMARY KEY (`cap_trans_line_id`),
-  INDEX `captransline_captrans_idx` (`capital_transaction_id` ASC),
-  INDEX `captrans_particular_idx` (`particular_id` ASC),
-  CONSTRAINT `captransline_captrans`
-    FOREIGN KEY (`capital_transaction_id`)
-    REFERENCES `amc`.`capitals_transaction` (`capital_transaction_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `captrans_particular`
-    FOREIGN KEY (`particular_id`)
-    REFERENCES `amc`.`chart_of_accounts` (`code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `general` (
+  `id` varchar(7) NOT NULL,
+  `interest_rate` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `general`
+--
 
--- -----------------------------------------------------
--- Table `amc`.`savings_transaction_line`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`savings_transaction_line` (
-  `sav_trans_line_id` INT NOT NULL AUTO_INCREMENT,
-  `savings_transaction_id` INT NULL,
-  `particular_id` INT NULL,
-  `type` INT NULL,
-  `amount` DECIMAL(13,2) NULL,
-  PRIMARY KEY (`sav_trans_line_id`),
-  INDEX `savtransline_savtrans_idx` (`savings_transaction_id` ASC),
-  INDEX `savtrans_particular_idx` (`particular_id` ASC),
-  CONSTRAINT `savtransline_savtrans`
-    FOREIGN KEY (`savings_transaction_id`)
-    REFERENCES `amc`.`savings_transaction` (`savings_transaction_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `savtrans_particular`
-    FOREIGN KEY (`particular_id`)
-    REFERENCES `amc`.`chart_of_accounts` (`code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `general` (`id`, `interest_rate`) VALUES
+('control', 0.03);
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `amc`.`loan_transaction_line`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `amc`.`loan_transaction_line` (
-  `loan_trans_line_id` INT NOT NULL,
-  `loan_transaction_id` INT NULL,
-  `particular_id` INT NULL,
-  `type` INT NULL,
-  `amount` DECIMAL(13,2) NULL,
-  PRIMARY KEY (`loan_trans_line_id`),
-  INDEX `loantransline_loantrans_idx` (`loan_transaction_id` ASC),
-  INDEX `loantrans_particular_idx` (`particular_id` ASC),
-  CONSTRAINT `loantransline_loantrans`
-    FOREIGN KEY (`loan_transaction_id`)
-    REFERENCES `amc`.`loan_transaction` (`loan_transaction_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `loantrans_particular`
-    FOREIGN KEY (`particular_id`)
-    REFERENCES `amc`.`chart_of_accounts` (`code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `individual_dividends`
+--
 
+CREATE TABLE `individual_dividends` (
+  `ind_dividend_id` int(11) NOT NULL,
+  `capital_account_id` int(11) DEFAULT NULL,
+  `dividend_id` int(11) DEFAULT NULL,
+  `current_balance` decimal(13,2) DEFAULT NULL,
+  `dividend_amount` decimal(13,2) DEFAULT NULL,
+  `date_computed` datetime DEFAULT NULL,
+  `date_released` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loans`
+--
+
+CREATE TABLE `loans` (
+  `loan_account_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `loan_type` int(11) DEFAULT NULL,
+  `request_type` int(11) DEFAULT NULL,
+  `date_granted` datetime DEFAULT NULL,
+  `approval_no` int(11) DEFAULT NULL,
+  `term` int(11) DEFAULT NULL,
+  `orig_amount` decimal(13,2) DEFAULT NULL,
+  `interest_rate` double DEFAULT NULL,
+  `purpose` varchar(65) DEFAULT NULL,
+  `loan_status` int(11) DEFAULT NULL,
+  `outstanding_balance` decimal(13,2) DEFAULT NULL,
+  `date_terminated` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loan_transaction`
+--
+
+CREATE TABLE `loan_transaction` (
+  `loan_transaction_id` int(11) NOT NULL,
+  `loan_account_id` int(11) DEFAULT NULL,
+  `transaction_type` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `total_amount` decimal(13,2) DEFAULT NULL,
+  `principal` decimal(13,2) DEFAULT NULL,
+  `interest` decimal(13,2) DEFAULT NULL,
+  `penalty` decimal(13,2) DEFAULT NULL,
+  `encoded_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loan_transaction_line`
+--
+
+CREATE TABLE `loan_transaction_line` (
+  `loan_trans_line_id` int(11) NOT NULL,
+  `loan_transaction_id` int(11) DEFAULT NULL,
+  `particular_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `members`
+--
+
+CREATE TABLE `members` (
+  `member_id` int(11) NOT NULL,
+  `family_name` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `middle_name` varchar(45) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `gender` varchar(6) DEFAULT NULL,
+  `address` varchar(75) DEFAULT NULL,
+  `contact_no` varchar(20) DEFAULT NULL,
+  `occupation` varchar(45) DEFAULT NULL,
+  `company_name` varchar(65) DEFAULT NULL,
+  `position` varchar(45) DEFAULT NULL,
+  `annual_income` decimal(13,2) DEFAULT NULL,
+  `tin` varchar(12) DEFAULT NULL,
+  `educ_attainment` varchar(45) DEFAULT NULL,
+  `civil_status` int(11) DEFAULT NULL,
+  `religion` varchar(20) DEFAULT NULL,
+  `no_of_dependents` int(11) DEFAULT NULL,
+  `beneficiary_name` varchar(45) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `acceptance_date` date DEFAULT NULL,
+  `acceptance_no` int(11) DEFAULT NULL,
+  `termination_date` date DEFAULT NULL,
+  `termination_no` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`member_id`, `family_name`, `first_name`, `middle_name`, `birthdate`, `gender`, `address`, `contact_no`, `occupation`, `company_name`, `position`, `annual_income`, `tin`, `educ_attainment`, `civil_status`, `religion`, `no_of_dependents`, `beneficiary_name`, `type`, `status`, `acceptance_date`, `acceptance_no`, `termination_date`, `termination_no`) VALUES
+(1, 'DELA CRUZ', 'JUAN', 'SANTOS', '1981-11-21', 'MALE', 'RIVERDALE, DAVAO CITY', '09123456789', 'PHYSICIAN', 'SOUTHERN PHILIPPINES MEDICAL CENTER', 'CHIEF OF CLINICS', '500000.00', '12345', 'DOCTOR OF MEDICINE', 1, 'CATHOLIC', 1, 'JUANA DELA CRUZ', 0, 1, '2015-06-07', 123456, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savings`
+--
+
+CREATE TABLE `savings` (
+  `savings_account_id` int(11) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `opening_date` date DEFAULT NULL,
+  `outstanding_balance` decimal(13,2) DEFAULT NULL,
+  `account_status` int(11) DEFAULT NULL,
+  `termination_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savings_transaction`
+--
+
+CREATE TABLE `savings_transaction` (
+  `savings_transaction_id` int(11) NOT NULL,
+  `savings_account_id` int(11) DEFAULT NULL,
+  `transaction_type` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `total_amount` decimal(13,2) DEFAULT NULL,
+  `interest_rate` double DEFAULT NULL,
+  `encoded_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savings_transaction_line`
+--
+
+CREATE TABLE `savings_transaction_line` (
+  `sav_trans_line_id` int(11) NOT NULL,
+  `savings_transaction_id` int(11) DEFAULT NULL,
+  `particular_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `middle_name` varchar(45) DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `user_type` int(11) DEFAULT NULL,
+  `user_status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `capitals`
+--
+ALTER TABLE `capitals`
+  ADD PRIMARY KEY (`capital_account_id`),
+  ADD KEY `capitals_members_idx` (`member_id`);
+
+--
+-- Indexes for table `capitals_transaction`
+--
+ALTER TABLE `capitals_transaction`
+  ADD PRIMARY KEY (`capital_transaction_id`),
+  ADD KEY `captrans_capitals_idx` (`capital_account_id`),
+  ADD KEY `capital_encodedby_idx` (`encoded_by`);
+
+--
+-- Indexes for table `capitals_transaction_line`
+--
+ALTER TABLE `capitals_transaction_line`
+  ADD PRIMARY KEY (`cap_trans_line_id`),
+  ADD KEY `captransline_captrans_idx` (`capital_transaction_id`),
+  ADD KEY `captrans_particular_idx` (`particular_id`);
+
+--
+-- Indexes for table `chart_of_accounts`
+--
+ALTER TABLE `chart_of_accounts`
+  ADD PRIMARY KEY (`code`);
+
+--
+-- Indexes for table `comakers`
+--
+ALTER TABLE `comakers`
+  ADD PRIMARY KEY (`comaker_id`),
+  ADD KEY `comaker_loan_idx` (`loan_id`);
+
+--
+-- Indexes for table `dividend_general`
+--
+ALTER TABLE `dividend_general`
+  ADD PRIMARY KEY (`dividend_id`);
+
+--
+-- Indexes for table `individual_dividends`
+--
+ALTER TABLE `individual_dividends`
+  ADD PRIMARY KEY (`ind_dividend_id`),
+  ADD KEY `dividend_capitalaccount_idx` (`capital_account_id`),
+  ADD KEY `dividend_general_idx` (`dividend_id`);
+
+--
+-- Indexes for table `loans`
+--
+ALTER TABLE `loans`
+  ADD PRIMARY KEY (`loan_account_id`),
+  ADD KEY `loan_member_idx` (`member_id`);
+
+--
+-- Indexes for table `loan_transaction`
+--
+ALTER TABLE `loan_transaction`
+  ADD PRIMARY KEY (`loan_transaction_id`),
+  ADD KEY `loantrans_loan_idx` (`loan_account_id`),
+  ADD KEY `loan_encoded_by_idx` (`encoded_by`);
+
+--
+-- Indexes for table `loan_transaction_line`
+--
+ALTER TABLE `loan_transaction_line`
+  ADD PRIMARY KEY (`loan_trans_line_id`),
+  ADD KEY `loantransline_loantrans_idx` (`loan_transaction_id`),
+  ADD KEY `loantrans_particular_idx` (`particular_id`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`member_id`);
+
+--
+-- Indexes for table `savings`
+--
+ALTER TABLE `savings`
+  ADD PRIMARY KEY (`savings_account_id`),
+  ADD KEY `savings_member_idx` (`member_id`);
+
+--
+-- Indexes for table `savings_transaction`
+--
+ALTER TABLE `savings_transaction`
+  ADD PRIMARY KEY (`savings_transaction_id`),
+  ADD KEY `savtrans_savings_idx` (`savings_account_id`),
+  ADD KEY `savings_encodedby_idx` (`encoded_by`);
+
+--
+-- Indexes for table `savings_transaction_line`
+--
+ALTER TABLE `savings_transaction_line`
+  ADD PRIMARY KEY (`sav_trans_line_id`),
+  ADD KEY `savtransline_savtrans_idx` (`savings_transaction_id`),
+  ADD KEY `savtrans_particular_idx` (`particular_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `capitals`
+--
+ALTER TABLE `capitals`
+  MODIFY `capital_account_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `capitals_transaction`
+--
+ALTER TABLE `capitals_transaction`
+  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `capitals_transaction_line`
+--
+ALTER TABLE `capitals_transaction_line`
+  MODIFY `cap_trans_line_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `comakers`
+--
+ALTER TABLE `comakers`
+  MODIFY `comaker_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `dividend_general`
+--
+ALTER TABLE `dividend_general`
+  MODIFY `dividend_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `individual_dividends`
+--
+ALTER TABLE `individual_dividends`
+  MODIFY `ind_dividend_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `loans`
+--
+ALTER TABLE `loans`
+  MODIFY `loan_account_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `loan_transaction`
+--
+ALTER TABLE `loan_transaction`
+  MODIFY `loan_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `savings`
+--
+ALTER TABLE `savings`
+  MODIFY `savings_account_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `savings_transaction`
+--
+ALTER TABLE `savings_transaction`
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `savings_transaction_line`
+--
+ALTER TABLE `savings_transaction_line`
+  MODIFY `sav_trans_line_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `capitals`
+--
+ALTER TABLE `capitals`
+  ADD CONSTRAINT `capitals_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `capitals_transaction`
+--
+ALTER TABLE `capitals_transaction`
+  ADD CONSTRAINT `capital_encodedby` FOREIGN KEY (`encoded_by`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `captrans_capitals` FOREIGN KEY (`capital_account_id`) REFERENCES `capitals` (`capital_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `capitals_transaction_line`
+--
+ALTER TABLE `capitals_transaction_line`
+  ADD CONSTRAINT `captrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `captransline_captrans` FOREIGN KEY (`capital_transaction_id`) REFERENCES `capitals_transaction` (`capital_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `comakers`
+--
+ALTER TABLE `comakers`
+  ADD CONSTRAINT `comaker_loan` FOREIGN KEY (`loan_id`) REFERENCES `loans` (`loan_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `individual_dividends`
+--
+ALTER TABLE `individual_dividends`
+  ADD CONSTRAINT `dividend_capitalaccount` FOREIGN KEY (`capital_account_id`) REFERENCES `capitals` (`capital_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `dividend_general` FOREIGN KEY (`dividend_id`) REFERENCES `dividend_general` (`dividend_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `loans`
+--
+ALTER TABLE `loans`
+  ADD CONSTRAINT `loan_member` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `loan_transaction`
+--
+ALTER TABLE `loan_transaction`
+  ADD CONSTRAINT `loan_encoded_by` FOREIGN KEY (`encoded_by`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `loantrans_loan` FOREIGN KEY (`loan_account_id`) REFERENCES `loans` (`loan_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `loan_transaction_line`
+--
+ALTER TABLE `loan_transaction_line`
+  ADD CONSTRAINT `loantrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `loantransline_loantrans` FOREIGN KEY (`loan_transaction_id`) REFERENCES `loan_transaction` (`loan_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `savings`
+--
+ALTER TABLE `savings`
+  ADD CONSTRAINT `savings_member` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `savings_transaction`
+--
+ALTER TABLE `savings_transaction`
+  ADD CONSTRAINT `savings_encodedby` FOREIGN KEY (`encoded_by`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `savtrans_savings` FOREIGN KEY (`savings_account_id`) REFERENCES `savings` (`savings_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `savings_transaction_line`
+--
+ALTER TABLE `savings_transaction_line`
+  ADD CONSTRAINT `savtrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `savtransline_savtrans` FOREIGN KEY (`savings_transaction_id`) REFERENCES `savings_transaction` (`savings_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
