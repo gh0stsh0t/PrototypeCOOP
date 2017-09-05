@@ -69,10 +69,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -88,6 +94,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.tabControl1);
@@ -101,11 +110,8 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.tbAmount);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.cbRequest);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.cbLoan);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.cbBorrower);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.button1);
@@ -412,17 +418,19 @@
             // 
             // cbRequest
             // 
+            this.cbRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbRequest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbRequest.FormattingEnabled = true;
             this.cbRequest.Items.AddRange(new object[] {
             "New",
             "Renewal",
             "Restructuring"});
-            this.cbRequest.Location = new System.Drawing.Point(368, 98);
+            this.cbRequest.Location = new System.Drawing.Point(0, 0);
             this.cbRequest.MaxDropDownItems = 3;
             this.cbRequest.Name = "cbRequest";
-            this.cbRequest.Size = new System.Drawing.Size(283, 21);
+            this.cbRequest.Size = new System.Drawing.Size(281, 21);
             this.cbRequest.TabIndex = 21;
-            this.cbRequest.Text = "New";
             // 
             // label5
             // 
@@ -436,17 +444,19 @@
             // 
             // cbLoan
             // 
+            this.cbLoan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLoan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbLoan.FormattingEnabled = true;
             this.cbLoan.Items.AddRange(new object[] {
             "Regular Loan",
             "Emergency Loan",
             "Applicance Loan"});
-            this.cbLoan.Location = new System.Drawing.Point(368, 56);
+            this.cbLoan.Location = new System.Drawing.Point(0, 0);
             this.cbLoan.MaxDropDownItems = 3;
             this.cbLoan.Name = "cbLoan";
-            this.cbLoan.Size = new System.Drawing.Size(283, 21);
+            this.cbLoan.Size = new System.Drawing.Size(281, 21);
             this.cbLoan.TabIndex = 22;
-            this.cbLoan.Text = "Regular loan";
             // 
             // label4
             // 
@@ -460,13 +470,17 @@
             // 
             // cbBorrower
             // 
-            this.cbBorrower.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBorrower.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbBorrower.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBorrower.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbBorrower.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbBorrower.FormattingEnabled = true;
-            this.cbBorrower.Location = new System.Drawing.Point(368, 18);
+            this.cbBorrower.Location = new System.Drawing.Point(0, 0);
             this.cbBorrower.Name = "cbBorrower";
-            this.cbBorrower.Size = new System.Drawing.Size(283, 21);
+            this.cbBorrower.Size = new System.Drawing.Size(281, 21);
             this.cbBorrower.TabIndex = 23;
-            this.cbBorrower.Text = "Choose borrower of Search by name";
+            this.cbBorrower.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbBorrower_KeyDown);
+            this.cbBorrower.Leave += new System.EventHandler(this.cbBorrower_Leave);
             // 
             // label2
             // 
@@ -502,6 +516,33 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.cbLoan);
+            this.panel2.Location = new System.Drawing.Point(368, 56);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(283, 21);
+            this.panel2.TabIndex = 34;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.cbBorrower);
+            this.panel3.Location = new System.Drawing.Point(368, 18);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(283, 21);
+            this.panel3.TabIndex = 35;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.cbRequest);
+            this.panel4.Location = new System.Drawing.Point(369, 98);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(283, 21);
+            this.panel4.TabIndex = 35;
+            // 
             // AddLoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,6 +563,9 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,5 +614,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
     }
 }

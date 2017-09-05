@@ -73,3 +73,4 @@ C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Vie
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojFakesResolveAssemblyReference.cache
