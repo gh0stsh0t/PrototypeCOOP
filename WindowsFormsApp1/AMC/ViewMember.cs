@@ -52,14 +52,12 @@ namespace AMC
             try
             {
                 conn.Open();
-                var comm = new MySqlCommand("SELECT member_id,concat_ws(',',family_name ,first_name) as name,gender,address,contact_no,type,status FROM members"+filter, conn);
-                var adp = new MySqlDataAdapter(comm);
-                var dt = new DataTable();
-                adp.Fill(dt);
+                
                 var tae = new DatabaseConn();
                 dataGridView1.DataSource = tae.Select("members", "member_id",
                     "concat_ws(',', family_name, first_name) as name", "gender", "address", "contact_no", "type",
                     "status").GetQueryData();
+
                 //dataGridView1.DataSource = dt;
                 dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
                 dataGridView1.Columns["member_id"].Visible = false;
