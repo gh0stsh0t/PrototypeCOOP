@@ -30,6 +30,12 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cbRequest = new System.Windows.Forms.ComboBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbBorrower = new System.Windows.Forms.ComboBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cbLoan = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -55,30 +61,24 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbPurpose = new System.Windows.Forms.TextBox();
-            this.tbTerm = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbInterest = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbAmount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cbRequest = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbLoan = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.cbBorrower = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -94,6 +94,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
@@ -104,7 +105,6 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.tbPurpose);
-            this.panel1.Controls.Add(this.tbTerm);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.tbInterest);
             this.panel1.Controls.Add(this.label9);
@@ -119,6 +119,79 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(905, 562);
             this.panel1.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.cbRequest);
+            this.panel4.Location = new System.Drawing.Point(369, 98);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(283, 21);
+            this.panel4.TabIndex = 35;
+            // 
+            // cbRequest
+            // 
+            this.cbRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbRequest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbRequest.FormattingEnabled = true;
+            this.cbRequest.Items.AddRange(new object[] {
+            "New",
+            "Renewal",
+            "Restructuring"});
+            this.cbRequest.Location = new System.Drawing.Point(0, 0);
+            this.cbRequest.MaxDropDownItems = 3;
+            this.cbRequest.Name = "cbRequest";
+            this.cbRequest.Size = new System.Drawing.Size(281, 21);
+            this.cbRequest.TabIndex = 21;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.cbBorrower);
+            this.panel3.Location = new System.Drawing.Point(368, 18);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(283, 21);
+            this.panel3.TabIndex = 35;
+            // 
+            // cbBorrower
+            // 
+            this.cbBorrower.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbBorrower.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBorrower.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbBorrower.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbBorrower.FormattingEnabled = true;
+            this.cbBorrower.Location = new System.Drawing.Point(0, 0);
+            this.cbBorrower.Name = "cbBorrower";
+            this.cbBorrower.Size = new System.Drawing.Size(281, 21);
+            this.cbBorrower.TabIndex = 23;
+            this.cbBorrower.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbBorrower_KeyDown);
+            this.cbBorrower.Leave += new System.EventHandler(this.cbBorrower_Leave);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.cbLoan);
+            this.panel2.Location = new System.Drawing.Point(368, 56);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(283, 21);
+            this.panel2.TabIndex = 34;
+            // 
+            // cbLoan
+            // 
+            this.cbLoan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLoan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbLoan.FormattingEnabled = true;
+            this.cbLoan.Items.AddRange(new object[] {
+            "Regular Loan",
+            "Emergency Loan",
+            "Applicance Loan"});
+            this.cbLoan.Location = new System.Drawing.Point(0, 0);
+            this.cbLoan.MaxDropDownItems = 3;
+            this.cbLoan.Name = "cbLoan";
+            this.cbLoan.Size = new System.Drawing.Size(281, 21);
+            this.cbLoan.TabIndex = 22;
             // 
             // button3
             // 
@@ -365,13 +438,6 @@
             this.tbPurpose.Size = new System.Drawing.Size(280, 90);
             this.tbPurpose.TabIndex = 24;
             // 
-            // tbTerm
-            // 
-            this.tbTerm.Location = new System.Drawing.Point(371, 211);
-            this.tbTerm.Name = "tbTerm";
-            this.tbTerm.Size = new System.Drawing.Size(247, 20);
-            this.tbTerm.TabIndex = 27;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -416,22 +482,6 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "Interest Rate";
             // 
-            // cbRequest
-            // 
-            this.cbRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbRequest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbRequest.FormattingEnabled = true;
-            this.cbRequest.Items.AddRange(new object[] {
-            "New",
-            "Renewal",
-            "Restructuring"});
-            this.cbRequest.Location = new System.Drawing.Point(0, 0);
-            this.cbRequest.MaxDropDownItems = 3;
-            this.cbRequest.Name = "cbRequest";
-            this.cbRequest.Size = new System.Drawing.Size(281, 21);
-            this.cbRequest.TabIndex = 21;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -442,22 +492,6 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Amount";
             // 
-            // cbLoan
-            // 
-            this.cbLoan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbLoan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbLoan.FormattingEnabled = true;
-            this.cbLoan.Items.AddRange(new object[] {
-            "Regular Loan",
-            "Emergency Loan",
-            "Applicance Loan"});
-            this.cbLoan.Location = new System.Drawing.Point(0, 0);
-            this.cbLoan.MaxDropDownItems = 3;
-            this.cbLoan.Name = "cbLoan";
-            this.cbLoan.Size = new System.Drawing.Size(281, 21);
-            this.cbLoan.TabIndex = 22;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -467,20 +501,6 @@
             this.label4.Size = new System.Drawing.Size(111, 21);
             this.label4.TabIndex = 15;
             this.label4.Text = "Request Type";
-            // 
-            // cbBorrower
-            // 
-            this.cbBorrower.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cbBorrower.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBorrower.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbBorrower.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbBorrower.FormattingEnabled = true;
-            this.cbBorrower.Location = new System.Drawing.Point(0, 0);
-            this.cbBorrower.Name = "cbBorrower";
-            this.cbBorrower.Size = new System.Drawing.Size(281, 21);
-            this.cbBorrower.TabIndex = 23;
-            this.cbBorrower.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbBorrower_KeyDown);
-            this.cbBorrower.Leave += new System.EventHandler(this.cbBorrower_Leave);
             // 
             // label2
             // 
@@ -516,32 +536,20 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // panel2
+            // comboBox1
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.cbLoan);
-            this.panel2.Location = new System.Drawing.Point(368, 56);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(283, 21);
-            this.panel2.TabIndex = 34;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.cbBorrower);
-            this.panel3.Location = new System.Drawing.Point(368, 18);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(283, 21);
-            this.panel3.TabIndex = 35;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.cbRequest);
-            this.panel4.Location = new System.Drawing.Point(369, 98);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(283, 21);
-            this.panel4.TabIndex = 35;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1 to 30 days",
+            "31 to 60 days",
+            "61 to 90 days",
+            "91 to 120 days",
+            "181 to 365 days",
+            "366 to 2 years (730 days)"});
+            this.comboBox1.Location = new System.Drawing.Point(371, 211);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(243, 21);
+            this.comboBox1.TabIndex = 36;
             // 
             // AddLoan
             // 
@@ -558,14 +566,14 @@
             this.Load += new System.EventHandler(this.AddLoan_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,7 +608,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPurpose;
-        private System.Windows.Forms.TextBox tbTerm;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbInterest;
         private System.Windows.Forms.Label label9;
@@ -617,5 +624,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

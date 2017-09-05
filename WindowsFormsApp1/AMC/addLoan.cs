@@ -91,6 +91,13 @@ namespace AMC
 
         private void cbBorrower_Leave(object sender, EventArgs e)
         {
+            if(cbBorrower.SelectedIndex != -1)
+            {
+                var b = (ComboboxContent)cbBorrower.SelectedItem;
+                memid = b.ID;
+                cbBorrower.DropDownStyle = ComboBoxStyle.DropDownList;
+                MessageBox.Show(memid.ToString());
+            }
         }
     }
 }

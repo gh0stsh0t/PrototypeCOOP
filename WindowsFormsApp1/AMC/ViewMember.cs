@@ -85,7 +85,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                //MessageBox.Show(ee.ToString());
+                MessageBox.Show(ee.ToString());
                 conn.Close();
             }
             dataGridView1.ClearSelection();
@@ -110,7 +110,7 @@ namespace AMC
                 }
                 catch (Exception ee)
                 {
-                    //MessageBox.Show(ee.ToString());
+                    MessageBox.Show(ee.ToString());
                     conn.Close();
                 }
             }
