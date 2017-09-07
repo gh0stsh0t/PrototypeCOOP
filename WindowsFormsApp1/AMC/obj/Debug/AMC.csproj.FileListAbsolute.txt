@@ -1,4 +1,3 @@
-
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
@@ -155,81 +154,6 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.addLoanM.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBUAccount.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.addLoanM.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.SelectMember.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewSavings.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
-D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
-
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.xml
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.Form2.resources
-C:\Users\Farshana Datukon\Documents\Visual Studio 2015\Projects\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.Form2.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP-nenen\PrototypeCOOP-nenen\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
-C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
-C:\Users\fadatukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
-C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
@@ -265,4 +189,17 @@ C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\f.csprojResolveAssemblyReference.cache
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.dll
 C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.pdb
-
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.MainForm.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddMember.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBUAccount.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewSavingsAccount.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Properties.Resources.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.addLoanM.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.SelectMember.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewSavings.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewMember.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
