@@ -28,235 +28,251 @@ namespace AMC
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMember = new System.Windows.Forms.Label();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rdWd = new System.Windows.Forms.RadioButton();
+            this.rdDep = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblAccount = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.cbxParticular = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lname = new System.Windows.Forms.TextBox();
+            this.txtAmt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbxTransaction = new System.Windows.Forms.ComboBox();
+            this.lblBalance = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dtpTime = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbxAccount = new System.Windows.Forms.ComboBox();
-            this.cbxMember = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.label2 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.dgvMembers = new System.Windows.Forms.DataGridView();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblMember);
+            this.panel1.Controls.Add(this.btnSelect);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lblAccount);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.cbxParticular);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.lname);
+            this.panel1.Controls.Add(this.txtAmt);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.cbxTransaction);
+            this.panel1.Controls.Add(this.lblBalance);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.dtpTime);
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.dtpDate);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.cbxAccount);
-            this.panel1.Controls.Add(this.cbxMember);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.splitter2);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.splitter1);
-            this.panel1.Location = new System.Drawing.Point(23, 109);
+            this.panel1.Location = new System.Drawing.Point(20, 136);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(906, 280);
+            this.panel1.Size = new System.Drawing.Size(470, 284);
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lblMember
+            // 
+            this.lblMember.AutoSize = true;
+            this.lblMember.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMember.Location = new System.Drawing.Point(280, 26);
+            this.lblMember.Name = "lblMember";
+            this.lblMember.Size = new System.Drawing.Size(12, 17);
+            this.lblMember.TabIndex = 32;
+            this.lblMember.Text = " ";
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.Silver;
+            this.btnSelect.FlatAppearance.BorderSize = 0;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSelect.Location = new System.Drawing.Point(172, 21);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(80, 28);
+            this.btnSelect.TabIndex = 31;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(45, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 17);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Member";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.rdWd);
+            this.panel2.Controls.Add(this.rdDep);
+            this.panel2.Location = new System.Drawing.Point(153, 171);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(254, 46);
+            this.panel2.TabIndex = 21;
+            // 
+            // rdWd
+            // 
+            this.rdWd.AutoSize = true;
+            this.rdWd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdWd.Location = new System.Drawing.Point(126, 12);
+            this.rdWd.Name = "rdWd";
+            this.rdWd.Size = new System.Drawing.Size(91, 21);
+            this.rdWd.TabIndex = 1;
+            this.rdWd.Text = "Withdrawal";
+            this.rdWd.UseVisualStyleBackColor = true;
+            // 
+            // rdDep
+            // 
+            this.rdDep.AutoSize = true;
+            this.rdDep.Checked = true;
+            this.rdDep.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdDep.Location = new System.Drawing.Point(26, 12);
+            this.rdDep.Name = "rdDep";
+            this.rdDep.Size = new System.Drawing.Size(71, 21);
+            this.rdDep.TabIndex = 0;
+            this.rdDep.TabStop = true;
+            this.rdDep.Text = "Deposit";
+            this.rdDep.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 17);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Current Balance";
+            // 
+            // lblAccount
+            // 
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccount.Location = new System.Drawing.Point(179, 63);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(12, 17);
+            this.lblAccount.TabIndex = 19;
+            this.lblAccount.Text = " ";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(242, 191);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(175, 230);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(14, 15);
+            this.label11.Size = new System.Drawing.Size(16, 17);
             this.label11.TabIndex = 18;
             this.label11.Text = "₱";
             // 
-            // cbxParticular
+            // txtAmt
             // 
-            this.cbxParticular.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxParticular.FormattingEnabled = true;
-            this.cbxParticular.Items.AddRange(new object[] {
-            "Savings",
-            "Capital Build-Up"});
-            this.cbxParticular.Location = new System.Drawing.Point(241, 228);
-            this.cbxParticular.Name = "cbxParticular";
-            this.cbxParticular.Size = new System.Drawing.Size(217, 21);
-            this.cbxParticular.TabIndex = 17;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(94, 230);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 15);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Particular";
-            // 
-            // lname
-            // 
-            this.lname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lname.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.lname.Location = new System.Drawing.Point(262, 186);
-            this.lname.Name = "lname";
-            this.lname.Size = new System.Drawing.Size(143, 23);
-            this.lname.TabIndex = 15;
+            this.txtAmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAmt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmt.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAmt.Location = new System.Drawing.Point(197, 228);
+            this.txtAmt.Name = "txtAmt";
+            this.txtAmt.Size = new System.Drawing.Size(166, 25);
+            this.txtAmt.TabIndex = 15;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(102, 191);
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(54, 232);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 15);
+            this.label9.Size = new System.Drawing.Size(53, 17);
             this.label9.TabIndex = 14;
             this.label9.Text = "Amount";
             // 
-            // label8
+            // lblBalance
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(427, 46);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 15);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Current Balance: xxxxx";
-            // 
-            // cbxTransaction
-            // 
-            this.cbxTransaction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxTransaction.FormattingEnabled = true;
-            this.cbxTransaction.Items.AddRange(new object[] {
-            "Deposit",
-            "Withdrawal"});
-            this.cbxTransaction.Location = new System.Drawing.Point(241, 148);
-            this.cbxTransaction.Name = "cbxTransaction";
-            this.cbxTransaction.Size = new System.Drawing.Size(164, 21);
-            this.cbxTransaction.TabIndex = 12;
+            this.lblBalance.AutoSize = true;
+            this.lblBalance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalance.Location = new System.Drawing.Point(179, 97);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(12, 17);
+            this.lblBalance.TabIndex = 13;
+            this.lblBalance.Text = " ";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(83, 151);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(32, 185);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 15);
+            this.label7.Size = new System.Drawing.Size(74, 17);
             this.label7.TabIndex = 11;
             this.label7.Text = "Transaction";
             // 
-            // dtpTime
-            // 
-            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(241, 111);
-            this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(164, 20);
-            this.dtpTime.TabIndex = 10;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(115, 116);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 15);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Time";
-            // 
             // dtpDate
             // 
+            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDate.Location = new System.Drawing.Point(241, 76);
+            this.dtpDate.Location = new System.Drawing.Point(178, 136);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(164, 20);
+            this.dtpDate.Size = new System.Drawing.Size(191, 25);
             this.dtpDate.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(115, 80);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(69, 140);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 15);
+            this.label5.Size = new System.Drawing.Size(35, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Date";
-            // 
-            // cbxAccount
-            // 
-            this.cbxAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxAccount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxAccount.FormattingEnabled = true;
-            this.cbxAccount.Items.AddRange(new object[] {
-            "Savings",
-            "Capital Build-Up"});
-            this.cbxAccount.Location = new System.Drawing.Point(241, 41);
-            this.cbxAccount.Name = "cbxAccount";
-            this.cbxAccount.Size = new System.Drawing.Size(164, 21);
-            this.cbxAccount.TabIndex = 6;
-            // 
-            // cbxMember
-            // 
-            this.cbxMember.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxMember.FormattingEnabled = true;
-            this.cbxMember.Location = new System.Drawing.Point(241, 8);
-            this.cbxMember.Name = "cbxMember";
-            this.cbxMember.Size = new System.Drawing.Size(355, 21);
-            this.cbxMember.TabIndex = 5;
-            this.cbxMember.Text = "[Select Member]";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(98, 46);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(25, 65);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.Size = new System.Drawing.Size(79, 17);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Account";
+            this.label4.Text = "Account No.";
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(164, 0);
+            this.splitter2.Location = new System.Drawing.Point(108, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(69, 280);
+            this.splitter2.Size = new System.Drawing.Size(54, 284);
             this.splitter2.TabIndex = 2;
             this.splitter2.TabStop = false;
             this.splitter2.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(69, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Member Name";
             // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(164, 280);
+            this.splitter1.Size = new System.Drawing.Size(108, 284);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
@@ -265,7 +281,7 @@ namespace AMC
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 63);
+            this.label1.Location = new System.Drawing.Point(16, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 20);
             this.label1.TabIndex = 5;
@@ -275,7 +291,7 @@ namespace AMC
             // 
             this.lblTop.AutoSize = true;
             this.lblTop.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop.Location = new System.Drawing.Point(20, 20);
+            this.lblTop.Location = new System.Drawing.Point(11, 16);
             this.lblTop.Name = "lblTop";
             this.lblTop.Size = new System.Drawing.Size(167, 30);
             this.lblTop.TabIndex = 3;
@@ -288,9 +304,9 @@ namespace AMC
             this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(7, 87);
+            this.button1.Location = new System.Drawing.Point(2, 103);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(936, 5);
+            this.button1.Size = new System.Drawing.Size(488, 6);
             this.button1.TabIndex = 6;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
@@ -298,36 +314,154 @@ namespace AMC
             // btnSubmit
             // 
             this.btnSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(239)))));
+            this.btnSubmit.Enabled = false;
             this.btnSubmit.FlatAppearance.BorderSize = 0;
             this.btnSubmit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
             this.btnSubmit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSubmit.Location = new System.Drawing.Point(586, 422);
+            this.btnSubmit.Location = new System.Drawing.Point(402, 445);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(139, 42);
+            this.btnSubmit.Size = new System.Drawing.Size(162, 48);
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // dgvMembers
+            // 
+            this.dgvMembers.AllowUserToAddRows = false;
+            this.dgvMembers.AllowUserToDeleteRows = false;
+            this.dgvMembers.AllowUserToResizeRows = false;
+            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMembers.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMembers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMembers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Title,
+            this.Debit,
+            this.Credit});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMembers.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvMembers.EnableHeadersVisualStyles = false;
+            this.dgvMembers.GridColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvMembers.Location = new System.Drawing.Point(534, 136);
+            this.dgvMembers.MultiSelect = false;
+            this.dgvMembers.Name = "dgvMembers";
+            this.dgvMembers.ReadOnly = true;
+            this.dgvMembers.RowHeadersVisible = false;
+            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMembers.Size = new System.Drawing.Size(374, 163);
+            this.dgvMembers.TabIndex = 26;
+            this.dgvMembers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellClick);
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Visible = false;
+            // 
+            // Title
+            // 
+            this.Title.HeaderText = "Account Title";
+            this.Title.Name = "Title";
+            this.Title.ReadOnly = true;
+            // 
+            // Debit
+            // 
+            this.Debit.HeaderText = "Debit";
+            this.Debit.Name = "Debit";
+            this.Debit.ReadOnly = true;
+            // 
+            // Credit
+            // 
+            this.Credit.HeaderText = "Credit";
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(530, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 20);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Particulars";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.button2.Enabled = false;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(516, 103);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(438, 6);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.Silver;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdd.Location = new System.Drawing.Point(812, 313);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(80, 35);
+            this.btnAdd.TabIndex = 32;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // AddTransaction
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 621);
+            this.ClientSize = new System.Drawing.Size(940, 717);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.dgvMembers);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTop);
             this.Controls.Add(this.button1);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddTransaction";
             this.Text = "Add Transaction";
             this.Load += new System.EventHandler(this.AddTransaction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,26 +471,34 @@ namespace AMC
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cbxTransaction;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dtpTime;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbxAccount;
-        private System.Windows.Forms.ComboBox cbxMember;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbxParticular;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox lname;
-        private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.TextBox txtAmt;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridView dgvMembers;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton rdWd;
+        private System.Windows.Forms.RadioButton rdDep;
+        private System.Windows.Forms.Button btnSelect;
+        public System.Windows.Forms.Label lblMember;
+        public System.Windows.Forms.Label lblBalance;
+        public System.Windows.Forms.Label lblAccount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Debit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Credit;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAdd;
+        public System.Windows.Forms.Button btnSubmit;
     }
 }

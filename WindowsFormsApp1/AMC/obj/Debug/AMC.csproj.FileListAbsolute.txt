@@ -115,3 +115,5 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.SelectMember.resources
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
