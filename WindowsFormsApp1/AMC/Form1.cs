@@ -81,7 +81,7 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
-	    innerChild(new ViewMember(this));
+	        innerChild(new ViewMember(this));
         }
         public void innerChild(Form child)
         {
@@ -107,6 +107,16 @@ namespace AMC
             childform.TopLevel = false;
             panel1.Controls.Add(childform);
             childform.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewSavings(this));
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddTransaction(this, "savings"));
         }
     }
 }

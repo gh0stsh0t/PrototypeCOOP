@@ -50,12 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddParticular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddParticular.Designer.cs">
+      <DependentUpon>AddParticular.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddTransaction.Designer.cs">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="databaseConn.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,11 +75,23 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCBUAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCBUAccount.Designer.cs">
+      <DependentUpon>NewCBUAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewSavingsAccount.Designer.cs">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectMember.Designer.cs">
+      <DependentUpon>SelectMember.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
@@ -88,6 +107,15 @@
     <Compile Include="ViewMember.Designer.cs">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSavings.Designer.cs">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddParticular.resx">
+      <DependentUpon>AddParticular.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCBUAccount.resx">
+      <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
@@ -110,6 +141,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SelectMember.resx">
+      <DependentUpon>SelectMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSavings.resx">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
     <Fakes Include="Fakes\MySql.Data.fakes" />
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
