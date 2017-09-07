@@ -30,10 +30,11 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mname = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.tbTerm = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cbRequest = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.cbBorrower = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbLoan = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -71,14 +72,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.name = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -94,9 +96,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.name);
+            this.panel1.Controls.Add(this.mname);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
@@ -115,10 +119,51 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.button1);
+            this.panel1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(17, 47);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(905, 562);
             this.panel1.TabIndex = 4;
+            // 
+            // mname
+            // 
+            this.mname.AutoSize = true;
+            this.mname.Location = new System.Drawing.Point(368, 24);
+            this.mname.Name = "mname";
+            this.mname.Size = new System.Drawing.Size(0, 13);
+            this.mname.TabIndex = 38;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(545, 19);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 23);
+            this.button4.TabIndex = 37;
+            this.button4.Text = "Select Member";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // tbTerm
+            // 
+            this.tbTerm.BackColor = System.Drawing.SystemColors.Window;
+            this.tbTerm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tbTerm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tbTerm.FormattingEnabled = true;
+            this.tbTerm.Items.AddRange(new object[] {
+            "1 to 30 days",
+            "31 to 60 days",
+            "61 to 90 days",
+            "91 to 120 days",
+            "181 to 365 days",
+            "366 to 2 years (730 days)"});
+            this.tbTerm.Location = new System.Drawing.Point(0, 0);
+            this.tbTerm.Name = "tbTerm";
+            this.tbTerm.Size = new System.Drawing.Size(241, 21);
+            this.tbTerm.TabIndex = 36;
             // 
             // panel4
             // 
@@ -145,29 +190,6 @@
             this.cbRequest.Size = new System.Drawing.Size(281, 21);
             this.cbRequest.TabIndex = 21;
             // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.cbBorrower);
-            this.panel3.Location = new System.Drawing.Point(368, 18);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(283, 21);
-            this.panel3.TabIndex = 35;
-            // 
-            // cbBorrower
-            // 
-            this.cbBorrower.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cbBorrower.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBorrower.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbBorrower.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbBorrower.FormattingEnabled = true;
-            this.cbBorrower.Location = new System.Drawing.Point(0, 0);
-            this.cbBorrower.Name = "cbBorrower";
-            this.cbBorrower.Size = new System.Drawing.Size(281, 21);
-            this.cbBorrower.TabIndex = 23;
-            this.cbBorrower.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbBorrower_KeyDown);
-            this.cbBorrower.Leave += new System.EventHandler(this.cbBorrower_Leave);
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -192,6 +214,7 @@
             this.cbLoan.Name = "cbLoan";
             this.cbLoan.Size = new System.Drawing.Size(281, 21);
             this.cbLoan.TabIndex = 22;
+            this.cbLoan.SelectedIndexChanged += new System.EventHandler(this.cbLoan_SelectedIndexChanged);
             // 
             // button3
             // 
@@ -205,6 +228,7 @@
             this.button3.TabIndex = 33;
             this.button3.Text = "Submit";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -217,6 +241,7 @@
             this.button2.TabIndex = 32;
             this.button2.Text = "Clear";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // tabControl1
             // 
@@ -250,7 +275,7 @@
             // 
             this.tbPosition1.Location = new System.Drawing.Point(88, 116);
             this.tbPosition1.Name = "tbPosition1";
-            this.tbPosition1.Size = new System.Drawing.Size(390, 20);
+            this.tbPosition1.Size = new System.Drawing.Size(390, 22);
             this.tbPosition1.TabIndex = 8;
             // 
             // label15
@@ -267,7 +292,7 @@
             // 
             this.tbCompany1.Location = new System.Drawing.Point(88, 82);
             this.tbCompany1.Name = "tbCompany1";
-            this.tbCompany1.Size = new System.Drawing.Size(390, 20);
+            this.tbCompany1.Size = new System.Drawing.Size(390, 22);
             this.tbCompany1.TabIndex = 8;
             // 
             // label14
@@ -284,7 +309,7 @@
             // 
             this.tbAddress1.Location = new System.Drawing.Point(88, 49);
             this.tbAddress1.Name = "tbAddress1";
-            this.tbAddress1.Size = new System.Drawing.Size(390, 20);
+            this.tbAddress1.Size = new System.Drawing.Size(390, 22);
             this.tbAddress1.TabIndex = 8;
             // 
             // label13
@@ -301,7 +326,7 @@
             // 
             this.tbName1.Location = new System.Drawing.Point(88, 16);
             this.tbName1.Name = "tbName1";
-            this.tbName1.Size = new System.Drawing.Size(390, 20);
+            this.tbName1.Size = new System.Drawing.Size(390, 22);
             this.tbName1.TabIndex = 8;
             // 
             // label12
@@ -336,7 +361,7 @@
             // 
             this.tbPosition2.Location = new System.Drawing.Point(88, 116);
             this.tbPosition2.Name = "tbPosition2";
-            this.tbPosition2.Size = new System.Drawing.Size(390, 20);
+            this.tbPosition2.Size = new System.Drawing.Size(390, 22);
             this.tbPosition2.TabIndex = 13;
             // 
             // label16
@@ -353,7 +378,7 @@
             // 
             this.tbCompany2.Location = new System.Drawing.Point(88, 82);
             this.tbCompany2.Name = "tbCompany2";
-            this.tbCompany2.Size = new System.Drawing.Size(390, 20);
+            this.tbCompany2.Size = new System.Drawing.Size(390, 22);
             this.tbCompany2.TabIndex = 14;
             // 
             // label17
@@ -370,7 +395,7 @@
             // 
             this.tbAddress2.Location = new System.Drawing.Point(88, 49);
             this.tbAddress2.Name = "tbAddress2";
-            this.tbAddress2.Size = new System.Drawing.Size(390, 20);
+            this.tbAddress2.Size = new System.Drawing.Size(390, 22);
             this.tbAddress2.TabIndex = 15;
             // 
             // label18
@@ -387,7 +412,7 @@
             // 
             this.tbName2.Location = new System.Drawing.Point(88, 16);
             this.tbName2.Name = "tbName2";
-            this.tbName2.Size = new System.Drawing.Size(390, 20);
+            this.tbName2.Size = new System.Drawing.Size(390, 22);
             this.tbName2.TabIndex = 16;
             // 
             // label19
@@ -452,7 +477,7 @@
             // 
             this.tbInterest.Location = new System.Drawing.Point(371, 176);
             this.tbInterest.Name = "tbInterest";
-            this.tbInterest.Size = new System.Drawing.Size(247, 20);
+            this.tbInterest.Size = new System.Drawing.Size(247, 22);
             this.tbInterest.TabIndex = 25;
             // 
             // label9
@@ -469,7 +494,7 @@
             // 
             this.tbAmount.Location = new System.Drawing.Point(404, 138);
             this.tbAmount.Name = "tbAmount";
-            this.tbAmount.Size = new System.Drawing.Size(247, 20);
+            this.tbAmount.Size = new System.Drawing.Size(247, 22);
             this.tbAmount.TabIndex = 26;
             // 
             // label7
@@ -536,20 +561,22 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
+            // name
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "1 to 30 days",
-            "31 to 60 days",
-            "61 to 90 days",
-            "91 to 120 days",
-            "181 to 365 days",
-            "366 to 2 years (730 days)"});
-            this.comboBox1.Location = new System.Drawing.Point(371, 211);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(243, 21);
-            this.comboBox1.TabIndex = 36;
+            this.name.AutoSize = true;
+            this.name.Location = new System.Drawing.Point(368, 24);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(0, 13);
+            this.name.TabIndex = 39;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.tbTerm);
+            this.panel3.Location = new System.Drawing.Point(370, 214);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(243, 21);
+            this.panel3.TabIndex = 35;
             // 
             // AddLoan
             // 
@@ -567,13 +594,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,13 +644,15 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbLoan;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbBorrower;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ComboBox tbTerm;
+        private System.Windows.Forms.Label mname;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label name;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

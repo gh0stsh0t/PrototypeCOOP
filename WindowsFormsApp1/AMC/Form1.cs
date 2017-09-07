@@ -118,5 +118,14 @@ namespace AMC
         {
 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            breaker();
+            childform = new AddLoan(-1);
+            childform.TopLevel = false;
+            panel1.Controls.Add(childform);
+            childform.Show();
+        }
     }
 }

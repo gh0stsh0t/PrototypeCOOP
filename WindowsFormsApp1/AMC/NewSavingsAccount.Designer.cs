@@ -158,6 +158,7 @@
             this.label3.Size = new System.Drawing.Size(253, 30);
             this.label3.TabIndex = 9;
             this.label3.Text = "Activate Savings Account";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 
