@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2017 at 03:42 AM
+-- Generation Time: Sep 07, 2017 at 03:29 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `capitals` (
   `capital_account_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
-  `opening_date` datetime DEFAULT NULL,
+  `opening_date` date DEFAULT NULL,
   `ics_no` int(11) DEFAULT NULL,
   `ics_amount` decimal(13,2) DEFAULT NULL,
   `ipuc_amount` decimal(13,2) DEFAULT NULL,
   `outstanding_balance` decimal(13,2) DEFAULT NULL,
   `account_status` int(11) DEFAULT NULL,
-  `withdrawal_date` datetime DEFAULT NULL
+  `withdrawal_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -54,26 +54,26 @@ CREATE TABLE `capitals_transaction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `capitals_transaction_line`
---
-
-CREATE TABLE `capitals_transaction_line` (
-  `cap_trans_line_id` int(11) NOT NULL,
-  `capital_transaction_id` int(11) DEFAULT NULL,
-  `particular_id` int(11) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `chart_of_accounts`
 --
 
 CREATE TABLE `chart_of_accounts` (
   `code` int(11) NOT NULL,
-  `account_title` varchar(75) DEFAULT NULL
+  `title` varchar(100) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chart_of_accounts_log`
+--
+
+CREATE TABLE `chart_of_accounts_log` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `total_amount` decimal(13,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -109,24 +109,6 @@ CREATE TABLE `dividend_general` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `general`
---
-
-CREATE TABLE `general` (
-  `id` varchar(7) NOT NULL,
-  `interest_rate` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `general`
---
-
-INSERT INTO `general` (`id`, `interest_rate`) VALUES
-('control', 0.03);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `individual_dividends`
 --
 
@@ -143,6 +125,25 @@ CREATE TABLE `individual_dividends` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `interest_rate_log`
+--
+
+CREATE TABLE `interest_rate_log` (
+  `id` int(11) NOT NULL,
+  `interest_rate` double NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `interest_rate_log`
+--
+
+INSERT INTO `interest_rate_log` (`id`, `interest_rate`, `timestamp`) VALUES
+(1, 0.03, '2017-09-06 18:43:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `loans`
 --
 
@@ -151,7 +152,7 @@ CREATE TABLE `loans` (
   `member_id` int(11) DEFAULT NULL,
   `loan_type` int(11) DEFAULT NULL,
   `request_type` int(11) DEFAULT NULL,
-  `date_granted` datetime DEFAULT NULL,
+  `date_granted` date DEFAULT NULL,
   `approval_no` int(11) DEFAULT NULL,
   `term` int(11) DEFAULT NULL,
   `orig_amount` decimal(13,2) DEFAULT NULL,
@@ -159,7 +160,7 @@ CREATE TABLE `loans` (
   `purpose` varchar(65) DEFAULT NULL,
   `loan_status` int(11) DEFAULT NULL,
   `outstanding_balance` decimal(13,2) DEFAULT NULL,
-  `date_terminated` datetime DEFAULT NULL
+  `date_terminated` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -172,26 +173,12 @@ CREATE TABLE `loan_transaction` (
   `loan_transaction_id` int(11) NOT NULL,
   `loan_account_id` int(11) DEFAULT NULL,
   `transaction_type` int(11) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `total_amount` decimal(13,2) DEFAULT NULL,
   `principal` decimal(13,2) DEFAULT NULL,
   `interest` decimal(13,2) DEFAULT NULL,
   `penalty` decimal(13,2) DEFAULT NULL,
   `encoded_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `loan_transaction_line`
---
-
-CREATE TABLE `loan_transaction_line` (
-  `loan_trans_line_id` int(11) NOT NULL,
-  `loan_transaction_id` int(11) DEFAULT NULL,
-  `particular_id` int(11) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -232,7 +219,7 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`member_id`, `family_name`, `first_name`, `middle_name`, `birthdate`, `gender`, `address`, `contact_no`, `occupation`, `company_name`, `position`, `annual_income`, `tin`, `educ_attainment`, `civil_status`, `religion`, `no_of_dependents`, `beneficiary_name`, `type`, `status`, `acceptance_date`, `acceptance_no`, `termination_date`, `termination_no`) VALUES
-(1, 'DELA CRUZ', 'JUAN', 'SANTOS', '1981-11-21', 'MALE', 'RIVERDALE, DAVAO CITY', '09123456789', 'PHYSICIAN', 'SOUTHERN PHILIPPINES MEDICAL CENTER', 'CHIEF OF CLINICS', '500000.00', '12345', 'DOCTOR OF MEDICINE', 1, 'CATHOLIC', 1, 'JUANA DELA CRUZ', 0, 1, '2015-06-07', 123456, NULL, NULL);
+(1, 'DELA CRUZ', 'JUAN', 'SANTOS', '1981-11-21', 'MALE', 'RIVERDALE, DAVAO CITY', '09123456789', 'PHYSICIAN', 'SOUTHERN PHILIPPINES MEDICAL CENTER', 'CHIEF OF CLINICS', '500000.00', '123456789123', 'DOCTOR OF MEDICINE', 1, 'CATHOLIC', 1, 'JUANA DELA CRUZ', 0, 1, '2015-06-07', 123456, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -244,10 +231,19 @@ CREATE TABLE `savings` (
   `savings_account_id` int(11) NOT NULL,
   `member_id` int(11) DEFAULT NULL,
   `opening_date` date DEFAULT NULL,
+  `initial_balance` decimal(13,2) DEFAULT NULL,
   `outstanding_balance` decimal(13,2) DEFAULT NULL,
+  `interest_rate` double DEFAULT NULL,
   `account_status` int(11) DEFAULT NULL,
   `termination_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `savings`
+--
+
+INSERT INTO `savings` (`savings_account_id`, `member_id`, `opening_date`, `initial_balance`, `outstanding_balance`, `interest_rate`, `account_status`, `termination_date`) VALUES
+(1, 1, '2017-09-07', '100.00', '100.00', 0.03, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -269,15 +265,15 @@ CREATE TABLE `savings_transaction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `savings_transaction_line`
+-- Table structure for table `savings_transaction_lin`
 --
 
-CREATE TABLE `savings_transaction_line` (
-  `sav_trans_line_id` int(11) NOT NULL,
+CREATE TABLE `savings_transaction_lin` (
+  `savings_trans_line_id` int(11) NOT NULL,
   `savings_transaction_id` int(11) DEFAULT NULL,
-  `particular_id` int(11) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL
+  `account_code` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -317,18 +313,17 @@ ALTER TABLE `capitals_transaction`
   ADD KEY `capital_encodedby_idx` (`encoded_by`);
 
 --
--- Indexes for table `capitals_transaction_line`
---
-ALTER TABLE `capitals_transaction_line`
-  ADD PRIMARY KEY (`cap_trans_line_id`),
-  ADD KEY `captransline_captrans_idx` (`capital_transaction_id`),
-  ADD KEY `captrans_particular_idx` (`particular_id`);
-
---
 -- Indexes for table `chart_of_accounts`
 --
 ALTER TABLE `chart_of_accounts`
   ADD PRIMARY KEY (`code`);
+
+--
+-- Indexes for table `chart_of_accounts_log`
+--
+ALTER TABLE `chart_of_accounts_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `code` (`code`);
 
 --
 -- Indexes for table `comakers`
@@ -352,6 +347,12 @@ ALTER TABLE `individual_dividends`
   ADD KEY `dividend_general_idx` (`dividend_id`);
 
 --
+-- Indexes for table `interest_rate_log`
+--
+ALTER TABLE `interest_rate_log`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `loans`
 --
 ALTER TABLE `loans`
@@ -365,14 +366,6 @@ ALTER TABLE `loan_transaction`
   ADD PRIMARY KEY (`loan_transaction_id`),
   ADD KEY `loantrans_loan_idx` (`loan_account_id`),
   ADD KEY `loan_encoded_by_idx` (`encoded_by`);
-
---
--- Indexes for table `loan_transaction_line`
---
-ALTER TABLE `loan_transaction_line`
-  ADD PRIMARY KEY (`loan_trans_line_id`),
-  ADD KEY `loantransline_loantrans_idx` (`loan_transaction_id`),
-  ADD KEY `loantrans_particular_idx` (`particular_id`);
 
 --
 -- Indexes for table `members`
@@ -396,12 +389,12 @@ ALTER TABLE `savings_transaction`
   ADD KEY `savings_encodedby_idx` (`encoded_by`);
 
 --
--- Indexes for table `savings_transaction_line`
+-- Indexes for table `savings_transaction_lin`
 --
-ALTER TABLE `savings_transaction_line`
-  ADD PRIMARY KEY (`sav_trans_line_id`),
-  ADD KEY `savtransline_savtrans_idx` (`savings_transaction_id`),
-  ADD KEY `savtrans_particular_idx` (`particular_id`);
+ALTER TABLE `savings_transaction_lin`
+  ADD PRIMARY KEY (`savings_trans_line_id`),
+  ADD KEY `savings_transaction_id` (`savings_transaction_id`),
+  ADD KEY `account_code` (`account_code`);
 
 --
 -- Indexes for table `users`
@@ -424,10 +417,10 @@ ALTER TABLE `capitals`
 ALTER TABLE `capitals_transaction`
   MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `capitals_transaction_line`
+-- AUTO_INCREMENT for table `chart_of_accounts_log`
 --
-ALTER TABLE `capitals_transaction_line`
-  MODIFY `cap_trans_line_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `chart_of_accounts_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `comakers`
 --
@@ -443,6 +436,11 @@ ALTER TABLE `dividend_general`
 --
 ALTER TABLE `individual_dividends`
   MODIFY `ind_dividend_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `interest_rate_log`
+--
+ALTER TABLE `interest_rate_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `loans`
 --
@@ -462,17 +460,17 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `savings`
 --
 ALTER TABLE `savings`
-  MODIFY `savings_account_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `savings_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
   MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `savings_transaction_line`
+-- AUTO_INCREMENT for table `savings_transaction_lin`
 --
-ALTER TABLE `savings_transaction_line`
-  MODIFY `sav_trans_line_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `savings_transaction_lin`
+  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -496,11 +494,10 @@ ALTER TABLE `capitals_transaction`
   ADD CONSTRAINT `captrans_capitals` FOREIGN KEY (`capital_account_id`) REFERENCES `capitals` (`capital_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `capitals_transaction_line`
+-- Constraints for table `chart_of_accounts_log`
 --
-ALTER TABLE `capitals_transaction_line`
-  ADD CONSTRAINT `captrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `captransline_captrans` FOREIGN KEY (`capital_transaction_id`) REFERENCES `capitals_transaction` (`capital_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `chart_of_accounts_log`
+  ADD CONSTRAINT `fk_account_code_log` FOREIGN KEY (`code`) REFERENCES `chart_of_accounts` (`code`);
 
 --
 -- Constraints for table `comakers`
@@ -529,13 +526,6 @@ ALTER TABLE `loan_transaction`
   ADD CONSTRAINT `loantrans_loan` FOREIGN KEY (`loan_account_id`) REFERENCES `loans` (`loan_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `loan_transaction_line`
---
-ALTER TABLE `loan_transaction_line`
-  ADD CONSTRAINT `loantrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `loantransline_loantrans` FOREIGN KEY (`loan_transaction_id`) REFERENCES `loan_transaction` (`loan_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `savings`
 --
 ALTER TABLE `savings`
@@ -549,11 +539,11 @@ ALTER TABLE `savings_transaction`
   ADD CONSTRAINT `savtrans_savings` FOREIGN KEY (`savings_account_id`) REFERENCES `savings` (`savings_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `savings_transaction_line`
+-- Constraints for table `savings_transaction_lin`
 --
-ALTER TABLE `savings_transaction_line`
-  ADD CONSTRAINT `savtrans_particular` FOREIGN KEY (`particular_id`) REFERENCES `chart_of_accounts` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `savtransline_savtrans` FOREIGN KEY (`savings_transaction_id`) REFERENCES `savings_transaction` (`savings_transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `savings_transaction_lin`
+  ADD CONSTRAINT `fk_savings_particular` FOREIGN KEY (`account_code`) REFERENCES `chart_of_accounts` (`code`),
+  ADD CONSTRAINT `fk_savings_transaction` FOREIGN KEY (`savings_transaction_id`) REFERENCES `savings_transaction` (`savings_transaction_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
