@@ -1,3 +1,4 @@
+﻿
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -141,6 +142,59 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="addLoan.cs">
+      
+      <SubType>Form</SubType>
+    
+    </Compile>
+
+    <Compile Include="addLoanM.cs">
+      
+      <SubType>Form</SubType>
+    
+    </Compile>
+    
+    <Compile Include="addLoanM.Designer.cs">
+      
+      <DependentUpon>addLoanM.cs</DependentUpon>
+    
+    </Compile>
+    <Compile Include="addLoan.Designer.cs">
+      
+      <DependentUpon>addLoan.cs</DependentUpon>
+    
+    </Compile>
+
+    <Compile Include="AddTransaction.cs">
+      
+      <SubType>Form</SubType>
+    
+    </Compile>
+    
+    <Compile Include="AddTransaction.Designer.cs">
+      
+      <DependentUpon>AddTransaction.cs</DependentUpon>
+    
+    </Compile>
+
+    <EmbeddedResource Include="addLoan.resx">
+      
+      <DependentUpon>addLoan.cs</DependentUpon>
+    
+    </EmbeddedResource>
+    
+    <EmbeddedResource Include="AddTransaction.resx">
+      
+      <DependentUpon>AddTransaction.cs</DependentUpon>
+    
+    </EmbeddedResource>
+
+    <EmbeddedResource Include="addLoanM.resx">
+      
+      <DependentUpon>addLoanM.cs</DependentUpon>
+    
+    </EmbeddedResource>
+
     <EmbeddedResource Include="SelectMember.resx">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,4 +235,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
 </Project>

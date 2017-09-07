@@ -362,7 +362,6 @@
             this.button12.Text = "Add Savings Transaction";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // sidebarBtnCBU
             // 
@@ -520,6 +519,7 @@
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button19;
+>>>>>>> Eric
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Panel panel1;
     }
