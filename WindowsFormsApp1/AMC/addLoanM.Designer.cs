@@ -90,6 +90,7 @@
             this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "addLoanM";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.addLoanM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mlist)).EndInit();
             this.ResumeLayout(false);

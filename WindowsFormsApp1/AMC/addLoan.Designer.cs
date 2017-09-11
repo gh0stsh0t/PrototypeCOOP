@@ -30,9 +30,11 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tbTerm = new System.Windows.Forms.ComboBox();
+            this.name = new System.Windows.Forms.Label();
             this.mname = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.tbTerm = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cbRequest = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,15 +74,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.name = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -125,6 +125,42 @@
             this.panel1.Size = new System.Drawing.Size(905, 562);
             this.panel1.TabIndex = 4;
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.tbTerm);
+            this.panel3.Location = new System.Drawing.Point(370, 214);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(243, 21);
+            this.panel3.TabIndex = 35;
+            // 
+            // tbTerm
+            // 
+            this.tbTerm.BackColor = System.Drawing.SystemColors.Window;
+            this.tbTerm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tbTerm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tbTerm.FormattingEnabled = true;
+            this.tbTerm.Items.AddRange(new object[] {
+            "1 to 30 days",
+            "31 to 60 days",
+            "61 to 90 days",
+            "91 to 120 days",
+            "181 to 365 days",
+            "366 to 2 years (730 days)"});
+            this.tbTerm.Location = new System.Drawing.Point(0, 0);
+            this.tbTerm.Name = "tbTerm";
+            this.tbTerm.Size = new System.Drawing.Size(241, 21);
+            this.tbTerm.TabIndex = 36;
+            // 
+            // name
+            // 
+            this.name.AutoSize = true;
+            this.name.Location = new System.Drawing.Point(368, 24);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(0, 13);
+            this.name.TabIndex = 39;
+            // 
             // mname
             // 
             this.mname.AutoSize = true;
@@ -145,25 +181,6 @@
             this.button4.Text = "Select Member";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // tbTerm
-            // 
-            this.tbTerm.BackColor = System.Drawing.SystemColors.Window;
-            this.tbTerm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tbTerm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tbTerm.FormattingEnabled = true;
-            this.tbTerm.Items.AddRange(new object[] {
-            "1 to 30 days",
-            "31 to 60 days",
-            "61 to 90 days",
-            "91 to 120 days",
-            "181 to 365 days",
-            "366 to 2 years (730 days)"});
-            this.tbTerm.Location = new System.Drawing.Point(0, 0);
-            this.tbTerm.Name = "tbTerm";
-            this.tbTerm.Size = new System.Drawing.Size(241, 21);
-            this.tbTerm.TabIndex = 36;
             // 
             // panel4
             // 
@@ -277,6 +294,7 @@
             this.tbPosition1.Name = "tbPosition1";
             this.tbPosition1.Size = new System.Drawing.Size(390, 22);
             this.tbPosition1.TabIndex = 8;
+            this.tbPosition1.Leave += new System.EventHandler(this.tbPosition1_Leave);
             // 
             // label15
             // 
@@ -294,6 +312,7 @@
             this.tbCompany1.Name = "tbCompany1";
             this.tbCompany1.Size = new System.Drawing.Size(390, 22);
             this.tbCompany1.TabIndex = 8;
+            this.tbCompany1.Leave += new System.EventHandler(this.tbCompany1_Leave);
             // 
             // label14
             // 
@@ -311,6 +330,7 @@
             this.tbAddress1.Name = "tbAddress1";
             this.tbAddress1.Size = new System.Drawing.Size(390, 22);
             this.tbAddress1.TabIndex = 8;
+            this.tbAddress1.Leave += new System.EventHandler(this.tbAddress1_Leave);
             // 
             // label13
             // 
@@ -328,6 +348,7 @@
             this.tbName1.Name = "tbName1";
             this.tbName1.Size = new System.Drawing.Size(390, 22);
             this.tbName1.TabIndex = 8;
+            this.tbName1.Leave += new System.EventHandler(this.tbName1_Leave);
             // 
             // label12
             // 
@@ -363,6 +384,7 @@
             this.tbPosition2.Name = "tbPosition2";
             this.tbPosition2.Size = new System.Drawing.Size(390, 22);
             this.tbPosition2.TabIndex = 13;
+            this.tbPosition2.Leave += new System.EventHandler(this.tbPosition2_Leave);
             // 
             // label16
             // 
@@ -380,6 +402,7 @@
             this.tbCompany2.Name = "tbCompany2";
             this.tbCompany2.Size = new System.Drawing.Size(390, 22);
             this.tbCompany2.TabIndex = 14;
+            this.tbCompany2.Leave += new System.EventHandler(this.tbCompany2_Leave);
             // 
             // label17
             // 
@@ -397,6 +420,7 @@
             this.tbAddress2.Name = "tbAddress2";
             this.tbAddress2.Size = new System.Drawing.Size(390, 22);
             this.tbAddress2.TabIndex = 15;
+            this.tbAddress2.Leave += new System.EventHandler(this.tbAddress2_Leave);
             // 
             // label18
             // 
@@ -414,6 +438,7 @@
             this.tbName2.Name = "tbName2";
             this.tbName2.Size = new System.Drawing.Size(390, 22);
             this.tbName2.TabIndex = 16;
+            this.tbName2.Leave += new System.EventHandler(this.tbName2_Leave);
             // 
             // label19
             // 
@@ -462,6 +487,7 @@
             this.tbPurpose.Name = "tbPurpose";
             this.tbPurpose.Size = new System.Drawing.Size(280, 90);
             this.tbPurpose.TabIndex = 24;
+            this.tbPurpose.Leave += new System.EventHandler(this.tbPurpose_Leave);
             // 
             // label11
             // 
@@ -479,6 +505,8 @@
             this.tbInterest.Name = "tbInterest";
             this.tbInterest.Size = new System.Drawing.Size(247, 22);
             this.tbInterest.TabIndex = 25;
+            this.tbInterest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbInterest_KeyPress);
+            this.tbInterest.Leave += new System.EventHandler(this.tbInterest_Leave);
             // 
             // label9
             // 
@@ -496,6 +524,8 @@
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(247, 22);
             this.tbAmount.TabIndex = 26;
+            this.tbAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAmount_KeyPress);
+            this.tbAmount.Leave += new System.EventHandler(this.tbAmount_Leave);
             // 
             // label7
             // 
@@ -561,23 +591,6 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // name
-            // 
-            this.name.AutoSize = true;
-            this.name.Location = new System.Drawing.Point(368, 24);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(0, 13);
-            this.name.TabIndex = 39;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.tbTerm);
-            this.panel3.Location = new System.Drawing.Point(370, 214);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(243, 21);
-            this.panel3.TabIndex = 35;
-            // 
             // AddLoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,6 +606,7 @@
             this.Load += new System.EventHandler(this.AddLoan_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -600,7 +614,6 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
