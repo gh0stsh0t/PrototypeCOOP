@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 
 namespace AMC
@@ -17,10 +18,11 @@ namespace AMC
         public int memid;
         private DatabaseConn _addloanconn;
         public DataTable loanmems;
+        public MySqlConnection conn;
         public string memname;
+        public int comakercount;
         private Form popup;
         private double intrate = 5.00; //DO THIS SHIT GUYS      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        string today = DateTime.Today.ToString("yyyyMM");
 
 
         public AddLoan(int x)
@@ -31,6 +33,7 @@ namespace AMC
             cbRequest.SelectedIndex = 0;
             tbTerm.SelectedIndex = 0;
             _addloanconn = new DatabaseConn();
+            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             tbInterest.Text = intrate.ToString();
             this.ActiveControl = label3;
         }
@@ -93,17 +96,52 @@ namespace AMC
         {
             if (validation())
             {
+                comakercnt();
                 try
                 {
-                    string[] taes = {"member_id", memid.ToString(), "loan_type", cbLoan.SelectedIndex.ToString(), "request_type"
-                    , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text,};
-                    _addloanconn.Insert("loans", taes);
+                    conn.Open();
+                    /*string[] taes = {"member_id", memid.ToString(), "loan_type", cbLoan.SelectedIndex.ToString(), "request_type"
+                            , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text, "term", tbTerm.SelectedIndex.ToString()
+                            , "interest_rate", tbInterest.Text, "purpose", tbPurpose.Text, "loan_status", "0", "outstanding_balance", tbAmount.Text};*/
+                    MySqlCommand cmd = new MySqlCommand("INSERT loans (member_id, loan_type, request_type, orig_amount, term, interest_rate, purpose, loan_status, outstanding_balance)"
+                        + "VALUES ('" + memid.ToString() + "', '" + cbLoan.SelectedIndex.ToString() + "', '" + cbRequest.SelectedIndex.ToString() + "', '" + tbAmount.Text + "', '" + tbTerm.SelectedIndex.ToString() + "', '" + tbInterest.Text + "', '" 
+                        + tbPurpose.Text + "', '0', '" + tbAmount.Text + "')", conn);
+                    cmd.ExecuteNonQuery();
+                    string id = cmd.LastInsertedId.ToString();
+                    MessageBox.Show(id);
+                        /*string[] comakers = { "loan_id", id, "name", tbName1.Text, "address", tbAddress1.Text, "company_name", tbCompany1.Text
+                            , "position", tbPosition1.Text};
+                        _addloanconn.Insert("comakers", comakers);*/
+                        cmd = new MySqlCommand("INSERT comakers (loan_id, name, address, company_name, position)"
+                        + "VALUES ('" + id + "', '" + tbName1.Text + "', '" + tbAddress1.Text + "', '" + tbCompany1.Text + "', '" + tbPosition1.Text + "')", conn);
+                        cmd.ExecuteNonQuery();
+                    if(comakercount == 2)
+                    {
+                        /*
+                        string[] comakers2 = { "loan_id", id, "name", tbName2.Text, "address", tbAddress2.Text, "company_name", tbCompany2.Text
+                            , "position", tbPosition2.Text};
+                        _addloanconn.Insert("comakers", comakers2);*/
+                        cmd = new MySqlCommand("INSERT comakers (loan_id, name, address, company_name, position)"
+                        + "VALUES ('" + id + "', '" + tbName2.Text + "', '" + tbAddress2.Text + "', '" + tbCompany2.Text + "', '" + tbPosition2.Text + "')", conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Success??");
+                    conn.Close();
                 }
                 catch (Exception ee)
                 {
                     MessageBox.Show(ee.ToString());
+                    conn.Close();
                 }
             } 
+        }
+
+        public void comakercnt()
+        {
+            if (tbName2.Text == "")
+                comakercount = 1;
+            else
+                comakercount = 2; 
         }
 
         private bool validation()
@@ -128,14 +166,19 @@ namespace AMC
                 MessageBox.Show("Please input details for Comaker 1.");
                 return false;
             }
+            else if (co2check())
+            {
+                MessageBox.Show("Please either input complete details for Comaker 2 or clear the text.");
+                return false;
+            }
             else
                 return true;   
         }
 
         private bool co2check()
         {
-            if ((tbAddress1.Text == "" || tbCompany1.Text == "" || tbName1.Text == "" || tbPosition1.Text == "") 
-                && (tbAddress1.Text != "" || tbCompany1.Text != "" || tbName1.Text != "" || tbPosition1.Text != ""))
+            if ((tbAddress2.Text == "" || tbCompany2.Text == "" || tbName2.Text == "" || tbPosition2.Text == "") 
+                && (tbAddress2.Text != "" || tbCompany2.Text != "" || tbName2.Text != "" || tbPosition2.Text != ""))
                 return true;
             return false;
         }

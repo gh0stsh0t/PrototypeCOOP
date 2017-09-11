@@ -46,6 +46,11 @@ namespace AMC
             return _holder;
         }
 
+        public MySqlCommand getCmd()
+        {
+            return _cmd;
+        }
+
         public DatabaseConn Select(string table, params string[] fields)
         {
             _flag = false;
