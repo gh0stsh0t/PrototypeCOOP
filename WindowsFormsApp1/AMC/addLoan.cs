@@ -128,10 +128,6 @@ namespace AMC
                 MessageBox.Show("Please input details for Comaker 1.");
                 return false;
             }
-            else if ()
-            {
-
-            }
             else
                 return true;   
         }
