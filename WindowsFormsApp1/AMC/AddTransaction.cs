@@ -17,6 +17,12 @@ namespace AMC
         public string memname; public int memid;
         MySqlConnection conn = new MySqlConnection();
         string accid;
+        public DataTable particulars = new DataTable();
+
+        public List<int> code = new List<int>();
+        public List<double> amount = new List<double>();
+        public List<double> new_total = new List<double>();
+        public List<int> debcred_type = new List<int>();
 
         public AddTransaction(MainForm main, string t)
         {
@@ -47,6 +53,12 @@ namespace AMC
             loadMembers(type);
 
             dtpDate.Value = DateTime.Now;
+            particulars.Columns.Add("Code", typeof(string));
+            particulars.Columns.Add("Account Title", typeof(string));
+            particulars.Columns.Add("Debit", typeof(double));
+            particulars.Columns.Add("Credit", typeof(double));
+
+            loadParticulars(particulars);
         }
 
         private void loadMembers(string t)
@@ -113,6 +125,15 @@ namespace AMC
             }
         }
 
+        public void enableButtons()
+        {
+            dtpDate.Enabled = true;
+            panelRadio.Enabled = true;
+            txtAmt.Enabled = true;
+            btnAdd.Enabled = true;
+            btnClear.Enabled = true;
+        }
+
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             string query ="";
@@ -124,26 +145,55 @@ namespace AMC
             {
                 transtype = "1";
             }
-            try
+            if (txtAmt.Text == "")
             {
-                conn.Open();
-                if (type == "savings")
+                MessageBox.Show("Please fill in all fields.");
+            } if (particulars.Rows.Count == 0)
+            {
+                MessageBox.Show("Please add particulars.");
+            }
+                else {
+                int bal = balance();
+                if(bal == 0)
+                    MessageBox.Show("Double entries are not balanced.");
+                else if (bal == 1)
                 {
-                    query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount)" +
-                                        "VALUES('" + accid + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "'"; // INTEREST RATE FROM GENERAL
-
-                    MySqlCommand ins = new MySqlCommand(query, conn);
-                    ins.ExecuteNonQuery();
+                    MessageBox.Show("Amount entered is not equal to the Particulars total.");
                 }
+                    
+                else
+                {
+                    try
+                    {
+                        conn.Open();
+                        if (type == "savings")
+                        {
+                            query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount)" +
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"; // INTEREST RATE FROM GENERAL
 
-                conn.Close();
+                            
+                        } else if (type =="capitals")
+                        {
+                            query = "INSERT INTO capitals_transaction (capital_account_id, transaction_type, date, total_amount)" +
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"; // INTEREST RATE FROM GENERAL
 
+                        }
+                        MySqlCommand ins = new MySqlCommand(query, conn);
+                        ins.ExecuteNonQuery();
+                        MessageBox.Show("Success! Transaction recorded.");
+                        conn.Close();
+
+                    }
+                    catch (Exception ee)
+                    {
+                        MessageBox.Show(ee.ToString());
+                        conn.Close();
+                    }
+                }
             }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.ToString());
-                conn.Close();
-            }
+            
+
+            
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -153,11 +203,50 @@ namespace AMC
             sel.Show();
         }
 
+        private int balance()
+        {
+            double credit = Convert.ToDouble(particulars.Compute("SUM(Credit)", string.Empty));
+            double debit = Convert.ToDouble(particulars.Compute("SUM(Debit)", string.Empty));
+            double transamt = double.Parse(txtAmt.Text);
+
+            if (credit != debit)
+            {
+                // MessageBox.Show("Double entries are not balanced.");
+                return 0;
+            }
+            else if (transamt != debit)
+            {
+                // MessageBox.Show("Amount entered is not equal to the Particulars total.");
+                return 1;
+            }
+            else return 2;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddParticular part = new AddParticular(this);
             this.Enabled = false;
             part.Show();
+        }
+
+        public void loadParticulars(DataTable tbl)
+        {
+            dgvParticulars.DataSource = tbl;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                particulars.Clear();
+                loadParticulars(particulars);
+            }
+            catch (DataException ee)
+            {
+                // Process exception and return.
+                Console.WriteLine("Exception of type {0} occurred.",
+                    e.GetType());
+            }
         }
     }
 }

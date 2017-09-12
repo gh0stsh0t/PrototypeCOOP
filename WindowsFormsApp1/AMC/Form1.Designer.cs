@@ -444,6 +444,7 @@
             this.button17.Text = "Add CBU Transaction";
             this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button19
             // 

@@ -28,13 +28,13 @@ namespace AMC
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMember = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelRadio = new System.Windows.Forms.Panel();
             this.rdWd = new System.Windows.Forms.RadioButton();
             this.rdDep = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,17 +53,14 @@ namespace AMC
             this.lblTop = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.dgvMembers = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvParticulars = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
+            this.panelRadio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParticulars)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -71,7 +68,7 @@ namespace AMC
             this.panel1.Controls.Add(this.lblMember);
             this.panel1.Controls.Add(this.btnSelect);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.panelRadio);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblAccount);
             this.panel1.Controls.Add(this.label11);
@@ -127,14 +124,15 @@ namespace AMC
             this.label3.TabIndex = 22;
             this.label3.Text = "Member";
             // 
-            // panel2
+            // panelRadio
             // 
-            this.panel2.Controls.Add(this.rdWd);
-            this.panel2.Controls.Add(this.rdDep);
-            this.panel2.Location = new System.Drawing.Point(153, 171);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(254, 46);
-            this.panel2.TabIndex = 21;
+            this.panelRadio.Controls.Add(this.rdWd);
+            this.panelRadio.Controls.Add(this.rdDep);
+            this.panelRadio.Enabled = false;
+            this.panelRadio.Location = new System.Drawing.Point(153, 171);
+            this.panelRadio.Name = "panelRadio";
+            this.panelRadio.Size = new System.Drawing.Size(254, 46);
+            this.panelRadio.TabIndex = 21;
             // 
             // rdWd
             // 
@@ -176,9 +174,8 @@ namespace AMC
             this.lblAccount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccount.Location = new System.Drawing.Point(179, 63);
             this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(12, 17);
+            this.lblAccount.Size = new System.Drawing.Size(0, 17);
             this.lblAccount.TabIndex = 19;
-            this.lblAccount.Text = " ";
             // 
             // label11
             // 
@@ -193,8 +190,9 @@ namespace AMC
             // txtAmt
             // 
             this.txtAmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAmt.Enabled = false;
             this.txtAmt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmt.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAmt.ForeColor = System.Drawing.Color.Black;
             this.txtAmt.Location = new System.Drawing.Point(197, 228);
             this.txtAmt.Name = "txtAmt";
             this.txtAmt.Size = new System.Drawing.Size(166, 25);
@@ -232,6 +230,7 @@ namespace AMC
             // 
             // dtpDate
             // 
+            this.dtpDate.Enabled = false;
             this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDate.Location = new System.Drawing.Point(178, 136);
@@ -329,73 +328,43 @@ namespace AMC
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // dgvMembers
+            // dgvParticulars
             // 
-            this.dgvMembers.AllowUserToAddRows = false;
-            this.dgvMembers.AllowUserToDeleteRows = false;
-            this.dgvMembers.AllowUserToResizeRows = false;
-            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMembers.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvMembers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMembers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.Title,
-            this.Debit,
-            this.Credit});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMembers.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvMembers.EnableHeadersVisualStyles = false;
-            this.dgvMembers.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvMembers.Location = new System.Drawing.Point(534, 136);
-            this.dgvMembers.MultiSelect = false;
-            this.dgvMembers.Name = "dgvMembers";
-            this.dgvMembers.ReadOnly = true;
-            this.dgvMembers.RowHeadersVisible = false;
-            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembers.Size = new System.Drawing.Size(374, 163);
-            this.dgvMembers.TabIndex = 26;
-            this.dgvMembers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellClick);
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "code";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.Visible = false;
-            // 
-            // Title
-            // 
-            this.Title.HeaderText = "Account Title";
-            this.Title.Name = "Title";
-            this.Title.ReadOnly = true;
-            // 
-            // Debit
-            // 
-            this.Debit.HeaderText = "Debit";
-            this.Debit.Name = "Debit";
-            this.Debit.ReadOnly = true;
-            // 
-            // Credit
-            // 
-            this.Credit.HeaderText = "Credit";
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
+            this.dgvParticulars.AllowUserToAddRows = false;
+            this.dgvParticulars.AllowUserToDeleteRows = false;
+            this.dgvParticulars.AllowUserToResizeRows = false;
+            this.dgvParticulars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvParticulars.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvParticulars.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvParticulars.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvParticulars.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvParticulars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvParticulars.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvParticulars.EnableHeadersVisualStyles = false;
+            this.dgvParticulars.GridColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvParticulars.Location = new System.Drawing.Point(534, 136);
+            this.dgvParticulars.MultiSelect = false;
+            this.dgvParticulars.Name = "dgvParticulars";
+            this.dgvParticulars.ReadOnly = true;
+            this.dgvParticulars.RowHeadersVisible = false;
+            this.dgvParticulars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvParticulars.Size = new System.Drawing.Size(374, 163);
+            this.dgvParticulars.TabIndex = 26;
+            this.dgvParticulars.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellClick);
             // 
             // label6
             // 
@@ -423,9 +392,10 @@ namespace AMC
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.Silver;
+            this.btnAdd.Enabled = false;
             this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -437,16 +407,35 @@ namespace AMC
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Silver;
+            this.btnClear.Enabled = false;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClear.Location = new System.Drawing.Point(726, 313);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(80, 35);
+            this.btnClear.TabIndex = 33;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // AddTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(940, 717);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.dgvMembers);
+            this.Controls.Add(this.dgvParticulars);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -459,9 +448,9 @@ namespace AMC
             this.Load += new System.EventHandler(this.AddTransaction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
+            this.panelRadio.ResumeLayout(false);
+            this.panelRadio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParticulars)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -482,23 +471,20 @@ namespace AMC
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtAmt;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridView dgvMembers;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelRadio;
         private System.Windows.Forms.RadioButton rdWd;
         private System.Windows.Forms.RadioButton rdDep;
         private System.Windows.Forms.Button btnSelect;
         public System.Windows.Forms.Label lblMember;
         public System.Windows.Forms.Label lblBalance;
         public System.Windows.Forms.Label lblAccount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Debit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Credit;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAdd;
         public System.Windows.Forms.Button btnSubmit;
+        public System.Windows.Forms.DataGridView dgvParticulars;
+        private System.Windows.Forms.Button btnClear;
     }
 }

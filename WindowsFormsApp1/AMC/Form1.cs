@@ -118,5 +118,10 @@ namespace AMC
         {
             innerChild(new AddTransaction(this, "savings"));
         }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddTransaction(this, "capitals"));
+        }
     }
 }
