@@ -118,5 +118,20 @@ namespace AMC
         {
             innerChild(new AddTransaction(this, "savings"));
         }
+
+        private void sidebarPanelLoans_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddLoan(-1));
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddRepayment());
+        }
     }
 }

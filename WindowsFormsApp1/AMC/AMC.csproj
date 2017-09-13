@@ -56,6 +56,12 @@
     <Compile Include="AddParticular.Designer.cs">
       <DependentUpon>AddParticular.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddRepayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRepayment.Designer.cs">
+      <DependentUpon>AddRepayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </Compile>
     <EmbeddedResource Include="AddParticular.resx">
       <DependentUpon>AddParticular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddRepayment.resx">
+      <DependentUpon>AddRepayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
