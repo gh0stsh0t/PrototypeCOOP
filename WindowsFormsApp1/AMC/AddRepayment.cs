@@ -32,7 +32,11 @@ namespace AMC
                 .Where("date_terminated", null);
             //cbxMember.DataSource = conn.GetQueryData();
         }
-
+        public void setName(string name)
+        {
+            label15.Text = name;
+            
+        }
         private void cbxMember_SelectedIndexChanged(object sender, EventArgs e)
         {
             conn.Select("Loans", "account_id", "type", "outstanding_balance")
