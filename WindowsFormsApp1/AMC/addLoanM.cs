@@ -70,11 +70,6 @@ namespace AMC
             }
         }
 
-        private void mlist_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void mlist_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
@@ -87,7 +82,7 @@ namespace AMC
             catch (Exception)
             {
                 hehe.memid = int.Parse(mlist.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-                hehe.setName(mlist.Rows[e.RowIndex].Cells["name"].Value.ToString());
+                hehe.SetName(mlist.Rows[e.RowIndex].Cells["name"].Value.ToString());
             }
         }
     }

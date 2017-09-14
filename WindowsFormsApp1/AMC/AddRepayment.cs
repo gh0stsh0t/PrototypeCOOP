@@ -24,25 +24,27 @@ namespace AMC
         public AddRepayment(int memberid) : this()
         {
             //cbxMember.SelectedIndex = memberid;
+            memid = memberid;
+            SetName(conn.Select("members", "concat_ws(',', family_name, first_name) as name")
+                        .Where("member_id",memid.ToString())
+                        .GetQueryData()
+                        .Rows[0][0].ToString());
         }
-
         private void MemberListRef()
         {
             conn.Select("LoansM", "member_id", "concat_ws(',', family_name, first_name) as name")
                 .Where("date_terminated", null);
             //cbxMember.DataSource = conn.GetQueryData();
         }
-        public void setName(string name)
+        public void SetName(string name)
         {
             label15.Text = name;
-            
-        }
-        private void cbxMember_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            conn.Select("Loans", "account_id", "type", "outstanding_balance")
-                .Where("date_terminated", null);
-            cbxAccount.DataSource = conn.GetQueryData();
-            cbxAccount.SelectedIndex = 0;
+            conn.Select("loans", "member_id", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
+            foreach (DataRow r in conn.GetData().Rows)
+            {
+                var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString());
+                cbxAccount.Items.Add(cc);
+            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -52,7 +54,7 @@ namespace AMC
                         "date_encoded", DateTime.Today.ToString());
         }
 
-        private void breaker()
+        private void Breaker()
         {
             try
             {
@@ -66,33 +68,52 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-            breaker();
+            Breaker();
             var reftomain = this;
             popup = new addLoanM(reftomain);
             popup.ShowDialog();
-            DataTable dt = conn.Select("loans","member_id","loan_account_id").Where("member_id",memid.ToString()).GetQueryData();
-            foreach (DataRow r in dt.Rows)
-            {
-                ComboboxContent cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString());
-                cbxAccount.Items.Add(cc);
-            }
+            
             
         }
 
         private void txtPenalty_TextChanged(object sender, EventArgs e)
         {
-
+            Addition();
         }
 
-        private void addition()
+        private void Addition()
         {
             try
             {
-                label12.Text = (int.Parse(txtInterest.ToString()) + int.Parse(txtPenalty.ToString()) + int.Parse(txtPrincipal.ToString())).ToString();
+                
+                label12.Text = (checkier(txtInterest.Text) + checkier(txtPenalty.Text) + checkier(txtPrincipal.Text)).ToString();
             }
             catch (Exception ex)
             {
             }
+        }
+
+        private static int checkier(string text)
+        {
+
+            try
+            {
+                return int.Parse(text);
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
+        private void txtPrincipal_TextChanged(object sender, EventArgs e)
+        {
+            Addition();
+        }
+
+        private void txtInterest_TextChanged(object sender, EventArgs e)
+        {
+            Addition();
         }
     }
 }
