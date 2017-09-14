@@ -16,7 +16,7 @@ namespace AMC
         public string type;
         public string memname; public int memid;
         MySqlConnection conn = new MySqlConnection();
-        string accid;
+        string accid; Int32 newID = 0;
         public DataTable particulars = new DataTable();
 
         public List<int> code = new List<int>();
@@ -66,64 +66,56 @@ namespace AMC
             
         }
 
+        private void insertTLines()
+        {
+            string q1 = "";
+            if(type=="savings")
+            {
+                q1 = "INSERT INTO savings_transaction_line (savings_transaction_id, account_code, amount, type) VALUES ";
+            } else if (type == "capitals")
+            {
+                q1 = "INSERT INTO capitals_transaction_line (capital_transaction_id, account_code, amount, type) VALUES ";
+            }
+            string q2 = "INSERT INTO chart_of_accounts_log (code, total_amount) VALUES ";
+            string columns = "", id = "", acode = "", amtt = "", typp = "", newtot = "", chartcol = "";
+            for(int i = 0; i<code.Count(); i++)
+            {
+                columns = "(";
+                id = newID.ToString();
+                acode = code.ElementAt(i).ToString(); 
+                amtt = amount.ElementAt(i).ToString();
+                typp = debcred_type.ElementAt(i).ToString();
+                newtot = new_total.ElementAt(i).ToString();
+                columns = "('" + id + "','" + acode + "','" + amtt + "','" + typp + "')";
+                chartcol = "('" + acode + "','" + newtot + "')";
+                if (i != code.Count() - 1)
+                {
+                    columns = columns + ",";
+                    chartcol = chartcol + ",";
+                }
+                q1 = q1 + columns;
+                q2 = q2 + chartcol;
+            }
+
+            try
+            {
+                MySqlCommand ins2 = new MySqlCommand(q1 + ";" + q2, conn);
+                ins2.ExecuteNonQuery();
+                // MessageBox.Show("Success! Transaction recorded.");
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+                conn.Close();
+            }
+
+        }
+
         private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
         }
 
-        private void loadAccountS(string memid)
-        {
-            try
-            {
-                conn.Open();
-
-                MySqlCommand comm = new MySqlCommand("SELECT savings_account_id, outstanding_balance FROM savings WHERE member_id = " + memid, conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                if (dt.Rows.Count == 1)
-                {
-                    accid = dt.Rows[0]["savings_account_id"].ToString();
-                    lblAccount.Text = accid;
-                    lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
-                }
-
-                conn.Close();
-
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.ToString());
-                conn.Close();
-            }
-        }
-
-        private void loadAccountC(string memid)
-        {
-            try
-            {
-                conn.Open();
-
-                MySqlCommand comm = new MySqlCommand("SELECT capital_account_id, outstanding_balance FROM capitals WHERE member_id = " + memid, conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
-                DataTable dt = new DataTable();
-                adp.Fill(dt);
-                if (dt.Rows.Count == 1)
-                {
-                    accid = dt.Rows[0]["capital_account_id"].ToString();
-                    lblAccount.Text = accid;
-                    lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
-                }
-
-                conn.Close();
-
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.ToString());
-                conn.Close();
-            }
-        }
 
         public void enableButtons()
         {
@@ -169,7 +161,8 @@ namespace AMC
                         if (type == "savings")
                         {
                             query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount)" +
-                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"; // INTEREST RATE FROM GENERAL
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "'); "
+                                                + "SELECT LAST_INSERT_ID()"; // INTEREST RATE FROM GENERAL
 
                             
                         } else if (type =="capitals")
@@ -179,10 +172,13 @@ namespace AMC
 
                         }
                         MySqlCommand ins = new MySqlCommand(query, conn);
-                        ins.ExecuteNonQuery();
+                        newID = Convert.ToInt32(ins.ExecuteScalar());
+                        insertTLines();
                         MessageBox.Show("Success! Transaction recorded.");
                         conn.Close();
 
+                        refreshEverything(1);
+                        
                     }
                     catch (Exception ee)
                     {
@@ -205,21 +201,28 @@ namespace AMC
 
         private int balance()
         {
-            double credit = Convert.ToDouble(particulars.Compute("SUM(Credit)", string.Empty));
-            double debit = Convert.ToDouble(particulars.Compute("SUM(Debit)", string.Empty));
-            double transamt = double.Parse(txtAmt.Text);
-
-            if (credit != debit)
+            try
             {
-                // MessageBox.Show("Double entries are not balanced.");
+                double credit = Convert.ToDouble(particulars.Compute("SUM(Credit)", string.Empty));
+                double debit = Convert.ToDouble(particulars.Compute("SUM(Debit)", string.Empty));
+                double transamt = double.Parse(txtAmt.Text);
+
+                if (credit != debit)
+                {
+                    // MessageBox.Show("Double entries are not balanced.");
+                    return 0;
+                }
+                else if (transamt != debit)
+                {
+                    // MessageBox.Show("Amount entered is not equal to the Particulars total.");
+                    return 1;
+                }
+                else return 2;
+            }
+            catch (Exception ee)
+            {
                 return 0;
             }
-            else if (transamt != debit)
-            {
-                // MessageBox.Show("Amount entered is not equal to the Particulars total.");
-                return 1;
-            }
-            else return 2;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -236,16 +239,36 @@ namespace AMC
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            refreshEverything(0);
+        }
+
+        private void refreshEverything(int what)
+        {
             try
             {
                 particulars.Clear();
                 loadParticulars(particulars);
+                code.Clear();
+                debcred_type.Clear();
+                new_total.Clear();
+                amount.Clear();
+                if (what == 1)
+                {
+                    lblAccount.Text = "";
+                    lblBalance.Text = "";
+                    lblMember.Text = "";
+                    txtAmt.Clear();
+                    txtAmt.Enabled = false;
+                    panelRadio.Enabled = false;
+                    dtpDate.Value = DateTime.Today;
+                    dtpDate.Enabled = false;
+                }
             }
             catch (DataException ee)
             {
                 // Process exception and return.
                 Console.WriteLine("Exception of type {0} occurred.",
-                    e.GetType());
+                    ee.GetType());
             }
         }
     }

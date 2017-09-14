@@ -91,12 +91,19 @@ namespace AMC
 
         private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            memname = dgvMembers.Rows[e.RowIndex].Cells["Name"].Value.ToString();
-            id = Int32.Parse(dgvMembers.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            lblSelected.Text = memname;
-            lblSelected.Visible = true;
-            sourceForm.memid = id;
-            sourceForm.memname = memname;
+            try
+            {
+                memname = dgvMembers.Rows[e.RowIndex].Cells["Name"].Value.ToString();
+                id = Int32.Parse(dgvMembers.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                lblSelected.Text = memname;
+                lblSelected.Visible = true;
+                sourceForm.memid = id;
+                sourceForm.memname = memname;
+            } catch (Exception ee)
+            {
+
+            }
+            
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)

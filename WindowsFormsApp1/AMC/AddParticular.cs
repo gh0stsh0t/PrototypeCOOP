@@ -52,11 +52,19 @@ namespace AMC
 
         private void dgvAccounts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            acctitle = dgvAccounts.Rows[e.RowIndex].Cells["Account Title"].Value.ToString();
-            code = Int32.Parse(dgvAccounts.Rows[e.RowIndex].Cells["Code"].Value.ToString());
-            acctype = Int32.Parse(dgvAccounts.Rows[e.RowIndex].Cells["type"].Value.ToString());
-            lblSelected.Text = code.ToString() + " - " + acctitle;
-            lblSelected.Visible = true;
+            try
+            {
+                acctitle = dgvAccounts.Rows[e.RowIndex].Cells["Account Title"].Value.ToString();
+                code = Int32.Parse(dgvAccounts.Rows[e.RowIndex].Cells["Code"].Value.ToString());
+                acctype = Int32.Parse(dgvAccounts.Rows[e.RowIndex].Cells["type"].Value.ToString());
+                lblSelected.Text = code.ToString() + " - " + acctitle;
+                lblSelected.Visible = true;
+            }
+            catch (Exception ee)
+            {
+
+            }
+            
         }
 
         private void txtSearch_Enter(object sender, EventArgs e)
@@ -111,6 +119,10 @@ namespace AMC
                 {
                     MessageBox.Show("You do not have sufficient funds on the selected account for this transaction.");
                     txtAmt.Clear();
+                } if(sourceForm.code.Contains(code))
+                {
+                    MessageBox.Show("You have already added that account.");
+                    txtAmt.Clear();
                 }
                 else
                 {
@@ -157,6 +169,7 @@ namespace AMC
             sourceForm.code.Add(code);
             sourceForm.amount.Add(amount);
             sourceForm.debcred_type.Add(type);
+            sourceForm.new_total.Add(solveNewAmount());
         }
 
         private Boolean toIncrease()
@@ -173,6 +186,14 @@ namespace AMC
                 else return false;
             }
             
+        }
+
+        private double solveNewAmount()
+        {
+            if (toIncrease())
+                return amount + maxamt;
+            else
+                return maxamt - amount;
         }
 
         private Boolean amountValid()
