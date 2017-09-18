@@ -195,8 +195,10 @@
             this.txtPrincipal.Name = "txtPrincipal";
             this.txtPrincipal.Size = new System.Drawing.Size(143, 23);
             this.txtPrincipal.TabIndex = 15;
-            this.txtPrincipal.Text = "0";
+            this.txtPrincipal.Text = "0.0";
             this.txtPrincipal.TextChanged += new System.EventHandler(this.txtPrincipal_TextChanged);
+            this.txtPrincipal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrincipal_KeyPress);
+            this.txtPrincipal.Leave += new System.EventHandler(this.txtPrincipal_Leave);
             // 
             // label11
             // 
@@ -270,8 +272,10 @@
             this.txtInterest.Name = "txtInterest";
             this.txtInterest.Size = new System.Drawing.Size(143, 23);
             this.txtInterest.TabIndex = 40;
-            this.txtInterest.Text = "0";
+            this.txtInterest.Text = "0.0";
             this.txtInterest.TextChanged += new System.EventHandler(this.txtInterest_TextChanged);
+            this.txtInterest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInterest_KeyPress);
+            this.txtInterest.Leave += new System.EventHandler(this.txtInterest_Leave);
             // 
             // txtPenalty
             // 
@@ -282,8 +286,10 @@
             this.txtPenalty.Name = "txtPenalty";
             this.txtPenalty.Size = new System.Drawing.Size(143, 23);
             this.txtPenalty.TabIndex = 40;
-            this.txtPenalty.Text = "0";
+            this.txtPenalty.Text = "0.0";
             this.txtPenalty.TextChanged += new System.EventHandler(this.txtPenalty_TextChanged);
+            this.txtPenalty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPenalty_KeyPress);
+            this.txtPenalty.Leave += new System.EventHandler(this.txtPenalty_Leave);
             // 
             // label5
             // 
@@ -346,6 +352,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 622);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.panel1);

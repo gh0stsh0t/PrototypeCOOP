@@ -88,6 +88,12 @@
     <Compile Include="NewCBUAccount.Designer.cs">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCBURelease.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCBURelease.Designer.cs">
+      <DependentUpon>NewCBURelease.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewCBUAccount.resx">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCBURelease.resx">
+      <DependentUpon>NewCBURelease.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>

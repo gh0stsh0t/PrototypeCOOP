@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -114,6 +115,55 @@ namespace AMC
         private void txtInterest_TextChanged(object sender, EventArgs e)
         {
             Addition();
+        }
+
+        private void keychecker(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            { e.Handled = true; }
+            TextBox txtDecimal = sender as TextBox;
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrincipal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            keychecker(sender,e);
+        }
+
+        private void txtInterest_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            keychecker(sender,e);
+        }
+
+        private void txtPenalty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            keychecker(sender,e);
+        }
+
+        private void txtPrincipal_Leave(object sender, EventArgs e)
+        {
+            isNum(sender);
+        }
+
+        private void txtInterest_Leave(object sender, EventArgs e)
+        {
+            isNum(sender);
+        }
+
+        private void txtPenalty_Leave(object sender, EventArgs e)
+        {
+            isNum(sender);
+        }
+
+        public void isNum(object strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{1,2}$");
+            if (rg.IsMatch(((TextBox)strToCheck).Text)) return;
+            MessageBox.Show("Please make sure the amount contains no special characters and has no more than 2 decimal points.");
+            txtPrincipal.Focus();
         }
     }
 }
