@@ -82,6 +82,12 @@
     <Compile Include="addLoanM.Designer.cs">
       <DependentUpon>addLoanM.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewLoans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewLoans.Designer.cs">
+      <DependentUpon>ViewLoans.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Fakes Include="Fakes\MySql.Data.fakes" />
+    <EmbeddedResource Include="ViewLoans.resx">
+      <DependentUpon>ViewLoans.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </EmbeddedResource>
