@@ -19,6 +19,10 @@ namespace AMC
             _holder=new DataTable();
         }
 
+        public string lastID()
+        {
+            return _cmd.LastInsertedId.ToString();
+        }
         private void RefreshCmd()
         {
             _cmd = new MySqlCommand();

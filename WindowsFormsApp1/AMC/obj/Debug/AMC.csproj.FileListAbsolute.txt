@@ -220,3 +220,4 @@ D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.reso
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
+C:\Users\RJSPERIAS\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBURelease.resources

@@ -100,30 +100,22 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    /*string[] taes = {"member_id", memid.ToString(), "loan_type", cbLoan.SelectedIndex.ToString(), "request_type"
+                    string[] loanStrings = {"member_id", memid.ToString(), "loan_type", cbLoan.SelectedIndex.ToString(), "request_type"
                             , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text, "term", tbTerm.SelectedIndex.ToString()
-                            , "interest_rate", tbInterest.Text, "purpose", tbPurpose.Text, "loan_status", "0", "outstanding_balance", tbAmount.Text};*/
-                    MySqlCommand cmd = new MySqlCommand("INSERT loans (member_id, loan_type, request_type, orig_amount, term, interest_rate, purpose, loan_status, outstanding_balance)"
-                        + "VALUES ('" + memid.ToString() + "', '" + cbLoan.SelectedIndex.ToString() + "', '" + cbRequest.SelectedIndex.ToString() + "', '" + tbAmount.Text + "', '" + tbTerm.SelectedIndex.ToString() + "', '" + tbInterest.Text + "', '"
-                        + tbPurpose.Text + "', '0', '" + tbAmount.Text + "')", conn);
-                    cmd.ExecuteNonQuery();
-                    string id = cmd.LastInsertedId.ToString();
+                            , "interest_rate", tbInterest.Text, "purpose", tbPurpose.Text, "loan_status", "0", "outstanding_balance", tbAmount.Text};
+                    _addloanconn = new DatabaseConn();
+                    _addloanconn.Insert("loans", loanStrings)
+                                .GetQueryData();
+                    string id = _addloanconn.lastID();
                     MessageBox.Show(id);
-                    /*string[] comakers = { "loan_id", id, "name", tbName1.Text, "address", tbAddress1.Text, "company_name", tbCompany1.Text
+                    string[] comakers = { "loan_id", id, "name", tbName1.Text, "address", tbAddress1.Text, "company_name", tbCompany1.Text
                         , "position", tbPosition1.Text};
-                    _addloanconn.Insert("comakers", comakers);*/
-                    cmd = new MySqlCommand("INSERT comakers (loan_id, name, address, company_name, position)"
-                    + "VALUES ('" + id + "', '" + tbName1.Text + "', '" + tbAddress1.Text + "', '" + tbCompany1.Text + "', '" + tbPosition1.Text + "')", conn);
-                    cmd.ExecuteNonQuery();
+                    _addloanconn.Insert("comakers", comakers);
                     if (comakercount == 2)
                     {
-                        /*
                         string[] comakers2 = { "loan_id", id, "name", tbName2.Text, "address", tbAddress2.Text, "company_name", tbCompany2.Text
                             , "position", tbPosition2.Text};
-                        _addloanconn.Insert("comakers", comakers2);*/
-                        cmd = new MySqlCommand("INSERT comakers (loan_id, name, address, company_name, position)"
-                        + "VALUES ('" + id + "', '" + tbName2.Text + "', '" + tbAddress2.Text + "', '" + tbCompany2.Text + "', '" + tbPosition2.Text + "')", conn);
-                        cmd.ExecuteNonQuery();
+                        _addloanconn.Insert("comakers", comakers2);
                     }
                     MessageBox.Show("Success??");
                     conn.Close();

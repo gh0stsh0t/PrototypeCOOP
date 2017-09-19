@@ -94,12 +94,12 @@ namespace AMC
             }
         }
 
-        private static int checkier(string text)
+        private static float checkier(string text)
         {
 
             try
             {
-                return int.Parse(text);
+                return float.Parse(text);
             }
             catch (Exception e)
             {
