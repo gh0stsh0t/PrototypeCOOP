@@ -119,11 +119,11 @@ namespace AMC
                 sourceForm.lblMember.Text = memname;
                 if (transtype == "savings")
                 {
-                    q1 = q1 + "savings_account_id AS accountid, outstanding_balance FROM savings WHERE member_id = " + id.ToString();
+                    q1 = q1 + "savings_account_id AS accountid FROM savings WHERE member_id = " + id.ToString();
                 }
                 else if (transtype == "capitals")
                 {
-                    q1 = q1 + "capital_account_id AS accountid, outstanding_balance FROM capitals WHERE member_id = " + id.ToString();
+                    q1 = q1 + "capital_account_id AS accountid FROM capitals WHERE member_id = " + id.ToString();
                 }
                 loadAcct(q1);
                 sourceForm.btnSubmit.Enabled = true;
@@ -151,7 +151,7 @@ namespace AMC
                 if (dt.Rows.Count != 0)
                 {
                     sourceForm.lblAccount.Text = dt.Rows[0]["accountid"].ToString();
-                    sourceForm.lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
+                    // sourceForm.lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
                 }
             }
             catch (Exception ee)

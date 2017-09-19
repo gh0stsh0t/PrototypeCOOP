@@ -35,8 +35,6 @@ namespace AMC
 
         private void NewSavingsAccount_Load(object sender, EventArgs e)
         {
-            getNewId();
-            lblAccount.Text = accid;
             try
             {
                 conn.Open();
@@ -72,7 +70,7 @@ namespace AMC
             }
         }
 
-        private void getNewId()
+        /* private void getNewId()
         {
             string q = "SELECT savings_account_id FROM savings ORDER BY savings_account_id DESC LIMIT 1";
             try
@@ -102,7 +100,7 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
                 conn.Close();
             }
-        }
+        } */
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -115,8 +113,10 @@ namespace AMC
             try
             {
                 conn.Open();
-                string query = "INSERT INTO savings (member_id, opening_date, initial_balance, outstanding_balance, account_status, interest_rate)" +
-                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "','" + txtBal.Text + "', '1','" + interest.ToString() + "')";
+                string query = "INSERT INTO savings (member_id, opening_date, account_status)" +
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1')"; /*+
+                                "INSERT INTO savings_balance_log (amo, opening_date, account_status)" +
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1');" + */
                 MySqlCommand ins = new MySqlCommand(query, conn);
                 ins.ExecuteNonQuery();
                 conn.Close();

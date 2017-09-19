@@ -38,10 +38,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
-            this.lblAccount = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.intRate = new System.Windows.Forms.TextBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,7 +68,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(77, 120);
+            this.label8.Location = new System.Drawing.Point(77, 116);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 21;
@@ -80,9 +78,9 @@
             // 
             this.txtBal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBal.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtBal.Location = new System.Drawing.Point(242, 122);
+            this.txtBal.Location = new System.Drawing.Point(215, 113);
             this.txtBal.Name = "txtBal";
-            this.txtBal.Size = new System.Drawing.Size(173, 23);
+            this.txtBal.Size = new System.Drawing.Size(151, 23);
             this.txtBal.TabIndex = 0;
             this.txtBal.Text = "0.00";
             // 
@@ -142,10 +140,8 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.txtBal);
             this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.lblAccount);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.intRate);
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.label2);
@@ -158,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(374, 83);
+            this.label7.Location = new System.Drawing.Point(318, 69);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(16, 13);
             this.label7.TabIndex = 22;
@@ -167,20 +163,12 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(239, 10);
+            this.lblName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(212, 17);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(81, 13);
+            this.lblName.Size = new System.Drawing.Size(99, 17);
             this.lblName.TabIndex = 19;
             this.lblName.Text = "Member Name";
-            // 
-            // lblAccount
-            // 
-            this.lblAccount.AutoSize = true;
-            this.lblAccount.Location = new System.Drawing.Point(239, 44);
-            this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(42, 13);
-            this.lblAccount.TabIndex = 13;
-            this.lblAccount.Text = "xxxxxxx";
             // 
             // label6
             // 
@@ -194,31 +182,21 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(77, 81);
+            this.label5.Location = new System.Drawing.Point(77, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Interest Rate";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(54, 44);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Account Number";
             // 
             // intRate
             // 
             this.intRate.Enabled = false;
             this.intRate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.intRate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.intRate.Location = new System.Drawing.Point(242, 79);
+            this.intRate.Location = new System.Drawing.Point(215, 65);
             this.intRate.Name = "intRate";
             this.intRate.ReadOnly = true;
-            this.intRate.Size = new System.Drawing.Size(126, 23);
+            this.intRate.Size = new System.Drawing.Size(96, 23);
             this.intRate.TabIndex = 3;
             this.intRate.Text = "3";
             // 
@@ -226,7 +204,7 @@
             // 
             this.splitter2.Location = new System.Drawing.Point(164, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(69, 177);
+            this.splitter2.Size = new System.Drawing.Size(42, 177);
             this.splitter2.TabIndex = 2;
             this.splitter2.TabStop = false;
             this.splitter2.Visible = false;
@@ -235,7 +213,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(96, 10);
+            this.label2.Location = new System.Drawing.Point(96, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 1;
@@ -287,10 +265,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblAccount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox intRate;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Label label2;

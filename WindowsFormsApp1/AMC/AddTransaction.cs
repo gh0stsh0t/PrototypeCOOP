@@ -132,10 +132,10 @@ namespace AMC
             string transtype = "";
             if(rdDep.Checked == true)
             {
-                transtype = "0";
+                transtype = "1";
             } else if (rdWd.Checked == true)
             {
-                transtype = "1";
+                transtype = "-1";
             }
             if (txtAmt.Text == "")
             {
