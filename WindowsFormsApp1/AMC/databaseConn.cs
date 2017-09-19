@@ -19,6 +19,20 @@ namespace AMC
             _holder=new DataTable();
         }
 
+        public DataTable storedProc(string procName)
+        {
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
+                _cmd.CommandText = "viewloanrequests";
+                _cmd.Connection = databasecon;
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _holder.Load(_cmd.ExecuteReader());
+                return _holder;
+            }
+        }
+
+
         private void RefreshCmd()
         {
             _cmd = new MySqlCommand();

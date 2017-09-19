@@ -22,20 +22,7 @@ namespace AMC
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             reftomain = parent;
             this.TopLevel = false;
-            filterSet(7);
         }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            if (!advanceSearchVisible)
-                panel1.Visible = !panel1.Visible;
-        }
-        //        private void Animations()
-        //        {
-        //            opaque.Location = new Point(0, 0);
-        //            opaque.Size = this.Size;
-        //            popupEnabler.Start();
-        //        }
         private void ViewLoans_Load(object sender, EventArgs e)
         {
             Rifrish();
@@ -53,15 +40,13 @@ namespace AMC
             {
                 var tae = new DatabaseConn();
                 string[] taes = {"member_id",
-                    "concat_ws(',', family_name, first_name) as name", "gender", "address", "contact_no", "type",
-                    "status"};
-                dataGridView1.DataSource = tae.Select("members", taes).GetQueryData();
-                //dataGridView1.DataSource = dt;
+                    "loan_type", "request_type", "term", "orig_amount", "interest_rate"};
+                dataGridView1.DataSource = tae.Select("loans", taes).GetQueryData();
                 dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
                 dataGridView1.Columns["member_id"].Visible = false;
                 conn.Close();
                 var x = new DataGridViewButtonColumn();
-                x.DefaultCellStyle.BackColor = button4.BackColor;
+                x.DefaultCellStyle.BackColor = button1.BackColor;
                 var addColumn = new DataGridViewButtonColumn
                 {
                     Name = "loans",
@@ -77,11 +62,6 @@ namespace AMC
                     DefaultCellStyle = x.DefaultCellStyle
                 };
                 var columnIndex = dataGridView1.ColumnCount;
-                if (dataGridView1.Columns["loans"] == null)
-                {
-                    dataGridView1.Columns.Add(addColumn);
-                    dataGridView1.Columns.Add(editColumn);
-                }
             }
             catch (Exception ee)
             {
@@ -132,17 +112,6 @@ namespace AMC
             }
         }
 
-        private void popupEnabler_Tick(object sender, EventArgs e)
-        {
-            //opaque.Opactiy
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            advanceSearchVisible = true;
-            panel1.Visible = true;
-        }
-
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             MessageBox.Show("edit dialog of user " + dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString());
@@ -159,42 +128,6 @@ namespace AMC
             {
                 reftomain.innerChild(new AddMember(memid));
             }
-        }
-
-        private void filterSet(int x)
-        {
-            switch (x)
-            {
-                case 0:
-                    filter = "";
-                    break;
-                case 1:
-                    filter = " WHERE date_terminated = NULL";
-                    break;
-                case 2:
-                    filter = "WHERE date_terminated NOT IN(NULL)";
-                    break;
-                case 3:
-                    filter = " WHERE ";
-                    break;
-                case 4:
-                    filter = " WHERE status=0";
-                    break;
-                default:
-                    filter = " WHERE status=1";
-                    break;
-            }
-        }
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            //filter
-            filterSet(comboBox1.SelectedIndex);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //reset
-            filterSet(7);
         }
     }
 }
