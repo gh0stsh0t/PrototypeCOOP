@@ -110,3 +110,7 @@ C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.Fakes.fakesconfig
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Form2.resources

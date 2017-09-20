@@ -82,6 +82,12 @@
     <Compile Include="addLoanM.Designer.cs">
       <DependentUpon>addLoanM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purpose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purpose.Designer.cs">
+      <DependentUpon>Purpose.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewLoans.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="addLoanM.resx">
       <DependentUpon>addLoanM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purpose.resx">
+      <DependentUpon>Purpose.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>

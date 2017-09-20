@@ -54,7 +54,25 @@ namespace AMC
                 return _holder;
             }
         }
-
+        //wait
+        /*
+        public dynamic GetQueryData(int x)
+        {
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
+                _cmd.CommandText = _sql;
+                _cmd.Connection = databasecon;
+                if (_flag)
+                {
+                    _cmd.ExecuteNonQuery();
+                    return _flag;
+                }
+                object tae.Load(_cmd.ExecuteScalar());
+                return _holder;
+            }
+        }
+        */
         public DataTable GetData()
         {
             return _holder;

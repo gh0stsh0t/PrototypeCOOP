@@ -55,8 +55,7 @@ namespace AMC
                 string[] taes = {"member_id",
                     "concat_ws(',', family_name, first_name) as name", "gender", "address", "contact_no", "type",
                     "status"};
-
-                dataGridView1.DataSource = tae.storedProc("asd");
+                dataGridView1.DataSource = tae.Select("members", taes).GetQueryData();
                 //dataGridView1.DataSource = dt;
                 dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
                 dataGridView1.Columns["member_id"].Visible = false;
@@ -151,14 +150,21 @@ namespace AMC
 
         private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            if (e.Button.Equals(MouseButtons.Left))
+            try
             {
-                reftomain.innerChild(new ViewProfile(memid, reftomain));
+                int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                if (e.Button.Equals(MouseButtons.Left))
+                {
+                    reftomain.innerChild(new ViewProfile(memid, reftomain));
+                }
+                else
+                {
+                    reftomain.innerChild(new AddMember(memid));
+                }
             }
-            else
+            catch(System.ArgumentOutOfRangeException)
             {
-                reftomain.innerChild(new AddMember(memid));
+
             }
         }
 

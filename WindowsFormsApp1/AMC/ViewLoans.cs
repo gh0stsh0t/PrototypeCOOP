@@ -16,6 +16,7 @@ namespace AMC
         private string filter = " where member.status=1";
         public MySqlConnection conn;
         public MainForm reftomain;
+        private Form popup;
         public ViewLoans(MainForm parent)
         {
             InitializeComponent();
@@ -30,8 +31,15 @@ namespace AMC
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //breaker();
-            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            reftomain.innerChild(new ViewProfile(memid, reftomain));
+            try
+            {
+                int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                reftomain.innerChild(new ViewProfile(memid, reftomain));
+            }
+            catch(System.ArgumentOutOfRangeException)
+            {
+
+            }
 
         }
         private void Rifrish()
@@ -41,9 +49,9 @@ namespace AMC
                 var tae = new DatabaseConn();
                 string[] taes = {"member_id",
                     "loan_type", "request_type", "term", "orig_amount", "interest_rate"};
-                dataGridView1.DataSource = tae.Select("loans", taes).GetQueryData();
+                dataGridView1.DataSource = tae.storedProc("asd");
                 dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
-                dataGridView1.Columns["member_id"].Visible = false;
+                dataGridView1.Columns["loan_status"].Visible = false;
                 conn.Close();
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button1.BackColor;
@@ -100,34 +108,13 @@ namespace AMC
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridView1.Columns["loans"].Index)
-            {
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
-            }
-            else if (e.ColumnIndex == dataGridView1.Columns["savings"].Index)
-            {
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
-            }
-        }
-
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show("edit dialog of user " + dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString());
+            try
+            {
+
+            }
         }
 
-        private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            if (e.Button.Equals(MouseButtons.Left))
-            {
-                reftomain.innerChild(new ViewProfile(memid, reftomain));
-            }
-            else
-            {
-                reftomain.innerChild(new AddMember(memid));
-            }
-        }
     }
 }
