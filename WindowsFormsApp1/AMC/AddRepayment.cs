@@ -21,7 +21,15 @@ namespace AMC
             InitializeComponent();
             MemberListRef();
         }
-
+        /*
+         * here lies the code for the data grid biew
+         * SELECT SUM(interest) TOTAL_INTEREST, SUM(principal) total_principal, SUM(penalty) total_penalty), SUM(interest)-SUM(release) balance 
+         * FROM loan_transactions
+         * GROUP BY loan_account_id
+         * 
+         * STORED PROC:
+         * SELECT date_granted-cutoffdate as age, age-term as taas name,  loans INNER JOIN loan_transactions
+         */
         public AddRepayment(int memberid) : this()
         {
             //cbxMember.SelectedIndex = memberid;
@@ -51,7 +59,8 @@ namespace AMC
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             conn.Insert("loan_transactions", 
-                        "principal", txtPrincipal.ToString(), "interest", txtInterest.ToString(), "penalty", txtPenalty.ToString(), 
+                        "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal", txtPrincipal.ToString(), 
+                        "interest", txtInterest.ToString(), "penalty", txtPenalty.ToString(), "total_amount", label12.Text,
                         "date_encoded", DateTime.Today.ToString());
         }
 
