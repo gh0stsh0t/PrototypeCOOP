@@ -73,8 +73,6 @@ namespace AMC
             var reftomain = this;
             popup = new addLoanM(reftomain);
             popup.ShowDialog();
-            
-            
         }
 
         private void txtPenalty_TextChanged(object sender, EventArgs e)

@@ -30,7 +30,7 @@ namespace AMC
             InitializeComponent();
              _addloanconn = new DatabaseConn();
         }
-        public addLoanM(AddRepayment heh)
+        public addLoanM(AddRepayment heh):this()
         {
             hehe = heh;
         }
