@@ -315,6 +315,16 @@ namespace AMC
                 tbInterest.Focus();
             }
         }
+
+        private void tbTerm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tbTerm_Leave(object sender, EventArgs e)
+        {
+
+        }
     }
    
 }

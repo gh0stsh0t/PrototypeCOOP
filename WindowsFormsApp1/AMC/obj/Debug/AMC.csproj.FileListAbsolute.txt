@@ -97,7 +97,6 @@ C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
-C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.xml
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddTransaction.resources
@@ -114,3 +113,5 @@ C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.D
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Form2.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ApprovalForm.resources

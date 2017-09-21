@@ -30,8 +30,6 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tbTerm = new System.Windows.Forms.ComboBox();
             this.name = new System.Windows.Forms.Label();
             this.mname = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -74,8 +72,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.tbTerm = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -96,7 +94,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.tbTerm);
             this.panel1.Controls.Add(this.name);
             this.panel1.Controls.Add(this.mname);
             this.panel1.Controls.Add(this.button4);
@@ -124,34 +122,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(905, 562);
             this.panel1.TabIndex = 4;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.tbTerm);
-            this.panel3.Location = new System.Drawing.Point(370, 214);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(243, 21);
-            this.panel3.TabIndex = 35;
-            // 
-            // tbTerm
-            // 
-            this.tbTerm.BackColor = System.Drawing.SystemColors.Window;
-            this.tbTerm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tbTerm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tbTerm.FormattingEnabled = true;
-            this.tbTerm.Items.AddRange(new object[] {
-            "1 to 30 days",
-            "31 to 60 days",
-            "61 to 90 days",
-            "91 to 120 days",
-            "181 to 365 days",
-            "366 to 2 years (730 days)"});
-            this.tbTerm.Location = new System.Drawing.Point(0, 0);
-            this.tbTerm.Name = "tbTerm";
-            this.tbTerm.Size = new System.Drawing.Size(241, 21);
-            this.tbTerm.TabIndex = 36;
             // 
             // name
             // 
@@ -591,6 +561,15 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // tbTerm
+            // 
+            this.tbTerm.Location = new System.Drawing.Point(371, 211);
+            this.tbTerm.Name = "tbTerm";
+            this.tbTerm.Size = new System.Drawing.Size(247, 22);
+            this.tbTerm.TabIndex = 26;
+            this.tbTerm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTerm_KeyPress);
+            this.tbTerm.Leave += new System.EventHandler(this.tbTerm_Leave);
+            // 
             // AddLoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,7 +585,6 @@
             this.Load += new System.EventHandler(this.AddLoan_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -662,10 +640,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox tbTerm;
         private System.Windows.Forms.Label mname;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label name;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox tbTerm;
     }
 }

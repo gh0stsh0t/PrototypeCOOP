@@ -12,8 +12,7 @@ namespace AMC
 {
     public partial class ViewLoans : Form
     {
-        private bool advanceSearchVisible = false;
-        private string filter = " where member.status=1";
+        private string filter = "loan_status = 0";
         public MySqlConnection conn;
         public MainForm reftomain;
         private Form popup;
@@ -28,48 +27,26 @@ namespace AMC
         {
             Rifrish();
         }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //breaker();
-            try
-            {
-                int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-                reftomain.innerChild(new ViewProfile(memid, reftomain));
-            }
-            catch(System.ArgumentOutOfRangeException)
-            {
-
-            }
-
-        }
         private void Rifrish()
         {
             try
             {
                 var tae = new DatabaseConn();
-                string[] taes = {"member_id",
-                    "loan_type", "request_type", "term", "orig_amount", "interest_rate"};
                 dataGridView1.DataSource = tae.storedProc("asd");
                 dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
-                dataGridView1.Columns["loan_status"].Visible = false;
+                dataGridView1.Columns["member_id"].Visible = false;
+                dataGridView1.Columns["loan_account_id"].Visible = false;
+                dataGridView1.Columns["loan_type"].HeaderText = "Loan Type";
+                dataGridView1.Columns["request_type"].HeaderText = "Request Type";
+                dataGridView1.Columns["term"].HeaderText = "Term";
+                dataGridView1.Columns["orig_amount"].HeaderText = "Amount";
+                dataGridView1.Columns["interest_rate"].HeaderText = "Interest Rate";
                 conn.Close();
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button1.BackColor;
-                var addColumn = new DataGridViewButtonColumn
-                {
-                    Name = "loans",
-                    Text = "loans",
-                    FlatStyle = FlatStyle.Flat,
-                    DefaultCellStyle = x.DefaultCellStyle
-                };
-                var editColumn = new DataGridViewButtonColumn
-                {
-                    Name = "savings",
-                    Text = "savings ",
-                    FlatStyle = FlatStyle.Flat,
-                    DefaultCellStyle = x.DefaultCellStyle
-                };
                 var columnIndex = dataGridView1.ColumnCount;
+                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                    dataGridView1.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             catch (Exception ee)
             {
@@ -77,6 +54,41 @@ namespace AMC
                 conn.Close();
             }
             dataGridView1.ClearSelection();
+            convert();
+        }
+
+        private void convert()
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                //change loan type
+                if (dataGridView1.Rows[i].Cells["loan_type"].Value.ToString() == "0")
+                {
+                    dataGridView1.Rows[i].Cells["loan_type"].Value = "Regular Loan";
+                }
+                else if (dataGridView1.Rows[i].Cells["loan_type"].Value.ToString() == "1")
+                {
+                    dataGridView1.Rows[i].Cells["loan_type"].Value = "Emergency Loan";
+                }
+                else
+                {
+                    dataGridView1.Rows[i].Cells["loan_type"].Value = "Appliance Loan";
+                }
+
+                //change request type
+                if (dataGridView1.Rows[i].Cells["request_type"].Value.ToString() == "0")
+                {
+                    dataGridView1.Rows[i].Cells["request_type"].Value = "New";
+                }
+                else if (dataGridView1.Rows[i].Cells["request_type"].Value.ToString() == "1")
+                {
+                    dataGridView1.Rows[i].Cells["request_type"].Value = "Renewal";
+                }
+                else
+                {
+                    dataGridView1.Rows[i].Cells["request_type"].Value = "Restructuring";
+                }
+            }
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
@@ -86,15 +98,19 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT concat_ws(',',family_name ,first_name) as name FROM membersloanv WHERE family_name LIKE '" + tbSearch.Text + "%' AND" + filter, conn);
+                    MySqlCommand comm = new MySqlCommand("SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where (family_name LIKE '" + tbSearch.Text + "%' OR first_name LIKE '" + tbSearch.Text + "%') AND " + filter, conn);
                     MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                     var dt = new DataTable();
                     adp.Fill(dt);
                     dataGridView1.DataSource = dt;
-                    dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
+                    if (dt.Rows.Count != 0)
+                    {
+                        dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
+                        foreach (DataGridViewColumn col in dataGridView1.Columns)
+                            dataGridView1.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
+                    convert();
                     conn.Close();
-                    dataGridView1.Columns["loans"].DisplayIndex = dataGridView1.ColumnCount - 2;
-                    dataGridView1.Columns["savings"].DisplayIndex = dataGridView1.ColumnCount - 1;
                 }
                 catch (Exception ee)
                 {
@@ -108,11 +124,30 @@ namespace AMC
             }
         }
 
+        private void breaker()
+        {
+            try
+            {
+                popup.Close();
+                popup.Dispose();
+            }
+            catch
+            {
+            }
+        }
+
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-
+                breaker();
+                ViewLoans reftomain = this;
+                popup = new ApprovalForm(reftomain, int.Parse(dataGridView1.Rows[e.RowIndex].Cells["loan_account_id"].Value.ToString()));
+                popup.ShowDialog();
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
             }
         }
 

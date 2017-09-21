@@ -1,6 +1,6 @@
 ﻿namespace AMC
 {
-    partial class Form2
+    partial class ApprovalForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mlist = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.mlist)).BeginInit();
             this.SuspendLayout();
-            // 
-            // mlist
-            // 
-            this.mlist.AllowUserToAddRows = false;
-            this.mlist.AllowUserToDeleteRows = false;
-            this.mlist.AllowUserToResizeColumns = false;
-            this.mlist.AllowUserToResizeRows = false;
-            this.mlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.mlist.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.mlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.mlist.ColumnHeadersVisible = false;
-            this.mlist.EnableHeadersVisualStyles = false;
-            this.mlist.Location = new System.Drawing.Point(12, 53);
-            this.mlist.MultiSelect = false;
-            this.mlist.Name = "mlist";
-            this.mlist.ReadOnly = true;
-            this.mlist.RowHeadersVisible = false;
-            this.mlist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.mlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.mlist.ShowCellErrors = false;
-            this.mlist.ShowCellToolTips = false;
-            this.mlist.ShowEditingIcon = false;
-            this.mlist.ShowRowErrors = false;
-            this.mlist.Size = new System.Drawing.Size(443, 239);
-            this.mlist.TabIndex = 5;
             // 
             // button3
             // 
@@ -80,27 +53,24 @@
             this.name.TabIndex = 3;
             this.name.Text = "label";
             // 
-            // Form2
+            // ApprovalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 304);
-            this.Controls.Add(this.mlist);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.name);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form2";
+            this.Name = "ApprovalForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form2";
-            ((System.ComponentModel.ISupportInitialize)(this.mlist)).EndInit();
+            this.Load += new System.EventHandler(this.ApprovalForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView mlist;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label name;
     }
