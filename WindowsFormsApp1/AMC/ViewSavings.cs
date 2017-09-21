@@ -15,6 +15,7 @@ namespace AMC
     {
         public MySqlConnection conn;
         public MainForm reftomain;
+        int accountstatus = 1;
 
         public ViewSavings(MainForm main)
         {
@@ -28,18 +29,28 @@ namespace AMC
             cbxMonth.SelectedIndex = Convert.ToInt32(DateTime.Now.Month) - 1;
             cbxYear.SelectedText = DateTime.Now.Year.ToString();
 
-            string q = createQuery(cbxMonth.SelectedIndex + 1, cbxYear.Text);
-            loadAccounts(q);
+
+            loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text);
         }
 
-        private void loadAccounts(string query)
+        private void loadMonthAccounts(int mn, string yr)
         {
+            lblDate.Text = "Month of " + cbxMonth.Text + " " + yr;
+            accountstatus = checkStatus();
             try
             {
-
                 conn.Open();
 
-                MySqlCommand comm = new MySqlCommand(query, conn);
+                MySqlCommand comm = new MySqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.StoredProcedure;
+                if(mn % 3 == 0)
+                    comm.CommandText = "displayQuarterMonthTable";
+                else
+                    comm.CommandText = "displayMonthTable";
+                comm.Parameters.AddWithValue("@mn", mn);
+                comm.Parameters.AddWithValue("@yr", yr);
+                comm.Parameters.AddWithValue("@accountstatus", accountstatus);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
@@ -65,9 +76,48 @@ namespace AMC
             dgvAccounts.ClearSelection();
         }
 
-        private string createQuery(int mn, string yr)
+        private void loadYearAccounts(string yr)
         {
-            string m = mn.ToString();
+            lblDate.Text = "Year Summary Report for " + yr;
+            accountstatus = checkStatus();
+            try
+            {
+                conn.Open();
+
+                MySqlCommand comm = new MySqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "displayYearTable";
+                comm.Parameters.AddWithValue("@yr", yr);
+                comm.Parameters.AddWithValue("@accountstatus", accountstatus);
+                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    dgvAccounts.DataSource = dt;
+                    dgvAccounts.CurrentCell.Selected = false;
+                    dgvAccounts.Columns["member_id"].Visible = false;
+                    conn.Close();
+                }
+                else
+                {
+                    dgvAccounts.DataSource = dt;
+                }
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+            dgvAccounts.ClearSelection();
+        }
+
+        /* private string createQuery(int mn, string yr)
+        {
+            
             if (rdMonth.Checked == true)
             {
                 if(mn % 3 == 0)
@@ -106,12 +156,51 @@ namespace AMC
             {
                 return "";
             }
-        }
+        } */
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            string q = createQuery(cbxMonth.SelectedIndex + 1, cbxYear.Text);
-            loadAccounts(q);
+            if (rdMonth.Checked == true)
+                loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text);
+            else
+                loadYearAccounts(cbxYear.Text);
+        }
+
+        private void rdYear_Click(object sender, EventArgs e)
+        {
+            cbxMonth.Enabled = false;
+            loadYearAccounts(cbxYear.Text);
+        }
+
+        private void rdMonth_Click(object sender, EventArgs e)
+        {
+            cbxMonth.SelectedIndex = Convert.ToInt32(DateTime.Now.Month) - 1;
+            cbxMonth.Enabled = true;
+            loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text);
+        }
+
+        private int checkStatus()
+        {
+            if (rdOpen.Checked == true)
+                return 1;
+            else
+                return 0;
+        }
+
+        private void rdOpen_Click(object sender, EventArgs e)
+        {
+            if (rdMonth.Checked == true)
+                loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text);
+            else
+                loadYearAccounts(cbxYear.Text);
+        }
+
+        private void rdClosed_Click(object sender, EventArgs e)
+        {
+            if (rdMonth.Checked == true)
+                loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text);
+            else
+                loadYearAccounts(cbxYear.Text);
         }
     }
 }
