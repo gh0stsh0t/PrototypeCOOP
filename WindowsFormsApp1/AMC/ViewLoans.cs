@@ -144,6 +144,7 @@ namespace AMC
                 ViewLoans reftomain = this;
                 popup = new ApprovalForm(reftomain, int.Parse(dataGridView1.Rows[e.RowIndex].Cells["loan_account_id"].Value.ToString()));
                 popup.ShowDialog();
+                Rifrish();
             }
             catch(Exception ee)
             {
@@ -153,3 +154,8 @@ namespace AMC
 
     }
 }
+
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanrequests`()
+//BEGIN
+//	SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where loan_status = 0;
+//END

@@ -31,7 +31,6 @@ namespace AMC
             memid = x;
             cbLoan.SelectedIndex = 0;
             cbRequest.SelectedIndex = 0;
-            tbTerm.SelectedIndex = 0;
             _addloanconn = new DatabaseConn();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             tbInterest.Text = intrate.ToString();
@@ -104,7 +103,7 @@ namespace AMC
                             , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text, "term", tbTerm.SelectedIndex.ToString()
                             , "interest_rate", tbInterest.Text, "purpose", tbPurpose.Text, "loan_status", "0", "outstanding_balance", tbAmount.Text};*/
                     MySqlCommand cmd = new MySqlCommand("INSERT loans (member_id, loan_type, request_type, orig_amount, term, interest_rate, purpose, loan_status, outstanding_balance)"
-                        + "VALUES ('" + memid.ToString() + "', '" + cbLoan.SelectedIndex.ToString() + "', '" + cbRequest.SelectedIndex.ToString() + "', '" + tbAmount.Text + "', '" + tbTerm.SelectedIndex.ToString() + "', '" + tbInterest.Text + "', '" 
+                        + "VALUES ('" + memid.ToString() + "', '" + cbLoan.SelectedIndex.ToString() + "', '" + cbRequest.SelectedIndex.ToString() + "', '" + tbAmount.Text + "', '" + tbTerm.Text + "', '" + tbInterest.Text + "', '" 
                         + tbPurpose.Text + "', '0', '" + tbAmount.Text + "')", conn);
                     cmd.ExecuteNonQuery();
                     string id = cmd.LastInsertedId.ToString();
@@ -200,7 +199,7 @@ namespace AMC
             tbPosition1.Clear();
             tbPosition2.Clear();
             tbPurpose.Clear();
-            tbTerm.SelectedIndex = 0;
+            tbTerm.Clear();
         }
 
         private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -318,12 +317,23 @@ namespace AMC
 
         private void tbTerm_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back))
+                e.Handled = true;
+           
         }
 
         private void tbTerm_Leave(object sender, EventArgs e)
         {
-
+            if (!isNum(tbTerm.Text))
+            {
+                MessageBox.Show("Please make sure the term is a number.");
+                tbTerm.Focus();
+            }
+            else if (int.Parse(tbTerm.Text) <= 0 || int.Parse(tbTerm.Text) > 730)
+            {
+                MessageBox.Show("Please make sure the term is between 1 day and 730 days (2 years).");
+                tbTerm.Focus();
+            }
         }
     }
    

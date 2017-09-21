@@ -21,7 +21,7 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-            innerChild (new ViewLoans(this));
+            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -127,6 +127,11 @@ namespace AMC
             childform.TopLevel = false;
             panel1.Controls.Add(childform);
             childform.Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewLoans(this));
         }
     }
 }
