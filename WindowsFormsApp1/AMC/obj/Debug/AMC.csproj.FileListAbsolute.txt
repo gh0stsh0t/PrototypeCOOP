@@ -153,7 +153,6 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.SelectMember.resources
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddLoan.resources
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.addLoanM.resources
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
 C:\Users\user\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
@@ -223,24 +222,6 @@ D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
 C:\Users\rjsperias\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBURelease.resources
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\fakes.args
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\Microsoft.QualityTools.Testing.Fakes.dll
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\MySql.Data.dll
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\MySql.Data.Fakes.dll
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\MySql.Data.Fakes.fakesconfig
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\MySql.Data.Fakes.pdb
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\b\MySql.Data.Fakes.xml
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.ah
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.ch
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.cs
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.csproj
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.fakes
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.fakesconfig
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\f.snk
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\f.csproj.FileListAbsolute.txt
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\f.csprojResolveAssemblyReference.cache
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.dll
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\Fakes\msd\o\MySql.Data.Fakes.pdb
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe.config
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
@@ -258,9 +239,9 @@ C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.resources
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.Fakes.fakesconfig
-C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\MySql.Data.dll
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
 C:\Users\evqmagno\Documents\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Form2.resources
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ApprovalForm.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ApprovalForm.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources

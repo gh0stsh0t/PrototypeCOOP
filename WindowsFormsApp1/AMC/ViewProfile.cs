@@ -15,6 +15,7 @@ namespace AMC
     {
         public MySqlConnection conn;
         public int memid;
+        public string memstat;
         public MainForm reftomain;
         Boolean hasSavings = false, hasLoan = false, hasCapital = false;
 
@@ -24,6 +25,7 @@ namespace AMC
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             memid = id;
             reftomain = main;
+            this.TopLevel = false;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -43,7 +45,6 @@ namespace AMC
             try
             {
                 conn.Open();
-
                 MySqlCommand comm = new MySqlCommand("SELECT * FROM members WHERE member_id = " + memid.ToString(), conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
@@ -79,10 +80,17 @@ namespace AMC
                     lblPosition.Text = dt.Rows[0]["position"].ToString();
                     lblReligion.Text = dt.Rows[0]["religion"].ToString();
                     string stat = dt.Rows[0]["status"].ToString();
+                    memstat = stat;
                     if (stat == "0")
+                    {
                         lblStatus.Text = "INACTIVE";
+                        btnDeactivate.Text = "Activate";
+                    }
                     else if (stat == "1")
+                    {
                         lblStatus.Text = "ACTIVE";
+                        btnDeactivate.Text = "Deactivate";
+                    }
                     lblTin.Text = dt.Rows[0]["tin"].ToString();
                     string type = dt.Rows[0]["type"].ToString();
                     if (type == "0")
@@ -90,7 +98,7 @@ namespace AMC
                     else if (type == "1")
                         lblType.Text = "ASSOCIATE";
                     // ANOTHER TYPE????
-                   
+
 
                 }
                 /* else if (dt.Rows.Count > 1)
@@ -120,7 +128,7 @@ namespace AMC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            reftomain.innerChild(new AddLoan(memid));
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -132,12 +140,69 @@ namespace AMC
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            reftomain.innerChild(new AddMember(memid));
+        }
 
+        private void btnDeactivate_Click(object sender, EventArgs e)
+        {
+            //
+        }
+
+        private void btnDeactivate_Click_1(object sender, EventArgs e)
+        {
+            string q = "", warn = "", notif = "";
+            if (memstat == "0")
+            {
+                q = "UPDATE members SET status = '1' WHERE member_id = '" + memid + "'";
+                warn = "Are you sure you want to reactivate this user?";
+                notif = "User reactivated.";
+
+            }
+            else if (memstat == "1")
+            {
+                q = "UPDATE members SET status = '0' WHERE member_id = '" + memid + "'";
+                warn = "Are you sure you want to deactivate this user?";
+                notif = "User deactivated.";
+            }
+
+            DialogResult dialogResult = MessageBox.Show(warn, "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand query = new MySqlCommand(q, conn);
+                    query.ExecuteNonQuery();
+                    conn.Close();
+
+                    MessageBox.Show(notif);
+                }
+                catch (Exception ee)
+                {
+                    conn.Close();
+                    MessageBox.Show(ee.Message);
+                }
+
+                load_member();
+                refresh_buttons();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+        }
+
+        private void btnCBU_Click(object sender, EventArgs e)
+        {
+            reftomain.Enabled = false;
+            NewCBUAccount cbu = new NewCBUAccount(memid, conn, reftomain);
+            cbu.Show();
         }
 
         private void load_accounts()
         {
-            
+
             hasSavings = false;
             hasLoan = false;
             hasCapital = false;
@@ -172,7 +237,7 @@ namespace AMC
                 conn.Close();
             }
 
-            
+
         }
 
         private void refresh_buttons()

@@ -69,7 +69,6 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
             }
         }
-
         private void mlist_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
@@ -85,5 +84,6 @@ namespace AMC
                 hehe.SetName(mlist.Rows[e.RowIndex].Cells["name"].Value.ToString());
             }
         }
+ 
     }
 }

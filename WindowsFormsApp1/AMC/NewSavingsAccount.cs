@@ -104,13 +104,7 @@ namespace AMC
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            reftomain.Enabled = true;
-            this.Close();
-        }
-
-        private void btnSubmit_Click_1(object sender, EventArgs e)
+        private void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {

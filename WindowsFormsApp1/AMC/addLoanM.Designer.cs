@@ -79,7 +79,6 @@
             this.mlist.ShowRowErrors = false;
             this.mlist.Size = new System.Drawing.Size(443, 239);
             this.mlist.TabIndex = 2;
-            this.mlist.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mlist_CellContentDoubleClick);
             this.mlist.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.mlist_CellMouseDoubleClick);
             // 
             // addLoanM

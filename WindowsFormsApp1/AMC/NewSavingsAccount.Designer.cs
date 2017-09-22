@@ -33,7 +33,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lname = new System.Windows.Forms.TextBox();
+            this.intRate = new System.Windows.Forms.TextBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.label2 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -94,15 +94,15 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Account Number";
             // 
-            // lname
+            // intRate
             // 
-            this.lname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lname.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lname.Location = new System.Drawing.Point(242, 79);
-            this.lname.Name = "lname";
-            this.lname.Size = new System.Drawing.Size(173, 23);
-            this.lname.TabIndex = 3;
-            this.lname.Text = "0.03";
+            this.intRate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intRate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.intRate.Location = new System.Drawing.Point(242, 79);
+            this.intRate.Name = "intRate";
+            this.intRate.Size = new System.Drawing.Size(173, 23);
+            this.intRate.TabIndex = 3;
+            this.intRate.Text = "0.03";
             // 
             // splitter2
             // 
@@ -182,7 +182,7 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lname);
+            this.panel1.Controls.Add(this.intRate);
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.splitter1);
@@ -270,7 +270,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox lname;
+        private System.Windows.Forms.TextBox intRate;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Splitter splitter1;
