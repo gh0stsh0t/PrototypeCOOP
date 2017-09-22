@@ -608,7 +608,7 @@ namespace AMC
                     query.ExecuteNonQuery();
 
                     databasecon.Close();
-                    MessageBox.Show(txtLname.Text + " sucesfully edited!");
+                    MessageBox.Show(txtLname.Text + " successfully edited!");
 
                 }
 

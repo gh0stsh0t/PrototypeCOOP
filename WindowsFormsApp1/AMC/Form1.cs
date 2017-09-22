@@ -13,7 +13,6 @@ namespace AMC
     public partial class MainForm : Form
     {
         public Form childform;
-
         public MainForm()
         {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -82,9 +80,8 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
-            innerChild(new ViewMember(this));
+	        innerChild(new ViewMember(this));
         }
-
         public void innerChild(Form child)
         {
             breaker();
@@ -93,7 +90,6 @@ namespace AMC
             panel1.Controls.Add(childform);
             childform.Show();
         }
-
         private void breaker()
         {
             try
@@ -101,11 +97,8 @@ namespace AMC
                 childform.Close();
                 childform.Dispose();
             }
-            catch
-            {
-            }
+            catch { }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             breaker();
@@ -117,7 +110,27 @@ namespace AMC
 
         private void button9_Click(object sender, EventArgs e)
         {
+            innerChild(new ViewSavings(this));
+        }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddTransaction(this, "savings"));
+        }
+
+        private void sidebarPanelLoans_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddLoan(-1));
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            innerChild(new AddRepayment());
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -182,7 +182,7 @@ namespace AMC
                     filter = "WHERE date_terminated NOT IN(NULL)";
                     break;
                 case 3:
-                    filter = " WHERE ";
+                    filter = " ";
                     break;
                 case 4:
                     filter = " WHERE status=0";
@@ -191,6 +191,7 @@ namespace AMC
                     filter = " WHERE status=1";
                     break;
             }
+            Rifrish();
         }
         private void button3_Click_1(object sender, EventArgs e)
         {

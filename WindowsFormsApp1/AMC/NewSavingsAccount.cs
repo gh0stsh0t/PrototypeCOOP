@@ -16,7 +16,8 @@ namespace AMC
         public MainForm reftomain;
         public int memid;
         public MySqlConnection conn;
-        string accid = DateTime.Today.ToString("yyyyMM") + "001";
+        string accid;
+        double interest;
 
         public NewSavingsAccount(int id, MySqlConnection c, MainForm main)
         {
@@ -34,6 +35,7 @@ namespace AMC
 
         private void NewSavingsAccount_Load(object sender, EventArgs e)
         {
+            getNewId();
             lblAccount.Text = accid;
             try
             {
@@ -46,7 +48,17 @@ namespace AMC
                 if (dt.Rows.Count == 1)
                 {
                     lblName.Text = dt.Rows[0]["family_name"].ToString() + ", " + dt.Rows[0]["first_name"].ToString() + " " + dt.Rows[0]["middle_name"].ToString();
-                    
+
+                }
+
+                MySqlCommand intrate = new MySqlCommand("SELECT interest_rate FROM interest_rate_log WHERE timestamp = (SELECT MAX(timestamp) FROM interest_rate_log)", conn);
+                MySqlDataAdapter adp2 = new MySqlDataAdapter(intrate);
+                DataTable dt2 = new DataTable();
+                adp2.Fill(dt2);
+                if (dt2.Rows.Count == 1)
+                {
+                    interest = Convert.ToDouble(dt2.Rows[0]["interest_rate"]);
+                    intRate.Text = (interest * 100).ToString();
                 }
 
 
@@ -60,14 +72,51 @@ namespace AMC
             }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void getNewId()
         {
-            
+            string q = "SELECT savings_account_id FROM savings ORDER BY savings_account_id DESC LIMIT 1";
             try
             {
                 conn.Open();
-                string query = "INSERT INTO savings (savings_account_id, member_id, opening_date, outstanding_balance, account_status)" + 
-                                "VALUES('" + accid + "','" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "', '0')";
+
+                MySqlCommand comm = new MySqlCommand(q, conn);
+                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+                if (dt.Rows.Count == 1)
+                {
+                    accid =(Int32.Parse(dt.Rows[0]["savings_account_id"].ToString()) + 1).ToString();
+
+                }
+                else { 
+                    accid = "1";
+                    }
+
+
+                conn.Close();
+
+
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            reftomain.Enabled = true;
+            this.Close();
+        }
+
+        private void btnSubmit_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                string query = "INSERT INTO savings (member_id, opening_date, initial_balance, outstanding_balance, account_status, interest_rate)" +
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "','" + txtBal.Text + "', '1','" + interest.ToString() + "')";
                 MySqlCommand ins = new MySqlCommand(query, conn);
                 ins.ExecuteNonQuery();
                 conn.Close();
@@ -82,7 +131,6 @@ namespace AMC
             reftomain.Enabled = true;
             reftomain.innerChild(new ViewProfile(memid, reftomain));
             this.Close();
-            
         }
 
         private void label3_Click(object sender, EventArgs e)
