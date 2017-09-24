@@ -20,6 +20,7 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
+            innerChild(new ViewLoanSched(this));
         }
 
         private void MainForm_Load(object sender, EventArgs e)

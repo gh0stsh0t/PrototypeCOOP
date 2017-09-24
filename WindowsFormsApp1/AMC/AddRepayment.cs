@@ -16,6 +16,7 @@ namespace AMC
         private DatabaseConn conn = new DatabaseConn();
         private addLoanM popup;
         public int memid;
+        public int loanid;
         public AddRepayment()
         {
             InitializeComponent();
@@ -48,20 +49,32 @@ namespace AMC
         public void SetName(string name)
         {
             label15.Text = name;
-            conn.Select("loans", "member_id", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
+            conn.Select("loans", "outstanding_balance", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
+            cbxAccount.Items.Clear();
             foreach (DataRow r in conn.GetData().Rows)
             {
                 var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString());
                 cbxAccount.Items.Add(cc);
             }
+            //label8.Text="Current Balance: "+
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            conn.Insert("loan_transactions", 
-                        "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal", txtPrincipal.ToString(), 
-                        "interest", txtInterest.ToString(), "penalty", txtPenalty.ToString(), "total_amount", label12.Text,
-                        "date_encoded", DateTime.Today.ToString());
+            try
+            {
+                MessageBox.Show(cbxAccount.SelectedItem.ToString());
+                conn.Insert("loan_transaction",
+                    "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal", txtPrincipal.Text,
+                    "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
+                    "date", DateTime.Today.ToString("yyyy-MM-dd"))
+                    .GetQueryData();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                throw;
+            }
         }
 
         private void Breaker()

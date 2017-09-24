@@ -68,7 +68,7 @@ namespace AMC
             try
             {
                 conn.Open();
-                MySqlCommand comm = new MySqlCommand("UPDATE loans SET loan_status = 1 WHERE loan_account_id = " + loanid, conn);
+                MySqlCommand comm = new MySqlCommand("UPDATE loans SET date_granted=current_date(), loan_status = 1 WHERE loan_account_id = " + loanid, conn);
                 comm.ExecuteNonQuery();
                 conn.Close();
                 this.Close();

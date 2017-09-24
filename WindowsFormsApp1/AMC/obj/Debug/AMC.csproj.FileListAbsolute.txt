@@ -245,3 +245,10 @@ C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.
 C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ApprovalForm.resources
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ApprovalForm.resources
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoans.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddParticular.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.AddRepayment.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBUAccount.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCBURelease.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.SelectMember.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewSavings.resources
+C:\Users\Eric\Documents\GitHub\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewLoanSched.resources

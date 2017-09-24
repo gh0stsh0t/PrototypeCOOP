@@ -20,7 +20,7 @@ namespace AMC
         {
             InitializeComponent();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
-            reftomain = parent;
+            reftomain = parent; 
             this.TopLevel = false;
         }
         private void ViewLoans_Load(object sender, EventArgs e)
@@ -32,8 +32,9 @@ namespace AMC
             try
             {
                 var tae = new DatabaseConn();
-                dataGridView1.DataSource = tae.storedProc("asd");
-                dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
+                dataGridView1.DataSource = tae.storedProc("viewloanrequests");
+               if(dataGridView1.Rows.Count != 0)
+                    dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
                 dataGridView1.Columns["member_id"].Visible = false;
                 dataGridView1.Columns["loan_account_id"].Visible = false;
                 dataGridView1.Columns["loan_type"].HeaderText = "Loan Type";

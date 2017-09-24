@@ -56,10 +56,11 @@ namespace AMC
                 }
                 else
                 {
-                    _addloanconn.Select("LoansM", "member_id", "concat_ws(',', family_name, first_name) as name")
+                    /*_addloanconn.Select("LoansM", "member_id", "concat_ws(',', family_name, first_name) as name")
                                 .Where("date_terminated", null)
-                                .GetQueryData();
-                    loanmems = _addloanconn.GetData();
+                                .GetQueryData();*/
+
+                    loanmems = _addloanconn.storedProc("loansM");
                     mlist.DataSource = loanmems;
                     mlist.Columns["member_id"].Visible = false;
                 }
@@ -76,14 +77,17 @@ namespace AMC
                 reftomain.memname = mlist.Rows[e.RowIndex].Cells["name"].Value.ToString();
                 reftomain.memid = int.Parse(mlist.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
                 reftomain.namerfrsh();
-                this.Hide();
+                this.Close();
             }
             catch (Exception)
             {
                 hehe.memid = int.Parse(mlist.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
                 hehe.SetName(mlist.Rows[e.RowIndex].Cells["name"].Value.ToString());
+                this.Close();
             }
         }
+        
  
     }
+
 }
