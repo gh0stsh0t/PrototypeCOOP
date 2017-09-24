@@ -97,6 +97,11 @@ namespace AMC
 
         public void details()
         {
+            dataGridView2.DataSource = null;
+            if (dataGridView2.Rows.Count != 0)
+                dataGridView2.Rows.Clear();
+            dataGridView2.Columns.Clear();
+            dataGridView2.Refresh();
             try
             {
                 var tae = new DatabaseConn();
@@ -110,9 +115,8 @@ namespace AMC
                 }
                 height += dataGridView2.ColumnHeadersHeight;
 
-                int width = 0;
-                width = dataGridView2.Width;
-                dataGridView2.ClientSize = new Size(width, height + 2);
+                int width = dataGridView2.Width;
+                dataGridView2.ClientSize = new Size(width, height);
                 conn.Close();
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button1.BackColor;
@@ -195,7 +199,7 @@ namespace AMC
                 counter--;
                 month.Text = counter.ToString();
             }
-            else
+            if(counter == 0)
                 month.Text = "month";           
             Rifrish2();
         }
