@@ -16,11 +16,11 @@ namespace AMC
         public DatabaseConn()
         {
             RefreshCmd();
-            _holder=new DataTable();
         }
 
         public DataTable storedProc(string procName)
         {
+            RefreshCmd();
             using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
             {
                 databasecon.Open();
@@ -34,6 +34,7 @@ namespace AMC
 
         public DataTable storedProc(string procName, string paraName, int x, string paraName2, int y)
         {
+            RefreshCmd();
             using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
             {
                 databasecon.Open();
@@ -54,6 +55,7 @@ namespace AMC
         private void RefreshCmd()
         {
             _cmd = new MySqlCommand();
+            _holder = new DataTable();
         }
 
         public dynamic GetQueryData()

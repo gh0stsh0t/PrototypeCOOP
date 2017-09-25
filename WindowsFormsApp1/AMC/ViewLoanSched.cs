@@ -13,7 +13,6 @@ namespace AMC
 {
     public partial class ViewLoanSched : Form
     {
-        public MySqlConnection conn;
         public MainForm reftomain;
         private Form popup;
         public int counter;
@@ -23,7 +22,6 @@ namespace AMC
         public ViewLoanSched(MainForm parent)
         {
             InitializeComponent();
-            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             reftomain = parent;
             this.TopLevel = false;
             Rifrish();
@@ -69,17 +67,32 @@ namespace AMC
                 }
                     width += dataGridView1.RowHeadersWidth;
                     dataGridView1.ClientSize = new Size(width + 3, height + 2);
-                conn.Close();
-                var x = new DataGridViewButtonColumn();
-                x.DefaultCellStyle.BackColor = button1.BackColor;
-                var columnIndex = dataGridView1.ColumnCount;
                 foreach (DataGridViewColumn col in dataGridView1.Columns)
                     dataGridView1.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                dataGridView3.DataSource = tae.storedProc("viewloanstotal");
+                dataGridView3.Columns["member_id"].Visible = false;
+                height = 0;
+                foreach (DataGridViewRow row in dataGridView3.Rows)
+                {
+                    height += row.Height;
+                }
+                height += dataGridView3.ColumnHeadersHeight;
+
+                width = 0;
+                foreach (DataGridViewColumn col in dataGridView3.Columns)
+                {
+                    if (col.Visible == true)
+                        width += col.Width;
+                }
+                width += dataGridView3.RowHeadersWidth;
+                dataGridView3.ClientSize = new Size(width + 3, height + 2);
+                foreach (DataGridViewColumn col in dataGridView3.Columns)
+                    dataGridView3.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.ToString());
-                conn.Close();
             }
             dataGridView1.ClearSelection();
             loanids.Clear();
@@ -117,7 +130,6 @@ namespace AMC
 
                 int width = dataGridView2.Width;
                 dataGridView2.ClientSize = new Size(width, height);
-                conn.Close();
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button1.BackColor;
                 var columnIndex = dataGridView2.ColumnCount;
@@ -131,7 +143,6 @@ namespace AMC
             catch (Exception ee)
             {
                 MessageBox.Show(ee.ToString());
-                conn.Close();
             }
             dataGridView2.ClearSelection();
         }
@@ -157,7 +168,6 @@ namespace AMC
                     DataRow row = dt.Rows[0];
                     dataGridView2.Rows.Add(row.ItemArray);
                 }
-                conn.Close();
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button1.BackColor;
                 var columnIndex = dataGridView2.ColumnCount;
@@ -167,7 +177,6 @@ namespace AMC
             catch (Exception ee)
             {
                 MessageBox.Show(ee.ToString());
-                conn.Close();
             }
             dataGridView2.ClearSelection();
         }
@@ -202,6 +211,16 @@ namespace AMC
             if(counter == 0)
                 month.Text = "month";           
             Rifrish2();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            back.Visible = !back.Visible;
+            month.Visible = back.Visible;
+            forward.Visible = back.Visible;
+            dataGridView2.Visible = back.Visible;
+            dataGridView3.Visible = !back.Visible;
         }
     }
 }
