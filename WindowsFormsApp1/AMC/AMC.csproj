@@ -93,6 +93,12 @@
     <Compile Include="SelectMember.Designer.cs">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewCapitals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCapitals.Designer.cs">
+      <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,12 @@
     </Compile>
     <Compile Include="ViewSavings.Designer.cs">
       <DependentUpon>ViewSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewTransactions.Designer.cs">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddParticular.resx">
       <DependentUpon>AddParticular.cs</DependentUpon>
@@ -144,8 +156,14 @@
     <EmbeddedResource Include="SelectMember.resx">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewCapitals.resx">
+      <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewSavings.resx">
       <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewTransactions.resx">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <Fakes Include="Fakes\MySql.Data.fakes" />
     <EmbeddedResource Include="ViewMember.resx">

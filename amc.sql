@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2017 at 08:49 AM
+-- Generation Time: Sep 25, 2017 at 03:11 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -26,24 +26,147 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `displayQuarterMonthTable` (IN `mn` INT, IN `yr` INT)  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayCapitalsTable` (IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
 BEGIN
 
-SELECT s.savings_account_id AS 'Account Number', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS Name, amc.getMonthBeginningBalance(mn,yr,st.savings_account_id) as 'Beginning Balance', amc.computeMonthOutstandingBalance(mn,yr,st.savings_account_id) as 'Outstanding Balance', amc.computeMonthInterest(mn,yr,st.savings_account_id) AS 'Computed Interest',
-amc.computeMonthInterestExpense(mn,yr,st.savings_account_id) AS 'Interest Expense for the Month',
-amc.computeQuarterInterest(mn,yr,st.savings_account_id) AS 'Interest Credited for the Quarter',
-amc.computeMonthEndBalance(mn,yr,st.savings_account_id) AS 'Month End Balance'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 GROUP BY s.savings_account_id;
+SELECT m.member_id, CAST(c.capital_account_id AS CHAR(5)) AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getCapitalBeginningBalance(yr,ct.capital_account_id),0) as 'Beginning Balance for the Year',
+COALESCE(amc.computeCapitalOutstandingBalance(yr,ct.capital_account_id),0) as 'Outstanding Balance',
+COALESCE(amc.computeCapitalAvgMonthlyBalance(yr,ct.capital_account_id),0) as 'Average Monthly Balance',
+COALESCE(amc.computeDividend(yr,ct.capital_account_id),0) as 'Interest on Share Capital or Dividend',
+COALESCE(amc.computeCapitalDifference(yr,ct.capital_account_id),0) as 'Increase / Decrease in SC for the Year',
+(SELECT amount FROM amc.capital_general_log WHERE fund_type = 3 AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1)  as 'Targeted Increase for the Year',
+COALESCE(amc.computeCapitalPercentAccomplished(yr,ct.capital_account_id),0) as '% Accomplished',
+COALESCE(amc.computeCapitalNetBookValue(yr,ct.capital_account_id),0) as 'Net Book Value of Share Capital'
+FROM capitals c LEFT JOIN capitals_transaction ct ON c.capital_account_id = ct.capital_account_id INNER JOIN members m ON c.member_id = m.member_id WHERE m.status = 1 AND c.account_status = accountstatus GROUP BY c.capital_account_id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+BEGIN
+
+SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(mn,yr,st.savings_account_id),0) as 'Beginning Balance', COALESCE(amc.computeMonthOutstandingBalance(mn,yr,st.savings_account_id),0) as 'Outstanding Balance', COALESCE(amc.computeMonthInterest(mn,yr,st.savings_account_id),0) AS 'Computed Interest',
+COALESCE(amc.computeMonthInterestExpense(mn,yr,st.savings_account_id),0) AS 'Interest Expense for the Month',
+COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
+COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
+COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayQuarterMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+BEGIN
+
+SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(mn,yr,st.savings_account_id),0) as 'Beginning Balance', COALESCE(amc.computeMonthOutstandingBalance(mn,yr,st.savings_account_id),0) as 'Outstanding Balance', COALESCE(amc.computeMonthInterest(mn,yr,st.savings_account_id),0) AS 'Computed Interest',
+COALESCE(amc.computeMonthInterestExpense(mn,yr,st.savings_account_id),0) AS 'Interest Expense for the Month',
+COALESCE(amc.computeQuarterInterest(mn,yr,st.savings_account_id),0) AS 'Interest Credited for the Quarter',
+COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
+COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
+COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayYearTable` (IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+BEGIN
+
+SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(1,yr,st.savings_account_id),0) as 'Beginning Balance for the Year',
+COALESCE(amc.computeYearOutstandingBalance(yr,st.savings_account_id),0) as 'Outstanding Balance, End of Year',
+COALESCE(amc.computeYearOutstandingBalance(yr,st.savings_account_id),0) - COALESCE(amc.getMonthBeginningBalance(1,yr,st.savings_account_id),0) as 'Increase (Decrease)',
+COALESCE(amc.computeYearInterest(yr,st.savings_account_id),0) as 'Total Computed Interest for the Year',
+COALESCE(amc.computeYearInterestExpense(yr,st.savings_account_id),0) as 'Total Interest Credit for the Year',
+COALESCE(amc.computeYearQuarterInterest(yr,st.savings_account_id),0) as 'Interest Expense for the Year (Based on Quarterly Credit)'
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateSavingsBalanceLog` ()  MODIFIES SQL DATA
+BEGIN
+INSERT INTO amc.savings_balance_log (savings_account_id, amount, date)
+SELECT st.savings_account_id, COALESCE(amc.computeMonthEndBalance(MONTH(CURDATE()) - 1,YEAR(CURDATE()),st.savings_account_id),0) AS 'Month End Balance', CURDATE() 
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id 
+WHERE m.status = 1 AND s.account_status = 1 GROUP BY s.savings_account_id;
 END$$
 
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalAvgMonthlyBalance` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE((SUM(
+        CASE WHEN DAY(date) <= 7
+    THEN COALESCE(transaction_type * total_amount * (13 - MONTH(date)),0)
+    ELSE COALESCE(transaction_type * total_amount * (12 - MONTH(date)),0)
+    END)
+    + (COALESCE(amc.getCapitalBeginningBalance(yr,accountid),0) * 12))
+             / 12,0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalDifference` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT COALESCE(amc.computeCapitalOutstandingBalance(YEAR(date),capital_account_id) - 		   COALESCE( 		   amc.getCapitalBeginningBalance(YEAR(date),capital_account_id),0), 0)    
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalNetBookValue` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE(
+        amc.computeCapitalOutstandingBalance(YEAR(date),capital_account_id) / amc.computeTotalCapitalOutstandingBalance(YEAR(date)) * amc.computeTotalCapitalOutstandingBalance(YEAR(date))
+        ,0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalOutstandingBalance` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE(SUM(total_amount * transaction_type),0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalPercentAccomplished` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT CONCAT((COALESCE(amc.computeCapitalDifference(YEAR(date),capital_account_id) / (SELECT COALESCE(amount,0) FROM amc.capital_general_log WHERE fund_type = 3 AND YEAR(date) <= 2017 ORDER BY date DESC LIMIT 1), 0)) * 100, ' %')   
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividend` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE(
+        amc.computeCapitalAvgMonthlyBalance(YEAR(date),capital_account_id) / amc.computeTotalCapitalAvgBalance(YEAR(date)) * (amc.computeDividendMultiplier(YEAR(date)) * 0.65)
+        ,0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividendMultiplier` (`yr` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT COALESCE(CONVERT(
+        amount * (SELECT 1 - amount FROM `capital_general_log` WHERE fund_type = 1 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1)
+        , DECIMAL(13,2)),0) FROM `capital_general_log` WHERE fund_type = 0 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    );
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthAvgDailyBalance` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
 RETURN 
 (
-    SELECT amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) / amc.getMonthDays(MONTH(date),YEAR(date)) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
+    SELECT COALESCE( amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) / amc.getMonthDays(MONTH(date),YEAR(date)),0) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
 );    
 END$$
 
@@ -51,7 +174,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthBalanceDifference` (`mn`
 BEGIN
 RETURN
 (
-    SELECT amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) - 		   amc.getMonthBeginningBalance(MONTH(date),YEAR(date),savings_account_id)    
+    SELECT COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) - 		   amc.getMonthBeginningBalance(MONTH(date),YEAR(date),savings_account_id), 0)    
     FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
 );
 END$$
@@ -62,10 +185,10 @@ RETURN
 (
     SELECT CASE
     WHEN MONTH(date) % 3 = 0 
-    THEN amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) + amc.computeQuarterInterest(MONTH(date),YEAR(date),savings_account_id)
-    ELSE amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id)
+    THEN COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) + amc.computeQuarterInterest(MONTH(date),YEAR(date),savings_account_id),0)
+    ELSE COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id),0)
     END AS balance
-    FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
+    FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
 );
 END$$
 
@@ -73,15 +196,15 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthInterest` (`mn` INT, `yr
 BEGIN
 RETURN
 (
-    SELECT amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) * (amc.getMonthInterestRate(MONTH(date),YEAR(date)) / 365) as computed_interest FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
+    SELECT COALESCE(amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) * (amc.getMonthInterestRate(MONTH(date),YEAR(date)) / 365),0) as computed_interest FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
 );
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthInterestExpense` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
 DECLARE x DECIMAL(13,2);
-IF (SELECT amc.computeMonthAvgDailyBalance(mn,yr,accountid) FROM amc.savings_transaction GROUP BY savings_account_id) > (SELECT amc.getMonthAvgDailyBalance(mn,yr) FROM amc.avg_daily_balance_log GROUP BY id)
-	THEN SET x = (SELECT amc.computeMonthInterest(mn,yr,accountid) FROM amc.savings_transaction GROUP BY savings_account_id);
+IF (SELECT COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,accountid),0) FROM amc.savings_transaction LIMIT 1) > (SELECT COALESCE(amc.getMonthAvgDailyBalance(mn,yr),0) FROM amc.avg_daily_balance_log LIMIT 1)
+	THEN SET x = (SELECT COALESCE( amc.computeMonthInterest(mn,yr,accountid),0) FROM amc.savings_transaction LIMIT 1);
 ELSE SET x = 0;
 END IF;
 RETURN x;
@@ -89,14 +212,14 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthMultipliedSum` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
-RETURN (SELECT SUM(((total_amount * (amc.getMonthDays(MONTH(date), YEAR(date)) - DAY(date))) * transaction_type)) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid);
+RETURN (SELECT COALESCE(SUM(((total_amount * (amc.getMonthDays(MONTH(date), YEAR(date)) - DAY(date))) * transaction_type)) + ((amc.getMonthDays(MONTH(date), YEAR(date)) * COALESCE(amc.getMonthBeginningBalance(MONTH(date), YEAR(date),savings_account_id),0))),0) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1);
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthOutstandingBalance` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT SUM(total_amount * transaction_type) + amc.getMonthBeginningBalance(mn,yr,accountid) AS outstanding_balance FROM savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid
+    SELECT COALESCE(SUM(total_amount * transaction_type) + amc.getMonthBeginningBalance(mn,yr,accountid),0) AS outstanding_balance FROM savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
 );
 END$$
 
@@ -104,9 +227,98 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `computeQuarterInterest` (`mn` INT, `
 BEGIN
 RETURN
 (
-    SELECT amc.computeMonthInterestExpense(MONTH(date)-2,YEAR(date),savings_account_id) + 		   amc.computeMonthInterestExpense(MONTH(date)-1,YEAR(date),savings_account_id) +
-    amc.computeMonthInterestExpense(MONTH(date)-2,YEAR(date),savings_account_id)    
+    SELECT COALESCE(amc.computeMonthInterestExpense(MONTH(date)-2,YEAR(date),savings_account_id),0) + 		   COALESCE(amc.computeMonthInterestExpense(MONTH(date)-1,YEAR(date),savings_account_id),0) +
+    COALESCE(amc.computeMonthInterestExpense(MONTH(date),YEAR(date),savings_account_id),0)    
     FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeTotalCapitalAvgBalance` (`yr` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN(
+    SELECT COALESCE(SUM(DISTINCT amc.computeCapitalAvgMonthlyBalance(yr,capital_account_id)),0) FROM amc.capitals_transaction WHERE YEAR(date) = yr LIMIT 1
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeTotalCapitalOutstandingBalance` (`yr` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN(
+    SELECT COALESCE(SUM(DISTINCT amc.computeCapitalOutstandingBalance(yr,capital_account_id)),0) FROM amc.capitals_transaction WHERE YEAR(date) = yr LIMIT 1
+    );
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeYearInterest` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT 
+    COALESCE(amc.computeMonthInterest(1,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(2,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(3,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(4,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(5,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(6,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(7,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(8,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(9,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(10,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(11,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterest(12,yr,accountid),0)
+    AS year_interest 
+    FROM amc.savings_transaction WHERE YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeYearInterestExpense` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT 
+    COALESCE(amc.computeMonthInterestExpense(1,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(2,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(3,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(4,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(5,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(6,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(7,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(8,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(9,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(10,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(11,yr,accountid),0) +
+    COALESCE(amc.computeMonthInterestExpense(12,yr,accountid),0)
+    AS year_interest 
+    FROM amc.savings_transaction WHERE YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeYearOutstandingBalance` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT COALESCE(amc.computeMonthEndBalance((SELECT max(MONTH(date)) FROM amc.savings_transaction WHERE YEAR(date) = yr AND savings_account_id = accountid LIMIT 1) ,yr,accountid),0)
+    AS outstanding_balance 
+    FROM amc.savings_transaction WHERE YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeYearQuarterInterest` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT 
+    COALESCE(amc.computeQuarterInterest(3,yr,accountid),0) +
+    COALESCE(amc.computeQuarterInterest(6,yr,accountid),0) +
+    COALESCE(amc.computeQuarterInterest(9,yr,accountid),0) +
+    COALESCE(amc.computeQuarterInterest(12,yr,accountid),0)
+    FROM amc.savings_transaction WHERE YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+);
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCapitalBeginningBalance` (`yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT COALESCE(amount,0) FROM amc.capitals_balance_log WHERE capital_account_id = accountid AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
 );
 END$$
 
@@ -114,7 +326,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getMonthAvgDailyBalance` (`mn` INT, 
 BEGIN
 RETURN
 (
-    SELECT amount FROM amc.avg_daily_balance_log WHERE MONTH(date) <= mn AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1
+    SELECT COALESCE(amount,0) FROM amc.avg_daily_balance_log WHERE MONTH(date) <= mn AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1
 );
 END$$
 
@@ -122,7 +334,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getMonthBeginningBalance` (`mn` INT,
 BEGIN
 RETURN
 (
-SELECT amount FROM amc.savings_balance_log WHERE savings_account_id = accountid AND MONTH(date) = mn AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    SELECT COALESCE(amount,0) FROM amc.savings_balance_log WHERE savings_account_id = accountid AND MONTH(date) = mn AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
 );
 END$$
 
@@ -197,15 +409,39 @@ INSERT INTO `capitals` (`capital_account_id`, `member_id`, `opening_date`, `ics_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `capitals_balance_log`
+--
+
+CREATE TABLE `capitals_balance_log` (
+  `id` int(11) NOT NULL,
+  `capital_account_id` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `capitals_transaction`
 --
 
 CREATE TABLE `capitals_transaction` (
   `capital_transaction_id` int(11) NOT NULL,
   `capital_account_id` int(11) DEFAULT NULL,
+  `transaction_type` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `total_amount` decimal(13,2) DEFAULT NULL,
   `encoded_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `capitals_transaction`
+--
+
+INSERT INTO `capitals_transaction` (`capital_transaction_id`, `capital_account_id`, `transaction_type`, `date`, `total_amount`, `encoded_by`) VALUES
+(1, 1, 1, '2017-09-04', '1000.00', NULL),
+(2, 1, 1, '2017-09-14', '2000.00', NULL),
+(3, 1, -1, '2017-09-25', '500.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -220,6 +456,30 @@ CREATE TABLE `capitals_transaction_line` (
   `amount` decimal(13,2) DEFAULT NULL,
   `type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `capital_general_log`
+--
+
+CREATE TABLE `capital_general_log` (
+  `id` int(11) NOT NULL,
+  `fund_type` int(11) DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `capital_general_log`
+--
+
+INSERT INTO `capital_general_log` (`id`, `fund_type`, `amount`, `date`, `updated_by`) VALUES
+(1, 0, '4320000.00', '2017-09-24', NULL),
+(2, 1, '0.30', '2017-09-24', NULL),
+(3, 2, '9901606.21', '2017-09-24', NULL),
+(4, 3, '2250.00', '2017-09-24', NULL);
 
 -- --------------------------------------------------------
 
@@ -485,8 +745,9 @@ CREATE TABLE `savings_balance_log` (
 --
 
 INSERT INTO `savings_balance_log` (`id`, `savings_account_id`, `date`, `amount`) VALUES
-(1, 1, '2017-09-01', '100.00'),
-(2, 1, '2017-08-01', '200.00');
+(2, 1, '2017-08-01', '200.00'),
+(5, 1, '2017-09-21', '421.00'),
+(6, 2, '2017-09-21', '4000.00');
 
 -- --------------------------------------------------------
 
@@ -499,9 +760,7 @@ CREATE TABLE `savings_transaction` (
   `savings_account_id` int(11) DEFAULT NULL,
   `transaction_type` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `total_amount` decimal(13,2) DEFAULT NULL,
-  `interest_rate` double DEFAULT NULL,
   `encoded_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -509,15 +768,20 @@ CREATE TABLE `savings_transaction` (
 -- Dumping data for table `savings_transaction`
 --
 
-INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id`, `transaction_type`, `date`, `time`, `total_amount`, `interest_rate`, `encoded_by`) VALUES
-(4, 1, -1, '2017-09-12', '2017-09-14 02:08:31', '10.00', NULL, NULL),
-(18, 1, 1, '2017-09-12', '2017-09-12 06:11:05', '20.00', NULL, NULL),
-(19, 1, 1, '2017-09-12', '2017-09-12 06:12:59', '20.00', NULL, NULL),
-(20, 1, -1, '2017-09-12', '2017-09-14 02:08:39', '25.00', NULL, NULL),
-(21, 1, 1, '2017-09-12', '2017-09-12 06:46:02', '30.00', NULL, NULL),
-(22, 1, 1, '2017-08-08', '2017-09-14 01:50:13', '35.00', NULL, NULL),
-(23, 1, -1, '2017-08-30', '2017-09-14 02:08:47', '14.00', NULL, NULL),
-(24, 1, 1, '2017-09-19', '2017-09-19 03:06:27', '20.00', NULL, NULL);
+INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id`, `transaction_type`, `date`, `total_amount`, `encoded_by`) VALUES
+(4, 1, -1, '2017-09-12', '10.00', NULL),
+(18, 1, 1, '2017-09-12', '20.00', NULL),
+(19, 1, 1, '2017-09-12', '20.00', NULL),
+(20, 1, -1, '2017-09-12', '25.00', NULL),
+(21, 1, 1, '2017-09-12', '30.00', NULL),
+(22, 1, 1, '2017-08-08', '35.00', NULL),
+(23, 1, -1, '2017-08-30', '14.00', NULL),
+(24, 1, 1, '2017-09-19', '20.00', NULL),
+(26, 2, -1, '2017-09-05', '500.00', NULL),
+(27, 2, 1, '2017-09-04', '100.00', NULL),
+(29, 2, 1, '2017-09-06', '100.00', NULL),
+(30, 2, 1, '2017-09-11', '200.00', NULL),
+(32, 1, 1, '2017-08-01', '200.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -583,6 +847,13 @@ ALTER TABLE `capitals`
   ADD KEY `capitals_members_idx` (`member_id`);
 
 --
+-- Indexes for table `capitals_balance_log`
+--
+ALTER TABLE `capitals_balance_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `capital_account_id` (`capital_account_id`);
+
+--
 -- Indexes for table `capitals_transaction`
 --
 ALTER TABLE `capitals_transaction`
@@ -596,6 +867,13 @@ ALTER TABLE `capitals_transaction`
 ALTER TABLE `capitals_transaction_line`
   ADD KEY `capital_transaction_id` (`capital_transaction_id`),
   ADD KEY `account_code` (`account_code`);
+
+--
+-- Indexes for table `capital_general_log`
+--
+ALTER TABLE `capital_general_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `updated_by` (`updated_by`);
 
 --
 -- Indexes for table `chart_of_accounts`
@@ -727,10 +1005,22 @@ ALTER TABLE `capitals`
   MODIFY `capital_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `capitals_balance_log`
+--
+ALTER TABLE `capitals_balance_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `capitals_transaction`
 --
 ALTER TABLE `capitals_transaction`
-  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `capital_general_log`
+--
+ALTER TABLE `capital_general_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `chart_of_accounts_log`
@@ -802,13 +1092,13 @@ ALTER TABLE `savings`
 -- AUTO_INCREMENT for table `savings_balance_log`
 --
 ALTER TABLE `savings_balance_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
-  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction_line`
@@ -839,6 +1129,12 @@ ALTER TABLE `capitals`
   ADD CONSTRAINT `capitals_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `capitals_balance_log`
+--
+ALTER TABLE `capitals_balance_log`
+  ADD CONSTRAINT `fk_capital_account_balance` FOREIGN KEY (`capital_account_id`) REFERENCES `capitals` (`capital_account_id`);
+
+--
 -- Constraints for table `capitals_transaction`
 --
 ALTER TABLE `capitals_transaction`
@@ -851,6 +1147,12 @@ ALTER TABLE `capitals_transaction`
 ALTER TABLE `capitals_transaction_line`
   ADD CONSTRAINT `fk_capital_particular` FOREIGN KEY (`account_code`) REFERENCES `chart_of_accounts` (`code`),
   ADD CONSTRAINT `fk_capital_transaction` FOREIGN KEY (`capital_transaction_id`) REFERENCES `capitals_transaction` (`capital_transaction_id`);
+
+--
+-- Constraints for table `capital_general_log`
+--
+ALTER TABLE `capital_general_log`
+  ADD CONSTRAINT `fk_capital_updated` FOREIGN KEY (`updated_by`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `chart_of_accounts_log`

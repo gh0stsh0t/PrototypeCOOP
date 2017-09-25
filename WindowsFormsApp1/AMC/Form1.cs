@@ -123,5 +123,20 @@ namespace AMC
         {
             innerChild(new AddTransaction(this, "capitals"));
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewCapitals(this));
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewTransactions(this, 'c'));
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewTransactions(this, 's'));
+        }
     }
 }
