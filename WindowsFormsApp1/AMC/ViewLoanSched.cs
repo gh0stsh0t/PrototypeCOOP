@@ -89,6 +89,26 @@ namespace AMC
                 dataGridView3.ClientSize = new Size(width + 3, height + 2);
                 foreach (DataGridViewColumn col in dataGridView3.Columns)
                     dataGridView3.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                dataGridView4.DataSource = tae.storedProc("viewloansaging");
+                dataGridView4.Columns["member_id"].Visible = false;
+                height = 0;
+                foreach (DataGridViewRow row in dataGridView4.Rows)
+                {
+                    height += row.Height;
+                }
+                height += dataGridView4.ColumnHeadersHeight;
+
+                width = 0;
+                foreach (DataGridViewColumn col in dataGridView4.Columns)
+                {
+                    if (col.Visible == true)
+                        width += col.Width;
+                }
+                width += dataGridView4.RowHeadersWidth;
+                dataGridView4.ClientSize = new Size(width + 3, height + 2);
+                foreach (DataGridViewColumn col in dataGridView4.Columns)
+                    dataGridView4.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             catch (Exception ee)
             {
@@ -98,6 +118,7 @@ namespace AMC
             loanids.Clear();
             for (int i = 0; i < dataGridView1.RowCount; i++)
                 loanids.Add(int.Parse(dataGridView1.Rows[i].Cells["loan_account_id"].Value.ToString()));
+
         }
 
         private void Rifrish2()
@@ -213,14 +234,32 @@ namespace AMC
             Rifrish2();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private int _toggler=0;
+        
+        private void button3_Click(object sender, EventArgs e)
         {
-
-            back.Visible = !back.Visible;
-            month.Visible = back.Visible;
-            forward.Visible = back.Visible;
-            dataGridView2.Visible = back.Visible;
-            dataGridView3.Visible = !back.Visible;
+            _toggler = (_toggler + 1) % 3;
+            switch (_toggler)
+            {
+                case 0:
+                    back.Visible = true;
+                    month.Visible = back.Visible;
+                    forward.Visible = back.Visible;
+                    dataGridView2.Visible = back.Visible;
+                    dataGridView3.Visible = false;
+                    dataGridView4.Visible = false;
+                    break;
+                case 1:
+                    back.Visible = false;
+                    month.Visible = back.Visible;
+                    forward.Visible = back.Visible;
+                    dataGridView2.Visible = back.Visible;
+                    dataGridView3.Visible = true;
+                    break;
+                default:
+                    dataGridView4.Visible = true;
+                    break;
+            }
         }
     }
 }

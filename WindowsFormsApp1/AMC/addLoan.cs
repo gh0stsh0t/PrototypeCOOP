@@ -100,7 +100,7 @@ namespace AMC
                 {
                     conn.Open();
                     string[] loanStrings = {"member_id", memid.ToString(), "loan_type", cbLoan.SelectedIndex.ToString(), "request_type"
-                            , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text, "term", tbTerm.SelectedIndex.ToString()
+                            , cbRequest.SelectedIndex.ToString(), "orig_amount", tbAmount.Text, "term", tbTerm.Text.ToString()
                             , "interest_rate", tbInterest.Text, "purpose", tbPurpose.Text, "loan_status", "0", "outstanding_balance", tbAmount.Text};
                     _addloanconn = new DatabaseConn();
                     _addloanconn.Insert("loans", loanStrings)
