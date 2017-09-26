@@ -90,23 +90,14 @@ namespace AMC
                 foreach (DataGridViewColumn col in dataGridView3.Columns)
                     dataGridView3.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-                dataGridView4.DataSource = tae.storedProc("viewloansaging");
-                dataGridView4.Columns["member_id"].Visible = false;
+                dataGridView4.DataSource = tae.storedProc("viewagingsched");
                 height = 0;
                 foreach (DataGridViewRow row in dataGridView4.Rows)
                 {
                     height += row.Height;
                 }
                 height += dataGridView4.ColumnHeadersHeight;
-
-                width = 0;
-                foreach (DataGridViewColumn col in dataGridView4.Columns)
-                {
-                    if (col.Visible == true)
-                        width += col.Width;
-                }
-                width += dataGridView4.RowHeadersWidth;
-                dataGridView4.ClientSize = new Size(width + 3, height + 2);
+                dataGridView4.ClientSize = new Size(633, height + 2);
                 foreach (DataGridViewColumn col in dataGridView4.Columns)
                     dataGridView4.Columns[col.Name].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
