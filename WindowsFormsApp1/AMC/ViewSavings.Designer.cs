@@ -45,6 +45,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblInterest = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -223,6 +225,8 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.lblInterest);
+            this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.lblDate);
             this.panel3.Controls.Add(this.lblTitle);
             this.panel3.Controls.Add(this.label4);
@@ -231,12 +235,32 @@
             this.panel3.Size = new System.Drawing.Size(907, 87);
             this.panel3.TabIndex = 28;
             // 
+            // lblInterest
+            // 
+            this.lblInterest.AutoSize = true;
+            this.lblInterest.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInterest.Location = new System.Drawing.Point(715, 26);
+            this.lblInterest.Name = "lblInterest";
+            this.lblInterest.Size = new System.Drawing.Size(29, 20);
+            this.lblInterest.TabIndex = 18;
+            this.lblInterest.Text = "3%";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(615, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(98, 20);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Interest Rate:";
+            // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lblDate.Location = new System.Drawing.Point(312, 53);
+            this.lblDate.Location = new System.Drawing.Point(18, 53);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(154, 20);
             this.lblDate.TabIndex = 14;
@@ -247,7 +271,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(281, 28);
+            this.lblTitle.Location = new System.Drawing.Point(17, 30);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(267, 20);
             this.lblTitle.TabIndex = 13;
@@ -257,7 +281,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(275, 6);
+            this.label4.Location = new System.Drawing.Point(17, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(290, 20);
             this.label4.TabIndex = 12;
@@ -392,6 +416,7 @@
             this.dgvAccounts.Size = new System.Drawing.Size(904, 385);
             this.dgvAccounts.TabIndex = 27;
             this.dgvAccounts.TabStop = false;
+            this.dgvAccounts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellDoubleClick);
             // 
             // label3
             // 
@@ -459,5 +484,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvAccounts2;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblInterest;
     }
 }

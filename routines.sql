@@ -29,6 +29,18 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalOutstandingBalance`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
+    READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE(SUM(total_amount * transaction_type),0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalNetBookValue`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
@@ -37,18 +49,6 @@ RETURN (
     COALESCE(
         amc.computeCapitalOutstandingBalance(YEAR(date),capital_account_id) / amc.computeTotalCapitalOutstandingBalance(YEAR(date)) * amc.computeTotalCapitalOutstandingBalance(YEAR(date))
         ,0)
-    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
-);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalOutstandingBalance`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
-    READS SQL DATA
-BEGIN
-RETURN (
-    SELECT 
-    COALESCE(SUM(total_amount * transaction_type),0)
     FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
 );
 END$$
@@ -67,6 +67,19 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividendMultiplier`(`yr` INT) RETURNS decimal(13,2)
+    READS SQL DATA
+BEGIN
+RETURN
+(
+    SELECT COALESCE(CONVERT(
+        amount * (SELECT 1 - amount FROM `capital_general_log` WHERE fund_type = 1 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1)
+        , DECIMAL(13,2)),0) FROM `capital_general_log` WHERE fund_type = 0 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    );
+END$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividend`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
@@ -81,15 +94,14 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividendMultiplier`(`yr` INT) RETURNS decimal(13,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthBalanceDifference`(`mn` INT, `yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT COALESCE(CONVERT(
-        amount * (SELECT 1 - amount FROM `capital_general_log` WHERE fund_type = 1 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1)
-        , DECIMAL(13,2)),0) FROM `capital_general_log` WHERE fund_type = 0 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
-    );
+    SELECT COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) - 		   amc.getMonthBeginningBalance(MONTH(date),YEAR(date),savings_account_id), 0)    
+    FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
+);
 END$$
 DELIMITER ;
 
@@ -101,18 +113,6 @@ RETURN
 (
     SELECT COALESCE( amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) / amc.getMonthDays(MONTH(date),YEAR(date)),0) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
 );    
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthBalanceDifference`(`mn` INT, `yr` INT, `accountid` INT) RETURNS decimal(13,2)
-    READS SQL DATA
-BEGIN
-RETURN
-(
-    SELECT COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) - 		   amc.getMonthBeginningBalance(MONTH(date),YEAR(date),savings_account_id), 0)    
-    FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid GROUP BY savings_account_id
-);
 END$$
 DELIMITER ;
 

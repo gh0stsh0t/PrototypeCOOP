@@ -28,8 +28,10 @@ namespace AMC
         {
             loadCbxYears();
             cbxMonth.SelectedIndex = Convert.ToInt32(DateTime.Now.Month) - 1;
-            
+
             loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text, "%");
+            loadIntRate((cbxMonth.SelectedIndex + 1).ToString(), cbxYear.Text);
+
         }
 
         private void loadMonthAccounts(int mn, string yr, string like)
@@ -43,7 +45,7 @@ namespace AMC
                 MySqlCommand comm = new MySqlCommand();
                 comm.Connection = conn;
                 comm.CommandType = CommandType.StoredProcedure;
-                if(mn % 3 == 0)
+                if (mn % 3 == 0)
                     comm.CommandText = "displayQuarterMonthTable";
                 else
                     comm.CommandText = "displayMonthTable";
@@ -116,48 +118,6 @@ namespace AMC
             dgvAccounts.ClearSelection();
         }
 
-        /* private string createQuery(int mn, string yr)
-        {
-            
-            if (rdMonth.Checked == true)
-            {
-                if(mn % 3 == 0)
-                {
-                    string q = "SELECT m.member_id, s.savings_account_id AS 'Account Number', " +
-                        "CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS Name, " +
-                        "amc.getMonthBeginningBalance(" + m + "," + yr + ", st.savings_account_id) as 'Beginning Balance', " + 
-                        "amc.computeMonthOutstandingBalance(" + m + "," + yr + ",st.savings_account_id) as 'Outstanding Balance', " +
-                        "amc.computeMonthInterest(" + m + "," + yr + ",st.savings_account_id) AS 'Computed Interest', " +
-                        "amc.computeMonthInterestExpense(" + m + "," + yr + ",st.savings_account_id) AS 'Interest Expense for the Month', " +
-                        "amc.computeQuarterInterest(" + m + "," + yr + ",st.savings_account_id) AS 'Interest Credited for the Quarter', " +
-                        "amc.computeMonthEndBalance(" + m + "," + yr + ",st.savings_account_id) AS 'Month End Balance', " +
-                        "amc.computeMonthAvgDailyBalance(" + m + "," + yr + ",st.savings_account_id) AS 'Average Daily Balance', " +
-                        "amc.computeMonthBalanceDifference(" + m + "," + yr + ",st.savings_account_id) AS 'Increase (Decrease) for the Month' " +
-                        "FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id " +
-                        "INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 GROUP BY s.savings_account_id";
-                    // MessageBox.Show(q);
-                    return q;
-                }
-                else
-                {
-                    return "SELECT m.member_id, s.savings_account_id AS 'Account Number', " + 
-                        "CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS Name, " + 
-                        "amc.getMonthBeginningBalance(" + mn.ToString() + "," + yr + ",st.savings_account_id) as 'Beginning Balance', " +
-                        "amc.computeMonthOutstandingBalance(" + mn.ToString() + "," + yr + ",st.savings_account_id) as 'Outstanding Balance', " +
-                        "amc.computeMonthInterest(" + mn.ToString() + "," + yr + ",st.savings_account_id) AS 'Computed Interest', " +
-                        "amc.computeMonthInterestExpense(" + mn.ToString() + "," + yr + ",st.savings_account_id) AS 'Interest Expense for the Month', " +
-                        "amc.computeMonthEndBalance(" + mn.ToString() + "," + yr + ",st.savings_account_id) AS 'Month End Balance', " +
-                        "amc.computeMonthAvgDailyBalance(" + mn.ToString() + "," + yr + ",st.savings_account_id) AS 'Average Daily Balance', " +
-                        "amc.computeMonthBalanceDifference(" + mn.ToString() + "," + yr + ",st.savings_account_id) AS 'Increase (Decrease) for the Month' " + 
-                        "FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id " + 
-                        "INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 GROUP BY s.savings_account_id";
-                }
-            }
-            else
-            {
-                return "";
-            }
-        } */
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -165,6 +125,8 @@ namespace AMC
                 loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text, "%");
             else
                 loadYearAccounts(cbxYear.Text, "%");
+
+            loadIntRate((cbxMonth.SelectedIndex + 1).ToString(), cbxYear.Text);
         }
 
         private void rdYear_Click(object sender, EventArgs e)
@@ -246,5 +208,50 @@ namespace AMC
                 cbxYear.Items.Add(i.ToString());
             cbxYear.SelectedIndex = 0;
         }
+
+        private void loadIntRate(string mn, string yr)
+        {
+            string rr;
+            try
+            {
+                conn.Open();
+                string query;
+                if (rdMonth.Checked == true)
+                    query = "SELECT COALESCE(interest_rate * 100,0) FROM interest_rate_log WHERE MONTH(date) <=" + mn +
+                        " AND YEAR(date) <= " + yr + " ORDER BY date DESC LIMIT 1 ";
+                else
+                    query = "SELECT COALESCE(interest_rate * 100,0) FROM interest_rate_log WHERE" +
+                        " YEAR(date) <= " + yr + " ORDER BY date DESC LIMIT 1 ";
+
+                MySqlCommand ins = new MySqlCommand(query, conn);
+                rr = ins.ExecuteScalar().ToString() + "%";
+                lblInterest.Text = rr;
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+                conn.Close();
+            }
+        }
+
+        private void dgvAccounts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string mid, mname;
+            mid = dgvAccounts.Rows[e.RowIndex].Cells["Acc. No."].Value.ToString();
+            mname = dgvAccounts.Rows[e.RowIndex].Cells["Member Name"].Value.ToString();
+            try
+            {
+                reftomain.Enabled = false;
+
+                ViewSavingsProfile sav = new ViewSavingsProfile(reftomain, conn, mid, mname);
+                sav.Show();
+            }
+            catch (Exception ee)
+            {
+
+            }
+
+        }
+
     }
 }

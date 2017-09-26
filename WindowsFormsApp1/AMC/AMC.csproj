@@ -125,6 +125,12 @@
     <Compile Include="ViewSavings.Designer.cs">
       <DependentUpon>ViewSavings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewSavingsProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSavingsProfile.Designer.cs">
+      <DependentUpon>ViewSavingsProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewTransactions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewSavings.resx">
       <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSavingsProfile.resx">
+      <DependentUpon>ViewSavingsProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewTransactions.resx">
       <DependentUpon>ViewTransactions.cs</DependentUpon>
