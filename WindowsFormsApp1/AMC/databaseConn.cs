@@ -16,7 +16,39 @@ namespace AMC
         public DatabaseConn()
         {
             RefreshCmd();
-            _holder=new DataTable();
+        }
+
+        public DataTable storedProc(string procName)
+        {
+            RefreshCmd();
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
+                _cmd.CommandText = procName;
+                _cmd.Connection = databasecon;
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _holder.Load(_cmd.ExecuteReader());
+                return _holder;
+            }
+        }
+
+        public DataTable storedProc(string procName, string paraName, int x, string paraName2, int y)
+        {
+            RefreshCmd();
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
+                _cmd.CommandText = procName;
+                _cmd.Connection = databasecon;
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.Parameters.Clear();
+                MySqlParameter param = new MySqlParameter(paraName, x);
+                _cmd.Parameters.Add(param);
+                param = new MySqlParameter(paraName2, y);
+                _cmd.Parameters.Add(param);
+                _holder.Load(_cmd.ExecuteReader());
+                return _holder;
+            }
         }
 
         public string lastID()
@@ -26,6 +58,7 @@ namespace AMC
         private void RefreshCmd()
         {
             _cmd = new MySqlCommand();
+            _holder = new DataTable();
         }
 
         public dynamic GetQueryData()
@@ -44,10 +77,33 @@ namespace AMC
                 return _holder;
             }
         }
-
+        //wait
+        /*
+        public dynamic GetQueryData(int x)
+        {
+            using (var databasecon = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;"))
+            {
+                databasecon.Open();
+                _cmd.CommandText = _sql;
+                _cmd.Connection = databasecon;
+                if (_flag)
+                {
+                    _cmd.ExecuteNonQuery();
+                    return _flag;
+                }
+                object tae.Load(_cmd.ExecuteScalar());
+                return _holder;
+            }
+        }
+        */
         public DataTable GetData()
         {
             return _holder;
+        }
+
+        public MySqlCommand getCmd()
+        {
+            return _cmd;
         }
 
         public DatabaseConn Select(string table, params string[] fields)

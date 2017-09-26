@@ -104,13 +104,7 @@ namespace AMC
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            reftomain.Enabled = true;
-            this.Close();
-        }
-
-        private void btnSubmit_Click_1(object sender, EventArgs e)
+        private void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -131,6 +125,11 @@ namespace AMC
             reftomain.Enabled = true;
             reftomain.innerChild(new ViewProfile(memid, reftomain));
             this.Close();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

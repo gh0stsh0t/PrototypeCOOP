@@ -150,14 +150,21 @@ namespace AMC
 
         private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            if (e.Button.Equals(MouseButtons.Left))
+            try
             {
-                reftomain.innerChild(new ViewProfile(memid, reftomain));
+                int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                if (e.Button.Equals(MouseButtons.Left))
+                {
+                    reftomain.innerChild(new ViewProfile(memid, reftomain));
+                }
+                else
+                {
+                    reftomain.innerChild(new AddMember(memid));
+                }
             }
-            else
+            catch(System.ArgumentOutOfRangeException)
             {
-                reftomain.innerChild(new AddMember(memid));
+
             }
         }
 

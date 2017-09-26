@@ -31,7 +31,6 @@ namespace AMC
             memid = x;
             cbLoan.SelectedIndex = 0;
             cbRequest.SelectedIndex = 0;
-            tbTerm.SelectedIndex = 0;
             _addloanconn = new DatabaseConn();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             tbInterest.Text = intrate.ToString();
@@ -49,7 +48,7 @@ namespace AMC
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,12 +58,12 @@ namespace AMC
 
         private void cbBorrower_KeyDown(object sender, KeyEventArgs e)
         {
-
+           
         }
 
         private void cbBorrower_Leave(object sender, EventArgs e)
         {
-
+           
         }
 
         private void breaker()
@@ -125,7 +124,7 @@ namespace AMC
                     MessageBox.Show(ee.ToString());
                     conn.Close();
                 }
-            }
+            } 
         }
 
         public void comakercnt()
@@ -133,7 +132,7 @@ namespace AMC
             if (tbName2.Text == "")
                 comakercount = 1;
             else
-                comakercount = 2;
+                comakercount = 2; 
         }
 
         private bool validation()
@@ -164,12 +163,12 @@ namespace AMC
                 return false;
             }
             else
-                return true;
+                return true;   
         }
 
         private bool co2check()
         {
-            if ((tbAddress2.Text == "" || tbCompany2.Text == "" || tbName2.Text == "" || tbPosition2.Text == "")
+            if ((tbAddress2.Text == "" || tbCompany2.Text == "" || tbName2.Text == "" || tbPosition2.Text == "") 
                 && (tbAddress2.Text != "" || tbCompany2.Text != "" || tbName2.Text != "" || tbPosition2.Text != ""))
                 return true;
             return false;
@@ -192,7 +191,7 @@ namespace AMC
             tbPosition1.Clear();
             tbPosition2.Clear();
             tbPurpose.Clear();
-            tbTerm.SelectedIndex = 0;
+            tbTerm.Clear();
         }
 
         private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -287,7 +286,7 @@ namespace AMC
 
         private void tbAmount_Leave(object sender, EventArgs e)
         {
-            if (!isNum(tbAmount.Text))
+            if(!isNum(tbAmount.Text))
             {
                 MessageBox.Show("Please make sure the amount contains no special characters and has no more than 2 decimal points.");
                 tbAmount.Focus();
@@ -307,6 +306,27 @@ namespace AMC
                 tbInterest.Focus();
             }
         }
-    }
 
+        private void tbTerm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back))
+                e.Handled = true;
+           
+        }
+
+        private void tbTerm_Leave(object sender, EventArgs e)
+        {
+            if (!isNum(tbTerm.Text))
+            {
+                MessageBox.Show("Please make sure the term is a number.");
+                tbTerm.Focus();
+            }
+            else if (int.Parse(tbTerm.Text) <= 0 || int.Parse(tbTerm.Text) > 730)
+            {
+                MessageBox.Show("Please make sure the term is between 1 day and 730 days (2 years).");
+                tbTerm.Focus();
+            }
+        }
+    }
+   
 }

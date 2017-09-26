@@ -20,7 +20,7 @@ namespace AMC
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            innerChild(new ViewLoanSched(this));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace AMC
 
         private void sidebarBtnMembers_Click(object sender, EventArgs e)
         {
-            if(sidebarPanelMembers.Visible == false)
+            if (sidebarPanelMembers.Visible == false)
                 sidebarPanelMembers.Visible = true;
             else
                 sidebarPanelMembers.Visible = false;
@@ -132,6 +132,11 @@ namespace AMC
         private void button5_Click(object sender, EventArgs e)
         {
             innerChild(new AddRepayment());
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            innerChild(new ViewLoans(this));
         }
     }
 }

@@ -774,5 +774,23 @@ namespace AMC
             if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || e.KeyChar == 22)
                 e.Handled = true;
         }
+
+        private void txtTIN2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || e.KeyChar == 22)
+                e.Handled = true;
+        }
+
+        private void txtTIN3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || e.KeyChar == 22)
+                e.Handled = true;
+        }
+
+        private void txtTIN4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || e.KeyChar == 22)
+                e.Handled = true;
+        }
     }
 }

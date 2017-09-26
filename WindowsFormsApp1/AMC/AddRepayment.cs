@@ -16,12 +16,21 @@ namespace AMC
         private DatabaseConn conn = new DatabaseConn();
         private addLoanM popup;
         public int memid;
+        public int loanid;
         public AddRepayment()
         {
             InitializeComponent();
             MemberListRef();
         }
-
+        /*
+         * here lies the code for the data grid biew
+         * SELECT SUM(interest) TOTAL_INTEREST, SUM(principal) total_principal, SUM(penalty) total_penalty), SUM(interest)-SUM(release) balance 
+         * FROM loan_transactions
+         * GROUP BY loan_account_id
+         * 
+         * STORED PROC:
+         * SELECT date_granted-cutoffdate as age, age-term as taas name,  loans INNER JOIN loan_transactions
+         */
         public AddRepayment(int memberid) : this()
         {
             //cbxMember.SelectedIndex = memberid;
@@ -40,19 +49,32 @@ namespace AMC
         public void SetName(string name)
         {
             label15.Text = name;
-            conn.Select("loans", "member_id", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
+            conn.Select("loans", "outstanding_balance", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
+            cbxAccount.Items.Clear();
             foreach (DataRow r in conn.GetData().Rows)
             {
                 var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString());
                 cbxAccount.Items.Add(cc);
             }
+            //label8.Text="Current Balance: "+
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            conn.Insert("loan_transactions", 
-                        "principal", txtPrincipal.ToString(), "interest", txtInterest.ToString(), "penalty", txtPenalty.ToString(), 
-                        "date_encoded", DateTime.Today.ToString());
+            try
+            {
+                MessageBox.Show(cbxAccount.SelectedItem.ToString());
+                conn.Insert("loan_transaction",
+                    "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal", txtPrincipal.Text,
+                    "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
+                    "date", DateTime.Today.ToString("yyyy-MM-dd"))
+                    .GetQueryData();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                throw;
+            }
         }
 
         private void Breaker()
@@ -73,8 +95,6 @@ namespace AMC
             var reftomain = this;
             popup = new addLoanM(reftomain);
             popup.ShowDialog();
-            
-            
         }
 
         private void txtPenalty_TextChanged(object sender, EventArgs e)

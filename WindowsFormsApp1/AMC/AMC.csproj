@@ -82,6 +82,12 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewLoanSched.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewLoanSched.Designer.cs">
+      <DependentUpon>ViewLoanSched.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewCBUAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,18 @@
     </Compile>
     <Compile Include="NewCBURelease.Designer.cs">
       <DependentUpon>NewCBURelease.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApprovalForm.Designer.cs">
+      <DependentUpon>ApprovalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewLoans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewLoans.Designer.cs">
+      <DependentUpon>ViewLoans.cs</DependentUpon>
     </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
@@ -141,11 +159,17 @@
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewLoanSched.resx">
+      <DependentUpon>ViewLoanSched.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewCBUAccount.resx">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewCBURelease.resx">
       <DependentUpon>NewCBURelease.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApprovalForm.resx">
+      <DependentUpon>ApprovalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
@@ -185,6 +209,9 @@
       <DependentUpon>ViewSavings.cs</DependentUpon>
     </EmbeddedResource>
     <Fakes Include="Fakes\MySql.Data.fakes" />
+    <EmbeddedResource Include="ViewLoans.resx">
+      <DependentUpon>ViewLoans.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewMember.resx">
       <DependentUpon>ViewMember.cs</DependentUpon>
     </EmbeddedResource>

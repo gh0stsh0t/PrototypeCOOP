@@ -476,7 +476,6 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(220, 25);
             this.numericUpDown1.TabIndex = 48;
             // 
@@ -526,6 +525,7 @@
             this.txtTIN4.TabIndex = 20;
             this.txtTIN4.Text = "000";
             this.txtTIN4.Enter += new System.EventHandler(this.txtTIN4_Enter);
+            this.txtTIN4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTIN4_KeyPress);
             this.txtTIN4.Leave += new System.EventHandler(this.txtTIN4_Leave);
             // 
             // txtTIN3
@@ -538,6 +538,7 @@
             this.txtTIN3.TabIndex = 19;
             this.txtTIN3.Text = "789";
             this.txtTIN3.Enter += new System.EventHandler(this.txtTIN3_Enter);
+            this.txtTIN3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTIN3_KeyPress);
             this.txtTIN3.Leave += new System.EventHandler(this.txtTIN3_Leave);
             // 
             // txtTIN2
@@ -550,6 +551,7 @@
             this.txtTIN2.TabIndex = 18;
             this.txtTIN2.Text = "456";
             this.txtTIN2.Enter += new System.EventHandler(this.txtTIN2_Enter);
+            this.txtTIN2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTIN2_KeyPress);
             this.txtTIN2.Leave += new System.EventHandler(this.txtTIN2_Leave);
             // 
             // dateTimePicker1

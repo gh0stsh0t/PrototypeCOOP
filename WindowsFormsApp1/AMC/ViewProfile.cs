@@ -190,7 +190,7 @@ namespace AMC
             {
                 //do something else
             }
-            
+
         }
 
         private void btnCBU_Click(object sender, EventArgs e)
@@ -202,7 +202,7 @@ namespace AMC
 
         private void load_accounts()
         {
-            
+
             hasSavings = false;
             hasLoan = false;
             hasCapital = false;
@@ -237,7 +237,7 @@ namespace AMC
                 conn.Close();
             }
 
-            
+
         }
 
         private void refresh_buttons()
