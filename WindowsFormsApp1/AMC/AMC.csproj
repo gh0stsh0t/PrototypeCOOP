@@ -82,6 +82,7 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="ViewLoanSched.cs">
       <SubType>Form</SubType>
     </Compile>
