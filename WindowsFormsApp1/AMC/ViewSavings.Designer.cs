@@ -92,6 +92,7 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(205, 25);
             this.tbSearch.TabIndex = 12;
+            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
             // 
             // cbxMonth
             // 
@@ -157,11 +158,12 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Location = new System.Drawing.Point(3, 23);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(940, 163);
+            this.panel2.Size = new System.Drawing.Size(940, 166);
             this.panel2.TabIndex = 12;
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.rdClosed);
             this.panel1.Controls.Add(this.rdOpen);
             this.panel1.Location = new System.Drawing.Point(732, 49);
@@ -220,19 +222,20 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.lblDate);
             this.panel3.Controls.Add(this.lblTitle);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Location = new System.Drawing.Point(1, 76);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(907, 84);
+            this.panel3.Size = new System.Drawing.Size(907, 87);
             this.panel3.TabIndex = 28;
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.lblDate.Location = new System.Drawing.Point(312, 53);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(154, 20);
@@ -342,12 +345,13 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.dgvAccounts);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 56);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(910, 544);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(922, 544);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // dgvAccounts
@@ -361,7 +365,7 @@
             this.dgvAccounts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
@@ -378,7 +382,7 @@
             this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAccounts.EnableHeadersVisualStyles = false;
             this.dgvAccounts.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvAccounts.Location = new System.Drawing.Point(3, 192);
+            this.dgvAccounts.Location = new System.Drawing.Point(3, 195);
             this.dgvAccounts.MultiSelect = false;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
@@ -403,8 +407,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 621);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
+            this.ClientSize = new System.Drawing.Size(960, 621);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -29,6 +29,7 @@ namespace AMC
             sidebarPanelLoans.Visible = false;
             sidebarPanelSavings.Visible = false;
             sidebarPanelMembers.Visible = false;
+            innerChild(new Dashboard(this));
         }
 
         private void sidebarBtnMembers_Click(object sender, EventArgs e)
@@ -137,6 +138,11 @@ namespace AMC
         private void button11_Click(object sender, EventArgs e)
         {
             innerChild(new ViewTransactions(this, 's'));
+        }
+
+        private void sidebarBtnDashboard_Click(object sender, EventArgs e)
+        {
+            innerChild(new Dashboard(this));
         }
     }
 }

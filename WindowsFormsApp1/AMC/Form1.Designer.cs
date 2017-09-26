@@ -30,6 +30,7 @@
         {
             this.sidebarPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.sidebarLogoPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarBtnDashboard = new System.Windows.Forms.Button();
             this.sidebarBtnMembers = new System.Windows.Forms.Button();
             this.sidebarPanelMembers = new System.Windows.Forms.FlowLayoutPanel();
@@ -52,14 +53,13 @@
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarPanel.SuspendLayout();
             this.sidebarLogoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.sidebarPanelMembers.SuspendLayout();
             this.sidebarPanelLoans.SuspendLayout();
             this.sidebarPanelSavings.SuspendLayout();
             this.sidebarPanelCBU.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // sidebarPanel
@@ -91,6 +91,16 @@
             this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 168);
             this.sidebarLogoPanel.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(34, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(145, 145);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // sidebarBtnDashboard
             // 
             this.sidebarBtnDashboard.FlatAppearance.BorderSize = 0;
@@ -107,6 +117,7 @@
             this.sidebarBtnDashboard.Text = "Dashboard";
             this.sidebarBtnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.sidebarBtnDashboard.UseVisualStyleBackColor = true;
+            this.sidebarBtnDashboard.Click += new System.EventHandler(this.sidebarBtnDashboard_Click);
             // 
             // sidebarBtnMembers
             // 
@@ -439,20 +450,11 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.panel1.Location = new System.Drawing.Point(232, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(950, 660);
             this.panel1.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(34, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(145, 145);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -470,11 +472,11 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.sidebarLogoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.sidebarPanelMembers.ResumeLayout(false);
             this.sidebarPanelLoans.ResumeLayout(false);
             this.sidebarPanelSavings.ResumeLayout(false);
             this.sidebarPanelCBU.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

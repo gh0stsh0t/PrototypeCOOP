@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2017 at 03:11 PM
+-- Generation Time: Sep 26, 2017 at 03:35 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -26,7 +26,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `displayCapitalsTable` (IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayCapitalsTable` (IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
 BEGIN
 
 SELECT m.member_id, CAST(c.capital_account_id AS CHAR(5)) AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getCapitalBeginningBalance(yr,ct.capital_account_id),0) as 'Beginning Balance for the Year',
@@ -37,11 +37,11 @@ COALESCE(amc.computeCapitalDifference(yr,ct.capital_account_id),0) as 'Increase 
 (SELECT amount FROM amc.capital_general_log WHERE fund_type = 3 AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1)  as 'Targeted Increase for the Year',
 COALESCE(amc.computeCapitalPercentAccomplished(yr,ct.capital_account_id),0) as '% Accomplished',
 COALESCE(amc.computeCapitalNetBookValue(yr,ct.capital_account_id),0) as 'Net Book Value of Share Capital'
-FROM capitals c LEFT JOIN capitals_transaction ct ON c.capital_account_id = ct.capital_account_id INNER JOIN members m ON c.member_id = m.member_id WHERE m.status = 1 AND c.account_status = accountstatus GROUP BY c.capital_account_id;
+FROM capitals c LEFT JOIN capitals_transaction ct ON c.capital_account_id = ct.capital_account_id INNER JOIN members m ON c.member_id = m.member_id WHERE m.status = 1 AND c.account_status = accountstatus  AND (c.capital_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY c.capital_account_id;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `displayMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
 BEGIN
 
 SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(mn,yr,st.savings_account_id),0) as 'Beginning Balance', COALESCE(amc.computeMonthOutstandingBalance(mn,yr,st.savings_account_id),0) as 'Outstanding Balance', COALESCE(amc.computeMonthInterest(mn,yr,st.savings_account_id),0) AS 'Computed Interest',
@@ -49,10 +49,10 @@ COALESCE(amc.computeMonthInterestExpense(mn,yr,st.savings_account_id),0) AS 'Int
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `displayQuarterMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayQuarterMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
 BEGIN
 
 SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(mn,yr,st.savings_account_id),0) as 'Beginning Balance', COALESCE(amc.computeMonthOutstandingBalance(mn,yr,st.savings_account_id),0) as 'Outstanding Balance', COALESCE(amc.computeMonthInterest(mn,yr,st.savings_account_id),0) AS 'Computed Interest',
@@ -61,10 +61,10 @@ COALESCE(amc.computeQuarterInterest(mn,yr,st.savings_account_id),0) AS 'Interest
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `displayYearTable` (IN `yr` INT, IN `accountstatus` INT)  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `displayYearTable` (IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
 BEGIN
 
 SELECT m.member_id, s.savings_account_id AS 'Acc. No.', CONCAT(m.family_name, ', ', m.first_name, ' ', m.middle_name) AS 'Member Name', COALESCE(amc.getMonthBeginningBalance(1,yr,st.savings_account_id),0) as 'Beginning Balance for the Year',
@@ -73,7 +73,15 @@ COALESCE(amc.computeYearOutstandingBalance(yr,st.savings_account_id),0) - COALES
 COALESCE(amc.computeYearInterest(yr,st.savings_account_id),0) as 'Total Computed Interest for the Year',
 COALESCE(amc.computeYearInterestExpense(yr,st.savings_account_id),0) as 'Total Interest Credit for the Year',
 COALESCE(amc.computeYearQuarterInterest(yr,st.savings_account_id),0) as 'Interest Expense for the Year (Based on Quarterly Credit)'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtainHeaderValues` (IN `yr` INT)  READS SQL DATA
+BEGIN
+
+SELECT PUC1 AS 'PUC1', PUC2 AS 'PUC2', NET AS 'NET', RF1 AS 'RF1' , CAST((NET * RF1) AS DECIMAL(13,2)) AS 'RF2', CAST(PUC1 - PUC2 AS DECIMAL(13,2)) AS 'DIFF1', CAST(NET - (NET * (RF1 / 100)) AS DECIMAL(13,2)) AS 'DIFF2'  
+FROM (SELECT amc.computeTotalCapitalOutstandingBalance(yr) AS 'PUC1', (SELECT amount FROM amc.capital_general_log WHERE fund_type = 2 AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1) AS 'PUC2', (SELECT amount FROM amc.capital_general_log WHERE fund_type = 0 AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1) AS 'NET', (SELECT amount * 100 FROM amc.capital_general_log WHERE fund_type = 1 AND YEAR(date) <= yr ORDER BY date DESC LIMIT 1) AS 'RF1') tb;
 
 END$$
 
@@ -394,7 +402,6 @@ CREATE TABLE `capitals` (
   `ics_no` int(11) DEFAULT NULL,
   `ics_amount` decimal(13,2) DEFAULT NULL,
   `ipuc_amount` decimal(13,2) DEFAULT NULL,
-  `outstanding_balance` decimal(13,2) DEFAULT NULL,
   `account_status` int(11) DEFAULT NULL,
   `withdrawal_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -403,8 +410,8 @@ CREATE TABLE `capitals` (
 -- Dumping data for table `capitals`
 --
 
-INSERT INTO `capitals` (`capital_account_id`, `member_id`, `opening_date`, `ics_no`, `ics_amount`, `ipuc_amount`, `outstanding_balance`, `account_status`, `withdrawal_date`) VALUES
-(1, 1, '2017-09-12', NULL, NULL, NULL, NULL, 1, NULL);
+INSERT INTO `capitals` (`capital_account_id`, `member_id`, `opening_date`, `ics_no`, `ics_amount`, `ipuc_amount`, `account_status`, `withdrawal_date`) VALUES
+(1, 1, '2017-09-12', NULL, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -528,7 +535,9 @@ INSERT INTO `chart_of_accounts_log` (`id`, `code`, `timestamp`, `total_amount`) 
 (7, 102, '2017-09-12 06:46:02', '30025.00'),
 (8, 101, '2017-09-12 06:46:02', '10025.00'),
 (9, 101, '2017-09-19 03:06:28', '10045.00'),
-(10, 102, '2017-09-19 03:06:28', '30045.00');
+(10, 102, '2017-09-19 03:06:28', '30045.00'),
+(11, 101, '2017-09-25 19:54:44', '10345.00'),
+(12, 102, '2017-09-25 19:54:44', '30345.00');
 
 -- --------------------------------------------------------
 
@@ -543,37 +552,6 @@ CREATE TABLE `comakers` (
   `address` varchar(75) DEFAULT NULL,
   `company_name` varchar(65) DEFAULT NULL,
   `position` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dividend_general`
---
-
-CREATE TABLE `dividend_general` (
-  `dividend_id` int(11) NOT NULL,
-  `year` int(11) DEFAULT NULL,
-  `total_paid_up` decimal(13,2) DEFAULT NULL,
-  `net_surplus` decimal(13,2) DEFAULT NULL,
-  `reserve_fund` decimal(13,2) DEFAULT NULL,
-  `date_set` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `individual_dividends`
---
-
-CREATE TABLE `individual_dividends` (
-  `ind_dividend_id` int(11) NOT NULL,
-  `capital_account_id` int(11) DEFAULT NULL,
-  `dividend_id` int(11) DEFAULT NULL,
-  `current_balance` decimal(13,2) DEFAULT NULL,
-  `dividend_amount` decimal(13,2) DEFAULT NULL,
-  `date_computed` datetime DEFAULT NULL,
-  `date_released` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -781,7 +759,8 @@ INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id
 (27, 2, 1, '2017-09-04', '100.00', NULL),
 (29, 2, 1, '2017-09-06', '100.00', NULL),
 (30, 2, 1, '2017-09-11', '200.00', NULL),
-(32, 1, 1, '2017-08-01', '200.00', NULL);
+(32, 1, 1, '2017-08-01', '200.00', NULL),
+(33, 2, 1, '2017-09-26', '300.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -809,7 +788,9 @@ INSERT INTO `savings_transaction_line` (`savings_trans_line_id`, `savings_transa
 (9, 21, 102, '30.00', 1),
 (10, 21, 101, '30.00', 0),
 (11, 24, 101, '20.00', 0),
-(12, 24, 102, '20.00', 1);
+(12, 24, 102, '20.00', 1),
+(13, 33, 101, '300.00', 0),
+(14, 33, 102, '300.00', 1);
 
 -- --------------------------------------------------------
 
@@ -894,20 +875,6 @@ ALTER TABLE `chart_of_accounts_log`
 ALTER TABLE `comakers`
   ADD PRIMARY KEY (`comaker_id`),
   ADD KEY `comaker_loan_idx` (`loan_id`);
-
---
--- Indexes for table `dividend_general`
---
-ALTER TABLE `dividend_general`
-  ADD PRIMARY KEY (`dividend_id`);
-
---
--- Indexes for table `individual_dividends`
---
-ALTER TABLE `individual_dividends`
-  ADD PRIMARY KEY (`ind_dividend_id`),
-  ADD KEY `dividend_capitalaccount_idx` (`capital_account_id`),
-  ADD KEY `dividend_general_idx` (`dividend_id`);
 
 --
 -- Indexes for table `interest_rate_log`
@@ -1026,25 +993,13 @@ ALTER TABLE `capital_general_log`
 -- AUTO_INCREMENT for table `chart_of_accounts_log`
 --
 ALTER TABLE `chart_of_accounts_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comakers`
 --
 ALTER TABLE `comakers`
   MODIFY `comaker_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `dividend_general`
---
-ALTER TABLE `dividend_general`
-  MODIFY `dividend_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `individual_dividends`
---
-ALTER TABLE `individual_dividends`
-  MODIFY `ind_dividend_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `interest_rate_log`
@@ -1098,13 +1053,13 @@ ALTER TABLE `savings_balance_log`
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
-  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction_line`
 --
 ALTER TABLE `savings_transaction_line`
-  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1165,13 +1120,6 @@ ALTER TABLE `chart_of_accounts_log`
 --
 ALTER TABLE `comakers`
   ADD CONSTRAINT `comaker_loan` FOREIGN KEY (`loan_id`) REFERENCES `loans` (`loan_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `individual_dividends`
---
-ALTER TABLE `individual_dividends`
-  ADD CONSTRAINT `dividend_capitalaccount` FOREIGN KEY (`capital_account_id`) REFERENCES `capitals` (`capital_account_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `dividend_general` FOREIGN KEY (`dividend_id`) REFERENCES `dividend_general` (`dividend_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `interest_rate_log`

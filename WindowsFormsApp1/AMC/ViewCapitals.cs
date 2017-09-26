@@ -27,10 +27,12 @@ namespace AMC
         private void ViewCapitals_Load(object sender, EventArgs e)
         {
             cbxYear.SelectedText = DateTime.Now.Year.ToString();
-            loadAccounts(cbxYear.Text);
+            loadCbxYears();
+            loadAccounts(cbxYear.Text, "%");
+            loadValues(cbxYear.Text);
         }
 
-        private void loadAccounts(string yr)
+        private void loadAccounts(string yr, string like)
         {
             lblDate.Text = "as of " + yr;
             accountstatus = checkStatus();
@@ -44,6 +46,7 @@ namespace AMC
                 comm.CommandText = "displayCapitalsTable";
                 comm.Parameters.AddWithValue("@yr", yr);
                 comm.Parameters.AddWithValue("@accountstatus", accountstatus);
+                comm.Parameters.AddWithValue("@likephrase", like);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
@@ -84,12 +87,115 @@ namespace AMC
 
         private void rdOpen_Click(object sender, EventArgs e)
         {
-            loadAccounts(cbxYear.Text);
+            loadAccounts(cbxYear.Text, "%");
         }
 
         private void rdClosed_Click(object sender, EventArgs e)
         {
-            loadAccounts(cbxYear.Text);
+            loadAccounts(cbxYear.Text, "%");
+        }
+
+        private void tbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            loadAccounts(cbxYear.Text, ("%" + tbSearch.Text + "%"));
+        }
+
+        private void loadValues(string yr)
+        { /*
+            try
+            {
+                conn.Open();
+
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    sourceForm.lblAccount.Text = dt.Rows[0]["accountid"].ToString();
+                    // sourceForm.lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
+                } */
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand comm = new MySqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "obtainHeaderValues";
+                comm.Parameters.AddWithValue("@yr", yr);
+                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    L1.Text = dt.Rows[0]["PUC1"].ToString();
+                    R1.Text = dt.Rows[0]["PUC2"].ToString();
+                    R2.Text = dt.Rows[0]["PUC1"].ToString();
+                    D1.Text = dt.Rows[0]["DIFF1"].ToString();
+                    R3.Text = dt.Rows[0]["NET"].ToString();
+                    L4.Text = dt.Rows[0]["RF1"].ToString();
+                    R4.Text = dt.Rows[0]["RF2"].ToString();
+                    D2.Text = dt.Rows[0]["DIFF2"].ToString();
+                    conn.Close();
+                }
+                else
+                {
+                    
+                }
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            loadAccounts(cbxYear.Text, "%");
+            loadValues(cbxYear.Text);
+        }
+
+        private void loadCbxYears()
+        {
+            string query; Int32 min = DateTime.Today.Year;
+            cbxYear.Items.Clear();
+            query = "SELECT YEAR(date) AS 'Year' FROM capitals_transaction ORDER BY date ASC LIMIT 1";
+
+            try
+            {
+
+                conn.Open();
+
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    min = Convert.ToInt32(dt.Rows[0]["Year"]);
+                }
+                else
+                { }
+                conn.Close();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+                conn.Close();
+            }
+
+            for (int i = DateTime.Today.Year; i >= min; i--)
+                cbxYear.Items.Add(i.ToString());
+            cbxYear.SelectedIndex = 0;
         }
     }
 }

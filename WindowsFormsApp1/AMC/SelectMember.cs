@@ -153,6 +153,28 @@ namespace AMC
                     sourceForm.lblAccount.Text = dt.Rows[0]["accountid"].ToString();
                     // sourceForm.lblBalance.Text = dt.Rows[0]["outstanding_balance"].ToString();
                 }
+
+                MySqlCommand comm2 = new MySqlCommand();
+                comm2.Connection = conn;
+                comm2.CommandType = CommandType.Text;
+                if (transtype == "savings")
+                {
+                    comm2.CommandText = "SELECT amc.computeMonthEndBalance(@mn, @yr, @accountid) AS 'CurrBalance'";
+                    comm2.Parameters.AddWithValue("@mn", DateTime.Today.Month);
+                }
+                else
+                {
+                    comm2.CommandText = "SELECT amc.computeCapitalOutstandingBalance(@yr, @accountid) AS 'CurrBalance'";
+                }                    
+                comm2.Parameters.AddWithValue("@yr", DateTime.Today.Year);
+                comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(dt.Rows[0]["accountid"]));
+                double bal;
+                bal = Convert.ToDouble(comm2.ExecuteScalar());
+                sourceForm.lblBalance.Text = bal.ToString();
+                /* MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                DataTable dt = new DataTable();
+                adp.Fill(dt); */
+                conn.Close();
             }
             catch (Exception ee)
             {

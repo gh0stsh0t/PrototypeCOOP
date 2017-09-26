@@ -162,14 +162,14 @@ namespace AMC
                         {
                             query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount)" +
                                                 "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "'); "
-                                                + "SELECT LAST_INSERT_ID()"; // INTEREST RATE FROM GENERAL
+                                                + "SELECT LAST_INSERT_ID()";
 
                             
                         } else if (type =="capitals")
                         {
                             query = "INSERT INTO capitals_transaction (capital_account_id, transaction_type, date, total_amount)" +
-                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"; // INTEREST RATE FROM GENERAL
-
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"  // INTEREST RATE FROM GENERAL
+                                                + "SELECT LAST_INSERT_ID()" ;
                         }
                         MySqlCommand ins = new MySqlCommand(query, conn);
                         newID = Convert.ToInt32(ins.ExecuteScalar());
