@@ -16,6 +16,7 @@ namespace AMC
         public MainForm()
         {
             InitializeComponent();
+            MessageBox.Show(User.Name.person);
         }
 
         private void button4_Click(object sender, EventArgs e)

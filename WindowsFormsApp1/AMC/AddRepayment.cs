@@ -127,10 +127,7 @@ namespace AMC
                 
                 label12.Text = (checkier(txtInterest.Text) + checkier(txtPenalty.Text) + checkier(txtPrincipal.Text)).ToString();
                 _value = checkier(x.Content2) - checkier(txtPrincipal.Text);
-                if (_value < 0)
-                    label18.ForeColor = Color.Red;
-                else
-                    label18.ForeColor = Color.Black;
+                label18.ForeColor = _value < 0 ? Color.Red : Color.Black;
                 label18.Text = _value.ToString("F");
             }
             catch (Exception ex)

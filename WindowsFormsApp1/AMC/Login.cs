@@ -13,6 +13,8 @@ namespace AMC
     public partial class Login : Form
     {
         private bool userCheck = true, passCheck = true;
+        public string uid, uname;
+        private DatabaseConn conn = new DatabaseConn();
         public Login()
         {
             InitializeComponent();
@@ -42,7 +44,18 @@ namespace AMC
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            var x = conn.Select("users", "user_id", "concat_ws(',', last_name, first_name) as Name")
+                        .Where("username", textBox1.Text, "password", tbSearch.Text)
+                        .GetQueryData();
+            if (x.Rows.Count == 1)
+            {
+                uid = x.Rows[0]["user_id"].ToString();
+                uname = x.Rows[0]["Name"].ToString();
+                this.DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+                MessageBox.Show("Invalid Username or Password");
         }
 
         private void tbSearch_Enter(object sender, EventArgs e)
