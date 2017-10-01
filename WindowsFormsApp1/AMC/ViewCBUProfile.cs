@@ -11,14 +11,22 @@ using MySql.Data.MySqlClient;
 
 namespace AMC
 {
-    public partial class ViewSavingsProfile : Form
+    public partial class ViewCBUProfile : Form
     {
+
         public MainForm reftomain;
         public MySqlConnection conn;
-        ViewSavings source;
+        ViewCapitals source;
         string anum, mname; Int32 stat;
 
-        public ViewSavingsProfile(MainForm main, ViewSavings src, MySqlConnection con, string no, string name)
+        private void ViewCBUProfile_Load(object sender, EventArgs e)
+        {
+            lblName.Text = "Account No. " + anum + " - " + mname;
+            getBalance();
+            loadTransactions(0);
+        }
+
+        public ViewCBUProfile(MainForm main, ViewCapitals src, MySqlConnection con, string no, string name)
         {
             InitializeComponent();
             reftomain = main;
@@ -28,18 +36,6 @@ namespace AMC
             source = src;
         }
 
-        private void ViewSavingsProfile_Load(object sender, EventArgs e)
-        {
-            lblName.Text = "Account No. " + anum + " - " + mname;
-            getBalance();
-            loadTransactions(0);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            reftomain.Enabled = true;
-            this.Close();
-        }
 
         private void getBalance()
         {
@@ -50,28 +46,33 @@ namespace AMC
                 MySqlCommand comm2 = new MySqlCommand();
                 comm2.Connection = conn;
                 comm2.CommandType = CommandType.Text;
-                comm2.CommandText = "SELECT amc.computeMonthEndBalance(@mn, @yr, @accountid) AS 'CurrBalance'";
-                comm2.Parameters.AddWithValue("@mn", DateTime.Today.Month);
+                comm2.CommandText = "SELECT amc.computeCapitalOutstandingBalance(@yr, @accountid) AS 'CurrBalance'";
                 comm2.Parameters.AddWithValue("@yr", DateTime.Today.Year);
                 comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(anum));
                 double bal;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
                 lblBalance.Text = bal.ToString();
-                comm2.CommandText = "SELECT account_status FROM savings WHERE savings_account_id = " + anum;
+                comm2.CommandText = "SELECT account_status FROM capitals WHERE capital_account_id = " + anum;
                 stat = Convert.ToInt32(comm2.ExecuteScalar());
                 DateTime d8;
-                comm2.CommandText = "SELECT opening_date FROM savings WHERE savings_account_id = " + anum;
+                comm2.CommandText = "SELECT opening_date FROM capitals WHERE capital_account_id = " + anum;
                 d8 = Convert.ToDateTime(comm2.ExecuteScalar());
                 lblDate.Text = "Opened on " + d8.ToString("MM/dd/yyyy");
-                if(stat == 0)
+                if (stat == 0)
                 {
-                    comm2.CommandText = "SELECT termination_date FROM savings WHERE savings_account_id = " + anum;
+                    comm2.CommandText = "SELECT withdrawal_date FROM capitals WHERE capital_account_id = " + anum;
                     d8 = Convert.ToDateTime(comm2.ExecuteScalar());
                     lblClose.Visible = true;
-                    lblClose.Text = "Closed since " + d8.ToString("MM/dd/yyyy");
+                    lblClose.Text = "Withdrawn on " + d8.ToString("MM/dd/yyyy");
                     lblX.Text = "Final Balance: ₱";
                     btnDeactivate.Visible = false;
                 }
+                comm2.CommandText = "SELECT ics_no FROM capitals WHERE capital_account_id = " + anum;
+                lblicsn.Text = comm2.ExecuteScalar().ToString();
+                comm2.CommandText = "SELECT ics_amount FROM capitals WHERE capital_account_id = " + anum;
+                lblics.Text = comm2.ExecuteScalar().ToString();
+                comm2.CommandText = "SELECT ipuc_amount FROM capitals WHERE capital_account_id = " + anum;
+                lblipuc.Text = comm2.ExecuteScalar().ToString();
                 conn.Close();
             }
             catch (Exception ee)
@@ -79,6 +80,11 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
                 conn.Close();
             }
+        }
+
+        private void rdAll_Click(object sender, EventArgs e)
+        {
+            loadTransactions(0);
         }
 
         private void rdDeposit_Click(object sender, EventArgs e)
@@ -91,9 +97,10 @@ namespace AMC
             loadTransactions(2);
         }
 
-        private void rdAll_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            loadTransactions(0);
+            reftomain.Enabled = true;
+            this.Close();
         }
 
         private void btnDeactivate_Click(object sender, EventArgs e)
@@ -104,7 +111,7 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    string q = "UPDATE savings SET account_status = 0, termination_date = '" + DateTime.Today.ToString("yyyy-MM-dd") + "' WHERE savings_account_id = " + anum;
+                    string q = "UPDATE capitals SET account_status = 0, withdrawal_date = '" + DateTime.Today.ToString("yyyy-MM-dd") + "' WHERE capital_account_id = " + anum;
                     MySqlCommand comm = new MySqlCommand(q, conn);
                     comm.ExecuteNonQuery();
                     conn.Close();
@@ -121,13 +128,13 @@ namespace AMC
             }
             else if (dialogResult == DialogResult.No)
             {
-                
+
             }
         }
 
         private void loadTransactions(int p)
         {
-            string q = "SELECT date AS 'Date', total_amount * transaction_type AS 'Amount' FROM savings_transaction WHERE savings_account_id = " + anum;
+            string q = "SELECT date AS 'Date', total_amount * transaction_type AS 'Amount' FROM capitals_transaction WHERE capital_account_id = " + anum;
             if (p == 1)
                 q += " AND transaction_type = 1 ";
             else if (p == 2)
@@ -165,4 +172,3 @@ namespace AMC
         }
     }
 }
-

@@ -87,6 +87,12 @@
     <Compile Include="NewCBUAccount.Designer.cs">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCOA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCOA.Designer.cs">
+      <DependentUpon>NewCOA.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSavingsAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,11 +105,23 @@
     <Compile Include="SelectMember.Designer.cs">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateAmount.Designer.cs">
+      <DependentUpon>UpdateAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewCapitals.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewCapitals.Designer.cs">
       <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCBUProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCBUProfile.Designer.cs">
+      <DependentUpon>ViewCBUProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
@@ -155,6 +173,9 @@
     <EmbeddedResource Include="NewCBUAccount.resx">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewCOA.resx">
+      <DependentUpon>NewCOA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewSavingsAccount.resx">
       <DependentUpon>NewSavingsAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,8 +192,14 @@
     <EmbeddedResource Include="SelectMember.resx">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpdateAmount.resx">
+      <DependentUpon>UpdateAmount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewCapitals.resx">
       <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewCBUProfile.resx">
+      <DependentUpon>ViewCBUProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewSavings.resx">
       <DependentUpon>ViewSavings.cs</DependentUpon>

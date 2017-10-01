@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 26, 2017 at 10:34 AM
+-- Generation Time: Oct 01, 2017 at 08:47 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -77,6 +77,16 @@ FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.sav
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `loansM` ()  READS SQL DATA
+BEGIN
+SELECT members.member_id, concat_ws(',', family_name, first_name) as name FROM members inner JOIN loans on members.member_id=loans.member_id WHERE date_terminated IS NULL;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `monthview` (IN `loanid` INT(11), IN `mo` INT(2))  READS SQL DATA
+BEGIN
+SELECT SUM(total_amount) AS Total, SUM(principal) AS Principal, SUM(interest) AS Interest, SUM(penalty) AS Penalty FROM loan_transaction WHERE MONTH(date) = mo AND loan_account_id = loanid;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtainHeaderValues` (IN `yr` INT)  READS SQL DATA
 BEGIN
 
@@ -91,6 +101,105 @@ INSERT INTO amc.savings_balance_log (savings_account_id, amount, date)
 SELECT st.savings_account_id, COALESCE(amc.computeMonthEndBalance(MONTH(CURDATE()) - 1,YEAR(CURDATE()),st.savings_account_id),0) AS 'Month End Balance', CURDATE() 
 FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id 
 WHERE m.status = 1 AND s.account_status = 1 GROUP BY s.savings_account_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewagingsched` ()  READS SQL DATA
+BEGIN
+SELECT
+    Age,
+    `Date Granted to Cut-off date`,
+    CASE
+        WHEN `Date Granted to Cut-off date` < 1 THEN 'Current'
+        ELSE 'Past Due'
+    END AS Status,
+    CASE
+        WHEN `Date Granted to Cut-off date` <= 1 THEN balance
+        ELSE 0
+    END AS 'Current',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 1 AND 30 THEN balance
+        ELSE 0
+    END AS '1-30 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 31 AND 60 THEN balance
+        ELSE 0
+    END AS '31-60 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 61 AND 90 THEN balance
+        ELSE 0
+    END AS '61-90 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 91 AND 120 THEN balance
+        ELSE 0
+    END AS '91-120 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 121 AND 180 THEN balance
+        ELSE 0
+    END AS '121-180 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 181 AND 365 THEN balance
+        ELSE 0
+    END AS '181-365 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 366 AND 730 THEN balance
+        ELSE 0
+    END AS '366 to 2 years (730 days)',
+    CASE
+        WHEN `Date Granted to Cut-off date` >= 731 THEN balance
+        ELSE 0
+    END AS 'More than 2 years (or 730 days)',
+    CASE
+        WHEN `Date Granted to Cut-off date` > 1 THEN balance
+        ELSE 0
+    END AS 'Total Past Due'
+FROM
+    (SELECT
+        Age,
+            term,
+            Age - term AS 'Date Granted to Cut-off date',
+            balance
+    FROM
+        (SELECT
+        DATEDIFF(DATE_ADD('2016-11-30', INTERVAL EXTRACT(YEAR FROM CURDATE()) - 2016 YEAR), date_granted) AS Age,
+            term,
+            outstanding_balance AS balance
+    FROM
+        loans
+    GROUP BY member_id) AS x) AS y;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanrequests` ()  READS SQL DATA
+BEGIN
+SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where loan_status = 0;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloansched` ()  READS SQL DATA
+BEGIN
+SELECT loan_account_id, member_id, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanschedname` ()  READS SQL DATA
+BEGIN
+SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted FROM loans NATURAL JOIN members;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanstotal` ()  READS SQL DATA
+BEGIN
+SELECT member_id,
+CASE WHEN SUM(interest) IS NULL THEN 0
+ELSE SUM(interest)
+            END AS 'Total Interest',
+CASE WHEN SUM(principal) IS NULL THEN 0
+ELSE SUM(principal)
+             END AS 'Total Principal',
+CASE WHEN SUM(penalty) IS NULL THEN 0
+ELSE SUM(penalty)
+             END AS 'Total Penalty',
+CASE WHEN SUM(outstanding_balance) IS NULL THEN 0
+ELSE SUM(outstanding_balance)
+             END AS balance
+FROM loan_transaction RIGHT JOIN loans on loans.loan_account_id=loan_transaction.loan_account_id
+GROUP BY member_id;
 END$$
 
 --
@@ -411,7 +520,7 @@ CREATE TABLE `capitals` (
 --
 
 INSERT INTO `capitals` (`capital_account_id`, `member_id`, `opening_date`, `ics_no`, `ics_amount`, `ipuc_amount`, `account_status`, `withdrawal_date`) VALUES
-(1, 1, '2017-09-12', NULL, NULL, NULL, 1, NULL);
+(1, 1, '2017-09-12', 123, '0.00', '0.00', 1, '2017-10-01');
 
 -- --------------------------------------------------------
 
@@ -497,16 +606,17 @@ INSERT INTO `capital_general_log` (`id`, `fund_type`, `amount`, `date`, `updated
 CREATE TABLE `chart_of_accounts` (
   `code` int(11) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL
+  `type` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `chart_of_accounts`
 --
 
-INSERT INTO `chart_of_accounts` (`code`, `title`, `type`) VALUES
-(101, 'Cash', 0),
-(102, 'Notes Payable', 2);
+INSERT INTO `chart_of_accounts` (`code`, `title`, `type`, `status`) VALUES
+(101, 'Cash', 0, 1),
+(102, 'Notes Payable', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -517,27 +627,17 @@ INSERT INTO `chart_of_accounts` (`code`, `title`, `type`) VALUES
 CREATE TABLE `chart_of_accounts_log` (
   `id` int(11) NOT NULL,
   `code` int(11) NOT NULL,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `total_amount` decimal(13,2) DEFAULT NULL
+  `date` date DEFAULT NULL,
+  `amount` decimal(13,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `chart_of_accounts_log`
 --
 
-INSERT INTO `chart_of_accounts_log` (`id`, `code`, `timestamp`, `total_amount`) VALUES
-(1, 101, '2017-09-07 03:34:20', '10000.00'),
-(2, 102, '2017-09-07 03:34:20', '30000.00'),
-(3, 101, '2017-09-12 06:12:59', '10020.00'),
-(4, 102, '2017-09-12 06:12:59', '30020.00'),
-(5, 101, '2017-09-12 06:42:47', '9995.00'),
-(6, 102, '2017-09-12 06:42:47', '29995.00'),
-(7, 102, '2017-09-12 06:46:02', '30025.00'),
-(8, 101, '2017-09-12 06:46:02', '10025.00'),
-(9, 101, '2017-09-19 03:06:28', '10045.00'),
-(10, 102, '2017-09-19 03:06:28', '30045.00'),
-(11, 101, '2017-09-25 19:54:44', '10345.00'),
-(12, 102, '2017-09-25 19:54:44', '30345.00');
+INSERT INTO `chart_of_accounts_log` (`id`, `code`, `date`, `amount`) VALUES
+(17, 101, '2017-10-02', '10000.00'),
+(18, 102, '2017-10-02', '30000.00');
 
 -- --------------------------------------------------------
 
@@ -596,6 +696,15 @@ CREATE TABLE `loans` (
   `date_terminated` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `loans`
+--
+
+INSERT INTO `loans` (`loan_account_id`, `member_id`, `loan_type`, `request_type`, `date_granted`, `approval_no`, `term`, `orig_amount`, `interest_rate`, `purpose`, `loan_status`, `outstanding_balance`, `date_terminated`) VALUES
+(1, 1, 0, 0, '2017-09-26', NULL, 60, '50000.00', 5, 'Loan', 1, '50000.00', '2017-09-26'),
+(2, 2, 0, 0, '2017-09-26', NULL, 90, '1000.00', 5, 'Loan', 1, '1000.00', NULL),
+(3, 1, 0, 0, '2017-09-26', NULL, 45, '1000.00', 5, 'asd', 1, '1000.00', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -626,6 +735,15 @@ CREATE TABLE `loan_transaction` (
   `penalty` decimal(13,2) DEFAULT NULL,
   `encoded_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loan_transaction`
+--
+
+INSERT INTO `loan_transaction` (`loan_transaction_id`, `loan_account_id`, `transaction_type`, `date`, `total_amount`, `principal`, `interest`, `penalty`, `encoded_by`) VALUES
+(1, 1, 1, '2017-09-26', '1050.00', '1000.00', '50.00', '0.00', NULL),
+(2, 2, 1, '2017-09-26', '210.00', '200.00', '10.00', '0.00', NULL),
+(3, 1, 1, '2017-09-26', '1020.00', '1000.00', '20.00', '0.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -703,7 +821,7 @@ CREATE TABLE `savings` (
 
 INSERT INTO `savings` (`savings_account_id`, `member_id`, `opening_date`, `initial_balance`, `account_status`, `termination_date`) VALUES
 (1, 1, '2017-09-07', '100.00', 1, NULL),
-(2, 2, '2017-09-19', NULL, 1, NULL);
+(2, 2, '2017-09-19', NULL, 0, '2017-09-30');
 
 -- --------------------------------------------------------
 
@@ -760,7 +878,8 @@ INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id
 (29, 2, 1, '2017-09-06', '100.00', NULL),
 (30, 2, 1, '2017-09-11', '200.00', NULL),
 (32, 1, 1, '2017-08-01', '200.00', NULL),
-(33, 2, 1, '2017-09-26', '300.00', NULL);
+(33, 2, 1, '2017-09-26', '300.00', NULL),
+(34, 1, -1, '2017-09-26', '100.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -790,7 +909,9 @@ INSERT INTO `savings_transaction_line` (`savings_trans_line_id`, `savings_transa
 (11, 24, 101, '20.00', 0),
 (12, 24, 102, '20.00', 1),
 (13, 33, 101, '300.00', 0),
-(14, 33, 102, '300.00', 1);
+(14, 33, 102, '300.00', 1),
+(15, 34, 101, '100.00', 0),
+(16, 34, 102, '100.00', 1);
 
 -- --------------------------------------------------------
 
@@ -990,10 +1111,16 @@ ALTER TABLE `capital_general_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `chart_of_accounts`
+--
+ALTER TABLE `chart_of_accounts`
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
 -- AUTO_INCREMENT for table `chart_of_accounts_log`
 --
 ALTER TABLE `chart_of_accounts_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `comakers`
@@ -1005,13 +1132,13 @@ ALTER TABLE `comakers`
 -- AUTO_INCREMENT for table `interest_rate_log`
 --
 ALTER TABLE `interest_rate_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `loan_account_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loan_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `loan_balance_log`
@@ -1023,7 +1150,7 @@ ALTER TABLE `loan_balance_log`
 -- AUTO_INCREMENT for table `loan_transaction`
 --
 ALTER TABLE `loan_transaction`
-  MODIFY `loan_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loan_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `loan_transaction_line`
@@ -1053,13 +1180,13 @@ ALTER TABLE `savings_balance_log`
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
-  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction_line`
 --
 ALTER TABLE `savings_transaction_line`
-  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`

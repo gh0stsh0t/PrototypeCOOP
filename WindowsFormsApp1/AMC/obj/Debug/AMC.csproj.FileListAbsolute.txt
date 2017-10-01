@@ -121,3 +121,6 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewTransactions.resources
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Dashboard.resources
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewSavingsProfile.resources
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewCBUProfile.resources
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.UpdateAmount.resources
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCOA.resources

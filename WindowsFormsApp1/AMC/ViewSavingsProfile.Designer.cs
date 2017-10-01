@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTop = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDate = new System.Windows.Forms.Label();
@@ -41,11 +41,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.lblBalance = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblX = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.btnDeactivate = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.lblClose = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
@@ -64,13 +65,14 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblClose);
             this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.dgvAccounts);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.lblBalance);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblX);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Location = new System.Drawing.Point(19, 51);
@@ -93,7 +95,7 @@
             this.panel2.Controls.Add(this.rdAll);
             this.panel2.Controls.Add(this.rdWithdrawal);
             this.panel2.Controls.Add(this.rdDeposit);
-            this.panel2.Location = new System.Drawing.Point(106, 79);
+            this.panel2.Location = new System.Drawing.Point(106, 91);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(224, 28);
             this.panel2.TabIndex = 26;
@@ -145,33 +147,33 @@
             this.dgvAccounts.BackgroundColor = System.Drawing.Color.White;
             this.dgvAccounts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAccounts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvAccounts.EnableHeadersVisualStyles = false;
             this.dgvAccounts.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvAccounts.Location = new System.Drawing.Point(5, 121);
+            this.dgvAccounts.Location = new System.Drawing.Point(5, 133);
             this.dgvAccounts.MultiSelect = false;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
             this.dgvAccounts.RowHeadersVisible = false;
             this.dgvAccounts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(428, 286);
+            this.dgvAccounts.Size = new System.Drawing.Size(428, 275);
             this.dgvAccounts.TabIndex = 28;
             this.dgvAccounts.TabStop = false;
             // 
@@ -179,7 +181,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 83);
+            this.label3.Location = new System.Drawing.Point(3, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 20);
             this.label3.TabIndex = 18;
@@ -191,7 +193,7 @@
             this.button2.Enabled = false;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(-6, 107);
+            this.button2.Location = new System.Drawing.Point(-6, 119);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(450, 4);
             this.button2.TabIndex = 17;
@@ -208,15 +210,15 @@
             this.lblBalance.TabIndex = 16;
             this.lblBalance.Text = "XXXX";
             // 
-            // label1
+            // lblX
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(212, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 17);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Current Balance: ₱";
+            this.lblX.AutoSize = true;
+            this.lblX.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblX.Location = new System.Drawing.Point(212, 37);
+            this.lblX.Name = "lblX";
+            this.lblX.Size = new System.Drawing.Size(114, 17);
+            this.lblX.TabIndex = 15;
+            this.lblX.Text = "Current Balance: ₱";
             // 
             // button1
             // 
@@ -256,6 +258,7 @@
             this.btnDeactivate.TabIndex = 19;
             this.btnDeactivate.Text = "Terminate Account";
             this.btnDeactivate.UseVisualStyleBackColor = false;
+            this.btnDeactivate.Click += new System.EventHandler(this.btnDeactivate_Click);
             // 
             // btnClose
             // 
@@ -273,6 +276,17 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // lblClose
+            // 
+            this.lblClose.AutoSize = true;
+            this.lblClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClose.Location = new System.Drawing.Point(6, 56);
+            this.lblClose.Name = "lblClose";
+            this.lblClose.Size = new System.Drawing.Size(129, 17);
+            this.lblClose.TabIndex = 30;
+            this.lblClose.Text = "Open since 9/2/2017";
+            this.lblClose.Visible = false;
             // 
             // ViewSavingsProfile
             // 
@@ -307,7 +321,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblBalance;
@@ -319,5 +333,6 @@
         private System.Windows.Forms.Button btnDeactivate;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label lblClose;
     }
 }

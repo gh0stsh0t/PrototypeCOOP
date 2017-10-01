@@ -163,7 +163,7 @@ namespace AMC
             if (rdMonth.Checked == true)
                 loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text, "%");
             else
-                loadYearAccounts(cbxYear.Text, "&");
+                loadYearAccounts(cbxYear.Text, "%");
         }
 
         private void tbSearch_KeyUp(object sender, KeyEventArgs e)
@@ -243,7 +243,7 @@ namespace AMC
             {
                 reftomain.Enabled = false;
 
-                ViewSavingsProfile sav = new ViewSavingsProfile(reftomain, conn, mid, mname);
+                ViewSavingsProfile sav = new ViewSavingsProfile(reftomain, this, conn, mid, mname);
                 sav.Show();
             }
             catch (Exception ee)
@@ -253,5 +253,13 @@ namespace AMC
 
         }
 
+        public void reopen()
+        {
+            loadCbxYears();
+            cbxMonth.SelectedIndex = Convert.ToInt32(DateTime.Now.Month) - 1;
+
+            loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text, "%");
+            loadIntRate((cbxMonth.SelectedIndex + 1).ToString(), cbxYear.Text);
+        }
     }
 }

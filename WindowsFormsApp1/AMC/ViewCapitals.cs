@@ -197,5 +197,31 @@ namespace AMC
                 cbxYear.Items.Add(i.ToString());
             cbxYear.SelectedIndex = 0;
         }
+
+        public void reopen()
+        {
+            cbxYear.SelectedText = DateTime.Now.Year.ToString();
+            loadCbxYears();
+            loadAccounts(cbxYear.Text, "%");
+            loadValues(cbxYear.Text);
+        }
+
+        private void dgvAccounts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string mid, mname;
+            mid = dgvAccounts.Rows[e.RowIndex].Cells["Acc. No."].Value.ToString();
+            mname = dgvAccounts.Rows[e.RowIndex].Cells["Member Name"].Value.ToString();
+            try
+            {
+                reftomain.Enabled = false;
+
+                ViewCBUProfile cbu = new ViewCBUProfile(reftomain, this, conn, mid, mname);
+                cbu.Show();
+            }
+            catch (Exception ee)
+            {
+
+            }
+        }
     }
 }
