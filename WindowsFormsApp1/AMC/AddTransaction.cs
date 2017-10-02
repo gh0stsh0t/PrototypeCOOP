@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -68,47 +69,58 @@ namespace AMC
 
         private void insertTLines()
         {
-            string q1 = "";
-            if(type=="savings")
-            {
-                q1 = "INSERT INTO savings_transaction_line (savings_transaction_id, account_code, amount, type) VALUES ";
-            } else if (type == "capitals")
-            {
-                q1 = "INSERT INTO capitals_transaction_line (capital_transaction_id, account_code, amount, type) VALUES ";
-            }
-            string q2 = "INSERT INTO chart_of_accounts_log (code, total_amount) VALUES ";
-            string columns = "", id = "", acode = "", amtt = "", typp = "", newtot = "", chartcol = "";
+            string q1 = "", q2 = "";
+            string columns = "", id = "", acode = "", typp = "", newtot = "", chartcol = "", cid = "";
+            
+
             for(int i = 0; i<code.Count(); i++)
             {
-                columns = "(";
+                if (type == "savings")
+                {
+                    q1 = "INSERT INTO savings_transaction_line (savings_transaction_id, account_log_id) VALUES ";
+                }
+                else if (type == "capitals")
+                {
+                    q1 = "INSERT INTO capitals_transaction_line (capital_transaction_id, account_log_id) VALUES ";
+                }
+                q2 = "INSERT INTO chart_of_accounts_log (code, amount, date, type) VALUES ";
+
+
                 id = newID.ToString();
                 acode = code.ElementAt(i).ToString(); 
-                amtt = amount.ElementAt(i).ToString();
                 typp = debcred_type.ElementAt(i).ToString();
                 newtot = new_total.ElementAt(i).ToString();
-                columns = "('" + id + "','" + acode + "','" + amtt + "','" + typp + "')";
-                chartcol = "('" + acode + "','" + newtot + "')";
-                if (i != code.Count() - 1)
+                
+                chartcol = "('" + acode + "','" + newtot + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + typp + "');";
+                q2 = q2 + chartcol + "SELECT LAST_INSERT_ID();" ;
+                try
                 {
-                    columns = columns + ",";
-                    chartcol = chartcol + ",";
+                    conn.Open();
+                    MySqlCommand ins = new MySqlCommand(q2, conn);
+                    cid = ins.ExecuteScalar().ToString();
+                    columns = "('" + id + "','" + cid + "')";
+                    q1 = q1 + columns;
+                    MySqlCommand ins2 = new MySqlCommand(q1, conn);
+                    ins2.ExecuteNonQuery();
+                    // MessageBox.Show("Success! Transaction recorded.");
+                    conn.Close();
                 }
-                q1 = q1 + columns;
-                q2 = q2 + chartcol;
+                catch (Exception ee)
+                {
+                    MessageBox.Show(ee.Message);
+                    conn.Close();
+                }
+
             }
 
-            try
-            {
-                MySqlCommand ins2 = new MySqlCommand(q1 + ";" + q2, conn);
-                ins2.ExecuteNonQuery();
-                // MessageBox.Show("Success! Transaction recorded.");
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.Message);
-                conn.Close();
-            }
 
+
+        }
+
+        public static Boolean isNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
+            return rg.IsMatch(strToCheck);
         }
 
         private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -140,7 +152,15 @@ namespace AMC
             if (txtAmt.Text == "")
             {
                 MessageBox.Show("Please fill in all fields.");
-            } if (particulars.Rows.Count == 0)
+            } else if(!isNum(txtAmt.Text))
+            {
+                MessageBox.Show("Please enter a valid amount.");
+            }
+            else if(rdWd.Checked == true && Convert.ToDouble(lblBalance.Text) < Convert.ToDouble(txtAmt.Text))
+            {
+                MessageBox.Show("Account balance is insufficient for this transaction.");
+            }
+            else if (particulars.Rows.Count == 0)
             {
                 MessageBox.Show("Please add particulars.");
             }
@@ -160,22 +180,23 @@ namespace AMC
                         conn.Open();
                         if (type == "savings")
                         {
-                            query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount)" +
-                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "'); "
+                            query = "INSERT INTO savings_transaction (savings_account_id, transaction_type, date, total_amount, encoded_by)" +
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "','" + User.Name.id + "'); "
                                                 + "SELECT LAST_INSERT_ID()";
 
                             
                         } else if (type =="capitals")
                         {
-                            query = "INSERT INTO capitals_transaction (capital_account_id, transaction_type, date, total_amount)" +
-                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "')"  // INTEREST RATE FROM GENERAL
+                            query = "INSERT INTO capitals_transaction (capital_account_id, transaction_type, date, total_amount, encoded_by)" +
+                                                "VALUES('" + lblAccount.Text + "', '" + transtype + "', '" + dtpDate.Value.ToString("yyyy-MM-dd") + "','" + txtAmt.Text + "','" + User.Name.id + "'); "  
                                                 + "SELECT LAST_INSERT_ID()" ;
                         }
                         MySqlCommand ins = new MySqlCommand(query, conn);
                         newID = Convert.ToInt32(ins.ExecuteScalar());
+                        conn.Close();
                         insertTLines();
                         MessageBox.Show("Success! Transaction recorded.");
-                        conn.Close();
+                        
 
                         refreshEverything(1);
                         

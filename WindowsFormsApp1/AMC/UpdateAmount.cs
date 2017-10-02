@@ -72,21 +72,21 @@ namespace AMC
                     if (cbxFund.SelectedIndex == 0)
                     {
                         n = (Convert.ToDouble(tbAmt.Text) / 100).ToString();
-                        q = "INSERT INTO interest_rate_log (interest_rate, date) VALUES (" + n + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO interest_rate_log (interest_rate, date, updated_by) VALUES (" + n + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id + "')";
                     }
                     else if (cbxFund.SelectedIndex == 1)
-                        q = "INSERT INTO avg_daily_balance_log (amount, date) VALUES (" + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO avg_daily_balance_log (amount, date, updated_by) VALUES (" + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id +  "')";
                     else if (cbxFund.SelectedIndex == 2)
-                        q = "INSERT INTO capital_general_log (fund_type, amount, date) VALUES (0," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO capital_general_log (fund_type, amount, date, updated_by) VALUES (0," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id  + "')";
                     else if (cbxFund.SelectedIndex == 3)
                     {
                         n = (Convert.ToDouble(tbAmt.Text) / 100).ToString();
-                        q = "INSERT INTO capital_general_log (fund_type, amount, date) VALUES (1," + n + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO capital_general_log (fund_type, amount, date, updated_by) VALUES (1," + n + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id  + "')";
                     }
                     else if (cbxFund.SelectedIndex == 4)
-                        q = "INSERT INTO capital_general_log (fund_type, amount, date) VALUES (2," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO capital_general_log (fund_type, amount, date, updated_by) VALUES (2," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id  + "')";
                     else if (cbxFund.SelectedIndex == 5)
-                        q = "INSERT INTO capital_general_log (fund_type, amount, date) VALUES (3," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "')";
+                        q = "INSERT INTO capital_general_log (fund_type, amount, date, updated_by) VALUES (3," + tbAmt.Text + ",'" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + User.Name.id  + "')";
                     try
                     {
                         conn.Open();

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -16,7 +17,7 @@ namespace AMC
         AddTransaction sourceForm;
         string acctitle; int code, type; double amount, maxamt; int acctype;
         public MySqlConnection conn;
-
+        
         public AddParticular(AddTransaction source)
         {
             InitializeComponent();
@@ -33,6 +34,12 @@ namespace AMC
         {
             sourceForm.Enabled = true;
             this.Close();
+        }
+
+        public static Boolean isNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
+            return rg.IsMatch(strToCheck);
         }
 
         private void refreshAccounts()
@@ -111,6 +118,10 @@ namespace AMC
             
             if (!fieldValidation())
                 MessageBox.Show("Fill in all fields.");
+            else if (!isNum(txtAmt.Text))
+            {
+                MessageBox.Show("Please enter a valid amount.");
+            }
             else
             {
                 type = getType();
@@ -191,15 +202,15 @@ namespace AMC
         private double solveNewAmount()
         {
             if (toIncrease())
-                return amount + maxamt;
+                return amount;
             else
-                return maxamt - amount;
+                return (amount * -1);
         }
 
         private Boolean amountValid()
         {
-            string query = "SELECT total_amount AS amount FROM chart_of_accounts_log WHERE code = '" + code.ToString() +
-                            "' AND timestamp = (SELECT MAX(timestamp) FROM chart_of_accounts_log WHERE code = '" + code.ToString() + "')";
+            string query = "SELECT SUM(amount) AS amount FROM chart_of_accounts_log WHERE code = '" + code.ToString() +
+                             "' LIMIT 1";
             try { 
             conn.Open();
 

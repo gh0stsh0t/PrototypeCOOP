@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 01, 2017 at 08:47 PM
+-- Generation Time: Oct 02, 2017 at 10:00 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -301,11 +301,10 @@ BEGIN
 RETURN
 (
     SELECT CASE
-    WHEN MONTH(date) % 3 = 0 
-    THEN COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id) + amc.computeQuarterInterest(MONTH(date),YEAR(date),savings_account_id),0)
-    ELSE COALESCE(amc.computeMonthOutstandingBalance(MONTH(date),YEAR(date),savings_account_id),0)
-    END AS balance
-    FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+    WHEN mn % 3 = 0 
+    THEN COALESCE(COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0) + COALESCE(amc.computeQuarterInterest(mn,yr,accountid),0),0)
+    ELSE COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0)
+    END 
 );
 END$$
 
@@ -313,7 +312,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthInterest` (`mn` INT, `yr
 BEGIN
 RETURN
 (
-    SELECT COALESCE(amc.computeMonthMultipliedSum(MONTH(date),YEAR(date),savings_account_id) * (amc.getMonthInterestRate(MONTH(date),YEAR(date)) / 365),0) as computed_interest FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+    SELECT COALESCE(COALESCE(amc.computeMonthMultipliedSum(mn,yr,accountid),0) * (COALESCE(amc.getMonthInterestRate(mn,yr),0) / 365),0)
 );
 END$$
 
@@ -329,14 +328,14 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthMultipliedSum` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
-RETURN (SELECT COALESCE(SUM(((total_amount * (amc.getMonthDays(MONTH(date), YEAR(date)) - DAY(date))) * transaction_type)) + ((amc.getMonthDays(MONTH(date), YEAR(date)) * COALESCE(amc.getMonthBeginningBalance(MONTH(date), YEAR(date),savings_account_id),0))),0) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1);
+RETURN (SELECT COALESCE(SUM(((total_amount * (amc.getMonthDays(MONTH(date), YEAR(date)) - DAY(date))) * transaction_type)),0) + ((amc.getMonthDays(MONTH(date), YEAR(date)) * COALESCE(amc.getMonthBeginningBalance(mn, yr,accountid),0))) AS amount FROM amc.savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1);
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthOutstandingBalance` (`mn` INT, `yr` INT, `accountid` INT) RETURNS DECIMAL(13,2) READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT COALESCE(SUM(total_amount * transaction_type) + amc.getMonthBeginningBalance(mn,yr,accountid),0) AS outstanding_balance FROM savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
+    SELECT COALESCE(COALESCE(SUM(total_amount * transaction_type),0) + amc.getMonthBeginningBalance(mn,yr,accountid),0) AS outstanding_balance FROM savings_transaction WHERE MONTH(date) = mn AND YEAR(date) = yr AND savings_account_id = accountid LIMIT 1
 );
 END$$
 
@@ -557,7 +556,8 @@ CREATE TABLE `capitals_transaction` (
 INSERT INTO `capitals_transaction` (`capital_transaction_id`, `capital_account_id`, `transaction_type`, `date`, `total_amount`, `encoded_by`) VALUES
 (1, 1, 1, '2017-09-04', '1000.00', NULL),
 (2, 1, 1, '2017-09-14', '2000.00', NULL),
-(3, 1, -1, '2017-09-25', '500.00', NULL);
+(3, 1, -1, '2017-09-25', '500.00', NULL),
+(4, 1, 1, '2017-10-03', '110.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -568,10 +568,16 @@ INSERT INTO `capitals_transaction` (`capital_transaction_id`, `capital_account_i
 CREATE TABLE `capitals_transaction_line` (
   `capital_trans_line_id` int(11) NOT NULL,
   `capital_transaction_id` int(11) DEFAULT NULL,
-  `account_code` int(11) DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL
+  `account_log_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `capitals_transaction_line`
+--
+
+INSERT INTO `capitals_transaction_line` (`capital_trans_line_id`, `capital_transaction_id`, `account_log_id`) VALUES
+(1, 4, 34),
+(2, 4, 35);
 
 -- --------------------------------------------------------
 
@@ -628,16 +634,24 @@ CREATE TABLE `chart_of_accounts_log` (
   `id` int(11) NOT NULL,
   `code` int(11) NOT NULL,
   `date` date DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL
+  `amount` decimal(13,2) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `encoded_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `chart_of_accounts_log`
 --
 
-INSERT INTO `chart_of_accounts_log` (`id`, `code`, `date`, `amount`) VALUES
-(17, 101, '2017-10-02', '10000.00'),
-(18, 102, '2017-10-02', '30000.00');
+INSERT INTO `chart_of_accounts_log` (`id`, `code`, `date`, `amount`, `type`, `encoded_by`) VALUES
+(17, 101, '2017-10-02', '10000.00', NULL, NULL),
+(18, 102, '2017-10-02', '30000.00', NULL, NULL),
+(32, 101, '2017-10-03', '-100.00', 1, NULL),
+(33, 102, '2017-10-03', '-100.00', 0, NULL),
+(34, 101, '2017-10-03', '110.00', 0, NULL),
+(35, 102, '2017-10-03', '110.00', 1, NULL),
+(36, 101, '2017-10-03', '-1000.00', 1, NULL),
+(37, 102, '2017-10-03', '-1000.00', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -754,9 +768,7 @@ INSERT INTO `loan_transaction` (`loan_transaction_id`, `loan_account_id`, `trans
 CREATE TABLE `loan_transaction_line` (
   `loan_trans_line_id` int(11) NOT NULL,
   `loan_transaction_id` int(11) NOT NULL,
-  `account_code` int(11) NOT NULL,
-  `amount` decimal(13,2) NOT NULL,
-  `type` int(11) NOT NULL
+  `account_log_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -821,7 +833,7 @@ CREATE TABLE `savings` (
 
 INSERT INTO `savings` (`savings_account_id`, `member_id`, `opening_date`, `initial_balance`, `account_status`, `termination_date`) VALUES
 (1, 1, '2017-09-07', '100.00', 1, NULL),
-(2, 2, '2017-09-19', NULL, 0, '2017-09-30');
+(2, 2, '2017-09-19', NULL, 1, '2017-09-30');
 
 -- --------------------------------------------------------
 
@@ -843,7 +855,9 @@ CREATE TABLE `savings_balance_log` (
 INSERT INTO `savings_balance_log` (`id`, `savings_account_id`, `date`, `amount`) VALUES
 (2, 1, '2017-08-01', '200.00'),
 (5, 1, '2017-09-21', '421.00'),
-(6, 2, '2017-09-21', '4000.00');
+(6, 2, '2017-09-21', '4000.00'),
+(8, 1, '2017-10-03', '377.07'),
+(9, 2, '2017-10-03', '4209.66');
 
 -- --------------------------------------------------------
 
@@ -879,7 +893,10 @@ INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id
 (30, 2, 1, '2017-09-11', '200.00', NULL),
 (32, 1, 1, '2017-08-01', '200.00', NULL),
 (33, 2, 1, '2017-09-26', '300.00', NULL),
-(34, 1, -1, '2017-09-26', '100.00', NULL);
+(34, 1, -1, '2017-09-26', '100.00', NULL),
+(35, 1, 1, '2017-10-01', '100.00', NULL),
+(42, 1, -1, '2017-10-03', '100.00', NULL),
+(43, 2, -1, '2017-10-03', '1000.00', 1);
 
 -- --------------------------------------------------------
 
@@ -890,28 +907,18 @@ INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id
 CREATE TABLE `savings_transaction_line` (
   `savings_trans_line_id` int(11) NOT NULL,
   `savings_transaction_id` int(11) DEFAULT NULL,
-  `account_code` int(11) DEFAULT NULL,
-  `amount` decimal(13,2) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL
+  `account_log_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `savings_transaction_line`
 --
 
-INSERT INTO `savings_transaction_line` (`savings_trans_line_id`, `savings_transaction_id`, `account_code`, `amount`, `type`) VALUES
-(5, 19, 101, '20.00', 0),
-(6, 19, 102, '20.00', 1),
-(7, 20, 101, '25.00', 1),
-(8, 20, 102, '25.00', 0),
-(9, 21, 102, '30.00', 1),
-(10, 21, 101, '30.00', 0),
-(11, 24, 101, '20.00', 0),
-(12, 24, 102, '20.00', 1),
-(13, 33, 101, '300.00', 0),
-(14, 33, 102, '300.00', 1),
-(15, 34, 101, '100.00', 0),
-(16, 34, 102, '100.00', 1);
+INSERT INTO `savings_transaction_line` (`savings_trans_line_id`, `savings_transaction_id`, `account_log_id`) VALUES
+(19, 42, 32),
+(20, 42, 33),
+(21, 43, 36),
+(22, 43, 37);
 
 -- --------------------------------------------------------
 
@@ -929,6 +936,13 @@ CREATE TABLE `users` (
   `user_type` int(11) DEFAULT NULL,
   `user_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `username`, `password`, `user_type`, `user_status`) VALUES
+(1, 'Last', 'First', NULL, 'admin', '1234', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -967,8 +981,9 @@ ALTER TABLE `capitals_transaction`
 -- Indexes for table `capitals_transaction_line`
 --
 ALTER TABLE `capitals_transaction_line`
+  ADD PRIMARY KEY (`capital_trans_line_id`),
   ADD KEY `capital_transaction_id` (`capital_transaction_id`),
-  ADD KEY `account_code` (`account_code`);
+  ADD KEY `account_code` (`account_log_id`);
 
 --
 -- Indexes for table `capital_general_log`
@@ -988,7 +1003,8 @@ ALTER TABLE `chart_of_accounts`
 --
 ALTER TABLE `chart_of_accounts_log`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `code` (`code`);
+  ADD KEY `code` (`code`),
+  ADD KEY `encoded_by` (`encoded_by`);
 
 --
 -- Indexes for table `comakers`
@@ -1032,7 +1048,7 @@ ALTER TABLE `loan_transaction`
 ALTER TABLE `loan_transaction_line`
   ADD PRIMARY KEY (`loan_trans_line_id`),
   ADD KEY `loan_transaction_id` (`loan_transaction_id`),
-  ADD KEY `account_code` (`account_code`);
+  ADD KEY `account_code` (`account_log_id`);
 
 --
 -- Indexes for table `members`
@@ -1068,7 +1084,7 @@ ALTER TABLE `savings_transaction`
 ALTER TABLE `savings_transaction_line`
   ADD PRIMARY KEY (`savings_trans_line_id`),
   ADD KEY `savings_transaction_id` (`savings_transaction_id`),
-  ADD KEY `account_code` (`account_code`);
+  ADD KEY `account_code` (`account_log_id`);
 
 --
 -- Indexes for table `users`
@@ -1102,7 +1118,13 @@ ALTER TABLE `capitals_balance_log`
 -- AUTO_INCREMENT for table `capitals_transaction`
 --
 ALTER TABLE `capitals_transaction`
-  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `capitals_transaction_line`
+--
+ALTER TABLE `capitals_transaction_line`
+  MODIFY `capital_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `capital_general_log`
@@ -1114,13 +1136,13 @@ ALTER TABLE `capital_general_log`
 -- AUTO_INCREMENT for table `chart_of_accounts`
 --
 ALTER TABLE `chart_of_accounts`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `chart_of_accounts_log`
 --
 ALTER TABLE `chart_of_accounts_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `comakers`
@@ -1132,7 +1154,7 @@ ALTER TABLE `comakers`
 -- AUTO_INCREMENT for table `interest_rate_log`
 --
 ALTER TABLE `interest_rate_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `loans`
@@ -1174,25 +1196,25 @@ ALTER TABLE `savings`
 -- AUTO_INCREMENT for table `savings_balance_log`
 --
 ALTER TABLE `savings_balance_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
-  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction_line`
 --
 ALTER TABLE `savings_transaction_line`
-  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -1227,7 +1249,7 @@ ALTER TABLE `capitals_transaction`
 -- Constraints for table `capitals_transaction_line`
 --
 ALTER TABLE `capitals_transaction_line`
-  ADD CONSTRAINT `fk_capital_particular` FOREIGN KEY (`account_code`) REFERENCES `chart_of_accounts` (`code`),
+  ADD CONSTRAINT `fk_capital_particular` FOREIGN KEY (`account_log_id`) REFERENCES `chart_of_accounts_log` (`id`),
   ADD CONSTRAINT `fk_capital_transaction` FOREIGN KEY (`capital_transaction_id`) REFERENCES `capitals_transaction` (`capital_transaction_id`);
 
 --
@@ -1240,7 +1262,8 @@ ALTER TABLE `capital_general_log`
 -- Constraints for table `chart_of_accounts_log`
 --
 ALTER TABLE `chart_of_accounts_log`
-  ADD CONSTRAINT `fk_account_code_log` FOREIGN KEY (`code`) REFERENCES `chart_of_accounts` (`code`);
+  ADD CONSTRAINT `fk_account_code_log` FOREIGN KEY (`code`) REFERENCES `chart_of_accounts` (`code`),
+  ADD CONSTRAINT `fk_particular_encoded` FOREIGN KEY (`encoded_by`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `comakers`
@@ -1277,7 +1300,7 @@ ALTER TABLE `loan_transaction`
 -- Constraints for table `loan_transaction_line`
 --
 ALTER TABLE `loan_transaction_line`
-  ADD CONSTRAINT `fk_loan_particular` FOREIGN KEY (`account_code`) REFERENCES `chart_of_accounts` (`code`),
+  ADD CONSTRAINT `fk_loan_particular` FOREIGN KEY (`account_log_id`) REFERENCES `chart_of_accounts_log` (`id`),
   ADD CONSTRAINT `fk_loan_transaction` FOREIGN KEY (`loan_transaction_id`) REFERENCES `loan_transaction` (`loan_transaction_id`);
 
 --
@@ -1303,7 +1326,7 @@ ALTER TABLE `savings_transaction`
 -- Constraints for table `savings_transaction_line`
 --
 ALTER TABLE `savings_transaction_line`
-  ADD CONSTRAINT `fk_savings_particular` FOREIGN KEY (`account_code`) REFERENCES `chart_of_accounts` (`code`),
+  ADD CONSTRAINT `fk_savings_particular` FOREIGN KEY (`account_log_id`) REFERENCES `chart_of_accounts_log` (`id`),
   ADD CONSTRAINT `fk_savings_transaction` FOREIGN KEY (`savings_transaction_id`) REFERENCES `savings_transaction` (`savings_transaction_id`);
 COMMIT;
 

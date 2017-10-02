@@ -170,7 +170,7 @@ namespace AMC
                 comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(dt.Rows[0]["accountid"]));
                 double bal;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
-                sourceForm.lblBalance.Text = bal.ToString();
+                sourceForm.lblBalance.Text = bal.ToString("n2");
                 /* MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt); */
