@@ -24,6 +24,7 @@ namespace AMC
         public List<double> amount = new List<double>();
         public List<double> new_total = new List<double>();
         public List<int> debcred_type = new List<int>();
+        int index;
 
         public AddTransaction(MainForm main, string t)
         {
@@ -54,11 +55,12 @@ namespace AMC
             }
             loadMembers(type);
 
-            dtpDate.Value = DateTime.Now;
+            dtpDate.Value = DateTime.Today;
             particulars.Columns.Add("Code", typeof(string));
             particulars.Columns.Add("Account Title", typeof(string));
             particulars.Columns.Add("Debit", typeof(double));
             particulars.Columns.Add("Credit", typeof(double));
+            particulars.Columns.Add("NewAmt", typeof(double));
 
             loadParticulars(particulars);
             
@@ -130,6 +132,7 @@ namespace AMC
             try
             {
                 btnDelete.Enabled = true;
+                index = e.RowIndex;
             }
             catch (Exception ee)
             {
@@ -266,6 +269,7 @@ namespace AMC
         public void loadParticulars(DataTable tbl)
         {
             dgvParticulars.DataSource = tbl;
+            dgvParticulars.Columns["NewAmt"].Visible = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -305,7 +309,7 @@ namespace AMC
 
         private void dgvParticulars_Leave(object sender, EventArgs e)
         {
-            btnDelete.Enabled = false;
+            // btnDelete.Enabled = false;
         }
 
         private void dgvParticulars_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -316,6 +320,46 @@ namespace AMC
         private void dgvParticulars_SelectionChanged(object sender, EventArgs e)
         {
             // btnDelete.Enabled = true;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string cd, amt, tot, dc = "";
+            try
+            {
+                
+                cd = dgvParticulars.Rows[index].Cells["Code"].Value.ToString();
+                if (dgvParticulars.Rows[index].Cells["Debit"].Value.ToString() != "")
+                {
+                    amt = dgvParticulars.Rows[index].Cells["Debit"].Value.ToString();
+                    dc = "0";
+                }
+                else
+                {
+                    amt = dgvParticulars.Rows[index].Cells["Credit"].Value.ToString();
+                    dc = "1";
+                }
+                tot = dgvParticulars.Rows[index].Cells["NewAmt"].Value.ToString();
+
+                code.Remove(int.Parse(cd));
+                amount.Remove(Convert.ToDouble(amt));
+                debcred_type.Remove(int.Parse(dc));
+                new_total.Remove(Convert.ToDouble(tot));
+
+                
+                foreach (DataRow dr in particulars.Rows)
+                {
+                    if (dr[0].ToString() == cd)
+                    {
+                        dr.Delete();
+                    }
+                }
+                loadParticulars(particulars);
+            }
+            catch (Exception ee)
+            {
+                // MessageBox.Show(ee.Message);
+            }
         }
     }
 }
