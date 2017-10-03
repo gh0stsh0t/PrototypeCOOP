@@ -252,6 +252,13 @@ namespace AMC
                     break;
             }
         }
+
+        private void printdgv_Click(object sender, EventArgs e)
+        {
+            ClsPrint t = new ClsPrint(dataGridView4, "Totals");
+            t.PrintForm();
+
+        }
     }
 }
 
