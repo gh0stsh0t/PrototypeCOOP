@@ -82,7 +82,8 @@
             this.txtBal.Name = "txtBal";
             this.txtBal.Size = new System.Drawing.Size(151, 23);
             this.txtBal.TabIndex = 0;
-            this.txtBal.Text = "0.00";
+            this.txtBal.Text = "500.00";
+            this.txtBal.Leave += new System.EventHandler(this.txtBal_Leave);
             // 
             // label3
             // 

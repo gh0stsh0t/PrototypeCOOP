@@ -127,20 +127,6 @@ namespace AMC
             return rg.IsMatch(strToCheck);
         }
 
-        private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                btnDelete.Enabled = true;
-                index = e.RowIndex;
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show("Please select a row.");
-            }
-            
-        }
-
 
         public void enableButtons()
         {
@@ -309,7 +295,10 @@ namespace AMC
 
         private void dgvParticulars_Leave(object sender, EventArgs e)
         {
-            // btnDelete.Enabled = false;
+            if (dgvParticulars.CurrentCell == null)
+            {
+                btnDelete.Visible = false;
+            }
         }
 
         private void dgvParticulars_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -360,6 +349,16 @@ namespace AMC
             {
                 // MessageBox.Show(ee.Message);
             }
+        }
+
+        private void dgvParticulars_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDelete.Visible = true;
+        }
+
+        private void AddTransaction_Click(object sender, EventArgs e)
+        {
+            btnDelete.Visible = false;
         }
     }
 }
