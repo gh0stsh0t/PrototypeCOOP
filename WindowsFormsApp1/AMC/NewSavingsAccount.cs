@@ -102,7 +102,13 @@ namespace AMC
             }
         } */
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            reftomain.Enabled = true;
+            this.Close();
+        }
+
+        private void btnSubmit_Click_1(object sender, EventArgs e)
         {
             int newID;
             try
@@ -111,12 +117,12 @@ namespace AMC
                 string query = "INSERT INTO savings (member_id, opening_date, account_status)" +
                                 "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1')"
                                 + " SELECT LAST_INSERT_ID()";
-            
-            MySqlCommand ins = new MySqlCommand(query, conn);
-            newID = Convert.ToInt32(ins.ExecuteScalar());
+
+                MySqlCommand ins = new MySqlCommand(query, conn);
+                newID = Convert.ToInt32(ins.ExecuteScalar());
                 query = "INSERT INTO savings_balance_log (savings_account_id, date, amount)" +
                 "VALUES('" + newID.ToString() + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "');";
-            MySqlCommand ins2 = new MySqlCommand(query, conn);
+                MySqlCommand ins2 = new MySqlCommand(query, conn);
                 ins2.ExecuteNonQuery();
                 conn.Close();
 
@@ -130,11 +136,6 @@ namespace AMC
             reftomain.Enabled = true;
             reftomain.innerChild(new ViewProfile(memid, reftomain));
             this.Close();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

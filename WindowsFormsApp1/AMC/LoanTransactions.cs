@@ -16,7 +16,7 @@ namespace AMC
         public MainForm reftomain;
         private int memId;
         private DatabaseConn db;
-        public LoanTransactions(int member,string membern, MainForm parent)
+        public LoanTransactions(int member, string membern, MainForm parent)
         {
             InitializeComponent();
             memId = member;
@@ -51,7 +51,7 @@ namespace AMC
         private void rifrish(int accId)
         {
             label5.Text = accId.ToString();
-            dataGridView4.DataSource = db.Select("loan_transaction","loan_transaction_id", "Date", "total_amount as 'Total Amount'", "Principal", "Interest", "Penalty", "encoded_by as Encoder")
+            dataGridView4.DataSource = db.Select("loan_transaction", "loan_transaction_id", "Date", "total_amount as 'Total Amount'", "Principal", "Interest", "Penalty", "encoded_by as Encoder")
                                          .Where("loan_account_id", accId.ToString())
                                          .GetQueryData();
             dataGridView4.Columns["loan_transaction_id"].Visible = false;
@@ -70,4 +70,5 @@ namespace AMC
         {
 
         }
+    }
 }

@@ -106,7 +106,6 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
     <Compile Include="ViewLoanSched.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,9 +229,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewLoanSched.resx">
       <DependentUpon>ViewLoanSched.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewCBUAccount.resx">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
