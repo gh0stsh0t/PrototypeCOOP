@@ -82,6 +82,18 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoanTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanTransactions.Designer.cs">
+      <DependentUpon>LoanTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoanTransactionsA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanTransactionsA.Designer.cs">
+      <DependentUpon>LoanTransactionsA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddMember.resx">
       <DependentUpon>AddMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanTransactions.resx">
+      <DependentUpon>LoanTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanTransactionsA.resx">
+      <DependentUpon>LoanTransactionsA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

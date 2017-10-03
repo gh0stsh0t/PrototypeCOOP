@@ -13,7 +13,7 @@ namespace AMC
     public partial class ViewMember : Form
     {
         private bool advanceSearchVisible = false;
-        private string filter = " where member.status=1";
+        private string filter = " where status=1";
         public MySqlConnection conn;
         public MainForm reftomain;
         public ViewMember(MainForm parent)
@@ -22,7 +22,6 @@ namespace AMC
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             reftomain = parent;
             this.TopLevel = false;
-            filterSet(7);
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -43,8 +42,20 @@ namespace AMC
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //breaker();
-            int memid = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-            reftomain.innerChild(new ViewProfile(memid, reftomain));
+            MessageBox.Show(e.ColumnIndex.ToString());
+            if (e.ColumnIndex == dataGridView2.Columns["loans"].Index)
+            {
+                MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
+            }
+            else if (e.ColumnIndex == dataGridView2.Columns["savings"].Index)
+            {
+                MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
+            }
+            else
+            {
+                int memid = Int32.Parse(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                reftomain.innerChild(new ViewProfile(memid, reftomain));
+            }
 
         }
         private void Rifrish()
@@ -52,14 +63,34 @@ namespace AMC
             try
             {
                 var tae = new DatabaseConn();
-                string[] taes = {"member_id",
+                if (filter.Equals(""))
+                {
+                    string[] taes = {"member_id",
                     "concat_ws(',', family_name, first_name) as name", "gender", "address", "contact_no", "type",
                     "status"};
-                dataGridView1.DataSource = tae.Select("members", taes).GetQueryData();
+                    dataGridView2.DataSource = tae.Select("members", taes).GetQueryData();
+                }
+                else
+                {
+                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT members.member_id, concat_ws(',',family_name ,first_name) as name, gender, address, contact_no, type, status FROM members LEFT JOIN loans on members.member_id=loans.member_id " + filter, conn);
+
+                    Console.Write(comm.CommandText);
+                    MySqlDataAdapter adp = new MySqlDataAdapter(comm);
+                    var dt = new DataTable();
+                    adp.Fill(dt);
+                    dataGridView2.DataSource = dt;
+                }
                 //dataGridView1.DataSource = dt;
-                dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
-                dataGridView1.Columns["member_id"].Visible = false;
-                conn.Close();
+                dataGridView2.Columns["member_id"].Visible = false;
+                int height = 0;
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    height += row.Height;
+                }
+                height += dataGridView2.ColumnHeadersHeight;
+                int width = dataGridView2.Width;
+                dataGridView2.ClientSize = new Size(width, height);
+                conn.Close();   
                 var x = new DataGridViewButtonColumn();
                 x.DefaultCellStyle.BackColor = button4.BackColor;
                 var addColumn = new DataGridViewButtonColumn
@@ -76,11 +107,11 @@ namespace AMC
                     FlatStyle = FlatStyle.Flat,
                     DefaultCellStyle = x.DefaultCellStyle
                 };
-                var columnIndex = dataGridView1.ColumnCount;
-                if (dataGridView1.Columns["loans"] == null)
+                var columnIndex = dataGridView2.ColumnCount;
+                if (dataGridView2.Columns["loans"] == null)
                 {
-                    dataGridView1.Columns.Add(addColumn);
-                    dataGridView1.Columns.Add(editColumn);
+                    dataGridView2.Columns.Add(addColumn);
+                    dataGridView2.Columns.Add(editColumn);
                 }
             }
             catch (Exception ee)
@@ -88,7 +119,7 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
                 conn.Close();
             }
-            dataGridView1.ClearSelection();
+            dataGridView2.ClearSelection();
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
@@ -98,15 +129,22 @@ namespace AMC
                 try
                 {
                     conn.Open();
-                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT concat_ws(',',family_name ,first_name) as name FROM membersloanv WHERE family_name LIKE '" + tbSearch.Text + "%' AND" + filter, conn);
+                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT members.member_id, concat_ws(',',family_name ,first_name) as name, gender, address, contact_no, type, status  FROM members LEFT JOIN loans on members.member_id=loans.member_id WHERE family_name LIKE '" + tbSearch.Text + "%' AND" + filter, conn);
                     MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                     var dt = new DataTable();
                     adp.Fill(dt);
-                    dataGridView1.DataSource = dt;
-                    dataGridView1.Height = dataGridView1.GetRowDisplayRectangle(0, true).Bottom * dataGridView1.RowCount + dataGridView1.ColumnHeadersHeight;
+                    dataGridView2.DataSource = dt;
+                    int height = 0;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        height += row.Height;
+                    }
+                    height += dataGridView2.ColumnHeadersHeight;
+
+                    dataGridView2.ClientSize = new Size(dataGridView2.Width, height);
                     conn.Close();
-                    dataGridView1.Columns["loans"].DisplayIndex = dataGridView1.ColumnCount - 2;
-                    dataGridView1.Columns["savings"].DisplayIndex = dataGridView1.ColumnCount - 1;
+                    dataGridView2.Columns["loans"].DisplayIndex = dataGridView2.ColumnCount - 2;
+                    dataGridView2.Columns["savings"].DisplayIndex = dataGridView2.ColumnCount - 1;
                 }
                 catch (Exception ee)
                 {
@@ -122,13 +160,13 @@ namespace AMC
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView1.Columns["loans"].Index)
+            if (e.ColumnIndex == dataGridView2.Columns["loans"].Index)
             {
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
+                MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
             }
-            else if (e.ColumnIndex == dataGridView1.Columns["savings"].Index)
+            else if (e.ColumnIndex == dataGridView2.Columns["savings"].Index)
             {
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
+                MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
             }
         }
 
@@ -145,17 +183,23 @@ namespace AMC
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show("edit dialog of user " + dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString());
+            MessageBox.Show("edit dialog of user " + dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " " + dataGridView2.Rows[e.RowIndex].Cells["name"].Value.ToString());
         }
 
         private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
             try
             {
-                int memid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                int memid = int.Parse(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
                 if (e.Button.Equals(MouseButtons.Left))
                 {
-                    reftomain.innerChild(new ViewProfile(memid, reftomain));
+                    if (e.ColumnIndex == dataGridView2.Columns["loans"].Index)
+                        reftomain.innerChild(new LoanTransactions(memid, dataGridView2.Rows[e.RowIndex].Cells["name"].Value.ToString(), reftomain));
+                        //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
+                    else if (e.ColumnIndex == dataGridView2.Columns["savings"].Index)
+                        MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
+                    else
+                        reftomain.innerChild(new ViewProfile(memid, reftomain));
                 }
                 else
                 {
@@ -176,7 +220,7 @@ namespace AMC
                     filter = "";
                     break;
                 case 1:
-                    filter = " WHERE date_terminated = NULL";
+                    filter = "WHERE date_terminated = NULL";
                     break;
                 case 2:
                     filter = "WHERE date_terminated NOT IN(NULL)";
@@ -203,6 +247,32 @@ namespace AMC
         {
             //reset
             filterSet(7);
+        }
+
+        private void dataGridView2_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                int memid = int.Parse(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
+                if (e.Button.Equals(MouseButtons.Left))
+                {
+                    if (e.ColumnIndex == dataGridView2.Columns["loans"].Index)
+                        reftomain.innerChild(new LoanTransactions(memid, dataGridView2.Rows[e.RowIndex].Cells["name"].Value.ToString(), reftomain));
+                    //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " loans");
+                    else if (e.ColumnIndex == dataGridView2.Columns["savings"].Index)
+                        MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString() + " savings");
+                    else
+                        reftomain.innerChild(new ViewProfile(memid, reftomain));
+                }
+                else
+                {
+                    reftomain.innerChild(new AddMember(memid));
+                }
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+
+            }
         }
     }
 }

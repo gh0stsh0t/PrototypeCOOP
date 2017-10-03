@@ -24,3 +24,5 @@ D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.ViewProfile.reso
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csproj.GenerateResource.Cache
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.exe
 D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\bin\Debug\AMC.pdb
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.LoanTransactions.resources
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.LoanTransactionsA.resources

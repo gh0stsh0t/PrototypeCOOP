@@ -30,6 +30,7 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tbTerm = new System.Windows.Forms.TextBox();
             this.name = new System.Windows.Forms.Label();
             this.mname = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -72,7 +73,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.tbTerm = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -122,6 +122,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(905, 562);
             this.panel1.TabIndex = 4;
+            // 
+            // tbTerm
+            // 
+            this.tbTerm.Location = new System.Drawing.Point(371, 211);
+            this.tbTerm.Name = "tbTerm";
+            this.tbTerm.Size = new System.Drawing.Size(247, 22);
+            this.tbTerm.TabIndex = 26;
+            this.tbTerm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTerm_KeyPress);
+            this.tbTerm.Leave += new System.EventHandler(this.tbTerm_Leave);
             // 
             // name
             // 
@@ -560,15 +569,6 @@
             this.button1.TabIndex = 13;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // tbTerm
-            // 
-            this.tbTerm.Location = new System.Drawing.Point(371, 211);
-            this.tbTerm.Name = "tbTerm";
-            this.tbTerm.Size = new System.Drawing.Size(247, 22);
-            this.tbTerm.TabIndex = 26;
-            this.tbTerm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTerm_KeyPress);
-            this.tbTerm.Leave += new System.EventHandler(this.tbTerm_Leave);
             // 
             // AddLoan
             // 
