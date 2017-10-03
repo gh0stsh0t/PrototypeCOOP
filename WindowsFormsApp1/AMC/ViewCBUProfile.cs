@@ -51,7 +51,7 @@ namespace AMC
                 comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(anum));
                 double bal;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
-                lblBalance.Text = bal.ToString();
+                lblBalance.Text = bal.ToString("n2");
                 comm2.CommandText = "SELECT account_status FROM capitals WHERE capital_account_id = " + anum;
                 stat = Convert.ToInt32(comm2.ExecuteScalar());
                 DateTime d8;
@@ -68,11 +68,11 @@ namespace AMC
                     btnDeactivate.Visible = false;
                 }
                 comm2.CommandText = "SELECT ics_no FROM capitals WHERE capital_account_id = " + anum;
-                lblicsn.Text = comm2.ExecuteScalar().ToString();
+                lblicsn.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
                 comm2.CommandText = "SELECT ics_amount FROM capitals WHERE capital_account_id = " + anum;
-                lblics.Text = comm2.ExecuteScalar().ToString();
+                lblics.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
                 comm2.CommandText = "SELECT ipuc_amount FROM capitals WHERE capital_account_id = " + anum;
-                lblipuc.Text = comm2.ExecuteScalar().ToString();
+                lblipuc.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
                 conn.Close();
             }
             catch (Exception ee)

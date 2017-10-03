@@ -44,7 +44,8 @@ namespace AMC
 
         private void AddTransaction_Load(object sender, EventArgs e)
         {
-            if(type=="savings")
+            dtpDate.MaxDate = DateTime.Today;
+            if (type=="savings")
             {
                 lblTop.Text = "Add Savings Transaction";
             } else if (type == "capitals")
@@ -60,6 +61,7 @@ namespace AMC
             particulars.Columns.Add("Credit", typeof(double));
 
             loadParticulars(particulars);
+            
         }
 
         private void loadMembers(string t)
@@ -125,6 +127,14 @@ namespace AMC
 
         private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                btnDelete.Enabled = true;
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Please select a row.");
+            }
             
         }
 
@@ -291,6 +301,21 @@ namespace AMC
                 Console.WriteLine("Exception of type {0} occurred.",
                     ee.GetType());
             }
+        }
+
+        private void dgvParticulars_Leave(object sender, EventArgs e)
+        {
+            btnDelete.Enabled = false;
+        }
+
+        private void dgvParticulars_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            // btnDelete.Enabled = true;
+        }
+
+        private void dgvParticulars_SelectionChanged(object sender, EventArgs e)
+        {
+            // btnDelete.Enabled = true;
         }
     }
 }

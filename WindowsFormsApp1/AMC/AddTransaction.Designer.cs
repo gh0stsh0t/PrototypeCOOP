@@ -58,6 +58,7 @@ namespace AMC
             this.button2 = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelRadio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParticulars)).BeginInit();
@@ -366,6 +367,9 @@ namespace AMC
             this.dgvParticulars.Size = new System.Drawing.Size(374, 163);
             this.dgvParticulars.TabIndex = 26;
             this.dgvParticulars.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellClick);
+            this.dgvParticulars.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvParticulars_DataBindingComplete);
+            this.dgvParticulars.SelectionChanged += new System.EventHandler(this.dgvParticulars_SelectionChanged);
+            this.dgvParticulars.Leave += new System.EventHandler(this.dgvParticulars_Leave);
             // 
             // label6
             // 
@@ -426,12 +430,30 @@ namespace AMC
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Silver;
+            this.btnDelete.Enabled = false;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDelete.Location = new System.Drawing.Point(640, 313);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(80, 35);
+            this.btnDelete.TabIndex = 34;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
             // AddTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(940, 717);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label6);
@@ -487,5 +509,6 @@ namespace AMC
         public System.Windows.Forms.Button btnSubmit;
         public System.Windows.Forms.DataGridView dgvParticulars;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
