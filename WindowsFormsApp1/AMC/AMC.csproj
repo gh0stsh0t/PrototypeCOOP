@@ -69,6 +69,12 @@
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="ComboboxContent.cs" />
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="databaseConn.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -82,6 +88,12 @@
     <Compile Include="AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewLoanSched.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,12 +106,13 @@
     <Compile Include="NewCBUAccount.Designer.cs">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewCBURelease.cs">
+    <Compile Include="NewCOA.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewCBURelease.Designer.cs">
-      <DependentUpon>NewCBURelease.cs</DependentUpon>
+    <Compile Include="NewCOA.Designer.cs">
+      <DependentUpon>NewCOA.cs</DependentUpon>
     </Compile>
+
     <Compile Include="ApprovalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +137,25 @@
     <Compile Include="SelectMember.Designer.cs">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateAmount.Designer.cs">
+      <DependentUpon>UpdateAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="ViewCapitals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCapitals.Designer.cs">
+      <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCBUProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCBUProfile.Designer.cs">
+      <DependentUpon>ViewCBUProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +176,18 @@
     <Compile Include="ViewSavings.Designer.cs">
       <DependentUpon>ViewSavings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewSavingsProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSavingsProfile.Designer.cs">
+      <DependentUpon>ViewSavingsProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewTransactions.Designer.cs">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddParticular.resx">
       <DependentUpon>AddParticular.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddTransaction.resx">
       <DependentUpon>AddTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -162,11 +209,14 @@
     <EmbeddedResource Include="ViewLoanSched.resx">
       <DependentUpon>ViewLoanSched.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewCBUAccount.resx">
       <DependentUpon>NewCBUAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewCBURelease.resx">
-      <DependentUpon>NewCBURelease.cs</DependentUpon>
+    <EmbeddedResource Include="NewCOA.resx">
+      <DependentUpon>NewCOA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApprovalForm.resx">
       <DependentUpon>ApprovalForm.cs</DependentUpon>
@@ -205,8 +255,23 @@
     <EmbeddedResource Include="SelectMember.resx">
       <DependentUpon>SelectMember.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpdateAmount.resx">
+      <DependentUpon>UpdateAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewCapitals.resx">
+      <DependentUpon>ViewCapitals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewCBUProfile.resx">
+      <DependentUpon>ViewCBUProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewSavings.resx">
       <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSavingsProfile.resx">
+      <DependentUpon>ViewSavingsProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewTransactions.resx">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <Fakes Include="Fakes\MySql.Data.fakes" />
     <EmbeddedResource Include="ViewLoans.resx">

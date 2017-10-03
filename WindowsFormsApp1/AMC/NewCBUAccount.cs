@@ -32,9 +32,15 @@ namespace AMC
             try
             {
                 conn.Open();
-                string query = "INSERT INTO capitals (member_id, opening_date, account_status)" +
-                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '0')";
-                MySqlCommand ins = new MySqlCommand(query, conn);
+                string query = "INSERT INTO capitals (member_id, opening_date, account_status, ics_no, ics_amount, ipuc_amount)" +
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1', '" + txticsn.Text + 
+                                "','" + txticsa.Text + "','" + txtipuc.Text + "')";
+                /* "SELECT LAST_INSERT_ID()" ;
+            }
+                        MySqlCommand ins = new MySqlCommand(query, conn);
+            newID = Convert.ToInt32(ins.ExecuteScalar()); */
+
+            MySqlCommand ins = new MySqlCommand(query, conn);
                 ins.ExecuteNonQuery();
                 conn.Close();
 

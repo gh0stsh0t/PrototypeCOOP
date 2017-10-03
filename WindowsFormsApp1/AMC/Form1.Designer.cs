@@ -52,7 +52,6 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sidebarPanel.SuspendLayout();
             this.sidebarLogoPanel.SuspendLayout();
@@ -80,7 +79,7 @@
             this.sidebarPanel.Location = new System.Drawing.Point(0, 0);
             this.sidebarPanel.Name = "sidebarPanel";
             this.sidebarPanel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.sidebarPanel.Size = new System.Drawing.Size(231, 622);
+            this.sidebarPanel.Size = new System.Drawing.Size(231, 661);
             this.sidebarPanel.TabIndex = 0;
             // 
             // sidebarLogoPanel
@@ -89,16 +88,16 @@
             this.sidebarLogoPanel.Location = new System.Drawing.Point(3, 13);
             this.sidebarLogoPanel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.sidebarLogoPanel.Name = "sidebarLogoPanel";
-            this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 76);
+            this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 168);
             this.sidebarLogoPanel.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::AMC.Properties.Resources.amclogo2;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(34, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 76);
+            this.pictureBox1.Size = new System.Drawing.Size(145, 145);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -110,7 +109,7 @@
             this.sidebarBtnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnDashboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnDashboard.Location = new System.Drawing.Point(3, 102);
+            this.sidebarBtnDashboard.Location = new System.Drawing.Point(3, 194);
             this.sidebarBtnDashboard.Name = "sidebarBtnDashboard";
             this.sidebarBtnDashboard.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnDashboard.Size = new System.Drawing.Size(225, 29);
@@ -118,6 +117,7 @@
             this.sidebarBtnDashboard.Text = "Dashboard";
             this.sidebarBtnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.sidebarBtnDashboard.UseVisualStyleBackColor = true;
+            this.sidebarBtnDashboard.Click += new System.EventHandler(this.sidebarBtnDashboard_Click);
             // 
             // sidebarBtnMembers
             // 
@@ -127,7 +127,7 @@
             this.sidebarBtnMembers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnMembers.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnMembers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnMembers.Location = new System.Drawing.Point(3, 137);
+            this.sidebarBtnMembers.Location = new System.Drawing.Point(3, 229);
             this.sidebarBtnMembers.Name = "sidebarBtnMembers";
             this.sidebarBtnMembers.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnMembers.Size = new System.Drawing.Size(225, 29);
@@ -142,7 +142,7 @@
             this.sidebarPanelMembers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(59)))), ((int)(((byte)(65)))));
             this.sidebarPanelMembers.Controls.Add(this.button1);
             this.sidebarPanelMembers.Controls.Add(this.button2);
-            this.sidebarPanelMembers.Location = new System.Drawing.Point(3, 172);
+            this.sidebarPanelMembers.Location = new System.Drawing.Point(3, 264);
             this.sidebarPanelMembers.Name = "sidebarPanelMembers";
             this.sidebarPanelMembers.Size = new System.Drawing.Size(225, 60);
             this.sidebarPanelMembers.TabIndex = 2;
@@ -191,7 +191,7 @@
             this.sidebarBtnLoans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnLoans.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnLoans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnLoans.Location = new System.Drawing.Point(3, 238);
+            this.sidebarBtnLoans.Location = new System.Drawing.Point(3, 330);
             this.sidebarBtnLoans.Name = "sidebarBtnLoans";
             this.sidebarBtnLoans.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnLoans.Size = new System.Drawing.Size(225, 29);
@@ -208,7 +208,7 @@
             this.sidebarPanelLoans.Controls.Add(this.button6);
             this.sidebarPanelLoans.Controls.Add(this.button7);
             this.sidebarPanelLoans.Controls.Add(this.button5);
-            this.sidebarPanelLoans.Location = new System.Drawing.Point(3, 273);
+            this.sidebarPanelLoans.Location = new System.Drawing.Point(3, 365);
             this.sidebarPanelLoans.Name = "sidebarPanelLoans";
             this.sidebarPanelLoans.Size = new System.Drawing.Size(225, 119);
             this.sidebarPanelLoans.TabIndex = 4;
@@ -294,7 +294,7 @@
             this.sidebarBtnSavings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnSavings.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnSavings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnSavings.Location = new System.Drawing.Point(3, 398);
+            this.sidebarBtnSavings.Location = new System.Drawing.Point(3, 490);
             this.sidebarBtnSavings.Name = "sidebarBtnSavings";
             this.sidebarBtnSavings.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnSavings.Size = new System.Drawing.Size(225, 29);
@@ -310,7 +310,7 @@
             this.sidebarPanelSavings.Controls.Add(this.button9);
             this.sidebarPanelSavings.Controls.Add(this.button11);
             this.sidebarPanelSavings.Controls.Add(this.button12);
-            this.sidebarPanelSavings.Location = new System.Drawing.Point(3, 433);
+            this.sidebarPanelSavings.Location = new System.Drawing.Point(3, 525);
             this.sidebarPanelSavings.Name = "sidebarPanelSavings";
             this.sidebarPanelSavings.Size = new System.Drawing.Size(225, 89);
             this.sidebarPanelSavings.TabIndex = 6;
@@ -349,6 +349,7 @@
             this.button11.Text = "View Savings Transactions";
             this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -375,7 +376,7 @@
             this.sidebarBtnCBU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnCBU.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnCBU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 528);
+            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 620);
             this.sidebarBtnCBU.Name = "sidebarBtnCBU";
             this.sidebarBtnCBU.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnCBU.Size = new System.Drawing.Size(225, 29);
@@ -391,10 +392,9 @@
             this.sidebarPanelCBU.Controls.Add(this.button14);
             this.sidebarPanelCBU.Controls.Add(this.button16);
             this.sidebarPanelCBU.Controls.Add(this.button17);
-            this.sidebarPanelCBU.Controls.Add(this.button19);
-            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 563);
+            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 655);
             this.sidebarPanelCBU.Name = "sidebarPanelCBU";
-            this.sidebarPanelCBU.Size = new System.Drawing.Size(225, 118);
+            this.sidebarPanelCBU.Size = new System.Drawing.Size(225, 87);
             this.sidebarPanelCBU.TabIndex = 8;
             // 
             // button14
@@ -413,6 +413,7 @@
             this.button14.Text = "View CBU Accounts";
             this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button16
             // 
@@ -430,6 +431,7 @@
             this.button16.Text = "View CBU Transactions";
             this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
@@ -447,26 +449,11 @@
             this.button17.Text = "Add CBU Transaction";
             this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button17.UseVisualStyleBackColor = true;
-            // 
-            // button19
-            // 
-            this.button19.FlatAppearance.BorderSize = 0;
-            this.button19.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.button19.Location = new System.Drawing.Point(3, 90);
-            this.button19.Name = "button19";
-            this.button19.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
-            this.button19.Size = new System.Drawing.Size(220, 23);
-            this.button19.TabIndex = 7;
-            this.button19.Text = "Compute Dividends";
-            this.button19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button19.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.panel1.Location = new System.Drawing.Point(232, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(934, 621);
@@ -484,7 +471,7 @@
             this.IsMdiContainer = true;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AMC";
+            this.Text = "Agriculturists Multipurpose Cooperative";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.sidebarLogoPanel.ResumeLayout(false);
@@ -522,7 +509,6 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button19;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Panel panel1;
     }

@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSelected = new System.Windows.Forms.Label();
-            this.dgvMembers = new System.Windows.Forms.DataGridView();
+            this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdCredit = new System.Windows.Forms.RadioButton();
             this.rdDebit = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,8 @@
             this.txtSearch.Size = new System.Drawing.Size(218, 23);
             this.txtSearch.TabIndex = 45;
             this.txtSearch.Text = "Type Account Title or Code to Search";
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
             // 
             // lblSelected
             // 
@@ -70,16 +72,16 @@
             this.lblSelected.Text = "None";
             this.lblSelected.Visible = false;
             // 
-            // dgvMembers
+            // dgvAccounts
             // 
-            this.dgvMembers.AllowUserToAddRows = false;
-            this.dgvMembers.AllowUserToDeleteRows = false;
-            this.dgvMembers.AllowUserToResizeColumns = false;
-            this.dgvMembers.AllowUserToResizeRows = false;
-            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMembers.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvMembers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvAccounts.AllowUserToAddRows = false;
+            this.dgvAccounts.AllowUserToDeleteRows = false;
+            this.dgvAccounts.AllowUserToResizeColumns = false;
+            this.dgvAccounts.AllowUserToResizeRows = false;
+            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccounts.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvAccounts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvAccounts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -87,8 +89,8 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -96,17 +98,18 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMembers.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvMembers.EnableHeadersVisualStyles = false;
-            this.dgvMembers.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvMembers.Location = new System.Drawing.Point(17, 112);
-            this.dgvMembers.MultiSelect = false;
-            this.dgvMembers.Name = "dgvMembers";
-            this.dgvMembers.ReadOnly = true;
-            this.dgvMembers.RowHeadersVisible = false;
-            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembers.Size = new System.Drawing.Size(348, 113);
-            this.dgvMembers.TabIndex = 43;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAccounts.EnableHeadersVisualStyles = false;
+            this.dgvAccounts.GridColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvAccounts.Location = new System.Drawing.Point(17, 112);
+            this.dgvAccounts.MultiSelect = false;
+            this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.ReadOnly = true;
+            this.dgvAccounts.RowHeadersVisible = false;
+            this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccounts.Size = new System.Drawing.Size(348, 113);
+            this.dgvAccounts.TabIndex = 43;
+            this.dgvAccounts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellClick);
             // 
             // button2
             // 
@@ -140,6 +143,7 @@
             this.btnSubmit.TabIndex = 40;
             this.btnSubmit.Text = "Add";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // label3
             // 
@@ -198,7 +202,7 @@
             // 
             this.txtAmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmt.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtAmt.ForeColor = System.Drawing.SystemColors.MenuText;
             this.txtAmt.Location = new System.Drawing.Point(112, 263);
             this.txtAmt.Name = "txtAmt";
             this.txtAmt.Size = new System.Drawing.Size(166, 25);
@@ -249,7 +253,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSelected);
-            this.Controls.Add(this.dgvMembers);
+            this.Controls.Add(this.dgvAccounts);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label3);
@@ -260,7 +264,8 @@
             this.Name = "AddParticular";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddParticular";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
+            this.Load += new System.EventHandler(this.AddParticular_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -272,7 +277,7 @@
 
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSelected;
-        private System.Windows.Forms.DataGridView dgvMembers;
+        private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label3;

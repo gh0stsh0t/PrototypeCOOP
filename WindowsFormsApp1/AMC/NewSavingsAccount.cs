@@ -35,8 +35,6 @@ namespace AMC
 
         private void NewSavingsAccount_Load(object sender, EventArgs e)
         {
-            getNewId();
-            lblAccount.Text = accid;
             try
             {
                 conn.Open();
@@ -51,7 +49,7 @@ namespace AMC
 
                 }
 
-                MySqlCommand intrate = new MySqlCommand("SELECT interest_rate FROM interest_rate_log WHERE timestamp = (SELECT MAX(timestamp) FROM interest_rate_log)", conn);
+                MySqlCommand intrate = new MySqlCommand("SELECT interest_rate FROM interest_rate_log WHERE date = (SELECT MAX(date) FROM interest_rate_log)", conn);
                 MySqlDataAdapter adp2 = new MySqlDataAdapter(intrate);
                 DataTable dt2 = new DataTable();
                 adp2.Fill(dt2);
@@ -72,7 +70,7 @@ namespace AMC
             }
         }
 
-        private void getNewId()
+        /* private void getNewId()
         {
             string q = "SELECT savings_account_id FROM savings ORDER BY savings_account_id DESC LIMIT 1";
             try
@@ -102,17 +100,24 @@ namespace AMC
                 MessageBox.Show(ee.ToString());
                 conn.Close();
             }
-        }
+        } */
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            int newID;
             try
             {
                 conn.Open();
-                string query = "INSERT INTO savings (member_id, opening_date, initial_balance, outstanding_balance, account_status, interest_rate)" +
-                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "','" + txtBal.Text + "', '1','" + interest.ToString() + "')";
-                MySqlCommand ins = new MySqlCommand(query, conn);
-                ins.ExecuteNonQuery();
+                string query = "INSERT INTO savings (member_id, opening_date, account_status)" +
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1')"
+                                + " SELECT LAST_INSERT_ID()";
+            
+            MySqlCommand ins = new MySqlCommand(query, conn);
+            newID = Convert.ToInt32(ins.ExecuteScalar());
+                query = "INSERT INTO savings_balance_log (savings_account_id, date, amount)" +
+                "VALUES('" + newID.ToString() + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtBal.Text + "');";
+            MySqlCommand ins2 = new MySqlCommand(query, conn);
+                ins2.ExecuteNonQuery();
                 conn.Close();
 
             }

@@ -119,6 +119,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.lblTin);
             this.panel1.Controls.Add(this.lblIncome);
             this.panel1.Controls.Add(this.lblPosition);
@@ -630,6 +631,7 @@
             this.label18.Size = new System.Drawing.Size(74, 20);
             this.label18.TabIndex = 18;
             this.label18.Text = "Accounts";
+            this.label18.Visible = false;
             // 
             // button2
             // 
@@ -643,6 +645,7 @@
             this.button2.TabIndex = 19;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Visible = false;
             // 
             // dgv1
             // 
@@ -675,6 +678,7 @@
             this.dgv1.RowHeadersVisible = false;
             this.dgv1.Size = new System.Drawing.Size(700, 111);
             this.dgv1.TabIndex = 20;
+            this.dgv1.Visible = false;
             // 
             // btnRequest
             // 
@@ -732,7 +736,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(934, 621);
             this.ControlBox = false;
             this.Controls.Add(this.btnCBU);
