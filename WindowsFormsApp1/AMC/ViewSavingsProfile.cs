@@ -56,7 +56,7 @@ namespace AMC
                 comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(anum));
                 double bal;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
-                lblBalance.Text = bal.ToString();
+                lblBalance.Text = bal.ToString("n2");
                 comm2.CommandText = "SELECT account_status FROM savings WHERE savings_account_id = " + anum;
                 stat = Convert.ToInt32(comm2.ExecuteScalar());
                 DateTime d8;

@@ -24,6 +24,7 @@ namespace AMC
         public List<double> amount = new List<double>();
         public List<double> new_total = new List<double>();
         public List<int> debcred_type = new List<int>();
+        int index;
 
         public AddTransaction(MainForm main, string t)
         {
@@ -44,7 +45,8 @@ namespace AMC
 
         private void AddTransaction_Load(object sender, EventArgs e)
         {
-            if(type=="savings")
+            dtpDate.MaxDate = DateTime.Today;
+            if (type=="savings")
             {
                 lblTop.Text = "Add Savings Transaction";
             } else if (type == "capitals")
@@ -53,13 +55,15 @@ namespace AMC
             }
             loadMembers(type);
 
-            dtpDate.Value = DateTime.Now;
+            dtpDate.Value = DateTime.Today;
             particulars.Columns.Add("Code", typeof(string));
             particulars.Columns.Add("Account Title", typeof(string));
             particulars.Columns.Add("Debit", typeof(double));
             particulars.Columns.Add("Credit", typeof(double));
+            particulars.Columns.Add("NewAmt", typeof(double));
 
             loadParticulars(particulars);
+            
         }
 
         private void loadMembers(string t)
@@ -125,6 +129,15 @@ namespace AMC
 
         private void dgvMembers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                btnDelete.Enabled = true;
+                index = e.RowIndex;
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Please select a row.");
+            }
             
         }
 
@@ -256,6 +269,7 @@ namespace AMC
         public void loadParticulars(DataTable tbl)
         {
             dgvParticulars.DataSource = tbl;
+            dgvParticulars.Columns["NewAmt"].Visible = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -290,6 +304,61 @@ namespace AMC
                 // Process exception and return.
                 Console.WriteLine("Exception of type {0} occurred.",
                     ee.GetType());
+            }
+        }
+
+        private void dgvParticulars_Leave(object sender, EventArgs e)
+        {
+            // btnDelete.Enabled = false;
+        }
+
+        private void dgvParticulars_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            // btnDelete.Enabled = true;
+        }
+
+        private void dgvParticulars_SelectionChanged(object sender, EventArgs e)
+        {
+            // btnDelete.Enabled = true;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string cd, amt, tot, dc = "";
+            try
+            {
+                
+                cd = dgvParticulars.Rows[index].Cells["Code"].Value.ToString();
+                if (dgvParticulars.Rows[index].Cells["Debit"].Value.ToString() != "")
+                {
+                    amt = dgvParticulars.Rows[index].Cells["Debit"].Value.ToString();
+                    dc = "0";
+                }
+                else
+                {
+                    amt = dgvParticulars.Rows[index].Cells["Credit"].Value.ToString();
+                    dc = "1";
+                }
+                tot = dgvParticulars.Rows[index].Cells["NewAmt"].Value.ToString();
+
+                code.Remove(int.Parse(cd));
+                amount.Remove(Convert.ToDouble(amt));
+                debcred_type.Remove(int.Parse(dc));
+                new_total.Remove(Convert.ToDouble(tot));
+
+                
+                foreach (DataRow dr in particulars.Rows)
+                {
+                    if (dr[0].ToString() == cd)
+                    {
+                        dr.Delete();
+                    }
+                }
+                loadParticulars(particulars);
+            }
+            catch (Exception ee)
+            {
+                // MessageBox.Show(ee.Message);
             }
         }
     }

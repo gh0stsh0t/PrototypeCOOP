@@ -171,6 +171,7 @@ namespace AMC
                 dr[2] = amount;
             if (type == 1)
                 dr[3] = amount;
+            dr[4] = solveNewAmount();
             sourceForm.particulars.Rows.Add(dr);
             sourceForm.loadParticulars(sourceForm.particulars);
         }
