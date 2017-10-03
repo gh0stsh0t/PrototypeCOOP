@@ -16,8 +16,8 @@ namespace AMC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if(User.Name != null)
-                Application.Run(new MainForm());
+            
+                Application.Run(new Reports());
         }
     }
 }
