@@ -53,6 +53,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,6 +168,7 @@
             this.cbxAccount.Name = "cbxAccount";
             this.cbxAccount.Size = new System.Drawing.Size(164, 21);
             this.cbxAccount.TabIndex = 6;
+            this.cbxAccount.SelectedIndexChanged += new System.EventHandler(this.cbxAccount_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -247,7 +251,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(295, 197);
+            this.label12.Location = new System.Drawing.Point(340, 198);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 15);
             this.label12.TabIndex = 39;
@@ -315,7 +319,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(278, 197);
+            this.label14.Location = new System.Drawing.Point(323, 198);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(14, 15);
             this.label14.TabIndex = 41;
@@ -323,6 +327,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label5);
@@ -347,6 +354,36 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(906, 280);
             this.panel1.TabIndex = 9;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(323, 214);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(14, 15);
+            this.label16.TabIndex = 44;
+            this.label16.Text = "₱";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(237, 214);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(80, 15);
+            this.label17.TabIndex = 42;
+            this.label17.Text = "Balance After:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(340, 214);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(27, 15);
+            this.label18.TabIndex = 43;
+            this.label18.Text = "xxxx";
             // 
             // AddRepayment
             // 
@@ -397,5 +434,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

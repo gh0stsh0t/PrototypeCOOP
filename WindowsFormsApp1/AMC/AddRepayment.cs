@@ -17,6 +17,7 @@ namespace AMC
         private addLoanM popup;
         public int memid;
         public int loanid;
+        private float _value;
         public AddRepayment()
         {
             InitializeComponent();
@@ -46,34 +47,50 @@ namespace AMC
                 .Where("date_terminated", null);
             //cbxMember.DataSource = conn.GetQueryData();
         }
-        public void SetName(string name)
+        public void SetName(string name, int index = 0)
         {
             label15.Text = name;
             conn.Select("loans", "outstanding_balance", "loan_account_id").Where("member_id", memid.ToString()).GetQueryData();
             cbxAccount.Items.Clear();
             foreach (DataRow r in conn.GetData().Rows)
             {
-                var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString());
+                var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString(),r["outstanding_balance"].ToString());
                 cbxAccount.Items.Add(cc);
             }
-            //label8.Text="Current Balance: "+
+            cbxAccount.SelectedIndex = index;
+            
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
-                MessageBox.Show(cbxAccount.SelectedItem.ToString());
+                if (_value < 0)
+                    throw new Exception();
                 conn.Insert("loan_transaction",
-                    "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal", txtPrincipal.Text,
-                    "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
-                    "date", DateTime.Today.ToString("yyyy-MM-dd"))
+                        "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal",
+                        txtPrincipal.Text,
+                        "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
+                        "date", DateTime.Today.ToString("yyyy-MM-dd"))
                     .GetQueryData();
+                string[] vals = {"outstanding_balance", _value.ToString()};
+                string[] incase = {"loan_status", "3", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd")};
+                var z = new string[vals.Length + incase.Length];
+                if (Math.Abs(_value) < 1e-6)
+                {
+                    vals.CopyTo(z, 0);
+                    incase.CopyTo(z, vals.Length);
+                }
+                    conn.Update("loans", vals)
+                        .Where("loan_account_id", cbxAccount.SelectedItem.ToString())
+                        .GetQueryData();
+                SetName(label15.Text,index:cbxAccount.SelectedIndex);
             }
             catch (Exception exception)
-            {
+            {/*
                 MessageBox.Show(exception.ToString());
-                throw;
+                throw;*/
+                MessageBox.Show("Final Balance is negative. Ensure Calculations are Correct");
             }
         }
 
@@ -104,10 +121,14 @@ namespace AMC
 
         private void Addition()
         {
+            var x = (ComboboxContent)cbxAccount.SelectedItem;
             try
             {
                 
                 label12.Text = (checkier(txtInterest.Text) + checkier(txtPenalty.Text) + checkier(txtPrincipal.Text)).ToString();
+                _value = checkier(x.Content2) - checkier(txtPrincipal.Text);
+                label18.ForeColor = _value < 0 ? Color.Red : Color.Black;
+                label18.Text = _value.ToString("F");
             }
             catch (Exception ex)
             {
@@ -184,6 +205,12 @@ namespace AMC
             if (rg.IsMatch(((TextBox)strToCheck).Text)) return;
             MessageBox.Show("Please make sure the amount contains no special characters and has no more than 2 decimal points.");
             txtPrincipal.Focus();
+        }
+
+        private void cbxAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var x = (ComboboxContent)cbxAccount.SelectedItem;
+            label8.Text = "Current Balance: " + x.content2;
         }
     }
 }
