@@ -85,7 +85,7 @@ namespace AMC
         {
             mouseDown = false; //sets mousedown to false
         }
-      
+
         private void btnPrintRep_Click(object sender, EventArgs e)
         {
             goPrint();
@@ -147,8 +147,9 @@ namespace AMC
         private void populateComboReport()
         {
             comboReports.Items.Clear();
-            comboReports.Items.Add("All Loan Accounts");
+            comboReports.Items.Add("All Active Loan Accounts");
             comboReports.Items.Add("Loan Transactions");
+            comboReports.Items.Add("View All Members");
         }
 
         private void comboReports_SelectedIndexChanged(object sender, EventArgs e)
@@ -277,10 +278,10 @@ namespace AMC
                             MySqlDataReader reader = query.ExecuteReader();
                             myCounter = 0;
                             if (reader.HasRows)
-                            { 
+                            {
                                 while (reader.Read())
                                 {
-                                    if(datagridTableChild.RowCount>0) splitter = datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells[0].Value.ToString();
+                                    if (datagridTableChild.RowCount > 0) splitter = datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells[0].Value.ToString();
                                     if (datagridTableChild.RowCount > 0 && reader[0].ToString() != splitter)
                                     {
                                         if (myTotalAmount > 0)
@@ -327,7 +328,7 @@ namespace AMC
                             }
 
                             conn.Close();
-                            
+
                         }
                         catch (Exception x)
 
@@ -341,7 +342,65 @@ namespace AMC
                     datagridTableChild.AllowUserToResizeRows = false;
                     datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
                     break;
+
+                case 2:     //View All Members
+                    {
+                        populatedatagridParent("SELECT concat_ws(',', family_name, first_name) as Name, gender, address, contact_no, type FROM members where status = 1", 1);
+                        datagridTableParent.Columns[1].Name = "Gender";
+                        datagridTableParent.Columns[2].Name = "Address";
+                        datagridTableParent.Columns[3].Name = "Contact No";
+                        datagridTableParent.Columns[4].Name = "Type";
+                        //set up datagridchild columns
+                        datagridTableChild.Rows.Clear();
+                        datagridTableChild.ColumnCount = 5;
+                        datagridTableChild.ColumnHeadersVisible = true;
+                        datagridTableChild.Columns[1].Name = "Gender";
+                        datagridTableChild.Columns[2].Name = "Address";
+                        datagridTableChild.Columns[3].Name = "Contact No";
+                        datagridTableChild.Columns[4].Name = "Type";
+                        datagridTableChild.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
+                        datagridTableChild.Columns[0].Width = 200;
+                        datagridTableChild.Columns[1].Width = 200;
+                        datagridTableChild.Columns[2].Width = 200;
+                        datagridTableChild.Columns[3].Width = 200;
+                        datagridTableChild.Columns[4].Width = 200;
+                        
+
+                        mySelectSQLChild = "SELECT concat_ws(',', family_name, first_name) as Name, gender, address, contact_no, type FROM members where status = 1";
+                        try
+                        {
+                            conn.Open();
+                            MySqlCommand query = new MySqlCommand(mySelectSQLChild, conn);
+                            MySqlDataReader reader = query.ExecuteReader();
+                            if (reader.HasRows)
+                            {
+
+                                while (reader.Read())
+                                {
+                                    if (reader[0] != null)
+                                    {
+                                        datagridTableChild.Rows.Add(reader[0], reader[1], reader[2], reader[3].ToString(), reader[4]);
+                                        datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
+                                        datagridTableChild.AllowUserToResizeRows = false;
+                                        
+                                    }
+                                }
+                            }
+
+                            conn.Close();
+
+                        }
+                        catch (Exception x)
+
+                        {
+                            MessageBox.Show("Error in Load:" + x.ToString());
+                            conn.Close();
+                        }
+                        break;
+                    }
             }
+
+          
 
             noSortColumn();
         }
@@ -353,7 +412,7 @@ namespace AMC
             //MessageBox.Show("Parent - " + selectCommand,"",MessageBoxButtons.OK);
             try
             {
-                if(n == 0)
+                if (n == 0)
                 {
                     var tae = new DatabaseConn(); //opens the connection
                     BindingSource bs = new BindingSource();
