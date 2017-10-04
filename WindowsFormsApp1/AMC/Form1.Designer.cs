@@ -30,6 +30,9 @@
         {
             this.sidebarPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.sidebarLogoPanel = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sidebarBtnDashboard = new System.Windows.Forms.Button();
             this.sidebarBtnMembers = new System.Windows.Forms.Button();
@@ -84,12 +87,69 @@
             // 
             // sidebarLogoPanel
             // 
+            this.sidebarLogoPanel.Controls.Add(this.button10);
+            this.sidebarLogoPanel.Controls.Add(this.button8);
+            this.sidebarLogoPanel.Controls.Add(this.button3);
             this.sidebarLogoPanel.Controls.Add(this.pictureBox1);
             this.sidebarLogoPanel.Location = new System.Drawing.Point(3, 13);
             this.sidebarLogoPanel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.sidebarLogoPanel.Name = "sidebarLogoPanel";
-            this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 168);
+            this.sidebarLogoPanel.Size = new System.Drawing.Size(225, 209);
             this.sidebarLogoPanel.TabIndex = 0;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
+            this.button10.Location = new System.Drawing.Point(3, 196);
+            this.button10.Name = "button10";
+            this.button10.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.button10.Size = new System.Drawing.Size(220, 2);
+            this.button10.TabIndex = 5;
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button10.UseVisualStyleBackColor = false;
+            // 
+            // button8
+            // 
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.ForeColor = System.Drawing.Color.White;
+            this.button8.Location = new System.Drawing.Point(142, 166);
+            this.button8.Name = "button8";
+            this.button8.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.button8.Size = new System.Drawing.Size(78, 23);
+            this.button8.TabIndex = 4;
+            this.button8.Text = "Logout";
+            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.MouseLeave += new System.EventHandler(this.button8_MouseLeave);
+            this.button8.MouseHover += new System.EventHandler(this.button8_MouseHover);
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(3, 167);
+            this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button3.Size = new System.Drawing.Size(159, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Hi,";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -109,7 +169,7 @@
             this.sidebarBtnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnDashboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnDashboard.Location = new System.Drawing.Point(3, 194);
+            this.sidebarBtnDashboard.Location = new System.Drawing.Point(3, 235);
             this.sidebarBtnDashboard.Name = "sidebarBtnDashboard";
             this.sidebarBtnDashboard.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnDashboard.Size = new System.Drawing.Size(225, 29);
@@ -127,7 +187,7 @@
             this.sidebarBtnMembers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnMembers.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnMembers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnMembers.Location = new System.Drawing.Point(3, 229);
+            this.sidebarBtnMembers.Location = new System.Drawing.Point(3, 270);
             this.sidebarBtnMembers.Name = "sidebarBtnMembers";
             this.sidebarBtnMembers.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnMembers.Size = new System.Drawing.Size(225, 29);
@@ -142,7 +202,7 @@
             this.sidebarPanelMembers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(59)))), ((int)(((byte)(65)))));
             this.sidebarPanelMembers.Controls.Add(this.button1);
             this.sidebarPanelMembers.Controls.Add(this.button2);
-            this.sidebarPanelMembers.Location = new System.Drawing.Point(3, 264);
+            this.sidebarPanelMembers.Location = new System.Drawing.Point(3, 305);
             this.sidebarPanelMembers.Name = "sidebarPanelMembers";
             this.sidebarPanelMembers.Size = new System.Drawing.Size(225, 60);
             this.sidebarPanelMembers.TabIndex = 2;
@@ -191,7 +251,7 @@
             this.sidebarBtnLoans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnLoans.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnLoans.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnLoans.Location = new System.Drawing.Point(3, 330);
+            this.sidebarBtnLoans.Location = new System.Drawing.Point(3, 371);
             this.sidebarBtnLoans.Name = "sidebarBtnLoans";
             this.sidebarBtnLoans.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnLoans.Size = new System.Drawing.Size(225, 29);
@@ -208,7 +268,7 @@
             this.sidebarPanelLoans.Controls.Add(this.button6);
             this.sidebarPanelLoans.Controls.Add(this.button7);
             this.sidebarPanelLoans.Controls.Add(this.button5);
-            this.sidebarPanelLoans.Location = new System.Drawing.Point(3, 365);
+            this.sidebarPanelLoans.Location = new System.Drawing.Point(3, 406);
             this.sidebarPanelLoans.Name = "sidebarPanelLoans";
             this.sidebarPanelLoans.Size = new System.Drawing.Size(225, 119);
             this.sidebarPanelLoans.TabIndex = 4;
@@ -294,7 +354,7 @@
             this.sidebarBtnSavings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnSavings.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnSavings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnSavings.Location = new System.Drawing.Point(3, 490);
+            this.sidebarBtnSavings.Location = new System.Drawing.Point(3, 531);
             this.sidebarBtnSavings.Name = "sidebarBtnSavings";
             this.sidebarBtnSavings.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnSavings.Size = new System.Drawing.Size(225, 29);
@@ -310,7 +370,7 @@
             this.sidebarPanelSavings.Controls.Add(this.button9);
             this.sidebarPanelSavings.Controls.Add(this.button11);
             this.sidebarPanelSavings.Controls.Add(this.button12);
-            this.sidebarPanelSavings.Location = new System.Drawing.Point(3, 525);
+            this.sidebarPanelSavings.Location = new System.Drawing.Point(3, 566);
             this.sidebarPanelSavings.Name = "sidebarPanelSavings";
             this.sidebarPanelSavings.Size = new System.Drawing.Size(225, 89);
             this.sidebarPanelSavings.TabIndex = 6;
@@ -376,7 +436,7 @@
             this.sidebarBtnCBU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sidebarBtnCBU.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarBtnCBU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 620);
+            this.sidebarBtnCBU.Location = new System.Drawing.Point(3, 661);
             this.sidebarBtnCBU.Name = "sidebarBtnCBU";
             this.sidebarBtnCBU.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.sidebarBtnCBU.Size = new System.Drawing.Size(225, 29);
@@ -392,7 +452,7 @@
             this.sidebarPanelCBU.Controls.Add(this.button14);
             this.sidebarPanelCBU.Controls.Add(this.button16);
             this.sidebarPanelCBU.Controls.Add(this.button17);
-            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 655);
+            this.sidebarPanelCBU.Location = new System.Drawing.Point(3, 696);
             this.sidebarPanelCBU.Name = "sidebarPanelCBU";
             this.sidebarPanelCBU.Size = new System.Drawing.Size(225, 87);
             this.sidebarPanelCBU.TabIndex = 8;
@@ -456,7 +516,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.panel1.Location = new System.Drawing.Point(232, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(934, 621);
+            this.panel1.Size = new System.Drawing.Size(950, 660);
             this.panel1.TabIndex = 1;
             // 
             // MainForm
@@ -464,7 +524,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1155, 622);
+            this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.sidebarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -472,6 +532,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agriculturists Multipurpose Cooperative";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.sidebarLogoPanel.ResumeLayout(false);
@@ -511,6 +572,9 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button10;
     }
 }
 

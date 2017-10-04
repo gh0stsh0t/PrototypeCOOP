@@ -11,13 +11,17 @@ namespace AMC
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        public static bool looper = true;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (User.Name != null)
-                Application.Run(new MainForm());
+            while (looper)
+            {
+                if (User.Name != null)
+                    Application.Run(new MainForm());
+            }
         }
     }
 }

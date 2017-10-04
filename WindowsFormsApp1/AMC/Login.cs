@@ -44,7 +44,7 @@ namespace AMC
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            var x = conn.Select("users", "user_id", "concat_ws(',', last_name, first_name) as Name")
+            var x = conn.Select("users", "user_id", "concat_ws(', ', last_name, first_name) as Name")
                         .Where("username", textBox1.Text, "password", tbSearch.Text)
                         .GetQueryData();
             if (x.Rows.Count == 1)

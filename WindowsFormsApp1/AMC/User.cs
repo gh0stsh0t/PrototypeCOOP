@@ -28,5 +28,10 @@ namespace AMC
                 return name;
             }
         }
+        public bool Logout()
+        {
+            name = null;
+            return true;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace AMC
         public MainForm()
         {
             InitializeComponent();
-            MessageBox.Show(User.Name.person);
+            MessageBox.Show("You are logged in as " + User.Name.person);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -31,6 +31,7 @@ namespace AMC
             sidebarPanelSavings.Visible = false;
             sidebarPanelMembers.Visible = false;
             innerChild(new Dashboard(this));
+            button3.Text = User.Name.person;
         }
 
         private void sidebarBtnMembers_Click(object sender, EventArgs e)
@@ -164,6 +165,30 @@ namespace AMC
         private void button7_Click(object sender, EventArgs e)
         {
             innerChild(new ViewLoans(this));
+        }
+
+        
+
+        private void button8_MouseHover(object sender, EventArgs e)
+        {
+            button8.ForeColor = Color.FromArgb(184, 199, 206);
+        }
+
+        private void button8_MouseLeave(object sender, EventArgs e)
+        {
+            button8.ForeColor = Color.White;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            User.Name.Logout();
+            Dispose();
+            Close();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.looper = false;
         }
     }
 }

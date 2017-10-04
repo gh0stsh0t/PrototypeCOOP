@@ -58,7 +58,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
-            this.lbl1111 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -159,7 +158,7 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(3, 29);
+            this.panel2.Location = new System.Drawing.Point(3, 23);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(940, 166);
             this.panel2.TabIndex = 12;
@@ -372,7 +371,6 @@
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.lbl1111);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.dgvAccounts);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 56);
@@ -408,7 +406,7 @@
             this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAccounts.EnableHeadersVisualStyles = false;
             this.dgvAccounts.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvAccounts.Location = new System.Drawing.Point(3, 201);
+            this.dgvAccounts.Location = new System.Drawing.Point(3, 195);
             this.dgvAccounts.MultiSelect = false;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
@@ -429,16 +427,6 @@
             this.label3.Size = new System.Drawing.Size(232, 30);
             this.label3.TabIndex = 7;
             this.label3.Text = "View Savings Accounts";
-            // 
-            // lbl1111
-            // 
-            this.lbl1111.AutoSize = true;
-            this.lbl1111.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl1111.Location = new System.Drawing.Point(83, 0);
-            this.lbl1111.Name = "lbl1111";
-            this.lbl1111.Size = new System.Drawing.Size(84, 26);
-            this.lbl1111.TabIndex = 11;
-            this.lbl1111.Text = "Filter by Name \r\nor Account No:";
             // 
             // ViewSavings
             // 
@@ -498,6 +486,5 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblInterest;
-        private System.Windows.Forms.Label lbl1111;
     }
 }
