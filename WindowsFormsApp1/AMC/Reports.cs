@@ -40,8 +40,6 @@ namespace AMC
 
         private void Reports_Load(object sender, EventArgs e)
         {
-            monCalFrom.Location = txtDateFrom.Location;
-            monCalFrom.Visible = true;
             int myScreenWidth = Screen.PrimaryScreen.Bounds.Width;
             int myScreenHeight = Screen.PrimaryScreen.Bounds.Height;
             /*
@@ -55,15 +53,66 @@ namespace AMC
                         datagridTableChild.Visible = false;
                         */
             //set Dates
-            datagridTableChild.RowTemplate.Height = 60;
+            monCalFrom.Location = txtDateFrom.Location;
             txtDateFrom.Text = DateTime.Now.ToString();
             txtDateTo.Text = DateTime.Now.ToString();
             monCalFrom.MinDate = Convert.ToDateTime("6/13/2017");
             monCalFrom.MaxDate = DateTime.Now;
             monCalTo.MaxDate = DateTime.Now;
+            hideall();
+            datagridTableChild.RowTemplate.Height = 60;
             populateComboReport();
             comboReports.Focus();
+            capitalDTP.Format = DateTimePickerFormat.Custom;
+            capitalDTP.CustomFormat = "yyyy";
+            capitalDTP.ShowUpDown = true;
+            capitalDTP.Location = txtDateFrom.Location;
+            capitalBtn.Location = txtDateTo.Location;
+            savingsMDTP.Location = txtDateFrom.Location;
+            savingsMDTP.Format = DateTimePickerFormat.Custom;
+            savingsMDTP.CustomFormat = "MM/yyyy";
+            hideall();
         }
+
+        private void showdates()
+        {         
+            monCalFrom.Visible = true;
+            monCalTo.Visible = true;
+            txtDateFrom.Visible = true;
+            txtDateTo.Visible = true;
+        }
+        private void hideall()
+        {
+            savingsMDTP.Visible = false;
+            monCalFrom.Visible = false;
+            monCalTo.Visible = false;
+            txtDateFrom.Visible = false;
+            txtDateTo.Visible = false;
+            capitalDTP.Visible = false;
+            capitalBtn.Visible = false;
+        }
+
+        private void capitals()
+        {
+            hideall();
+            capitalDTP.Visible = true;
+            capitalBtn.Visible = true;
+        }
+
+        private void savingsmonth()
+        {
+            hideall();
+            savingsMDTP.Visible = true;
+            capitalBtn.Visible = true;
+        }
+
+        private void savingsyear()
+        {
+            hideall();
+            capitalDTP.Visible = true;
+            capitalBtn.Visible = true;
+        }
+
 
         //mouse handling
         private void formReports_MouseDown(object sender, MouseEventArgs e)
@@ -147,14 +196,25 @@ namespace AMC
         private void populateComboReport()
         {
             comboReports.Items.Clear();
-            comboReports.Items.Add("All Active Loan Accounts");
+            comboReports.Items.Add("Active Loan Accounts");
             comboReports.Items.Add("Loan Transactions");
-            comboReports.Items.Add("View All Members");
+            comboReports.Items.Add("All Members");
+            comboReports.Items.Add("CBU Report");
+            comboReports.Items.Add("Savings (Month)");
+            comboReports.Items.Add("Savings (Year)");
         }
 
         private void comboReports_SelectedIndexChanged(object sender, EventArgs e)
         {
             maketheDataGrid();
+        }
+
+        private void cleardgv()
+        {
+            datagridTableChild.DataSource = null;
+            datagridTableChild.Rows.Clear();
+            datagridTableChild.Columns.Clear();
+            datagridTableParent.DataSource = null;
         }
 
         private void maketheDataGrid()
@@ -164,6 +224,7 @@ namespace AMC
             {
                 case 0:     //All Loan Accounts
                     {
+                        hideall();
                         populatedatagridParent("viewloanscomplete", 0);
                         datagridTableParent.Columns[0].Visible = false;
                         datagridTableParent.Columns[1].Visible = false;
@@ -234,6 +295,7 @@ namespace AMC
 
                 case 1:         //Loan Transactions
                     {
+                        showdates();
                         populatedatagridParent("SELECT DISTINCT Name, transaction_type, date, total_amount, principal, interest, penalty FROM loan_transaction LEFT JOIN (SELECT concat_ws(', ', family_name, first_name) as Name, loan_account_id FROM loans NATURAL JOIN members) AS T ON loan_transaction.loan_account_id = T.loan_account_id ORDER BY T.loan_account_id, loan_transaction_id;", 1);
                         //set up datagridchild columns
                         datagridTableChild.Rows.Clear();
@@ -345,6 +407,7 @@ namespace AMC
 
                 case 2:     //View All Members
                     {
+                        hideall();
                         populatedatagridParent("SELECT concat_ws(',', family_name, first_name) as Name, gender, address, contact_no, type FROM members where status = 1", 1);
                         datagridTableParent.Columns[1].Name = "Gender";
                         datagridTableParent.Columns[2].Name = "Address";
@@ -364,7 +427,7 @@ namespace AMC
                         datagridTableChild.Columns[2].Width = 200;
                         datagridTableChild.Columns[3].Width = 200;
                         datagridTableChild.Columns[4].Width = 200;
-                        
+
 
                         mySelectSQLChild = "SELECT concat_ws(',', family_name, first_name) as Name, gender, address, contact_no, type FROM members where status = 1";
                         try
@@ -382,7 +445,7 @@ namespace AMC
                                         datagridTableChild.Rows.Add(reader[0], reader[1], reader[2], reader[3].ToString(), reader[4]);
                                         datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
                                         datagridTableChild.AllowUserToResizeRows = false;
-                                        
+
                                     }
                                 }
                             }
@@ -398,9 +461,28 @@ namespace AMC
                         }
                         break;
                     }
+                case 3:
+                    {
+                        cleardgv();
+                        capitals();
+                        break;
+                    }
+                case 4:
+                    {
+                        cleardgv();
+                        savingsmonth();
+                        break;
+                    }
+                case 5:
+                    {
+                        cleardgv();
+                        capitals();
+                        break;
+                    }
+
             }
 
-          
+
 
             noSortColumn();
         }
@@ -421,7 +503,7 @@ namespace AMC
                     conn.Close();
                     datagridTableParent.AutoResizeRows();
                 }
-                else
+                else if(n == 1)
                 {
                     conn.Open(); //opens the connection
                     MySqlCommand query = new MySqlCommand(Command, conn); //query to select all entries in tbl_productcatalog
@@ -435,6 +517,34 @@ namespace AMC
                     conn.Close();
                     datagridTableParent.AutoResizeRows();
                 }
+                else if(n == 2)
+                {
+                    var tae = new DatabaseConn(); //opens the connection
+                    BindingSource bs = new BindingSource();
+                    DateTime dt = capitalDTP.Value;
+                    bs.DataSource = tae.storedProc(Command, "yr", dt.Year, "accountstatus", 1, "likephrase", "%");
+                    datagridTableParent.DataSource = bs;
+                    datagridTableChild.DataSource = bs;
+                    conn.Close();
+                    datagridTableParent.AutoResizeRows();
+                }
+                else if (n == 3)
+                {
+                    var tae = new DatabaseConn(); //opens the connection
+                    BindingSource bs = new BindingSource();
+                    DateTime dt = savingsMDTP.Value;
+                    if(dt.Month == 3 || dt.Month == 6 || dt.Month == 9 || dt.Month == 12)
+                    {
+                        bs.DataSource = tae.storedProc("displayQuarterMonthTable","mn", dt.Month, "yr", dt.Year, "accountstatus", 1, "likephrase", "%");
+                    }
+                    else
+                    {
+                        bs.DataSource = tae.storedProc("displayMonthTable", "mn", dt.Month, "yr", dt.Year, "accountstatus", 1, "likephrase", "%");
+                    }
+                    datagridTableParent.DataSource = bs;
+                    datagridTableChild.DataSource = bs;
+                    conn.Close();
+                }
             }
             catch (Exception x)
             {
@@ -442,6 +552,7 @@ namespace AMC
                 conn.Close();
             }
         }
+
 
 
         //set datagridChild tbl here
@@ -521,5 +632,29 @@ namespace AMC
             }
         }
 
+        private void capitalBtn_Click(object sender, EventArgs e)
+        {
+            if(capitalDTP.Visible == true && comboReports.SelectedIndex == 3)
+            {
+                cleardgv();
+                populatedatagridParent("displayCapitalsTable", 2);
+                datagridTableParent.Columns[0].Visible = false;
+                datagridTableChild.Columns[0].Visible = false;
+            }
+            else if(savingsMDTP.Visible == true)
+            {
+                cleardgv();
+                populatedatagridParent("display", 3);
+                datagridTableParent.Columns[0].Visible = false;
+                datagridTableChild.Columns[0].Visible = false;
+            }
+            else
+            {
+                cleardgv();
+                populatedatagridParent("displayYearTable", 2);
+                datagridTableParent.Columns[0].Visible = false;
+                datagridTableChild.Columns[0].Visible = false;
+            }
+        }
     }
 }
