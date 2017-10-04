@@ -49,7 +49,7 @@ namespace AMC
                 comm2.CommandText = "SELECT amc.computeCapitalOutstandingBalance(@yr, @accountid) AS 'CurrBalance'";
                 comm2.Parameters.AddWithValue("@yr", DateTime.Today.Year);
                 comm2.Parameters.AddWithValue("@accountid", Convert.ToInt32(anum));
-                double bal;
+                double bal, cs, puc;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
                 lblBalance.Text = bal.ToString("n2");
                 comm2.CommandText = "SELECT account_status FROM capitals WHERE capital_account_id = " + anum;
@@ -70,10 +70,15 @@ namespace AMC
                 comm2.CommandText = "SELECT ics_no FROM capitals WHERE capital_account_id = " + anum;
                 lblicsn.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
                 comm2.CommandText = "SELECT ics_amount FROM capitals WHERE capital_account_id = " + anum;
-                lblics.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
+                cs = Convert.ToDouble(comm2.ExecuteScalar());
+                lblics.Text = cs.ToString("n2");
                 comm2.CommandText = "SELECT ipuc_amount FROM capitals WHERE capital_account_id = " + anum;
-                lblipuc.Text = Convert.ToDouble(comm2.ExecuteScalar()).ToString("n2");
+                puc = Convert.ToDouble(comm2.ExecuteScalar());
+                lblipuc.Text = puc.ToString("n2");
                 conn.Close();
+
+                lblpartial.Text = (puc / cs * 100).ToString("n2") + "%";
+                lblcompl.Text = (bal / cs * 100).ToString("n2") + "%";
             }
             catch (Exception ee)
             {

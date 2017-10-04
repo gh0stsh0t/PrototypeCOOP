@@ -125,3 +125,4 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.UpdateAmount.resources
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.NewCOA.resources
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.Login.resources
+C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.UpdateCOA.resources

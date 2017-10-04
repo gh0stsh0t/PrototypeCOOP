@@ -53,6 +53,20 @@ namespace AMC
 
                 if (dt.Rows.Count != 0)
                 {
+                    // ADD TOTALS
+                     DataRow dr = dt.NewRow();
+                    dr[1] = "";
+                    dr[2] = "TOTAL";
+                    dr[3] = Convert.ToDouble(dt.Compute("Sum([Beginning Balance for the Year])", string.Empty));
+                    dr[4] = Convert.ToDouble(dt.Compute("Sum([Outstanding Balance])", string.Empty));
+                    dr[5] = Convert.ToDouble(dt.Compute("Sum([Average Monthly Balance])", string.Empty));
+                    dr[6] = Convert.ToDouble(dt.Compute("Sum([Interest on Share Capital or Dividend])", string.Empty));
+                    dr[7] = Convert.ToDouble(dt.Compute("Sum([Increase / Decrease in SC for the Year])", string.Empty));
+                    dr[8] = Convert.ToDouble(dt.Compute("Sum([Targeted Increase for the Year])", string.Empty));
+                    dr[9] = Convert.ToDouble(dt.Compute("Sum([% Accomplished])", string.Empty));
+                    dr[10] = Convert.ToDouble(dt.Compute("Sum([Net Book Value of Share Capital])", string.Empty));
+                    dt.Rows.Add(dr);
+
                     dgvAccounts.DataSource = dt;
                     dgvAccounts.Columns["member_id"].Visible = false;
                     // dgvAccounts.CurrentCell.Selected = false;
