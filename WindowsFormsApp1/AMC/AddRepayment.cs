@@ -15,8 +15,10 @@ namespace AMC
     {
         private DatabaseConn conn = new DatabaseConn();
         private addLoanM popup;
-        public int memid;
-        public int loanid;
+        public int memid, loanid;
+        private string transid;
+        private bool edit= false;
+        private float orig;
         private float _value;
         public AddRepayment()
         {
@@ -41,6 +43,28 @@ namespace AMC
                         .GetQueryData()
                         .Rows[0][0].ToString());
         }
+
+        public AddRepayment(string transaction, int memberid, int index):this()
+        {
+            edit = true;
+            transid = transaction;
+            memid = memberid;
+            SetName(conn.Select("members", "concat_ws(',', family_name, first_name) as name")
+                .Where("member_id", memid.ToString())
+                .GetQueryData()
+                .Rows[0][0].ToString(),index);
+
+            var trans = conn.Select("loan_transaction",
+                    "loan_account_id", "principal",
+                    "interest", "penalty")
+                            .Where("loan_transaction_id", transid.ToString())
+                            .GetQueryData();
+            orig = float.Parse(trans.Row[0].Cells["interest"].Value.ToString());
+            txtInterest.Text = trans.Row[0].Cells["interest"].Value.ToString();
+            txtPrincipal.Text = trans.Row[0].Cells["principal"].Value.ToString();
+            txtPenalty.Text = trans.Row[0].Cells["penalty"].Value.ToString();
+
+        }
         private void MemberListRef()
         {
             conn.Select("LoansM", "member_id", "concat_ws(',', family_name, first_name) as name")
@@ -57,34 +81,51 @@ namespace AMC
                 var cc = new ComboboxContent(int.Parse(r["loan_account_id"].ToString()), r["loan_account_id"].ToString(),r["outstanding_balance"].ToString());
                 cbxAccount.Items.Add(cc);
             }
+            if(edit)
+                for (var x = 0;x<cbxAccount.Items.Count;x++)
+                    if (cbxAccount.Items[x].ToString().Equals(transid))
+                        index = x;
             cbxAccount.SelectedIndex = index;
-            
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
-                if (_value < 0)
+                string[] valueStrings =
+                {
+                    "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal",
+                    txtPrincipal.Text,
+                    "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
+                    "date", DateTime.Today.ToString("yyyy-MM-dd")
+                };
+
+                if (_value < 0 && !edit)
                     throw new Exception();
-                conn.Insert("loan_transaction",
-                        "loan_account_id", cbxAccount.SelectedItem.ToString(), "transaction_type", "1", "principal",
-                        txtPrincipal.Text,
-                        "interest", txtInterest.Text, "penalty", txtPenalty.Text, "total_amount", label12.Text,
-                        "date", DateTime.Today.ToString("yyyy-MM-dd"))
-                    .GetQueryData();
+                if (edit)
+                    conn.Update("loan_transactions", valueStrings).Where("loan_transaction_id", transid)
+                        .GetQueryData();
+                else
+                    conn.Insert("loan_transaction",valueStrings)
+                        .GetQueryData();
                 string[] vals = {"outstanding_balance", _value.ToString()};
-                string[] incase = {"loan_status", "3", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd")};
-                var z = new string[vals.Length + incase.Length];
+                var z = new string[6];
                 if (Math.Abs(_value) < 1e-6)
                 {
+                    string[] incase = { "loan_status", "3", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd") };
                     vals.CopyTo(z, 0);
                     incase.CopyTo(z, vals.Length);
                 }
-                    conn.Update("loans", vals)
-                        .Where("loan_account_id", cbxAccount.SelectedItem.ToString())
-                        .GetQueryData();
-                SetName(label15.Text,index:cbxAccount.SelectedIndex);
+                else
+                {
+                    string[] nocase= { "loan_status", "1", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd")};
+                    vals.CopyTo(z, 0);
+                    nocase.CopyTo(z, vals.Length);
+                }
+                conn.Update("loans", vals)
+                    .Where("loan_account_id", cbxAccount.SelectedItem.ToString())
+                    .GetQueryData();
+                SetName(label15.Text, index: cbxAccount.SelectedIndex);
             }
             catch (Exception exception)
             {/*
@@ -126,7 +167,7 @@ namespace AMC
             {
                 
                 label12.Text = (checkier(txtInterest.Text) + checkier(txtPenalty.Text) + checkier(txtPrincipal.Text)).ToString();
-                _value = checkier(x.Content2) - checkier(txtPrincipal.Text);
+                _value = checkier(x.Content2) - checkier(txtPrincipal.Text) - (edit?orig:0);
                 label18.ForeColor = _value < 0 ? Color.Red : Color.Black;
                 label18.Text = _value.ToString("F");
             }

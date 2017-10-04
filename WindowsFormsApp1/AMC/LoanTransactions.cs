@@ -55,6 +55,8 @@ namespace AMC
                                          .Where("loan_account_id", accId.ToString())
                                          .GetQueryData();
             dataGridView4.Columns["loan_transaction_id"].Visible = false;
+            dataGridView4.Columns["Encoder"].Visible = false;
+
             int height = 0;
             foreach (DataGridViewRow row in dataGridView4.Rows)
             {
@@ -68,7 +70,18 @@ namespace AMC
 
         private void dataGridView4_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (dataGridView4.Rows[e.RowIndex].Cells["Date"].Value.ToString().Equals(DateTime.Today.Date.ToString("yyyy-MM-dd")) || User.Name.id.Equals(dataGridView4.Rows[e.RowIndex].Cells["Encoder"].Value.ToString()))
+            {
+                reftomain.innerChild(new AddRepayment(dataGridView4.Rows[e.RowIndex].Cells["loan_transaction_id"].Value.ToString(),memId,int.Parse(label5.Text)));
+            } 
+            else
+            {
+                var x = db.Select("users", "concat_ws(',', last_name, first_name) as Name")
+                    .Where("user_id", dataGridView4.Rows[e.RowIndex].Cells["Encoder"].Value.ToString())
+                    .GetQueryData();
+                MessageBox.Show("Transaction can only be edited within the same day by the same encoder" + "\n" +
+                                "Encoder: " + x.Rows[0].Cells["Name"].Value.ToString());
+            }
         }
     }
 }
