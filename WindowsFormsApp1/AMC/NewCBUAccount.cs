@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -28,21 +29,25 @@ namespace AMC
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            Int32 newID;
             try
             {
                 conn.Open();
                 string query = "INSERT INTO capitals (member_id, opening_date, account_status, ics_no, ics_amount, ipuc_amount)" +
                                 "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1', '" + txticsn.Text + 
-                                "','" + txticsa.Text + "','" + txtipuc.Text + "')";
-                /* "SELECT LAST_INSERT_ID()" ;
-            }
-                        MySqlCommand ins = new MySqlCommand(query, conn);
-            newID = Convert.ToInt32(ins.ExecuteScalar()); */
+                                "','" + txticsa.Text.Replace(",", "") + "','" + txtipuc.Text + "') "
+                                + "SELECT LAST_INSERT_ID()" ;
+            
+
 
             MySqlCommand ins = new MySqlCommand(query, conn);
-                ins.ExecuteNonQuery();
-                conn.Close();
+            newID = Convert.ToInt32(ins.ExecuteScalar());
+            query = "INSERT INTO capital_balance_log (capital_account_id, date, amount)" +
+            "VALUES('" + newID.ToString() + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtipuc.Text + "');";
+            MySqlCommand ins2 = new MySqlCommand(query, conn);
+            ins2.ExecuteNonQuery();
+            conn.Close();
+
 
             }
             catch (Exception ee)
@@ -88,6 +93,37 @@ namespace AMC
         {
             reftomain.Enabled = true;
             this.Close();
+        }
+
+        private void txticsn_Leave(object sender, EventArgs e)
+        {
+            if(!isNum(txticsn.Text))
+            {
+                MessageBox.Show("Please enter a valid number.");
+                txticsn.Text = "100";
+            } else if(Convert.ToInt32(txticsn.Text) < 100)
+            {
+                MessageBox.Show("Please enter a number not lower than 100.");
+                txticsn.Text = "100";
+            } else
+            {
+                txticsa.Text = (Convert.ToDouble(txticsn.Text) * 100).ToString("n2");
+            }
+        }
+
+        public static Boolean isNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
+            return rg.IsMatch(strToCheck);
+        }
+
+        private void txtipuc_Leave(object sender, EventArgs e)
+        {
+            if (!isNum(txtipuc.Text))
+            {
+                MessageBox.Show("Please enter a valid number.");
+                txtipuc.Text = "1500.00";
+            }
         }
     }
 }

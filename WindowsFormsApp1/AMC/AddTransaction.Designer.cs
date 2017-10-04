@@ -28,8 +28,8 @@ namespace AMC
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMember = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@ namespace AMC
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.lblPr = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelRadio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParticulars)).BeginInit();
@@ -67,6 +68,7 @@ namespace AMC
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblPr);
             this.panel1.Controls.Add(this.lblMember);
             this.panel1.Controls.Add(this.btnSelect);
             this.panel1.Controls.Add(this.label3);
@@ -339,23 +341,23 @@ namespace AMC
             this.dgvParticulars.BackgroundColor = System.Drawing.Color.White;
             this.dgvParticulars.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvParticulars.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvParticulars.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvParticulars.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvParticulars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvParticulars.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvParticulars.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvParticulars.EnableHeadersVisualStyles = false;
             this.dgvParticulars.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvParticulars.Location = new System.Drawing.Point(534, 136);
@@ -366,7 +368,7 @@ namespace AMC
             this.dgvParticulars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvParticulars.Size = new System.Drawing.Size(374, 163);
             this.dgvParticulars.TabIndex = 26;
-            this.dgvParticulars.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellClick);
+            this.dgvParticulars.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvParticulars_CellClick);
             this.dgvParticulars.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvParticulars_DataBindingComplete);
             this.dgvParticulars.SelectionChanged += new System.EventHandler(this.dgvParticulars_SelectionChanged);
             this.dgvParticulars.Leave += new System.EventHandler(this.dgvParticulars_Leave);
@@ -445,7 +447,18 @@ namespace AMC
             this.btnDelete.TabIndex = 34;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // lblPr
+            // 
+            this.lblPr.AutoSize = true;
+            this.lblPr.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPr.Location = new System.Drawing.Point(292, 100);
+            this.lblPr.Name = "lblPr";
+            this.lblPr.Size = new System.Drawing.Size(10, 13);
+            this.lblPr.TabIndex = 33;
+            this.lblPr.Text = " ";
             // 
             // AddTransaction
             // 
@@ -469,6 +482,7 @@ namespace AMC
             this.Name = "AddTransaction";
             this.Text = "Add Transaction";
             this.Load += new System.EventHandler(this.AddTransaction_Load);
+            this.Click += new System.EventHandler(this.AddTransaction_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelRadio.ResumeLayout(false);
@@ -510,5 +524,6 @@ namespace AMC
         public System.Windows.Forms.DataGridView dgvParticulars;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDelete;
+        public System.Windows.Forms.Label lblPr;
     }
 }

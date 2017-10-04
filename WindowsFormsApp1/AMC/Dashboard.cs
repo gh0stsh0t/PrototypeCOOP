@@ -123,5 +123,12 @@ namespace AMC
         {
             loadCoA();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            UpdateCOA coa = new UpdateCOA(this, conn);
+            coa.Show();
+            this.Enabled = false;
+        }
     }
 }

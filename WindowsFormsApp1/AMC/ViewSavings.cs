@@ -32,6 +32,7 @@ namespace AMC
             loadMonthAccounts(cbxMonth.SelectedIndex + 1, cbxYear.Text, "%");
             loadIntRate((cbxMonth.SelectedIndex + 1).ToString(), cbxYear.Text);
 
+            
         }
 
         private void loadMonthAccounts(int mn, string yr, string like)
@@ -57,8 +58,33 @@ namespace AMC
                 DataTable dt = new DataTable();
                 adp.Fill(dt);
 
+                
+            
+
                 if (dt.Rows.Count != 0)
                 {
+                    // ADD TOTALS
+                    DataRow dr = dt.NewRow();
+                    dr[2] = "TOTAL";
+                    dr[3] = (Convert.ToDouble(dt.Compute("Sum([Beginning Balance])", string.Empty))).ToString("n2");
+                    dr[4] = (Convert.ToDouble(dt.Compute("Sum([Outstanding Balance])", string.Empty))).ToString("n2");
+                    dr[5] = (Convert.ToDouble(dt.Compute("Sum([Computed Interest])", string.Empty))).ToString("n2");
+                    dr[6] = (Convert.ToDouble(dt.Compute("Sum([Interest Expense for the Month])", string.Empty))).ToString("n2");
+                    if (mn % 3 != 0)
+                    {
+                        dr[7] = (Convert.ToDouble(dt.Compute("Sum([Month End Balance])", string.Empty))).ToString("n2");
+                        dr[8] = (Convert.ToDouble(dt.Compute("Sum([Average Daily Balance])", string.Empty))).ToString("n2");
+                        dr[9] = (Convert.ToDouble(dt.Compute("Sum([Increase (Decrease) for the Month])", string.Empty))).ToString("n2");
+                    }
+                    else
+                    {
+                        dr[8] = (Convert.ToDouble(dt.Compute("Sum([Month End Balance])", string.Empty))).ToString("n2");
+                        dr[9] = (Convert.ToDouble(dt.Compute("Sum([Average Daily Balance])", string.Empty))).ToString("n2");
+                        dr[10] = (Convert.ToDouble(dt.Compute("Sum([Increase (Decrease) for the Month])", string.Empty))).ToString("n2");
+                        dr[7] = (Convert.ToDouble(dt.Compute("Sum([Interest Credited for the Quarter])", string.Empty))).ToString("n2");
+                    }
+                    dt.Rows.Add(dr);
+
                     dgvAccounts.DataSource = dt;
                     dgvAccounts.CurrentCell.Selected = false;
                     dgvAccounts.Columns["member_id"].Visible = false;
@@ -69,6 +95,17 @@ namespace AMC
                     dgvAccounts.DataSource = dt;
                 }
                 conn.Close();
+
+                
+                /* TOTALSSSS double outstotal;
+                outstotal = Convert.ToDouble(dt.Compute("Sum([Outstanding Balance])", string.Empty));
+                lbl1111.Text = outstotal.ToString("n2");  */
+
+                /* string x = ""; foreach(DataColumn column in dt.Columns)
+                {
+                    x += column.ColumnName;
+                }
+                MessageBox.Show(x); */
             }
             catch (Exception ee)
             {
@@ -99,6 +136,17 @@ namespace AMC
 
                 if (dt.Rows.Count != 0)
                 {
+                    // ADD TOTALS
+                    DataRow dr = dt.NewRow();
+                    dr[2] = "TOTAL";
+                    dr[3] = (Convert.ToDouble(dt.Compute("Sum([Beginning Balance for the Year])", string.Empty))).ToString("n2");
+                    dr[4] = (Convert.ToDouble(dt.Compute("Sum([Outstanding Balance, End of Year])", string.Empty))).ToString("n2");
+                    dr[5] = (Convert.ToDouble(dt.Compute("Sum([Increase (Decrease)])", string.Empty))).ToString("n2");
+                    dr[6] = (Convert.ToDouble(dt.Compute("Sum([Total Computed Interest for the Year])", string.Empty))).ToString("n2");
+                    dr[7] = (Convert.ToDouble(dt.Compute("Sum([Total Interest Credit for the Year])", string.Empty))).ToString("n2");
+                    dr[8] = (Convert.ToDouble(dt.Compute("Sum([Interest Expense for the Year (Based on Quarterly Credit)])", string.Empty))).ToString("n2");
+                    dt.Rows.Add(dr);
+
                     dgvAccounts.DataSource = dt;
                     dgvAccounts.CurrentCell.Selected = false;
                     dgvAccounts.Columns["member_id"].Visible = false;
@@ -236,19 +284,25 @@ namespace AMC
 
         private void dgvAccounts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string mid, mname;
-            mid = dgvAccounts.Rows[e.RowIndex].Cells["Acc. No."].Value.ToString();
-            mname = dgvAccounts.Rows[e.RowIndex].Cells["Member Name"].Value.ToString();
-            try
+            if (dgvAccounts.CurrentCell.RowIndex != dgvAccounts.Rows.Count - 1)
             {
-                reftomain.Enabled = false;
+                
+                try
+                {
+                    string mid, mname;
+                    mid = dgvAccounts.Rows[e.RowIndex].Cells["Acc. No."].Value.ToString();
+                    mname = dgvAccounts.Rows[e.RowIndex].Cells["Member Name"].Value.ToString();
+                    reftomain.Enabled = false;
 
-                ViewSavingsProfile sav = new ViewSavingsProfile(reftomain, this, conn, mid, mname);
-                sav.Show();
-            }
-            catch (Exception ee)
-            {
+                    ViewSavingsProfile sav = new ViewSavingsProfile(reftomain, this, conn, mid, mname);
+                    sav.Show();
 
+
+                }
+                catch (Exception ee)
+                {
+
+                }
             }
 
         }

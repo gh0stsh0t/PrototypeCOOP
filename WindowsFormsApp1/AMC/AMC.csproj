@@ -162,6 +162,12 @@
     <Compile Include="UpdateAmount.Designer.cs">
       <DependentUpon>UpdateAmount.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateCOA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateCOA.Designer.cs">
+      <DependentUpon>UpdateCOA.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="ViewCapitals.cs">
       <SubType>Form</SubType>
@@ -285,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateAmount.resx">
       <DependentUpon>UpdateAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateCOA.resx">
+      <DependentUpon>UpdateCOA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewCapitals.resx">
       <DependentUpon>ViewCapitals.cs</DependentUpon>

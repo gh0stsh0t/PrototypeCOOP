@@ -82,9 +82,11 @@
             this.txticsa.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txticsa.Location = new System.Drawing.Point(242, 114);
             this.txticsa.Name = "txticsa";
+            this.txticsa.ReadOnly = true;
             this.txticsa.Size = new System.Drawing.Size(173, 23);
             this.txticsa.TabIndex = 0;
-            this.txticsa.Text = "0.00";
+            this.txticsa.TabStop = false;
+            this.txticsa.Text = "10,000.00";
             // 
             // btnSubmit
             // 
@@ -163,7 +165,8 @@
             this.txtipuc.Name = "txtipuc";
             this.txtipuc.Size = new System.Drawing.Size(173, 23);
             this.txtipuc.TabIndex = 22;
-            this.txtipuc.Text = "0.00";
+            this.txtipuc.Text = "1500.00";
+            this.txtipuc.Leave += new System.EventHandler(this.txtipuc_Leave);
             // 
             // lblName
             // 
@@ -201,6 +204,8 @@
             this.txticsn.Name = "txticsn";
             this.txticsn.Size = new System.Drawing.Size(173, 23);
             this.txticsn.TabIndex = 3;
+            this.txticsn.Text = "100";
+            this.txticsn.Leave += new System.EventHandler(this.txticsn_Leave);
             // 
             // splitter2
             // 

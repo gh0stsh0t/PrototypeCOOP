@@ -171,6 +171,13 @@ namespace AMC
                 double bal;
                 bal = Convert.ToDouble(comm2.ExecuteScalar());
                 sourceForm.lblBalance.Text = bal.ToString("n2");
+                if(transtype != "savings")
+                {
+                    comm2.CommandText = "SELECT ics_amount FROM capitals WHERE member_id = " + id.ToString();
+                    double ics;
+                    ics = Convert.ToDouble(comm2.ExecuteScalar());
+                    sourceForm.lblPr.Text = "(" + (bal / ics * 100).ToString("n2") + "% of Initial Capital Shares)";
+                }
                 /* MySqlDataAdapter adp = new MySqlDataAdapter(comm);
                 DataTable dt = new DataTable();
                 adp.Fill(dt); */

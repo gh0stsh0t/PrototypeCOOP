@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 
 namespace AMC
@@ -136,6 +137,26 @@ namespace AMC
             reftomain.Enabled = true;
             reftomain.innerChild(new ViewProfile(memid, reftomain));
             this.Close();
+        }
+
+        private void txtBal_Leave(object sender, EventArgs e)
+        {
+            if (!isNum(txtBal.Text))
+            {
+                MessageBox.Show("Please enter a valid number.");
+                txtBal.Text = "500.00";
+            }
+            else if (Convert.ToDouble(txtBal.Text) < 500)
+            {
+                MessageBox.Show("Please enter an amount not lower than 500.00.");
+                txtBal.Text = "500.00";
+            }
+        }
+
+        public static Boolean isNum(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[0-9]+\.?[0-9]{0,2}$");
+            return rg.IsMatch(strToCheck);
         }
     }
 }
