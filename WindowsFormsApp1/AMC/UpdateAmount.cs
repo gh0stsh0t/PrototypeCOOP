@@ -97,7 +97,7 @@ namespace AMC
                     }
                     catch (Exception ee)
                     {
-                        MessageBox.Show(ee.Message);
+                        //MessageBox.Show(ee.Message);
                         conn.Close();
                     }
                     reftomain.Enabled = true;

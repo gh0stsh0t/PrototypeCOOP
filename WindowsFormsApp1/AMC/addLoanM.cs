@@ -67,7 +67,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
             }
         }
         private void mlist_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -86,8 +86,16 @@ namespace AMC
                 this.Close();
             }
         }
-        
- 
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
     }
 
 }

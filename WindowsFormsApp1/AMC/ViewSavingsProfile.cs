@@ -76,7 +76,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }
@@ -159,7 +159,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }

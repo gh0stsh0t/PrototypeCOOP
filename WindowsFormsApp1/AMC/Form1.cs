@@ -190,5 +190,15 @@ namespace AMC
         {
             Program.looper = false;
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            innerChild(new Reports(this));
+        }
+
+        private void button12_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

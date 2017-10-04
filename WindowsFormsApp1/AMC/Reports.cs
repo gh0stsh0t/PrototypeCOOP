@@ -31,11 +31,13 @@ namespace AMC
         bool mouseDown; //boolean for mousedown
         Point lastLocation; //variable for the last location of the mouse
         int myCounter;
+        MainForm src;
 
-        public Reports()
+        public Reports(MainForm main)
         {
             InitializeComponent();
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root"); //connection
+            src = main;
         }
 
         private void Reports_Load(object sender, EventArgs e)
@@ -56,7 +58,7 @@ namespace AMC
             monCalFrom.Location = txtDateFrom.Location;
             txtDateFrom.Text = DateTime.Now.ToString();
             txtDateTo.Text = DateTime.Now.ToString();
-            monCalFrom.MinDate = Convert.ToDateTime("6/13/2017");
+            monCalFrom.MinDate = Convert.ToDateTime("2/2/2017");
             monCalFrom.MaxDate = DateTime.Now;
             monCalTo.MaxDate = DateTime.Now;
             hideall();
@@ -197,7 +199,7 @@ namespace AMC
         {
             comboReports.Items.Clear();
             comboReports.Items.Add("Active Loan Accounts");
-            comboReports.Items.Add("Loan Transactions");
+            //comboReports.Items.Add("Loan Transactions");
             comboReports.Items.Add("All Members");
             comboReports.Items.Add("CBU Report");
             comboReports.Items.Add("Savings (Month)");
@@ -293,119 +295,119 @@ namespace AMC
                         break;
                     }
 
-                case 1:         //Loan Transactions
-                    {
-                        showdates();
-                        populatedatagridParent("SELECT DISTINCT Name, transaction_type, date, total_amount, principal, interest, penalty FROM loan_transaction LEFT JOIN (SELECT concat_ws(', ', family_name, first_name) as Name, loan_account_id FROM loans NATURAL JOIN members) AS T ON loan_transaction.loan_account_id = T.loan_account_id ORDER BY T.loan_account_id, loan_transaction_id;", 1);
-                        //set up datagridchild columns
-                        datagridTableChild.Rows.Clear();
-                        datagridTableChild.ColumnCount = 7;
-                        datagridTableChild.ColumnHeadersVisible = true;
-                        datagridTableChild.Columns[0].Name = "Name";
-                        datagridTableChild.Columns[1].Name = "Transaction Type";
-                        datagridTableChild.Columns[2].Name = "Date";
-                        datagridTableChild.Columns[3].Name = "Total Amount";
-                        datagridTableChild.Columns[4].Name = "Principal";
-                        datagridTableChild.Columns[5].Name = "Interest";
-                        datagridTableChild.Columns[6].Name = "Penalty";
-                        datagridTableChild.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
-                        datagridTableChild.Columns[0].Width = 200;
-                        datagridTableChild.Columns[1].Width = 200;
-                        datagridTableChild.Columns[2].Width = 150;
-                        datagridTableChild.Columns[3].Width = 150;
-                        datagridTableChild.Columns[4].Width = 100;
-                        datagridTableChild.Columns[5].Width = 100;
-                        datagridTableChild.Columns[6].Width = 100;
-                        totalAmount = 0;
-                        totalPrincipal = 0;
-                        totalInterest = 0;
-                        totalPenalty = 0;
-                        string splitter = "";
+                //case 1:         //Loan Transactions
+                //    {
+                //        showdates();
+                //        populatedatagridParent("SELECT DISTINCT Name, transaction_type, date, total_amount, principal, interest, penalty FROM loan_transaction LEFT JOIN (SELECT concat_ws(', ', family_name, first_name) as Name, loan_account_id FROM loans NATURAL JOIN members) AS T ON loan_transaction.loan_account_id = T.loan_account_id ORDER BY T.loan_account_id, loan_transaction_id;", 1);
+                //        //set up datagridchild columns
+                //        datagridTableChild.Rows.Clear();
+                //        datagridTableChild.ColumnCount = 7;
+                //        datagridTableChild.ColumnHeadersVisible = true;
+                //        datagridTableChild.Columns[0].Name = "Name";
+                //        datagridTableChild.Columns[1].Name = "Transaction Type";
+                //        datagridTableChild.Columns[2].Name = "Date";
+                //        datagridTableChild.Columns[3].Name = "Total Amount";
+                //        datagridTableChild.Columns[4].Name = "Principal";
+                //        datagridTableChild.Columns[5].Name = "Interest";
+                //        datagridTableChild.Columns[6].Name = "Penalty";
+                //        datagridTableChild.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
+                //        datagridTableChild.Columns[0].Width = 200;
+                //        datagridTableChild.Columns[1].Width = 200;
+                //        datagridTableChild.Columns[2].Width = 150;
+                //        datagridTableChild.Columns[3].Width = 150;
+                //        datagridTableChild.Columns[4].Width = 100;
+                //        datagridTableChild.Columns[5].Width = 100;
+                //        datagridTableChild.Columns[6].Width = 100;
+                //        totalAmount = 0;
+                //        totalPrincipal = 0;
+                //        totalInterest = 0;
+                //        totalPenalty = 0;
+                //        string splitter = "";
 
 
-                        float myTotalAmount = 0;
-                        float myPrincipal = 0;
-                        float myInterest = 0;
-                        float myPenalty = 0;
-                        DateTime dt = Convert.ToDateTime(txtDateFrom.Text);
-                        string datefrom = dt.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-                        dt = Convert.ToDateTime(txtDateTo.Text);
-                        string dateto = DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-                        myDatesSQL[2] = "date between '" + datefrom + "' AND '" + dateto + "'";
-                        mySelectSQLChild = "SELECT DISTINCT Name, transaction_type, date, total_amount, principal, interest, penalty FROM loan_transaction LEFT JOIN (SELECT concat_ws(', ', family_name, first_name) as Name, loan_account_id FROM loans NATURAL JOIN members) AS T ON loan_transaction.loan_account_id = T.loan_account_id WHERE " + myDatesSQL[2] + " ORDER BY T.loan_account_id, loan_transaction_id";
-                        try
-                        {
-                            conn.Open();
-                            MySqlCommand query = new MySqlCommand(mySelectSQLChild, conn);
-                            MySqlDataReader reader = query.ExecuteReader();
-                            myCounter = 0;
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    if (datagridTableChild.RowCount > 0) splitter = datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells[0].Value.ToString();
-                                    if (datagridTableChild.RowCount > 0 && reader[0].ToString() != splitter)
-                                    {
-                                        if (myTotalAmount > 0)
-                                        {
-                                            datagridTableChild.Rows.Add(datagridTableParent.Rows[datagridTableChild.RowCount - 1].Cells["Name"].Value.ToString() + ": Sub-Total", "", "", myTotalAmount.ToString("#,#.00#"), myPrincipal.ToString("#,#.00#"), myInterest.ToString("#,#.00#"), myPenalty.ToString("#,#.00#"));
-                                            datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
-                                            datagridTableChild.AllowUserToResizeRows = false;
-                                            datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
-                                            datagridTableChild.Rows.Add("", "", "", "", "", "", "");
-                                            datagridTableChild.Rows[datagridTableChild.RowCount - 1].Height = 8;
-                                        }
-                                        myTotalAmount = 0;
-                                        myPrincipal = 0;
-                                        myInterest = 0;
-                                        myPenalty = 0;
-                                    }
-                                    if (reader[0].ToString() != "")
-                                    {
-                                        if (reader[0] != null)
-                                        {
-                                            datagridTableChild.Rows.Add(reader[0], reader[1], String.Format("{0:M/d/yyyy}", reader[2]), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString());
-                                            datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
-                                            datagridTableChild.AllowUserToResizeRows = false;
-                                            totalAmount = totalAmount + float.Parse(reader[3].ToString());
-                                            totalPrincipal = totalPrincipal + float.Parse(reader[4].ToString());
-                                            totalInterest = totalInterest + float.Parse(reader[5].ToString());
-                                            totalPenalty = totalPenalty + float.Parse(reader[6].ToString());
-                                            myTotalAmount = myTotalAmount + float.Parse(reader[3].ToString());
-                                            myPrincipal = myPrincipal + float.Parse(reader[4].ToString());
-                                            myInterest = myInterest + float.Parse(reader[5].ToString());
-                                            myPenalty = myPenalty + float.Parse(reader[6].ToString());
-                                        }
-                                    }
-                                }
-                                if (myTotalAmount > 0)
-                                {
-                                    datagridTableChild.Rows.Add(datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells["Name"].Value.ToString() + ": Sub-Total", "", "", myTotalAmount.ToString("#,#.00#"), myPrincipal.ToString("#,#.00#"), myInterest.ToString("#,#.00#"), myPenalty.ToString("#,#.00#"));
-                                    datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
-                                    datagridTableChild.AllowUserToResizeRows = false;
-                                    datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
-                                    datagridTableChild.Rows.Add("", "", "", "", "", "", "");
-                                    datagridTableChild.Rows[datagridTableChild.RowCount - 1].Height = 8;
-                                }
-                            }
+                //        float myTotalAmount = 0;
+                //        float myPrincipal = 0;
+                //        float myInterest = 0;
+                //        float myPenalty = 0;
+                //        DateTime dt = Convert.ToDateTime(txtDateFrom.Text);
+                //        string datefrom = dt.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                //        dt = Convert.ToDateTime(txtDateTo.Text);
+                //        string dateto = DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                //        myDatesSQL[2] = "date between '" + datefrom + "' AND '" + dateto + "'";
+                //        mySelectSQLChild = "SELECT DISTINCT Name, transaction_type, date, total_amount, principal, interest, penalty FROM loan_transaction LEFT JOIN (SELECT concat_ws(', ', family_name, first_name) as Name, loan_account_id FROM loans NATURAL JOIN members) AS T ON loan_transaction.loan_account_id = T.loan_account_id WHERE " + myDatesSQL[2] + " ORDER BY T.loan_account_id, loan_transaction_id";
+                //        try
+                //        {
+                //            conn.Open();
+                //            MySqlCommand query = new MySqlCommand(mySelectSQLChild, conn);
+                //            MySqlDataReader reader = query.ExecuteReader();
+                //            myCounter = 0;
+                //            if (reader.HasRows)
+                //            {
+                //                while (reader.Read())
+                //                {
+                //                    if (datagridTableChild.RowCount > 0) splitter = datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells[0].Value.ToString();
+                //                    if (datagridTableChild.RowCount > 0 && reader[0].ToString() != splitter)
+                //                    {
+                //                        if (myTotalAmount > 0)
+                //                        {
+                //                            datagridTableChild.Rows.Add(datagridTableParent.Rows[datagridTableChild.RowCount - 1].Cells["Name"].Value.ToString() + ": Sub-Total", "", "", myTotalAmount.ToString("#,#.00#"), myPrincipal.ToString("#,#.00#"), myInterest.ToString("#,#.00#"), myPenalty.ToString("#,#.00#"));
+                //                            datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
+                //                            datagridTableChild.AllowUserToResizeRows = false;
+                //                            datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
+                //                            datagridTableChild.Rows.Add("", "", "", "", "", "", "");
+                //                            datagridTableChild.Rows[datagridTableChild.RowCount - 1].Height = 8;
+                //                        }
+                //                        myTotalAmount = 0;
+                //                        myPrincipal = 0;
+                //                        myInterest = 0;
+                //                        myPenalty = 0;
+                //                    }
+                //                    if (reader[0].ToString() != "")
+                //                    {
+                //                        if (reader[0] != null)
+                //                        {
+                //                            datagridTableChild.Rows.Add(reader[0], reader[1], String.Format("{0:M/d/yyyy}", reader[2]), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString());
+                //                            datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
+                //                            datagridTableChild.AllowUserToResizeRows = false;
+                //                            totalAmount = totalAmount + float.Parse(reader[3].ToString());
+                //                            totalPrincipal = totalPrincipal + float.Parse(reader[4].ToString());
+                //                            totalInterest = totalInterest + float.Parse(reader[5].ToString());
+                //                            totalPenalty = totalPenalty + float.Parse(reader[6].ToString());
+                //                            myTotalAmount = myTotalAmount + float.Parse(reader[3].ToString());
+                //                            myPrincipal = myPrincipal + float.Parse(reader[4].ToString());
+                //                            myInterest = myInterest + float.Parse(reader[5].ToString());
+                //                            myPenalty = myPenalty + float.Parse(reader[6].ToString());
+                //                        }
+                //                    }
+                //                }
+                //                if (myTotalAmount > 0)
+                //                {
+                //                    datagridTableChild.Rows.Add(datagridTableChild.Rows[datagridTableChild.RowCount - 1].Cells["Name"].Value.ToString() + ": Sub-Total", "", "", myTotalAmount.ToString("#,#.00#"), myPrincipal.ToString("#,#.00#"), myInterest.ToString("#,#.00#"), myPenalty.ToString("#,#.00#"));
+                //                    datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
+                //                    datagridTableChild.AllowUserToResizeRows = false;
+                //                    datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
+                //                    datagridTableChild.Rows.Add("", "", "", "", "", "", "");
+                //                    datagridTableChild.Rows[datagridTableChild.RowCount - 1].Height = 8;
+                //                }
+                //            }
 
-                            conn.Close();
+                //            conn.Close();
 
-                        }
-                        catch (Exception x)
+                //        }
+                //        catch (Exception x)
 
-                        {
-                            MessageBox.Show("Error in Load:" + x.ToString());
-                            conn.Close();
-                        }
-                    }
-                    datagridTableChild.Rows.Add("Grand Total", "", "", totalAmount.ToString("#,#.00#"), totalPrincipal.ToString("#,#.00#"), totalInterest.ToString("#,#.00#"), totalPenalty.ToString("#,#.00#"));
-                    datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
-                    datagridTableChild.AllowUserToResizeRows = false;
-                    datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
-                    break;
+                //        {
+                //            MessageBox.Show("Error in Load:" + x.ToString());
+                //            conn.Close();
+                //        }
+                //    }
+                //    datagridTableChild.Rows.Add("Grand Total", "", "", totalAmount.ToString("#,#.00#"), totalPrincipal.ToString("#,#.00#"), totalInterest.ToString("#,#.00#"), totalPenalty.ToString("#,#.00#"));
+                //    datagridTableChild.AutoResizeRow(datagridTableChild.RowCount - 1, DataGridViewAutoSizeRowMode.AllCells);
+                //    datagridTableChild.AllowUserToResizeRows = false;
+                //    datagridTableChild.Rows[datagridTableChild.RowCount - 1].DefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
+                //    break;
 
-                case 2:     //View All Members
+                case 1:     //View All Members
                     {
                         hideall();
                         populatedatagridParent("SELECT concat_ws(',', family_name, first_name) as Name, gender, address, contact_no, type FROM members where status = 1", 1);
@@ -461,19 +463,19 @@ namespace AMC
                         }
                         break;
                     }
-                case 3:
+                case 2:
                     {
                         cleardgv();
                         capitals();
                         break;
                     }
-                case 4:
+                case 3:
                     {
                         cleardgv();
                         savingsmonth();
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         cleardgv();
                         capitals();

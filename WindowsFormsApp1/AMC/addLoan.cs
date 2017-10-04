@@ -106,7 +106,7 @@ namespace AMC
                     _addloanconn.Insert("loans", loanStrings)
                                 .GetQueryData();
                     string id = _addloanconn.lastID();
-                    MessageBox.Show(id);
+                    //MessageBox.Show(id);
                     string[] comakers = { "loan_id", id, "name", tbName1.Text, "address", tbAddress1.Text, "company_name", tbCompany1.Text
                         , "position", tbPosition1.Text};
                     _addloanconn.Insert("comakers", comakers);
@@ -116,12 +116,12 @@ namespace AMC
                             , "position", tbPosition2.Text};
                         _addloanconn.Insert("comakers", comakers2);
                     }
-                    MessageBox.Show("Success??");
+                    //MessageBox.Show("Success??");
                     conn.Close();
                 }
                 catch (Exception ee)
                 {
-                    MessageBox.Show(ee.ToString());
+                    ////MessageBox.Show(ee.ToString());
                     conn.Close();
                 }
             } 

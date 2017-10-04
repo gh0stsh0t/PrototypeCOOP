@@ -103,7 +103,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
             }
             dataGridView1.ClearSelection();
             loanids.Clear();
@@ -154,7 +154,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
             }
             dataGridView2.ClearSelection();
         }
@@ -188,7 +188,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
             }
             dataGridView2.ClearSelection();
         }

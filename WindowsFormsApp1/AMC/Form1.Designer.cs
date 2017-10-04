@@ -55,6 +55,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sidebarPanel.SuspendLayout();
             this.sidebarLogoPanel.SuspendLayout();
@@ -78,6 +79,7 @@
             this.sidebarPanel.Controls.Add(this.sidebarPanelSavings);
             this.sidebarPanel.Controls.Add(this.sidebarBtnCBU);
             this.sidebarPanel.Controls.Add(this.sidebarPanelCBU);
+            this.sidebarPanel.Controls.Add(this.button13);
             this.sidebarPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebarPanel.Location = new System.Drawing.Point(0, 0);
             this.sidebarPanel.Name = "sidebarPanel";
@@ -427,6 +429,7 @@
             this.button12.Text = "Add Savings Transaction";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // sidebarBtnCBU
             // 
@@ -511,6 +514,24 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // button13
+            // 
+            this.button13.FlatAppearance.BorderSize = 0;
+            this.button13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
+            this.button13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button13.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
+            this.button13.Location = new System.Drawing.Point(3, 789);
+            this.button13.Name = "button13";
+            this.button13.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.button13.Size = new System.Drawing.Size(225, 29);
+            this.button13.TabIndex = 10;
+            this.button13.Text = "Reports";
+            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
@@ -575,6 +596,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button13;
     }
 }
 

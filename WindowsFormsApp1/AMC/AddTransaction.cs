@@ -202,7 +202,7 @@ namespace AMC
                     }
                     catch (Exception ee)
                     {
-                        MessageBox.Show(ee.ToString());
+                        //MessageBox.Show(ee.ToString());
                         conn.Close();
                     }
                 }
@@ -287,9 +287,9 @@ namespace AMC
             }
             catch (DataException ee)
             {
-                // Process exception and return.
+                /*Process exception and return.
                 Console.WriteLine("Exception of type {0} occurred.",
-                    ee.GetType());
+                    ee.GetType());*/
             }
         }
 

@@ -121,7 +121,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }
@@ -141,11 +141,6 @@ namespace AMC
         private void btnEdit_Click(object sender, EventArgs e)
         {
             reftomain.innerChild(new AddMember(memid));
-        }
-
-        private void btnDeactivate_Click(object sender, EventArgs e)
-        {
-            //
         }
 
         private void btnDeactivate_Click_1(object sender, EventArgs e)
@@ -233,7 +228,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
 

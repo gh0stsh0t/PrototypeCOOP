@@ -65,11 +65,12 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                //MessageBox.Show(ee.ToString());
+                ////MessageBox.Show(ee.ToString());
                 conn.Close();
             }
             dataGridView2.ClearSelection();
         }
+
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
@@ -91,7 +92,7 @@ namespace AMC
                 }
                 catch (Exception ee)
                 {
-                    MessageBox.Show(ee.ToString());
+                    ////MessageBox.Show(ee.ToString());
                     conn.Close();
                 }
             }

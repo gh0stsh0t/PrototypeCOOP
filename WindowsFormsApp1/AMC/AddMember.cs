@@ -615,7 +615,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                ////MessageBox.Show(ee.ToString());
                 databasecon.Close();
             }
 

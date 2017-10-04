@@ -102,30 +102,36 @@ namespace AMC
 
                 if (_value < 0 && !edit)
                     throw new Exception();
-                if (edit)
-                    conn.Update("loan_transactions", valueStrings).Where("loan_transaction_id", transid)
-                        .GetQueryData();
-                else
-                    conn.Insert("loan_transaction",valueStrings)
-                        .GetQueryData();
-                string[] vals = {"outstanding_balance", _value.ToString()};
-                var z = new string[6];
-                if (Math.Abs(_value) < 1e-6)
+                if (float.Parse(txtPrincipal.Text) <= 0)
                 {
-                    string[] incase = { "loan_status", "3", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd") };
-                    vals.CopyTo(z, 0);
-                    incase.CopyTo(z, vals.Length);
+                    if (edit)
+                        conn.Update("loan_transactions", valueStrings).Where("loan_transaction_id", transid)
+                            .GetQueryData();
+                    else
+                        conn.Insert("loan_transaction", valueStrings)
+                            .GetQueryData();
+                    string[] vals = { "outstanding_balance", _value.ToString() };
+                    var z = new string[6];
+                    if (Math.Abs(_value) < 1e-6)
+                    {
+                        string[] incase = { "loan_status", "3", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd") };
+                        vals.CopyTo(z, 0);
+                        incase.CopyTo(z, vals.Length);
+                    }
+                    else
+                    {
+                        string[] nocase = { "loan_status", "1", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd") };
+                        vals.CopyTo(z, 0);
+                        nocase.CopyTo(z, vals.Length);
+                    }
+                    conn.Update("loans", vals)
+                        .Where("loan_account_id", cbxAccount.SelectedItem.ToString())
+                        .GetQueryData();
+                    SetName(label15.Text, index: cbxAccount.SelectedIndex);
+                    MessageBox.Show("Transaction recorded");
                 }
                 else
-                {
-                    string[] nocase= { "loan_status", "1", "date_terminated", DateTime.Today.ToString("yyyy-MM-dd")};
-                    vals.CopyTo(z, 0);
-                    nocase.CopyTo(z, vals.Length);
-                }
-                conn.Update("loans", vals)
-                    .Where("loan_account_id", cbxAccount.SelectedItem.ToString())
-                    .GetQueryData();
-                SetName(label15.Text, index: cbxAccount.SelectedIndex);
+                    MessageBox.Show("Principal value Must not be 0");
             }
             catch (Exception exception)
             {/*

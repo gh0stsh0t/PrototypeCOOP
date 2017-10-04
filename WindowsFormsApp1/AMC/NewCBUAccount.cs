@@ -34,15 +34,15 @@ namespace AMC
             {
                 conn.Open();
                 string query = "INSERT INTO capitals (member_id, opening_date, account_status, ics_no, ics_amount, ipuc_amount)" +
-                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1', '" + txticsn.Text + 
-                                "','" + txticsa.Text.Replace(",", "") + "','" + txtipuc.Text + "') "
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1', '" + txticsn.Text +
+                                "','" + txticsa.Text.Replace(",", "") + "','" + txtipuc.Text + "'); "
                                 + "SELECT LAST_INSERT_ID()" ;
             
 
 
             MySqlCommand ins = new MySqlCommand(query, conn);
             newID = Convert.ToInt32(ins.ExecuteScalar());
-            query = "INSERT INTO capital_balance_log (capital_account_id, date, amount)" +
+            query = "INSERT INTO capitals_balance_log (capital_account_id, date, amount)" +
             "VALUES('" + newID.ToString() + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "','" + txtipuc.Text + "');";
             MySqlCommand ins2 = new MySqlCommand(query, conn);
             ins2.ExecuteNonQuery();
@@ -84,7 +84,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                ////MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }

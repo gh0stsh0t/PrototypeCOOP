@@ -22,6 +22,7 @@ namespace AMC
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Program.looper = false;
             Close();
         }
 

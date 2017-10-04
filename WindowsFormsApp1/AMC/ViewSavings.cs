@@ -109,7 +109,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
             dgvAccounts.ClearSelection();
@@ -160,7 +160,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
             dgvAccounts.ClearSelection();
@@ -248,7 +248,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                //MessageBox.Show(ee.ToString());
                 conn.Close();
             }
 

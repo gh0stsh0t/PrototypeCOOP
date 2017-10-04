@@ -27,6 +27,16 @@ namespace AMC
         {
             loadBals();
             loadCoA();
+
+            var db = new DatabaseConn();
+            DataTable a = db.Select("members", "COUNT(member_id)").Where("status", "1").GetQueryData();
+            label15.Text = a.Rows[0][0].ToString();
+            a = db.Select("loans", "SUM(orig_amount) as tanan", "SUM(Case when date_terminated is null then 1 else 0 end) as notp", "SUM(Case when date_terminated is not null then 1 else 0 end) as vryp", "SUM(outstanding_balance) as outt").GetQueryData();
+            label16.Text = a.Rows[0]["tanan"].ToString();
+            label18.Text = a.Rows[0]["notp"].ToString();
+            label19.Text = a.Rows[0]["vryp"].ToString();
+            label20.Text = a.Rows[0]["outt"].ToString();
+
         }
 
         private void loadCoA()
@@ -58,7 +68,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                ////MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }
@@ -95,7 +105,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                ////MessageBox.Show(ee.ToString());
                 conn.Close();
             }
         }
