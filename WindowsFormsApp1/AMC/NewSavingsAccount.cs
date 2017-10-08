@@ -116,7 +116,7 @@ namespace AMC
             {
                 conn.Open();
                 string query = "INSERT INTO savings (member_id, opening_date, account_status)" +
-                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1')"
+                                "VALUES('" + memid + "','" + DateTime.Today.ToString("yyyy-MM-dd") + "', '1'); "
                                 + " SELECT LAST_INSERT_ID()";
 
                 MySqlCommand ins = new MySqlCommand(query, conn);
