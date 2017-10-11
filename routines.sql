@@ -17,25 +17,13 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalPercentAccomplished`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalDifference`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT CONCAT((COALESCE(amc.computeCapitalDifference(YEAR(date),capital_account_id) / (SELECT COALESCE(amount,0) FROM amc.capital_general_log WHERE fund_type = 3 AND YEAR(date) <= 2017 ORDER BY date DESC LIMIT 1), 0)) * 100, ' %')   
+    SELECT COALESCE(amc.computeCapitalOutstandingBalance(YEAR(date),capital_account_id) - 		   COALESCE( 		   amc.getCapitalBeginningBalance(YEAR(date),capital_account_id),0), 0)    
     FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid LIMIT 1
-);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalOutstandingBalance`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
-    READS SQL DATA
-BEGIN
-RETURN (
-    SELECT 
-    COALESCE(SUM(total_amount * transaction_type),0)
-    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
 );
 END$$
 DELIMITER ;
@@ -55,12 +43,24 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalDifference`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalOutstandingBalance`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
+    READS SQL DATA
+BEGIN
+RETURN (
+    SELECT 
+    COALESCE(SUM(total_amount * transaction_type),0)
+    FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid GROUP BY capital_account_id
+);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeCapitalPercentAccomplished`(`yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT COALESCE(amc.computeCapitalOutstandingBalance(YEAR(date),capital_account_id) - 		   COALESCE( 		   amc.getCapitalBeginningBalance(YEAR(date),capital_account_id),0), 0)    
+    SELECT CONCAT((COALESCE(amc.computeCapitalDifference(YEAR(date),capital_account_id) / (SELECT COALESCE(amount,0) FROM amc.capital_general_log WHERE fund_type = 3 AND YEAR(date) <= 2017 ORDER BY date DESC LIMIT 1), 0)) * 100, ' %')   
     FROM amc.capitals_transaction WHERE YEAR(date) = yr AND capital_account_id = accountid LIMIT 1
 );
 END$$
@@ -81,17 +81,15 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthEndBalance`(`mn` INT, `yr` INT, `accountid` INT) RETURNS decimal(13,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividendMultiplier`(`yr` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT CASE
-    WHEN mn % 3 = 0 
-    THEN COALESCE(COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0) + COALESCE(amc.computeQuarterInterest(mn,yr,accountid),0),0)
-    ELSE COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0)
-    END 
-);
+    SELECT COALESCE(CONVERT(
+        amount * (SELECT 1 - amount FROM `capital_general_log` WHERE fund_type = 1 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1)
+        , DECIMAL(13,2)),0) FROM `capital_general_log` WHERE fund_type = 0 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    );
 END$$
 DELIMITER ;
 
@@ -119,15 +117,17 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` FUNCTION `computeDividendMultiplier`(`yr` INT) RETURNS decimal(13,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `computeMonthEndBalance`(`mn` INT, `yr` INT, `accountid` INT) RETURNS decimal(13,2)
     READS SQL DATA
 BEGIN
 RETURN
 (
-    SELECT COALESCE(CONVERT(
-        amount * (SELECT 1 - amount FROM `capital_general_log` WHERE fund_type = 1 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1)
-        , DECIMAL(13,2)),0) FROM `capital_general_log` WHERE fund_type = 0 AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
-    );
+    SELECT CASE
+    WHEN mn % 3 = 0 
+    THEN COALESCE(COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0) + COALESCE(amc.computeQuarterInterest(mn,yr,accountid),0),0)
+    ELSE COALESCE(amc.computeMonthOutstandingBalance(mn,yr,accountid),0)
+    END 
+);
 END$$
 DELIMITER ;
 
@@ -314,7 +314,7 @@ COALESCE(amc.computeMonthInterestExpense(mn,yr,st.savings_account_id),0) AS 'Int
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND MONTH(s.opening_date) <= mn AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 DELIMITER ;
 
@@ -329,7 +329,7 @@ COALESCE(amc.computeQuarterInterest(mn,yr,st.savings_account_id),0) AS 'Interest
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND MONTH(s.opening_date) <= mn AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 DELIMITER ;
 
@@ -344,7 +344,7 @@ COALESCE(amc.computeYearOutstandingBalance(yr,st.savings_account_id),0) - COALES
 COALESCE(amc.computeYearInterest(yr,st.savings_account_id),0) as 'Total Computed Interest for the Year',
 COALESCE(amc.computeYearInterestExpense(yr,st.savings_account_id),0) as 'Total Interest Credit for the Year',
 COALESCE(amc.computeYearQuarterInterest(yr,st.savings_account_id),0) as 'Interest Expense for the Year (Based on Quarterly Credit)'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 
 END$$
 DELIMITER ;
@@ -355,7 +355,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getCapitalBeginningBalance`(`yr` INT
 BEGIN
 RETURN
 (
-    SELECT COALESCE(amount,0) FROM amc.capitals_balance_log WHERE capital_account_id = accountid AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    SELECT COALESCE(amount,0) FROM amc.capitals_balance_log WHERE capital_account_id = accountid AND YEAR(date) = yr ORDER BY date ASC LIMIT 1
 );
 END$$
 DELIMITER ;
@@ -410,6 +410,22 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `loansM`()
+    READS SQL DATA
+BEGIN
+	SELECT members.member_id, concat_ws(',', family_name, first_name) as name FROM members inner JOIN loans on members.member_id=loans.member_id where date_terminated IS NULL AND loan_status=1;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `monthview`(IN `loanid` INT(11), IN `mo` INT(2))
+    READS SQL DATA
+BEGIN
+	SELECT SUM(total_amount) AS Total, SUM(principal) AS Principal, SUM(interest) AS Interest, SUM(penalty) AS Penalty FROM loan_transaction WHERE MONTH(date) = mo AND loan_account_id = loanid;
+END$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtainHeaderValues`(IN `yr` INT)
     READS SQL DATA
 BEGIN
@@ -428,5 +444,126 @@ INSERT INTO amc.savings_balance_log (savings_account_id, amount, date)
 SELECT st.savings_account_id, COALESCE(amc.computeMonthEndBalance(MONTH(CURDATE()) - 1,YEAR(CURDATE()),st.savings_account_id),0) AS 'Month End Balance', CURDATE() 
 FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id 
 WHERE m.status = 1 AND s.account_status = 1 GROUP BY s.savings_account_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewagingsched`()
+    READS SQL DATA
+BEGIN
+SELECT 
+    Age,
+    `Date Granted to Cut-off date`,
+    CASE
+        WHEN `Date Granted to Cut-off date` < 1 THEN 'Current'
+        ELSE 'Past Due'
+    END AS Status,
+    CASE
+        WHEN `Date Granted to Cut-off date` <= 1 THEN balance
+        ELSE 0
+    END AS 'Current',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 1 AND 30 THEN balance
+        ELSE 0
+    END AS '1-30 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 31 AND 60 THEN balance
+        ELSE 0
+    END AS '31-60 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 61 AND 90 THEN balance
+        ELSE 0
+    END AS '61-90 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 91 AND 120 THEN balance
+        ELSE 0
+    END AS '91-120 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 121 AND 180 THEN balance
+        ELSE 0
+    END AS '121-180 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 181 AND 365 THEN balance
+        ELSE 0
+    END AS '181-365 Days',
+    CASE
+        WHEN `Date Granted to Cut-off date` BETWEEN 366 AND 730 THEN balance
+        ELSE 0
+    END AS '366 to 2 years (730 days)',
+    CASE
+        WHEN `Date Granted to Cut-off date` >= 731 THEN balance
+        ELSE 0
+    END AS 'More than 2 years (or 730 days)',
+    CASE
+        WHEN `Date Granted to Cut-off date` > 1 THEN balance
+        ELSE 0
+    END AS 'Total Past Due'
+FROM
+    (SELECT 
+        Age,
+            term,
+            Age - term AS 'Date Granted to Cut-off date',
+            balance
+    FROM
+        (SELECT 
+        DATEDIFF(DATE_ADD('2016-11-30', INTERVAL EXTRACT(YEAR FROM CURDATE()) - 2016 YEAR), date_granted) AS Age,
+            term,
+            outstanding_balance AS balance
+    FROM
+        loans
+    GROUP BY member_id) AS x) AS y;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanrequests`()
+    READS SQL DATA
+BEGIN
+	SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where loan_status = 0;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloansched`()
+    READS SQL DATA
+BEGIN
+	SELECT loan_account_id, member_id, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanschedname`()
+    READS SQL DATA
+BEGIN
+	SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted FROM loans NATURAL JOIN members;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanscomplete`()
+BEGIN
+	SELECT  loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members WHERE loan_status = 1;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanstotal`()
+    READS SQL DATA
+BEGIN
+SELECT member_id,
+		CASE WHEN SUM(interest) IS NULL THEN 0 
+			ELSE SUM(interest)
+            END AS 'Total Interest', 
+		CASE WHEN SUM(principal) IS NULL THEN 0
+			 ELSE SUM(principal)
+             END AS 'Total Principal', 
+		CASE WHEN SUM(penalty) IS NULL THEN 0
+			 ELSE SUM(interest)
+             END AS 'Total Penalty', 
+		CASE WHEN SUM(outstanding_balance) IS NULL THEN 0
+			 ELSE SUM(outstanding_balance)
+             END AS balance
+		FROM loan_transaction RIGHT JOIN loans on loans.loan_account_id=loan_transaction.loan_account_id
+		GROUP BY member_id;
 END$$
 DELIMITER ;

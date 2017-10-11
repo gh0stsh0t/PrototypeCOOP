@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2017 at 10:00 PM
+-- Generation Time: Oct 11, 2017 at 04:43 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -49,7 +49,7 @@ COALESCE(amc.computeMonthInterestExpense(mn,yr,st.savings_account_id),0) AS 'Int
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND MONTH(s.opening_date) <= mn AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `displayQuarterMonthTable` (IN `mn` INT, IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
@@ -61,7 +61,7 @@ COALESCE(amc.computeQuarterInterest(mn,yr,st.savings_account_id),0) AS 'Interest
 COALESCE(amc.computeMonthEndBalance(mn,yr,st.savings_account_id),0) AS 'Month End Balance',
 COALESCE(amc.computeMonthAvgDailyBalance(mn,yr,st.savings_account_id),0) AS 'Average Daily Balance',
 COALESCE(amc.computeMonthBalanceDifference(mn,yr,st.savings_account_id),0) AS 'Increase (Decrease) for the Month'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND MONTH(s.opening_date) <= mn AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `displayYearTable` (IN `yr` INT, IN `accountstatus` INT, IN `likephrase` VARCHAR(75))  READS SQL DATA
@@ -73,18 +73,18 @@ COALESCE(amc.computeYearOutstandingBalance(yr,st.savings_account_id),0) - COALES
 COALESCE(amc.computeYearInterest(yr,st.savings_account_id),0) as 'Total Computed Interest for the Year',
 COALESCE(amc.computeYearInterestExpense(yr,st.savings_account_id),0) as 'Total Interest Credit for the Year',
 COALESCE(amc.computeYearQuarterInterest(yr,st.savings_account_id),0) as 'Interest Expense for the Year (Based on Quarterly Credit)'
-FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
+FROM savings s LEFT JOIN savings_transaction st ON s.savings_account_id = st.savings_account_id INNER JOIN members m ON s.member_id = m.member_id WHERE m.status = 1 AND s.account_status = accountstatus AND YEAR(s.opening_date) <= yr AND (s.savings_account_id LIKE likephrase OR m.family_name LIKE likephrase OR m.first_name LIKE likephrase OR m.middle_name LIKE likephrase ) GROUP BY s.savings_account_id;
 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `loansM` ()  READS SQL DATA
 BEGIN
-SELECT members.member_id, concat_ws(',', family_name, first_name) as name FROM members inner JOIN loans on members.member_id=loans.member_id WHERE date_terminated IS NULL;
+	SELECT members.member_id, concat_ws(',', family_name, first_name) as name FROM members inner JOIN loans on members.member_id=loans.member_id where date_terminated IS NULL AND loan_status=1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `monthview` (IN `loanid` INT(11), IN `mo` INT(2))  READS SQL DATA
 BEGIN
-SELECT SUM(total_amount) AS Total, SUM(principal) AS Principal, SUM(interest) AS Interest, SUM(penalty) AS Penalty FROM loan_transaction WHERE MONTH(date) = mo AND loan_account_id = loanid;
+	SELECT SUM(total_amount) AS Total, SUM(principal) AS Principal, SUM(interest) AS Interest, SUM(penalty) AS Penalty FROM loan_transaction WHERE MONTH(date) = mo AND loan_account_id = loanid;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtainHeaderValues` (IN `yr` INT)  READS SQL DATA
@@ -105,7 +105,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewagingsched` ()  READS SQL DATA
 BEGIN
-SELECT
+SELECT 
     Age,
     `Date Granted to Cut-off date`,
     CASE
@@ -153,13 +153,13 @@ SELECT
         ELSE 0
     END AS 'Total Past Due'
 FROM
-    (SELECT
+    (SELECT 
         Age,
             term,
             Age - term AS 'Date Granted to Cut-off date',
             balance
     FROM
-        (SELECT
+        (SELECT 
         DATEDIFF(DATE_ADD('2016-11-30', INTERVAL EXTRACT(YEAR FROM CURDATE()) - 2016 YEAR), date_granted) AS Age,
             term,
             outstanding_balance AS balance
@@ -170,36 +170,40 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanrequests` ()  READS SQL DATA
 BEGIN
-SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where loan_status = 0;
+	SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, cast(loan_type AS char(25)) as loan_type, cast(request_type AS char(25)) as request_type, term, orig_amount, interest_rate FROM loans NATURAL JOIN members where loan_status = 0;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloansched` ()  READS SQL DATA
 BEGIN
-SELECT loan_account_id, member_id, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members;
+	SELECT loan_account_id, member_id, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanschedname` ()  READS SQL DATA
 BEGIN
-SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted FROM loans NATURAL JOIN members;
+	SELECT loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted FROM loans NATURAL JOIN members;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanscomplete` ()  BEGIN
+	SELECT  loan_account_id, member_id, concat_ws(', ', family_name, first_name) as Name, date_granted, term, DATE_ADD(date_granted, INTERVAL term DAY) as due_date, orig_amount, outstanding_balance FROM loans NATURAL JOIN members WHERE loan_status = 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewloanstotal` ()  READS SQL DATA
 BEGIN
 SELECT member_id,
-CASE WHEN SUM(interest) IS NULL THEN 0
-ELSE SUM(interest)
-            END AS 'Total Interest',
-CASE WHEN SUM(principal) IS NULL THEN 0
-ELSE SUM(principal)
-             END AS 'Total Principal',
-CASE WHEN SUM(penalty) IS NULL THEN 0
-ELSE SUM(penalty)
-             END AS 'Total Penalty',
-CASE WHEN SUM(outstanding_balance) IS NULL THEN 0
-ELSE SUM(outstanding_balance)
+		CASE WHEN SUM(interest) IS NULL THEN 0 
+			ELSE SUM(interest)
+            END AS 'Total Interest', 
+		CASE WHEN SUM(principal) IS NULL THEN 0
+			 ELSE SUM(principal)
+             END AS 'Total Principal', 
+		CASE WHEN SUM(penalty) IS NULL THEN 0
+			 ELSE SUM(interest)
+             END AS 'Total Penalty', 
+		CASE WHEN SUM(outstanding_balance) IS NULL THEN 0
+			 ELSE SUM(outstanding_balance)
              END AS balance
-FROM loan_transaction RIGHT JOIN loans on loans.loan_account_id=loan_transaction.loan_account_id
-GROUP BY member_id;
+		FROM loan_transaction RIGHT JOIN loans on loans.loan_account_id=loan_transaction.loan_account_id
+		GROUP BY member_id;
 END$$
 
 --
@@ -434,7 +438,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `getCapitalBeginningBalance` (`yr` IN
 BEGIN
 RETURN
 (
-    SELECT COALESCE(amount,0) FROM amc.capitals_balance_log WHERE capital_account_id = accountid AND YEAR(date) = yr ORDER BY date DESC LIMIT 1
+    SELECT COALESCE(amount,0) FROM amc.capitals_balance_log WHERE capital_account_id = accountid AND YEAR(date) = yr ORDER BY date ASC LIMIT 1
 );
 END$$
 
@@ -519,7 +523,9 @@ CREATE TABLE `capitals` (
 --
 
 INSERT INTO `capitals` (`capital_account_id`, `member_id`, `opening_date`, `ics_no`, `ics_amount`, `ipuc_amount`, `account_status`, `withdrawal_date`) VALUES
-(1, 1, '2017-09-12', 123, '0.00', '0.00', 1, '2017-10-01');
+(1, 1, '2017-09-12', 100, '10000.00', '1500.00', 1, '2017-10-01'),
+(3, 2, '2017-10-04', 100, '10000.00', '1500.00', 1, NULL),
+(4, 8, '2017-10-04', 100, '10000.00', '1500.00', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -533,6 +539,15 @@ CREATE TABLE `capitals_balance_log` (
   `date` date DEFAULT NULL,
   `amount` decimal(13,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `capitals_balance_log`
+--
+
+INSERT INTO `capitals_balance_log` (`id`, `capital_account_id`, `date`, `amount`) VALUES
+(1, 3, '2017-10-04', '1500.00'),
+(2, 1, '2017-09-01', '10000.00'),
+(3, 4, '2017-10-04', '1500.00');
 
 -- --------------------------------------------------------
 
@@ -557,7 +572,9 @@ INSERT INTO `capitals_transaction` (`capital_transaction_id`, `capital_account_i
 (1, 1, 1, '2017-09-04', '1000.00', NULL),
 (2, 1, 1, '2017-09-14', '2000.00', NULL),
 (3, 1, -1, '2017-09-25', '500.00', NULL),
-(4, 1, 1, '2017-10-03', '110.00', NULL);
+(4, 1, 1, '2017-10-03', '110.00', NULL),
+(5, 3, 1, '2017-10-04', '100.00', 1),
+(6, 4, 1, '2017-10-04', '100.00', 1);
 
 -- --------------------------------------------------------
 
@@ -577,7 +594,11 @@ CREATE TABLE `capitals_transaction_line` (
 
 INSERT INTO `capitals_transaction_line` (`capital_trans_line_id`, `capital_transaction_id`, `account_log_id`) VALUES
 (1, 4, 34),
-(2, 4, 35);
+(2, 4, 35),
+(3, 5, 43),
+(4, 5, 44),
+(5, 6, 47),
+(6, 6, 48);
 
 -- --------------------------------------------------------
 
@@ -601,7 +622,8 @@ INSERT INTO `capital_general_log` (`id`, `fund_type`, `amount`, `date`, `updated
 (1, 0, '4320000.00', '2017-09-24', NULL),
 (2, 1, '0.30', '2017-09-24', NULL),
 (3, 2, '9901606.21', '2017-09-24', NULL),
-(4, 3, '2250.00', '2017-09-24', NULL);
+(4, 3, '2250.00', '2017-09-24', NULL),
+(5, 1, '0.31', '2017-10-04', 1);
 
 -- --------------------------------------------------------
 
@@ -651,7 +673,20 @@ INSERT INTO `chart_of_accounts_log` (`id`, `code`, `date`, `amount`, `type`, `en
 (34, 101, '2017-10-03', '110.00', 0, NULL),
 (35, 102, '2017-10-03', '110.00', 1, NULL),
 (36, 101, '2017-10-03', '-1000.00', 1, NULL),
-(37, 102, '2017-10-03', '-1000.00', 0, NULL);
+(37, 102, '2017-10-03', '-1000.00', 0, NULL),
+(38, 101, '2017-10-03', '50.00', 0, NULL),
+(39, 102, '2017-10-03', '50.00', 1, NULL),
+(40, 102, '2017-10-03', '-200.00', 0, NULL),
+(41, 101, '2017-10-03', '-200.00', 1, NULL),
+(42, 102, '2017-10-04', '100.00', 2, NULL),
+(43, 102, '2017-10-04', '-100.00', 0, NULL),
+(44, 101, '2017-10-04', '-100.00', 1, NULL),
+(45, 101, '2017-10-04', '100.00', 0, NULL),
+(46, 102, '2017-10-04', '100.00', 1, NULL),
+(47, 101, '2017-10-04', '100.00', 0, NULL),
+(48, 102, '2017-10-04', '100.00', 1, NULL),
+(49, 101, '2017-10-04', '-100.00', 1, NULL),
+(50, 102, '2017-10-04', '-100.00', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -717,7 +752,9 @@ CREATE TABLE `loans` (
 INSERT INTO `loans` (`loan_account_id`, `member_id`, `loan_type`, `request_type`, `date_granted`, `approval_no`, `term`, `orig_amount`, `interest_rate`, `purpose`, `loan_status`, `outstanding_balance`, `date_terminated`) VALUES
 (1, 1, 0, 0, '2017-09-26', NULL, 60, '50000.00', 5, 'Loan', 1, '50000.00', '2017-09-26'),
 (2, 2, 0, 0, '2017-09-26', NULL, 90, '1000.00', 5, 'Loan', 1, '1000.00', NULL),
-(3, 1, 0, 0, '2017-09-26', NULL, 45, '1000.00', 5, 'asd', 1, '1000.00', NULL);
+(3, 1, 0, 0, '2017-09-26', NULL, 45, '1000.00', 5, 'asd', 1, '0.00', NULL),
+(4, 9, 0, 1, NULL, NULL, 123, '123412.00', 5, 'None', 0, '123412.00', NULL),
+(5, 9, 0, 1, '2017-10-04', NULL, 123, '123412.00', 5, 'None', 1, '123412.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -757,7 +794,8 @@ CREATE TABLE `loan_transaction` (
 INSERT INTO `loan_transaction` (`loan_transaction_id`, `loan_account_id`, `transaction_type`, `date`, `total_amount`, `principal`, `interest`, `penalty`, `encoded_by`) VALUES
 (1, 1, 1, '2017-09-26', '1050.00', '1000.00', '50.00', '0.00', NULL),
 (2, 2, 1, '2017-09-26', '210.00', '200.00', '10.00', '0.00', NULL),
-(3, 1, 1, '2017-09-26', '1020.00', '1000.00', '20.00', '0.00', NULL);
+(3, 1, 1, '2017-09-26', '1020.00', '1000.00', '20.00', '0.00', NULL),
+(4, 3, 1, '2017-10-04', '0.00', '0.00', '0.00', '0.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -810,7 +848,19 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`member_id`, `family_name`, `first_name`, `middle_name`, `birthdate`, `gender`, `address`, `contact_no`, `occupation`, `company_name`, `position`, `annual_income`, `tin`, `educ_attainment`, `civil_status`, `religion`, `no_of_dependents`, `beneficiary_name`, `type`, `status`, `acceptance_date`, `acceptance_no`, `termination_date`, `termination_no`) VALUES
 (1, 'DELA CRUZ', 'JUAN', 'SANTOS', '1981-11-21', 'MALE', 'RIVERDALE, DAVAO CITY', '09123456789', 'PHYSICIAN', 'SOUTHERN PHILIPPINES MEDICAL CENTER', 'CHIEF OF CLINICS', '500000.00', '123456789123', 'DOCTOR OF MEDICINE', 1, 'CATHOLIC', 1, 'JUANA DELA CRUZ', 0, 1, '2015-06-07', 123456, NULL, NULL),
-(2, 'RIZAL', 'JOSE', 'MERCADO', '1989-06-19', 'MALE', 'DAVAO CITY', '09123456788', 'WRITER', 'LA SOLIDARIDAD', 'EDITOR', '100000.00', '123456789123', 'HIGH SCHOOL GRADUATE', 0, 'CATHOLIC', 0, 'NONE', 0, 1, '2017-09-01', 123, NULL, NULL);
+(2, 'RIZAL', 'JOSE', 'MERCADO', '1989-06-19', 'MALE', 'DAVAO CITY', '09123456788', 'WRITER', 'LA SOLIDARIDAD', 'EDITOR', '100000.00', '123456789123', 'HIGH SCHOOL GRADUATE', 0, 'CATHOLIC', 0, 'NONE', 0, 1, '2017-09-01', 123, NULL, NULL),
+(3, 'Rich', 'Richie', 'Moneybags', '1962-03-06', 'Male', 'Moneylandia', '09991524808', 'Rich Person', 'Rich Industries', 'CEO', '999999.00', '123456789123', 'College Graduate', 0, 'None', 0, 'None', 0, 1, '2017-10-04', 123213, NULL, NULL),
+(4, 'Perias', 'Raphael John', 'Something', '1998-06-03', 'Male', 'Cabantian, Davao City', '09991234567', 'Anything', 'Anywhere', 'Anything', '1234567.00', '123456789123', 'College Graduate', 0, 'Catholic', 0, 'None', 0, 1, '2017-10-04', 123123, NULL, NULL),
+(5, 'Fonda', 'Jane', 'Lady', '1942-11-03', 'Female', 'Madrid, Spain', '09991421324', 'Rich Lady', 'None', 'Rich Lady', '12.00', '123456789123', 'Unknown', 1, 'Evangelist', 0, 'None', 0, 1, '2017-10-04', 1323133, NULL, NULL),
+(6, 'Rose', 'Derrick', 'James', '1989-04-03', 'Male', 'New York', '09991423909', 'Professional Athelete', 'New York Knicks', 'Athlete', '6500000.00', '123456789123', 'High School Graduate', 0, 'Protestant', 0, 'None', 0, 1, '2017-10-04', 123213123, NULL, NULL),
+(7, 'Wayne', 'Lil', 'Christopher', '1982-03-08', 'Male', 'The World', '09991423808', 'Rapper', 'None', 'feat.', '12356784.00', '123456789123', 'Unknown', 0, 'None', 0, 'None', 0, 1, '2017-10-04', 123123123, NULL, NULL),
+(8, 'Chigga', 'Rich', 'Bryce', '1999-04-01', 'Male', 'Indonesia', '09991428404', 'Rapper', 'b8', 'Blackest Chinese dude', '0.00', '123456789123', 'High School', 0, 'Evangelist', 0, 'None', 0, 1, '2017-10-04', 1232123, NULL, NULL),
+(9, 'Knowles', 'Beyonce', 'Diva', '1984-10-02', 'Female', 'Brooklyn', '09991239090', 'Singer', 'Warner Brothers Music', 'Chart Topper', '9999999.00', '123456789123', 'High School Graduate', 2, 'Jewish', 1, 'Lil Jay Z', 0, 1, '2017-10-04', 13123123, NULL, NULL),
+(10, 'Rapper', 'Chance the', 'Stephen', '1992-05-27', 'Male', 'Brooklyn', '09231231231', 'Rapper', 'Warner Brothers Music', 'New Age Rapper', '1234567.00', '123456789123', 'High School Graduate', 1, 'Jewish', 0, 'None', 0, 1, '2017-10-04', 123123213, NULL, NULL),
+(11, 'Kunis', 'Mila', 'Russian', '1988-12-12', 'Female', 'Toronto', '09991535808', 'Actress', 'Somewhere', 'Who cares', '23234234.00', '123456789123', 'College Graduate', 1, 'Christian', 0, 'None', 0, 1, '2017-10-04', 13213, NULL, NULL),
+(12, 'Clooney', 'George', 'Mr', '1972-12-12', 'Male', 'Who Acres', '09991429492', 'Actor', 'ASDFASF', 'Wtf', '2123123.00', '123456789123', 'High School Graduate', 2, 'Muslim', 4, 'LOL some hobo', 0, 1, '2017-10-04', 123213213, NULL, NULL),
+(13, 'Mason', 'Mason', 'Mason', '2017-02-02', 'Female', 'Werewolf', '09123456789', 'Mason', 'aDFAFasdflnqwer', 'Villager', '12.12', '123456789123', 'None', 1, 'Jewish', 12, 'Santa Claus', 0, 1, '2017-10-04', 21321323, NULL, NULL),
+(14, 'Magno', 'Vincent', 'ui', '1995-08-29', 'Male', '64 V Mapa', '09991523333', 'adf', 'Wayn', 'aasdf', '0.00', '123123123123', 'asdf', 0, 'Catholic', 0, 'asdf', 0, 0, '2017-10-04', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -896,7 +946,11 @@ INSERT INTO `savings_transaction` (`savings_transaction_id`, `savings_account_id
 (34, 1, -1, '2017-09-26', '100.00', NULL),
 (35, 1, 1, '2017-10-01', '100.00', NULL),
 (42, 1, -1, '2017-10-03', '100.00', NULL),
-(43, 2, -1, '2017-10-03', '1000.00', 1);
+(43, 2, -1, '2017-10-03', '1000.00', 1),
+(44, 1, 1, '2017-10-03', '50.00', 1),
+(45, 1, 1, '2017-10-03', '200.00', 1),
+(46, 1, 1, '2017-10-04', '100.00', 1),
+(47, 1, -1, '2017-10-04', '100.00', 1);
 
 -- --------------------------------------------------------
 
@@ -918,7 +972,15 @@ INSERT INTO `savings_transaction_line` (`savings_trans_line_id`, `savings_transa
 (19, 42, 32),
 (20, 42, 33),
 (21, 43, 36),
-(22, 43, 37);
+(22, 43, 37),
+(23, 44, 38),
+(24, 44, 39),
+(25, 45, 40),
+(26, 45, 41),
+(27, 46, 45),
+(28, 46, 46),
+(29, 47, 49),
+(30, 47, 50);
 
 -- --------------------------------------------------------
 
@@ -942,7 +1004,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `username`, `password`, `user_type`, `user_status`) VALUES
-(1, 'Last', 'First', NULL, 'admin', '1234', 0, 1);
+(1, 'Admin', 'Admin', NULL, 'admin', '1234', 0, 1),
+(2, 'ta', 'tatta', 'tatt', 'rat', 'tata', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -1106,31 +1169,31 @@ ALTER TABLE `avg_daily_balance_log`
 -- AUTO_INCREMENT for table `capitals`
 --
 ALTER TABLE `capitals`
-  MODIFY `capital_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `capital_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `capitals_balance_log`
 --
 ALTER TABLE `capitals_balance_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `capitals_transaction`
 --
 ALTER TABLE `capitals_transaction`
-  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `capital_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `capitals_transaction_line`
 --
 ALTER TABLE `capitals_transaction_line`
-  MODIFY `capital_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `capital_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `capital_general_log`
 --
 ALTER TABLE `capital_general_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `chart_of_accounts`
@@ -1142,7 +1205,7 @@ ALTER TABLE `chart_of_accounts`
 -- AUTO_INCREMENT for table `chart_of_accounts_log`
 --
 ALTER TABLE `chart_of_accounts_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `comakers`
@@ -1160,7 +1223,7 @@ ALTER TABLE `interest_rate_log`
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `loan_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `loan_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `loan_balance_log`
@@ -1172,7 +1235,7 @@ ALTER TABLE `loan_balance_log`
 -- AUTO_INCREMENT for table `loan_transaction`
 --
 ALTER TABLE `loan_transaction`
-  MODIFY `loan_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `loan_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `loan_transaction_line`
@@ -1184,7 +1247,7 @@ ALTER TABLE `loan_transaction_line`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `savings`
@@ -1196,25 +1259,25 @@ ALTER TABLE `savings`
 -- AUTO_INCREMENT for table `savings_balance_log`
 --
 ALTER TABLE `savings_balance_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction`
 --
 ALTER TABLE `savings_transaction`
-  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `savings_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `savings_transaction_line`
 --
 ALTER TABLE `savings_transaction_line`
-  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `savings_trans_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
