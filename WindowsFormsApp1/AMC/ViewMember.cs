@@ -56,7 +56,8 @@ namespace AMC
                 }
                 else
                 {
-                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT member_id, concat_ws(',',family_name ,first_name) as name, gender, address, contact_no, type, status FROM members " + filter, conn);
+                    MySqlCommand comm = new MySqlCommand("SELECT DISTINCT member_id, concat_ws(',',family_name ,first_name) as name, gender, address, contact_no,"+
+                        "CASE WHEN type = 0 THEN 'Regular' WHEN type = 1 THEN 'Associate' ELSE 'Lab' END as type, CASE WHEN civil_status = 0 THEN 'Single' WHEN civil_status = 1 THEN 'Married' WHEN civil_status = 2 THEN 'Divorced' ELSE 'Widowed' END as 'civil status' FROM members " + filter, conn);
 
                     Console.Write(comm.CommandText);
                     MySqlDataAdapter adp = new MySqlDataAdapter(comm);
