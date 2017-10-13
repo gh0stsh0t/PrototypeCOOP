@@ -59,10 +59,10 @@ namespace AMC
                     "interest", "penalty")
                             .Where("loan_transaction_id", transid.ToString())
                             .GetQueryData();
-            orig = float.Parse(trans.Row[0].Cells["interest"].Value.ToString());
-            txtInterest.Text = trans.Row[0].Cells["interest"].Value.ToString();
-            txtPrincipal.Text = trans.Row[0].Cells["principal"].Value.ToString();
-            txtPenalty.Text = trans.Row[0].Cells["penalty"].Value.ToString();
+            orig = float.Parse(trans.Rows[0].Cells["interest"].Value.ToString());
+            txtInterest.Text = trans.Rows[0].Cells["interest"].Value.ToString();
+            txtPrincipal.Text = trans.Rows[0].Cells["principal"].Value.ToString();
+            txtPenalty.Text = trans.Rows[0].Cells["penalty"].Value.ToString();
 
         }
         private void MemberListRef()

@@ -159,7 +159,7 @@ namespace AMC
 
         private void button5_Click(object sender, EventArgs e)
         {
-            innerChild(new AddRepayment());
+            innerChild(new ViewMember(true, this));
         }
 
         private void button7_Click(object sender, EventArgs e)

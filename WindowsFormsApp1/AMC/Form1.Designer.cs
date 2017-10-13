@@ -343,7 +343,7 @@
             this.button5.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
             this.button5.Size = new System.Drawing.Size(220, 23);
             this.button5.TabIndex = 6;
-            this.button5.Text = "Add Repayment";
+            this.button5.Text = "View Loan Transactions";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);

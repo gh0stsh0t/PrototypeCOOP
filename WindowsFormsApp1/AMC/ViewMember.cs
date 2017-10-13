@@ -13,6 +13,7 @@ namespace AMC
     public partial class ViewMember : Form
     {
         private bool advanceSearchVisible = false;
+        private bool trans = false;
         private string filter = " where status=1";
         public MySqlConnection conn;
         public MainForm reftomain;
@@ -23,7 +24,15 @@ namespace AMC
             reftomain = parent;
             this.TopLevel = false;
         }
-
+        public ViewMember(bool x,MainForm parent)
+        {
+            InitializeComponent();
+            conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
+            reftomain = parent;
+            this.TopLevel = false;
+            label3.Text = "Choose Member";
+            trans = x;
+        }
         private void label4_Click(object sender, EventArgs e)
         {
             if (!advanceSearchVisible)
@@ -142,10 +151,18 @@ namespace AMC
             try
             {
                 int memid = int.Parse(dataGridView2.Rows[e.RowIndex].Cells["member_id"].Value.ToString());
-                if (e.Button.Equals(MouseButtons.Left))
-                    reftomain.innerChild(new ViewProfile(memid, reftomain));
+                string memn = dataGridView2.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                if (trans)
+                {
+                    reftomain.innerChild(new LoanTransactions(memid, memn, reftomain));
+                }
                 else
-                    reftomain.innerChild(new AddMember(memid));
+                {
+                    if (e.Button.Equals(MouseButtons.Left))
+                        reftomain.innerChild(new ViewProfile(memid, reftomain));
+                    else
+                        reftomain.innerChild(new AddMember(memid)); 
+                }
             }
             catch (System.ArgumentOutOfRangeException)
             {

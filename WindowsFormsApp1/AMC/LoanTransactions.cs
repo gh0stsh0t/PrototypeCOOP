@@ -25,10 +25,15 @@ namespace AMC
             reftomain = parent;
             popup();
         }
-
+        public LoanTransactions(MainForm parent)
+        {
+            InitializeComponent();
+            db = new DatabaseConn();
+            reftomain = parent;
+        }
         private void button4_Click(object sender, EventArgs e)
         {
-            reftomain.innerChild(new ViewMember(reftomain));
+            reftomain.innerChild(new ViewMember(true,reftomain));
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -82,6 +87,11 @@ namespace AMC
                 MessageBox.Show("Transaction can only be edited within the same day by the same encoder" + "\n" +
                                 "Encoder: " + x.Rows[0].Cells["Name"].Value.ToString());
             }
+        }
+
+        private void LoanTransactions_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

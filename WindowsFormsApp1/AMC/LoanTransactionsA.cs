@@ -35,7 +35,6 @@ namespace AMC
 
         private void mlist_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
             acc = (int)mlist.Rows[e.RowIndex].Cells["loan_account_id"].Value;
             this.DialogResult = DialogResult.OK;
             Close();

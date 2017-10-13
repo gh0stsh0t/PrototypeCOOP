@@ -129,3 +129,5 @@ C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\A
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.exe
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.pdb
 C:\Users\Farshana Datukon\Desktop\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojFakesResolveAssemblyReference.cache
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.csprojResolveAssemblyReference.cache
+D:\Programming\PrototypeCOOP\WindowsFormsApp1\AMC\obj\Debug\AMC.UpdateCOA.resources
