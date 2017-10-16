@@ -82,6 +82,11 @@ namespace AMC
             }
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+            conn.Select("users", "user_id", "concat_ws(', ', last_name, first_name) as Name").GetQueryData();
+        }
+
         private void textBox1_Leave(object sender, EventArgs e)
         {
             userCheck = textBox1.Text.Equals("");

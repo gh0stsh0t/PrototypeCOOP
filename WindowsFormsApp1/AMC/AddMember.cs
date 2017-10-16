@@ -50,6 +50,7 @@ namespace AMC
             filldata();
             neweditform();
             label3.Text = "Edit Member";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -103,7 +104,7 @@ namespace AMC
             txtPos.ForeColor = Color.FromArgb(0, 0, 0);
             occpl = txtOcc.Text = holder.Rows[0]["occupation"].ToString();
             txtOcc.ForeColor = Color.FromArgb(0, 0, 0);
-            annincpl = txtAnnInc.Text = holder.Rows[0]["annual_income"].ToString();
+            annincpl = annincval = txtAnnInc.Text = holder.Rows[0]["annual_income"].ToString();
             txtAnnInc.ForeColor = Color.FromArgb(0, 0, 0);
             string TIN = holder.Rows[0]["tin"].ToString();
             tin1pl = txtTIN1.Text = TIN.Substring(0,3);
@@ -615,7 +616,7 @@ namespace AMC
             }
             catch (Exception ee)
             {
-                ////MessageBox.Show(ee.ToString());
+                MessageBox.Show(ee.ToString());
                 databasecon.Close();
             }
 
