@@ -22,10 +22,11 @@ namespace AMC
         public string memname;
         public int comakercount;
         private Form popup;
+        private MainForm reftomain;
         private double intrate = 5.00; //DO THIS SHIT GUYS      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 
-        public AddLoan(int x)
+        public AddLoan(int x, MainForm parents)
         {
             InitializeComponent();
             memid = x;
@@ -35,6 +36,7 @@ namespace AMC
             conn = new MySqlConnection("Server=localhost;Database=amc;Uid=root;Pwd=root;");
             tbInterest.Text = intrate.ToString();
             this.ActiveControl = label3;
+            reftomain = parents;
         }
 
         private void AddLoan_Load(object sender, EventArgs e)
@@ -81,8 +83,7 @@ namespace AMC
         private void button4_Click(object sender, EventArgs e)
         {
             breaker();
-            AddLoan reftomain = this;
-            popup = new addLoanM(reftomain);
+            popup = new addLoanM(this);
             popup.ShowDialog();
         }
 
@@ -116,7 +117,8 @@ namespace AMC
                             , "position", tbPosition2.Text};
                         _addloanconn.Insert("comakers", comakers2);
                     }
-                    //MessageBox.Show("Success??");
+                    MessageBox.Show("Success");
+                    reftomain.innerChild(new AddLoan(-1, reftomain));
                     conn.Close();
                 }
                 catch (Exception ee)

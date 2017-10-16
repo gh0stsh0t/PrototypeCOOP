@@ -154,7 +154,7 @@ namespace AMC
 
         private void button6_Click(object sender, EventArgs e)
         {
-            innerChild(new AddLoan(-1));
+            innerChild(new AddLoan(-1,this));
         }
 
         private void button5_Click(object sender, EventArgs e)

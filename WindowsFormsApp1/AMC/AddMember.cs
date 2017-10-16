@@ -570,7 +570,7 @@ namespace AMC
                         + "tin, educ_attainment, civil_status, religion, no_of_dependents, beneficiary_name, type, status, acceptance_date)"
                         + "VALUES ('" + txtLname.Text + "', '" + txtFname.Text + "', '" + txtMname.Text + "', '" + bday + "', '" + gender + "', '" + txtAddr.Text + "', '" + txtContNo.Text + "', '"
                         + txtOcc.Text + "', '" + txtCompany.Text + "', '" + pos + "', '" + anninc + "', '" + tin + "', '"
-                        + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "'," + dependents + ", '" + ben + "', " + mtype.SelectedIndex + ", '0', '" + now + "')", databasecon);
+                        + educ + "', '" + civstat.SelectedIndex + "', '" + rel + "'," + dependents + ", '" + ben + "', " + mtype.SelectedIndex + ", '1', '" + now + "')", databasecon);
                         query.ExecuteNonQuery();
 
                         databasecon.Close();
