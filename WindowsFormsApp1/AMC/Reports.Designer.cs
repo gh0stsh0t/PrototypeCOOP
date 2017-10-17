@@ -29,23 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblReports = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.monCalFrom = new System.Windows.Forms.MonthCalendar();
-            this.monCalTo = new System.Windows.Forms.MonthCalendar();
             this.lblRep = new System.Windows.Forms.Label();
             this.comboReports = new System.Windows.Forms.ComboBox();
             this.pnlReports = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.datagridTableChild = new System.Windows.Forms.DataGridView();
-            this.txtDateTo = new System.Windows.Forms.TextBox();
-            this.txtDateFrom = new System.Windows.Forms.TextBox();
             this.lblDateTo = new System.Windows.Forms.Label();
             this.lblDateFrom = new System.Windows.Forms.Label();
             this.datagridTableParent = new System.Windows.Forms.DataGridView();
@@ -53,7 +50,10 @@
             this.capitalDTP = new System.Windows.Forms.DateTimePicker();
             this.capitalBtn = new System.Windows.Forms.Button();
             this.savingsMDTP = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtDateFrom = new System.Windows.Forms.TextBox();
+            this.txtDateTo = new System.Windows.Forms.TextBox();
+            this.monCalTo = new System.Windows.Forms.MonthCalendar();
+            this.monCalFrom = new System.Windows.Forms.MonthCalendar();
             this.pnlReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTableChild)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTableParent)).BeginInit();
@@ -73,23 +73,6 @@
             // timer1
             // 
             this.timer1.Interval = 1;
-            // 
-            // monCalFrom
-            // 
-            this.monCalFrom.Location = new System.Drawing.Point(164, 435);
-            this.monCalFrom.Name = "monCalFrom";
-            this.monCalFrom.TabIndex = 184;
-            this.monCalFrom.Visible = false;
-            this.monCalFrom.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monCalFrom_DateSelected);
-            // 
-            // monCalTo
-            // 
-            this.monCalTo.Location = new System.Drawing.Point(393, 435);
-            this.monCalTo.Name = "monCalTo";
-            this.monCalTo.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(1753, 1, 1, 0, 0, 0, 0), new System.DateTime(1753, 1, 7, 0, 0, 0, 0));
-            this.monCalTo.TabIndex = 185;
-            this.monCalTo.Visible = false;
-            this.monCalTo.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monCalTo_DateSelected);
             // 
             // lblRep
             // 
@@ -124,6 +107,19 @@
             this.pnlReports.Name = "pnlReports";
             this.pnlReports.Size = new System.Drawing.Size(433, 83);
             this.pnlReports.TabIndex = 189;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(-264, 63);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(960, 5);
+            this.button1.TabIndex = 102;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // btnBack
             // 
@@ -176,55 +172,37 @@
             this.datagridTableChild.AllowUserToResizeRows = false;
             this.datagridTableChild.BackgroundColor = System.Drawing.Color.White;
             this.datagridTableChild.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagridTableChild.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagridTableChild.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.datagridTableChild.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.datagridTableChild.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datagridTableChild.DefaultCellStyle = dataGridViewCellStyle2;
             this.datagridTableChild.Location = new System.Drawing.Point(463, 32);
             this.datagridTableChild.Name = "datagridTableChild";
             this.datagridTableChild.ReadOnly = true;
             this.datagridTableChild.RowHeadersVisible = false;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.datagridTableChild.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.datagridTableChild.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.datagridTableChild.RowTemplate.Height = 60;
             this.datagridTableChild.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridTableChild.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridTableChild.Size = new System.Drawing.Size(459, 403);
             this.datagridTableChild.TabIndex = 186;
-            // 
-            // txtDateTo
-            // 
-            this.txtDateTo.Location = new System.Drawing.Point(264, 85);
-            this.txtDateTo.Name = "txtDateTo";
-            this.txtDateTo.Size = new System.Drawing.Size(169, 22);
-            this.txtDateTo.TabIndex = 183;
-            this.txtDateTo.Enter += new System.EventHandler(this.txtDateTo_Enter);
-            this.txtDateTo.Leave += new System.EventHandler(this.txtDateTo_Leave);
-            // 
-            // txtDateFrom
-            // 
-            this.txtDateFrom.Location = new System.Drawing.Point(21, 85);
-            this.txtDateFrom.Name = "txtDateFrom";
-            this.txtDateFrom.Size = new System.Drawing.Size(169, 22);
-            this.txtDateFrom.TabIndex = 182;
-            this.txtDateFrom.Enter += new System.EventHandler(this.txtDateFrom_Enter);
-            this.txtDateFrom.Leave += new System.EventHandler(this.txtDateFrom_Leave);
             // 
             // lblDateTo
             // 
@@ -260,11 +238,11 @@
             this.datagridTableParent.Name = "datagridTableParent";
             this.datagridTableParent.ReadOnly = true;
             this.datagridTableParent.RowHeadersVisible = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            this.datagridTableParent.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            this.datagridTableParent.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.datagridTableParent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridTableParent.Size = new System.Drawing.Size(289, 259);
             this.datagridTableParent.TabIndex = 179;
@@ -317,18 +295,42 @@
             this.savingsMDTP.Size = new System.Drawing.Size(200, 22);
             this.savingsMDTP.TabIndex = 195;
             // 
-            // button1
+            // txtDateFrom
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
-            this.button1.Enabled = false;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(-264, 63);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(960, 5);
-            this.button1.TabIndex = 102;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.txtDateFrom.Location = new System.Drawing.Point(21, 85);
+            this.txtDateFrom.Name = "txtDateFrom";
+            this.txtDateFrom.Size = new System.Drawing.Size(169, 22);
+            this.txtDateFrom.TabIndex = 182;
+            this.txtDateFrom.Visible = false;
+            this.txtDateFrom.Enter += new System.EventHandler(this.txtDateFrom_Enter);
+            this.txtDateFrom.Leave += new System.EventHandler(this.txtDateFrom_Leave);
+            // 
+            // txtDateTo
+            // 
+            this.txtDateTo.Location = new System.Drawing.Point(264, 85);
+            this.txtDateTo.Name = "txtDateTo";
+            this.txtDateTo.Size = new System.Drawing.Size(169, 22);
+            this.txtDateTo.TabIndex = 183;
+            this.txtDateTo.Visible = false;
+            this.txtDateTo.Enter += new System.EventHandler(this.txtDateTo_Enter);
+            this.txtDateTo.Leave += new System.EventHandler(this.txtDateTo_Leave);
+            // 
+            // monCalTo
+            // 
+            this.monCalTo.Location = new System.Drawing.Point(393, 435);
+            this.monCalTo.Name = "monCalTo";
+            this.monCalTo.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(1753, 1, 1, 0, 0, 0, 0), new System.DateTime(1753, 1, 7, 0, 0, 0, 0));
+            this.monCalTo.TabIndex = 185;
+            this.monCalTo.Visible = false;
+            this.monCalTo.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monCalTo_DateSelected);
+            // 
+            // monCalFrom
+            // 
+            this.monCalFrom.Location = new System.Drawing.Point(164, 435);
+            this.monCalFrom.Name = "monCalFrom";
+            this.monCalFrom.TabIndex = 184;
+            this.monCalFrom.Visible = false;
+            this.monCalFrom.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monCalFrom_DateSelected);
             // 
             // Reports
             // 
@@ -375,8 +377,6 @@
 
         public System.Windows.Forms.Label lblReports;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.MonthCalendar monCalFrom;
-        private System.Windows.Forms.MonthCalendar monCalTo;
         private System.Windows.Forms.Label lblRep;
         private System.Windows.Forms.ComboBox comboReports;
         private System.Windows.Forms.Panel pnlReports;
@@ -384,8 +384,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView datagridTableChild;
-        private System.Windows.Forms.TextBox txtDateTo;
-        private System.Windows.Forms.TextBox txtDateFrom;
         private System.Windows.Forms.Label lblDateTo;
         private System.Windows.Forms.Label lblDateFrom;
         private System.Windows.Forms.DataGridView datagridTableParent;
@@ -394,5 +392,9 @@
         private System.Windows.Forms.Button capitalBtn;
         private System.Windows.Forms.DateTimePicker savingsMDTP;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtDateFrom;
+        private System.Windows.Forms.TextBox txtDateTo;
+        private System.Windows.Forms.MonthCalendar monCalTo;
+        private System.Windows.Forms.MonthCalendar monCalFrom;
     }
 }
